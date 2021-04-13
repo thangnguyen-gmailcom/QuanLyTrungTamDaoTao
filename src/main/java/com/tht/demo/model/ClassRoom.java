@@ -21,6 +21,10 @@ public class ClassRoom {
     private LocalDateTime createdDate;
 
     @ManyToOne
+    @JoinColumn(name = "teacher_id")
+    private User teacher;
+
+    @ManyToOne
     @JoinColumn(name = "course_id")
     private Course course;
 
