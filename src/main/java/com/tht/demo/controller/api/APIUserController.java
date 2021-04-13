@@ -1,4 +1,4 @@
-package com.tht.demo.controller;
+package com.tht.demo.controller.api;
 
 import com.tht.demo.model.User;
 import com.tht.demo.repository.UserRepository;
