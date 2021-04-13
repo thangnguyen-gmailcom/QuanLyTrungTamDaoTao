@@ -18,14 +18,14 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "user")
+@RequestMapping(value = "api/user")
 public class APIUserController {
 @Autowired
 private UserRepository userRepository;
     @Autowired
     private UserService userService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<?> showAll(Pageable pageable) {
         try {
             Page<User> userList = userService.showAll(pageable);
@@ -34,6 +34,7 @@ private UserRepository userRepository;
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable long id){
         try {

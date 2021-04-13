@@ -30,7 +30,7 @@ public class User {
     @Column(name = "id_card")
     private String idCard;
 
-    private boolean gender;
+    private int gender;
 
     @Column(name = "created_date")
     private LocalDateTime createdDate;
