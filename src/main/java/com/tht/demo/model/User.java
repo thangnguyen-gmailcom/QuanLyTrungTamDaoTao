@@ -55,8 +55,6 @@ public class User {
     @OneToMany(mappedBy = "staffCreatedId")
     private List<User> users;
 
-    @OneToMany(mappedBy = "teacher")
-    private List<ClassRoom> classRooms2;
 
     @ManyToOne
     @JoinColumn(name = "staff_edited_id")
