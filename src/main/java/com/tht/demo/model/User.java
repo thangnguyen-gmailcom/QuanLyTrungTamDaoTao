@@ -30,7 +30,7 @@ public class User {
     @Column(name = "id_card")
     private String idCard;
 
-    private boolean gender;
+    private int gender;
 
     @Column(name = "created_date")
     private LocalDateTime createdDate;
@@ -87,4 +87,7 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "address")
     private Province province;
+
+    @OneToMany(mappedBy = "teacher")
+    private List<ClassRoom> classRooms2;
 }
