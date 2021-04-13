@@ -90,4 +90,7 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "address")
     private Province province;
+
+    @OneToMany(mappedBy = "teacher")
+    private List<ClassRoom> classRooms2;
 }
