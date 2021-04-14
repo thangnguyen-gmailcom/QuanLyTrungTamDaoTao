@@ -33,25 +33,19 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="product-payment-inner-st">
                         <ul id="myTabedu1" class="tab-review-design">
-                            <li class="active"><a href="#description">Điểm Danh</a></li>
+                            <li class="active"><a href="#description">Tạo Mới Nội Dung Buổi Học</a></li>
                         </ul>
                         <div id="myTabContent" class="tab-content custom-product-edit">
                             <div class="product-tab-list tab-pane fade active in" id="description">
                                 <div class="row">
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" disabled placeholder="14/4/2021">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" disabled placeholder="Buổi 1">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" disabled placeholder="Chủ Nhiệm">
-                                        </div>
+                                        <select class="form-control" id="course" name="sellist1">
+                                            <option selected disabled>---Chọn Chương Trình---</option>
+                                            <option>A</option>
+                                            <option>B</option>
+                                            <option>C</option>
+                                            <option>D</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -61,38 +55,19 @@
                                                 <table>
                                                     <tr>
                                                         <th>STT</th>
-                                                        <th>Tên Học Viên</th>
-                                                        <th>Số Điện Thoại</th>
-                                                        <th>Có</th>
-                                                        <th>Vắng</th>
-                                                        <th>Đi Trễ</th>
-                                                        <th>Nhận Xét</th>
+                                                        <th>Tên Buổi Học</th>
+                                                        <th>Tiêu Đề</th>
                                                         <th>Action</th>
                                                     </tr>
                                                     <tr>
                                                         <td>1</td>
-                                                        <td>Nguyễn Văn A</td>
-                                                        <td>0967888xxx</td>
-                                                        <td>
-                                                            <div class="radio">
-                                                                <label><input type="radio" name="optradio"></label>
-                                                            </div>
+                                                        <td>Lesson 1</td>
                                                         </td>
                                                         <td>
-                                                            <div class="radio">
-                                                                <label><input type="radio" name="optradio"></label>
-                                                            </div>
+                                                            <input type="text" class="form-control" placeholder="Tiêu đề buổi học">
                                                         </td>
                                                         <td>
-                                                            <div class="radio">
-                                                                <label><input type="radio" name="optradio"></label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <input type="text" class="form-control">
-                                                        </td>
-                                                        <td>
-                                                            <a href=""> <button data-toggle="tooltip" title="Lưu Nhận Xét" class="pd-setting-ed"><i class="fa fa-save" aria-hidden="true"></i></button></a>
+                                                            <a href=""> <button data-toggle="tooltip" title="Lưu" class="pd-setting-ed"><i class="fa fa-save" aria-hidden="true"></i></button></a>
                                                         </td>
                                                     </tr>
                                                 </table>

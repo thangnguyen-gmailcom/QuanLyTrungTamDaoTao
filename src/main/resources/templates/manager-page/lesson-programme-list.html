@@ -1,0 +1,75 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<header th:replace="/manager-page/layout::header"></header>
+
+<body>
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+
+<!-- Start Left menu area -->
+<div th:replace="/manager-page/layout::left-sidebar-pro">
+</div>
+<!-- End Left menu area -->
+
+
+<!-- Start Welcome area -->
+<div class="all-content-wrapper">
+    <div class="container-fluid">
+        <div class="row" style="margin-top: 5%;">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="logo-pro">
+                    <a href="index.html"><img class="main-logo" src="" alt="" /></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="/manager-page/layout::header-advance-area"></div>
+    <div class="product-status mg-b-15">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="product-status-wrap">
+                        <h4>Danh Sách Buổi Theo Chương Trình</h4>
+                        <div class="asset-inner">
+                            <table>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Chương trình học</th>
+                                    <th>Tổng Số Buổi</th>
+                                    <th>Action</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Anh Văn Giao Tiếp</td>
+                                    <td>30</td>
+                                    <td>
+                                        <a th:href="@{/lesson/list}"> <button data-toggle="tooltip" title="view" class="pd-setting-ed"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
+                                        <a th:href="@{/lesson/editAll}"> <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
+                                        <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="custom-pagination">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="/manager-page/layout::scrip"></footer>
+</body>
+
+</html>
