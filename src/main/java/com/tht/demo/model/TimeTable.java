@@ -24,10 +24,6 @@ public class TimeTable {
     private ClassRoom classRoom;
 
     @ManyToOne
-    @JoinColumn(name = "lesson_id")
-    private Lesson lesson;
-
-    @ManyToOne
     @JoinColumn(name = "user_created_id")
     private User user;
 

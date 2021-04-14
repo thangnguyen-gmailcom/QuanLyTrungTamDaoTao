@@ -1,11 +1,14 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
+
 <header th:replace="/manager-page/layout::header"></header>
 
 <body>
+
 <!--[if lt IE 8]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
 <![endif]-->
 
 
@@ -21,7 +24,7 @@
         <div class="row" style="margin-top: 5%;">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="logo-pro">
-                    <a href="index.html"><img class="main-logo" src="" alt="" /></a>
+                    <a href="index.html"><img class="main-logo" src="" alt=""/></a>
                 </div>
             </div>
         </div>
@@ -38,29 +41,19 @@
                                 <tr>
                                     <th>STT</th>
                                     <th>Niên Khóa</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
+                                    <th>Chương trình</th>
+                                    <th>Hành Động</th>
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Web Development Book</td>
-                                    <td>
-                                        <button class="pd-setting">Active</button>
-                                    </td>
-                                    <td>
-                                        <a th:href="@{/course/edit}"> <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
-                                        <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                    </td>
-                                </tr>
+                                <tbody id="showListCourses">
+                                </tbody>
                             </table>
                         </div>
                         <div class="custom-pagination">
                             <ul class="pagination">
-                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+<!--                                <li class="page-item" id="previous"><a class="pageable">Previous</a></li>-->
+<!--                                <li class="page-item"><a class="page-link" href="#">1</a></li>-->
+<!--                                <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+<!--                                <li class="page-item"><a class="page-link" href="#">3</a></li>-->
                             </ul>
                         </div>
                     </div>
@@ -71,6 +64,111 @@
 </div>
 
 <footer th:replace="/manager-page/layout::scrip"></footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js" integrity="sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
 </body>
+<script>
+    var courses = courses || {};
+    var programmeData = [];
+    var programme = programme || {};
+    courses.showAll = function (page) {
+        let search = $('#str').val();
+        $.ajax({
+            url: "http://localhost:8080/api/courses?page="+page,
+            method: "GET",
+            dataType: "json",
+            success: function (data) {
+                $('#showListCourses').empty();
+                let totalPage = parseInt(data.totalPages);
+                let num = parseInt(data.pageable.pageNumber);
+                console.log(totalPage);
+                $('.pagination').empty('');
+                if (num !=0) {
 
+                    $('.pagination').append(`<li class="page-item" ><a class="page-link" href="#" onclick="courses.showAll(${num} -1)">Trước</a></li>`)
+                }
+                for (let i = 0; i < totalPage; i++) {
+
+                    if (data.pageable.pageNumber === i ) {
+                        $('.pagination').append(`<li class="page-item "><a class="page-link" href="#">${i + 1}</a></li>`);
+                    }
+                    // if (data.pageable.pageNumber !== i && i < 2){
+                    //     $('.pagination').append(`<li class="page-item"><a class="page-link" href="#" onclick="courses.showAll(${i})">${i + 1}</a></li>`)
+                    // }
+                }
+
+                if (num < totalPage-1){
+                $('.pagination').append(`<li class="page-item"><a class="page-link" href="#" onclick="courses.showAll(${num} +1)">Sau</a></li>`);
+                }
+                $.each(data.content, function (i, v) {
+                    $('#showListCourses').append(
+                        "<tr>" +
+                        "<td>" + v.id + "</td>" +
+                        "<td>" + v.courseName + "</td>" +
+                        "<td>" + v.programme.programmeName + "</td>" +
+                        "<td>" +
+
+                        "<a  href='#' onclick='courses.editForm(" + v.id + ")'  ><i class=\"fas fa-edit\" ></i></a>"
+                        +
+                        "<a style='padding-left: 35px'    ><i onclick='courses.delete(" + v.id + ")' class=\"fas fa-trash-alt\"></i></a>" +
+                        "</td>" +
+                        "</tr>"
+                    );
+
+                })
+            }
+
+        })
+    }
+
+
+    // courses.delete = function(id){
+    //         $.ajax({
+    //             url : "http://localhost:8080/api/courses/" + id,
+    //             method : "DELETE",
+    //             dataType:'json',
+    //             success : function(data){
+    //                 courses.showAll(0);
+    //             }
+    //         });
+    //     // courses.showAll(0);
+    //     }
+
+
+
+    courses.delete = function(id){
+        bootbox.confirm({
+            message: "Bạn có chắc muốn xóa không?",
+            buttons: {
+                cancel: {
+                    label: '<i class="fa fa-times">Không</i> '
+                },
+                confirm: {
+                    label: '<i class="fa fa-check"> Có</i>'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    $.ajax({
+                        url:"http://localhost:8080/api/courses/" + id,
+                        method: "DELETE",
+                        contentType: 'json',
+                        success: function (data) {
+                            courses.showAll(0);
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    courses.editForm = function (id) {
+        window.location = "/courses/edit/"+id;
+    };
+    $(document).ready(function () {
+        courses.showAll(0);
+    });
+</script>
 </html>

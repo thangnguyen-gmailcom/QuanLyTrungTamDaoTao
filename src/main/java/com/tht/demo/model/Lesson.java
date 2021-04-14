@@ -18,6 +18,6 @@ public class Lesson {
     private String content;
 
     @ManyToOne
-    @JoinColumn(name = "course_id")
-    private Course course;
+    @JoinColumn(name = "programme_id")
+    private Programme programme;
 }

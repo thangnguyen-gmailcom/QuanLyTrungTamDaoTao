@@ -145,12 +145,12 @@
                         >
                         <ul class="submenu-angle" aria-expanded="false">
                             <li>
-                                <a title="All Courses" th:href="@{/course}"
+                                <a title="All Courses" th:href="@{/courses}"
                                 ><span class="mini-sub-pro">Danh Sách</span></a
                                 >
                             </li>
                             <li>
-                                <a title="Add Courses" th:href="@{/course/add}"
+                                <a title="Add Courses" th:href="@{/courses/add}"
                                 ><span class="mini-sub-pro">Tạo mới</span></a
                                 >
                             </li>
@@ -664,12 +664,12 @@
 </div>
 </body>
 <footer th:fragment="scrip">
-
+    <script th:src="@{/js/vendor/jquery-1.12.4.min.js}"></script>
 <!--    Fonrt Awesome-->
     <script src="https://kit.fontawesome.com/f9d4b9dcf7.js" crossorigin="anonymous"></script>
     <!-- jquery
    ============================================ -->
-    <script th:src="@{/js/vendor/jquery-1.12.4.min.js}"></script>
+
     <!-- bootstrap JS
         ============================================ -->
     <script th:src="@{/js/bootstrap.min.js}"></script>

@@ -1,6 +1,7 @@
 package com.tht.demo.service.impl;
 
 import com.tht.demo.model.Course;
+import com.tht.demo.repository.ClassRoomRepository;
 import com.tht.demo.repository.CourseRepository;
 import com.tht.demo.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,16 +9,21 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
 public class CourseServiceImpl implements CourseService {
     @Autowired
+    private ClassRoomRepository classRoomRepository;
+
+
+    @Autowired
     private CourseRepository courseRepository;
 
     @Override
     public Page<Course> showAll(Pageable pageable) {
-        return courseRepository.findAll(pageable);
+        return courseRepository.findAllByDeletedIsFalse(pageable);
     }
 
     @Override
@@ -31,7 +37,15 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    @Transactional
     public void delele(Long id) {
-        courseRepository.deleteById(id);
+
+        boolean result = courseRepository.softDeleteCourse(id) > 0;
+        if (!result)
+            throw new RuntimeException("course not found");
+        classRoomRepository.softDeleteClassRoomByCourseId(id);
+
+//        courseRepository.deleteById(id
+//        );
     }
 }
