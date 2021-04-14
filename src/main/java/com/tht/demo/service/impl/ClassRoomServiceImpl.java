@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
@@ -18,7 +19,7 @@ public class ClassRoomServiceImpl implements ClassRoomService {
 
     @Override
     public Page<ClassRoom> showAll(Pageable pageable) {
-        return classRoomRepository.findAll(pageable);
+        return classRoomRepository.findAllByDeletedIsFalse(pageable);
     }
 
     @Override
@@ -32,7 +33,8 @@ public class ClassRoomServiceImpl implements ClassRoomService {
     }
 
     @Override
+    @Transactional
     public void delele(Long id) {
-        classRoomRepository.deleteById(id);
+        classRoomRepository.softDeleteClassRoom(id);
     }
 }

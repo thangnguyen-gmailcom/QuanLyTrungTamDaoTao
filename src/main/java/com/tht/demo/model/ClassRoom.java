@@ -34,6 +34,6 @@ public class ClassRoom {
 
     @OneToMany(mappedBy = "classRoom")
     private List<StudentClass> studentClasses;
-
+    private boolean deleted;
 
 }

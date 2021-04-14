@@ -6,7 +6,9 @@ import com.tht.demo.service.CourseService;
 import com.tht.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +21,13 @@ public class APICourseController {
 
 
     @GetMapping("")
-    public ResponseEntity<?> showAll(Pageable pageable) {
+    public ResponseEntity<?> showAll(@RequestParam(value = "page",required = false,defaultValue = "0") int page
+                                  ) {
         try {
-            Page<Course> courses = courseService.showAll(pageable);
+            Page<Course> courses = courseService.showAll(PageRequest.of(page,8));
             return new ResponseEntity<>(courses, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
     @DeleteMapping("/{id}")
