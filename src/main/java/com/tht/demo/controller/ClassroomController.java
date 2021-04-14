@@ -19,4 +19,7 @@ public class ClassroomController {
 
     @GetMapping("/edit")
     public String edit(){return "manager-page/class-edit";}
+
+    @GetMapping("/view")
+    public String view(){return "manager-page/class-view";}
 }
