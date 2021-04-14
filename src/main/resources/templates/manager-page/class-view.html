@@ -34,7 +34,7 @@
                     <div class="product-payment-inner-st">
                         <ul id="myTabedu1" class="tab-review-design">
                             <li class="active"><a href="#description">Danh Sách Học Viên</a></li>
-                            <li><a href="#INFORMATION">Buổi Hiện Tại</a></li>
+                            <li><a href="#INFORMATION">Lịch Trình Bài Học</a></li>
                             <li><a href="#reviews"> Thêm Học Viên Vào Lớp</a></li>
                         </ul>
                         <div id="myTabContent" class="tab-content custom-product-edit">
@@ -84,15 +84,25 @@
                                                     <tr>
                                                         <th>STT</th>
                                                         <th>Số Buổi</th>
+                                                        <th>Ngày</th>
                                                         <th>Nội Dung Chính</th>
+                                                        <th>Điểm Danh</th>
+                                                        <th>Nhận Xét</th>
                                                         <th>Action</th>
                                                     </tr>
                                                     <tr>
                                                         <td>1</td>
                                                         <td>Lesson 1</td>
+                                                        <td>14/4/2021</td>
                                                         <td>Động từ bất quy tắc</td>
                                                         <td>
                                                             <a th:href="@{/attend}"> <button data-toggle="tooltip" title="Điểm Danh" class="pd-setting-ed"><i class="fa fa-table" aria-hidden="true"></i></button></a>
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" class="form-control">
+                                                        </td>
+                                                        <td>
+                                                            <a href=""> <button data-toggle="tooltip" title="Lưu Nhận Xét" class="pd-setting-ed"><i class="fa fa-save" aria-hidden="true"></i></button></a>
                                                         </td>
                                                     </tr>
                                                 </table>
