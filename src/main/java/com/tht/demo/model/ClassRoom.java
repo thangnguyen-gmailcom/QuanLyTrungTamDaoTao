@@ -32,10 +32,6 @@ public class ClassRoom {
     @JoinColumn(name = "staff_created_id")
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "teacher_id")
-    private User teacher;
-
     @OneToMany(mappedBy = "classRoom")
     private List<StudentClass> studentClasses;
 
