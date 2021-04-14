@@ -222,13 +222,25 @@
                         </ul>
                     </li>
                     <li>
-                        <a title="Landing Page" href="events.html" aria-expanded="false"
-                        ><span
-                                class="educate-icon educate-event icon-wrap sub-icon-mg"
-                                aria-hidden="true"
-                        ></span>
-                            <span class="mini-click-non">Thời Khóa biểu</span></a
+                        <a
+                                class="has-arrow"
+                                href="all-students.html"
+                                aria-expanded="false"
+                        ><span class="educate-icon educate-event icon-wrap sub-icon-mg"></span>
+                            <span class="mini-click-non">Thời Khóa Biểu</span></a
                         >
+                        <ul class="submenu-angle" aria-expanded="false">
+                            <li>
+                                <a title="All Students" th:href="@{/timetable}"
+                                ><span class="mini-sub-pro">Danh sách</span></a
+                                >
+                            </li>
+                            <li>
+                                <a title="Add Students" th:href="@{/timetable/add}"
+                                ><span class="mini-sub-pro">Tạo mới</span></a
+                                >
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </nav>
@@ -661,6 +673,8 @@
     <!-- bootstrap JS
         ============================================ -->
     <script th:src="@{/js/bootstrap.min.js}"></script>
+
+
     <!-- wow JS
         ============================================ -->
     <script th:src="@{/js/wow.min.js}"></script>
