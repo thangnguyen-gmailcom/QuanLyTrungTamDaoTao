@@ -1,0 +1,191 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+
+<header th:replace="/manager-page/layout::header"></header>
+
+<body>
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+
+
+<!-- Start Left menu area -->
+<div th:replace="/manager-page/layout::left-sidebar-pro">
+</div>
+<!-- End Left menu area -->
+
+
+<!-- Start Welcome area -->
+<div class="all-content-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="logo-pro">
+                    <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt=""/></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="/manager-page/layout::header-advance-area"/>
+    <!-- Single pro tab review Start-->
+    <div class="single-pro-review-area mt-t-30 mg-b-15" style="margin-top: 5%;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="product-payment-inner-st">
+                        <ul id="myTabedu1" class="tab-review-design">
+                            <li class="active"><a href="#description">Chỉnh Sửa Thời Khóa Biểu</a></li>
+                        </ul>
+                        <div id="myTabContent" class="tab-content custom-product-edit">
+                            <div class="product-tab-list tab-pane fade active in" id="description">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <form action="" method="">
+                                            <div class="review-content-section">
+                                                <div id="dropzone1" class="pro-ad addcoursepro">
+                                                    <!--                                                Start Form-->
+                                                    <form action="" method=""
+                                                          class="dropzone dropzone-custom needsclick addcourse"
+                                                          id="demo1-upload">
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                                <div class="form-group">
+                                                                    <label for="teacher">Lớp</label>
+                                                                    <select class="form-control" id="teacher"
+                                                                            name="sellist1">
+                                                                        <option selected disabled>---Vui Lòng chọn---
+                                                                        </option>
+                                                                        <option>A</option>
+                                                                        <option>B</option>
+                                                                        <option>C</option>
+                                                                        <option>D</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="form-group data-custon-pick"
+                                                                         id="data_2">
+                                                                        <label for="teacher">Ngày Bắt Đầu</label>
+                                                                        <div class="input-group date"></div>
+                                                                        <input type="date" class="form-control"
+                                                                               name="dateOfBirth">
+                                                                        <div></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                                <fieldset>
+                                                                    <legend>Ngày Học Trong Tuần</legend>
+                                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                        <!--                                                                <label for="teacher"></label>-->
+                                                                    </div>
+                                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                                        <div class="form-check-inline">
+                                                                            <label class="form-check-label"
+                                                                                   for="check1">
+                                                                                <input type="checkbox"
+                                                                                       class="form-check-input"
+                                                                                       id="check1"
+                                                                                       name="vehicle1"
+                                                                                       value="something"> Thứ
+                                                                                2
+                                                                            </label>
+                                                                        </div>
+                                                                        <br>
+                                                                        <div class="form-check-inline">
+                                                                            <label class="form-check-label"
+                                                                                   for="check5">
+                                                                                <input type="checkbox"
+                                                                                       class="form-check-input"
+                                                                                       id="check5"
+                                                                                       name="vehicle1"
+                                                                                       value="something"> Thứ
+                                                                                5
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                                        <div class="form-check-inline">
+                                                                            <label class="form-check-label"
+                                                                                   for="check3">
+                                                                                <input type="checkbox"
+                                                                                       class="form-check-input"
+                                                                                       id="check3"
+                                                                                       name="vehicle1"
+                                                                                       value="something"> Thứ
+                                                                                3
+                                                                            </label>
+                                                                        </div>
+                                                                        <br>
+                                                                        <div class="form-check-inline">
+                                                                            <label class="form-check-label"
+                                                                                   for="check6">
+                                                                                <input type="checkbox"
+                                                                                       class="form-check-input"
+                                                                                       id="check6"
+                                                                                       name="vehicle1"
+                                                                                       value="something"> Thứ
+                                                                                6
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                                        <div class="form-check-inline">
+                                                                            <label class="form-check-label"
+                                                                                   for="check4">
+                                                                                <input type="checkbox"
+                                                                                       class="form-check-input"
+                                                                                       id="check4"
+                                                                                       name="vehicle1"
+                                                                                       value="something"> Thứ
+                                                                                4
+                                                                            </label>
+                                                                        </div>
+                                                                        <br>
+                                                                        <div class="form-check-inline">
+                                                                            <label class="form-check-label"
+                                                                                   for="check7">
+                                                                                <input type="checkbox"
+                                                                                       class="form-check-input"
+                                                                                       id="check7"
+                                                                                       name="vehicle1"
+                                                                                       value="something"> Thứ
+                                                                                7
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </fieldset>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col-lg-1">
+                                                                <div class="payment-adress">
+                                                                    <button type="submit"
+                                                                            class="btn btn-primary waves-effect waves-light">
+                                                                        Submit
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                    <!--                                                End Form-->
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="/manager-page/layout::scrip"></footer>
+</body>
+
+</html>
