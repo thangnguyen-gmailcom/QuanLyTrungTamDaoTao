@@ -1,0 +1,123 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<header th:replace="/manager-page/layout::header"></header>
+
+<body>
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+
+<!-- Start Left menu area -->
+<div th:replace="/manager-page/layout::left-sidebar-pro">
+</div>
+<!-- End Left menu area -->
+
+
+<!-- Start Welcome area -->
+<div class="all-content-wrapper">
+    <div class="container-fluid">
+        <div class="row" style="margin-top: 5%;">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="logo-pro">
+                    <a href="index.html"><img class="main-logo" src="" alt="" /></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="/manager-page/layout::header-advance-area"></div>
+    <div class="data-table-area mg-b-15">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="product-payment-inner-st">
+                        <ul id="myTabedu1" class="tab-review-design">
+                            <li class="active"><a href="#description">Điểm Danh</a></li>
+                        </ul>
+                        <div id="myTabContent" class="tab-content custom-product-edit">
+                            <div class="product-tab-list tab-pane fade active in" id="description">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" disabled placeholder="14/4/2021">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" disabled placeholder="Buổi 1">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" disabled placeholder="Chủ Nhiệm">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="product-status-wrap">
+                                            <div class="asset-inner">
+                                                <table>
+                                                    <tr>
+                                                        <th>STT</th>
+                                                        <th>Tên Học Viên</th>
+                                                        <th>Email</th>
+                                                        <th>Số Điện Thoại</th>
+                                                        <th>Có</th>
+                                                        <th>Vắng</th>
+                                                        <th>Đi Trễ</th>
+                                                        <th>Nhận Xét</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>Nguyễn Văn A</td>
+                                                        <td>hocvien@gmail.com</td>
+                                                        <td>0967888xxx</td>
+                                                        <td>
+                                                            <div class="radio">
+                                                                <label><input type="radio" name="optradio"></label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="radio">
+                                                                <label><input type="radio" name="optradio"></label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="radio">
+                                                                <label><input type="radio" name="optradio"></label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" class="form-control">
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
+                                            </div>
+                                            <div class="custom-pagination">
+                                                <ul class="pagination">
+                                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="/manager-page/layout::scrip"></footer>
+</body>
+
+</html>
