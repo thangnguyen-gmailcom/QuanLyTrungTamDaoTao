@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,8 +18,8 @@ public class DistrictServiceImpl implements DistrictService {
 
 
     @Override
-    public Page<District> showAll(Pageable pageable) {
-        return districtRepository.findAll(pageable);
+    public List<District> showAll(String provinceCode) {
+        return districtRepository.findAllByProvinceProvinceCode(provinceCode);
     }
 
     @Override

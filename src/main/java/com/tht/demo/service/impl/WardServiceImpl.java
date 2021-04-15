@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,13 +17,13 @@ public class WardServiceImpl implements WardService {
     private WardRepository wardRepository;
 
     @Override
-    public Page<Ward> showAll(Pageable pageable) {
-        return wardRepository.findAll(pageable);
+    public List<Ward> showAll(String districtCode) {
+        return wardRepository.findAllByDistrictDistrictCode(districtCode);
     }
 
     @Override
-    public Optional<Ward> findById(Long id) {
-        return wardRepository.findById(id);
+    public Optional<Ward> findByWardCode(String wardCode) {
+        return wardRepository.findByWardCode(wardCode);
     }
 
     @Override

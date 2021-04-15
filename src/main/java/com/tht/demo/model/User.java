@@ -1,8 +1,12 @@
 package com.tht.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -15,19 +19,29 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotBlank(message = "* email không được để trống")
+    @Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "* email sai định dạng")
     private String email;
 
     private String password;
 
+    @NotBlank(message = "* họ và tên không được để trống")
+    @Size(min = 10, max = 100, message = "* họ và tên phải từ 10 đến 100 ký tự")
     private String fullname;
 
     @Column(name = "date_of_birth")
+    @NotNull(message = "* ngày sinh không được để trống")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
 
     @Column(name = "phone_number")
+    @NotBlank(message = "* số điện thoại không được để trống")
+    @Pattern(regexp = "(84|0[3|5|7|8|9])+([0-9]{8})\\b", message = "* số điện thoại không đúng định dạng")
     private String phoneNumber;
 
     @Column(name = "id_card")
+    @NotNull(message = "* số chứng minh nhân dân không được để trống")
+    @Pattern(regexp = "[0-9]{9}", message = "* số chứng minh nhân dân không đúng định dạng")
     private String idCard;
 
     private int gender;
@@ -68,6 +82,7 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "role_id")
+    @NotNull(message = "Quyền không được để trống")
     private Roles roles;
 
     @OneToMany(mappedBy = "user")
@@ -87,7 +102,8 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "address")
-    private Province province;
+    @NotNull(message = "xã-phường không được để trống")
+    private Ward ward;
 
     @OneToMany(mappedBy = "teacher")
     private List<ClassRoom> classRooms2;
