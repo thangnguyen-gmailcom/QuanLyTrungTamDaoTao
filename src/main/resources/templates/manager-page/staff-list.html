@@ -5,7 +5,8 @@
 
 <body>
 <!--[if lt IE 8]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
 <![endif]-->
 
 
@@ -21,7 +22,7 @@
         <div class="row" style="margin-top: 5%;">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="logo-pro">
-                    <a href="index.html"><img class="main-logo" src="" alt="" /></a>
+                    <a href="index.html"><img class="main-logo" src="" alt=""/></a>
                 </div>
             </div>
         </div>
@@ -29,38 +30,21 @@
     <div th:replace="/manager-page/layout::header-advance-area"></div>
     <div class="contacts-area mg-b-15">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="hpanel hblue contact-panel contact-panel-cs responsive-mg-b-30">
-                        <div class="panel-body custom-panel-jw">
-                            <div class="social-media-in">
-                                <a th:href="@{staff/info}"><i class="fas fa-eye"></i></a>
-                                <a th:href="@{staff/edit}"><i class="fas fa-edit"></i></a>
-                                <a th:href="@{staff/delete}"><i class="fas fa-trash"></i></i></a>
-                            </div>
-                            <img alt="logo" class="img-circle m-b" src="img/contact/1.jpg">
-                            <h3><a href="">John Alva</a></h3>
-                            <p class="all-pro-ad">London, LA</p>
-                            <p>
-                                Lorem ipsum dolor sit amet of, consectetur adipiscing elitable. Vestibulum tincidunt est vitae ultrices accumsan.
-                            </p>
-                        </div>
-                        <div class="panel-footer contact-footer">
-                            <div class="professor-stds-int">
-                                <div class="professor-stds">
-                                    <div class="contact-stat"><span>Likes: </span> <strong>956</strong></div>
-                                </div>
-                                <div class="professor-stds">
-                                    <div class="contact-stat"><span>Comments: </span> <strong>350</strong></div>
-                                </div>
-                                <div class="professor-stds">
-                                    <div class="contact-stat"><span>Views: </span> <strong>450</strong></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="row" id="show-list-user">
             </div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center" id="pageable">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -68,5 +52,75 @@
 
 <footer th:replace="/manager-page/layout::scrip"></footer>
 </body>
+<script type="text/javascript">
+    var users = {};
+    users.findAllEmployee = function (page) {
+        $.ajax({
+            url: "http://localhost:8080/api/user?page=" + page,
+            method: "GET",
+            dataType: "json",
+            success: function (data) {
+                $('#show-list-user').empty();
+                let totalPage = parseInt(data.totalPages);
+                let num = parseInt(data.pageable.pageNumber);
+                $('.pagination').empty('');
+                if (num !=0) {
+                    $('.pagination').append(`<li class="page-item" ><a class="page-link" href="#" onclick="courses.showAll(${num} -1)">Trước</a></li>`)
+                }
+                for (let i = 0; i < totalPage; i++) {
+                    if (data.pageable.pageNumber === i ) {
+                        $('.pagination').append(`<li class="page-item "><a class="page-link" href="#">${i + 1}</a></li>`);
+                    }
+                }
+                if (num < totalPage-1){
+                    $('.pagination').append(`<li class="page-item"><a class="page-link" href="#" onclick="courses.showAll(${num} +1)">Sau</a></li>`);
+                }
+                $.each(data.content, function (i, v) {
+                    let info = ' chưa có thông tin';
+                    if(v.information == null){
+                        v.information = info;
+                    }
+                    $('#show-list-user').append(`
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12" >
+                        <div class="hpanel hblue contact-panel contact-panel-cs responsive-mg-b-30">
+                        <div class="panel-body custom-panel-jw">
+                            <div class="social-media-in">
+                                <a th:href="@{staff/info}"><i class="fas fa-eye"></i></a>
+                                <a onclick="users.edit(${v.id})"><i class="fas fa-edit"></i></a>
+                                <a th:href="@{staff/delete}"><i class="fas fa-trash"></i></i></a>
+                        </div>
+                        <img alt="logo" class="img-circle m-b" src="img/contact/1.jpg">
+                            <h3><a href="">${v.fullname}</a></h3>
+                            <p class="all-pro-ad">${v.ward.wardName},${v.ward.district.distinctName},${v.ward.district.province.provinceName}</p>
+                            <p style="white-space: nowrap;width: 100%; overflow: hidden; text-overflow: ellipsis; " th:if="${v.information != 'null'}" >
+                                ${v.information}
+                            </p>
+                    </div>
+                    <div class="panel-footer contact-footer">
+                        <div class="professor-stds-int">
+                            <div class="professor-stds">
+                                <div class="contact-stat"><span>Likes: </span> <strong>956</strong></div>
+                            </div>
+                            <div class="professor-stds">
+                                <div class="contact-stat"><span>Comments: </span> <strong>350</strong></div>
+                            </div>
+                            <div class="professor-stds">
+                                <div class="contact-stat"><span>Views: </span> <strong>450</strong></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+</div>`)
+                })
+            }
+        })
+    }
 
+    users.edit = function (id){
+        window.location = "/staff/edit?id="+id;
+    }
+    $(document).ready(function () {
+        users.findAllEmployee(0)
+    })
+</script>
 </html>

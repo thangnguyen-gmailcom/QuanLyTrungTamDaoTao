@@ -5,6 +5,7 @@ import com.tht.demo.repository.UserRepository;
 import com.tht.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,15 +21,13 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = "api/user")
 public class APIUserController {
-@Autowired
-private UserRepository userRepository;
     @Autowired
     private UserService userService;
 
     @GetMapping("")
-    public ResponseEntity<?> showAll(Pageable pageable) {
+    public ResponseEntity<?> showAll(@RequestParam(value = "page",required = false,defaultValue = "0") int page) {
         try {
-            Page<User> userList = userService.showAll(pageable);
+            Page<User> userList = userService.showAllEmployee(PageRequest.of(page,8));
             return new ResponseEntity<>(userList, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -44,7 +43,5 @@ private UserRepository userRepository;
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
-
-
 
 }

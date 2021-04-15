@@ -1,5 +1,6 @@
 package com.tht.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -25,5 +26,6 @@ public class District {
     private Province province;
 
     @OneToMany(mappedBy = "district")
+    @JsonIgnore
     private List<Ward> wards;
 }

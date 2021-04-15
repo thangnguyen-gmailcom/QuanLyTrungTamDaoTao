@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,8 +17,8 @@ public class RolesServiceImpl implements RolesService {
     private RolesRepository rolesRepository;
 
     @Override
-    public Page<Roles> showAll(Pageable pageable) {
-        return rolesRepository.findAll(pageable);
+    public List<Roles> showAll() {
+        return rolesRepository.findAll();
     }
 
     @Override
