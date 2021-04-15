@@ -55,12 +55,12 @@ private ProgrammeRepository programmeRepository;
                     courseService.save(course);
                 attributes.addFlashAttribute("mess", "Thêm mới thành công...!!!");
             } else {
-                attributes.addFlashAttribute("mess", "Tên khóa đã tồn tại");
+                attributes.addFlashAttribute("error", "Tên khóa đã tồn tại");
             }
             return "redirect:/courses";
         } catch (Exception e) {
-            attributes.addFlashAttribute("mess", "error");
-            return "redirect:/manager-page/courses-add";
+            attributes.addFlashAttribute("error", "error");
+            return "redirect:/courses";
         }
     }
 
