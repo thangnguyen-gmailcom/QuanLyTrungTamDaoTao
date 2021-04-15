@@ -6,6 +6,13 @@
     <title>Trung Tâm THT</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!--    uploadFile-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <!-- favicon
 		============================================ -->
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico" />
@@ -287,40 +294,13 @@
                                                             class="fa fa-angle-down edu-icon edu-down-arrow"
                                                     ></i>
                                                 </a>
-                                                <ul
-                                                        role="menu"
-                                                        class="dropdown-header-top author-log dropdown-menu animated zoomIn"
-                                                >
+                                                <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
                                                     <li>
-                                                        <a href="#"
-                                                        ><span
-                                                                class="edu-icon edu-home-admin author-log-ic"
-                                                        ></span
-                                                        >My Account</a
-                                                        >
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"
+                                                        <a th:href="@{/profile}"
                                                         ><span
                                                                 class="edu-icon edu-user-rounded author-log-ic"
                                                         ></span
                                                         >My Profile</a
-                                                        >
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"
-                                                        ><span
-                                                                class="edu-icon edu-money author-log-ic"
-                                                        ></span
-                                                        >User Billing</a
-                                                        >
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"
-                                                        ><span
-                                                                class="edu-icon edu-settings author-log-ic"
-                                                        ></span
-                                                        >Settings</a
                                                         >
                                                     </li>
                                                     <li>
@@ -750,6 +730,15 @@
         window.Lobibox.notify('error', {
             size: 'mini',
             msg: document.getElementById("error").innerHTML
+        });
+    </script>
+
+<!--    upload FIle-->
+    <script>
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
     </script>
 </footer>
