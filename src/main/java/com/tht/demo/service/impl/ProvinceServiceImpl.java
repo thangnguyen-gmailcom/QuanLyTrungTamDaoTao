@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,8 +17,8 @@ public class ProvinceServiceImpl implements ProvinceService {
     private ProvinceRepository provinceRepository;
 
     @Override
-    public Page<Province> showAll(Pageable pageable) {
-        return provinceRepository.findAll(pageable);
+    public List<Province> showAll() {
+        return provinceRepository.findAll();
     }
 
     @Override

@@ -8,8 +8,11 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 public interface UserService {
-    Page<User> showAll(Pageable pageable);
+    Page<User> showAllEmployee(Pageable pageable);
     Optional<User> findById(Long id);
     User save(User user);
     void delele(Long id);
+    Optional<User> findByEmail(String userEmail);
+    Optional<User> findByPhoneNumber(String phoneNumber);
+    Optional<User> findByIdCard(String idCard);
 }

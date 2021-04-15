@@ -17,8 +17,8 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public Page<User> showAll(Pageable pageable) {
-        return userRepository.findAll(pageable);
+    public Page<User> showAllEmployee(Pageable pageable) {
+        return userRepository.findAllEmployeeOrderByIdDesc(pageable);
     }
 
     @Override
@@ -34,5 +34,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delele(Long id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<User> findByEmail(String userEmail) {
+        return userRepository.findByEmail(userEmail);
+    }
+
+    @Override
+    public Optional<User> findByPhoneNumber(String phoneNumber) {
+        return userRepository.findByPhoneNumber(phoneNumber);
+    }
+
+    @Override
+    public Optional<User> findByIdCard(String idCard) {
+        return userRepository.findByIdCard(idCard);
     }
 }
