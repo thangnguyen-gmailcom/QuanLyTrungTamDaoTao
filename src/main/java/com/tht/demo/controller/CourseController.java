@@ -7,6 +7,7 @@ import com.tht.demo.repository.CourseRepository;
 import com.tht.demo.repository.ProgrammeRepository;
 import com.tht.demo.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,8 +21,8 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/courses")
 public class CourseController {
-@Autowired
-private ProgrammeRepository programmeRepository;
+    @Autowired
+    private ProgrammeRepository programmeRepository;
     @Autowired
     private CourseRepository courseRepository;
     @Autowired
@@ -32,27 +33,28 @@ private ProgrammeRepository programmeRepository;
     public String coursesList() {
         return "manager-page/courses-list";
     }
+
     @GetMapping("/add")
-    public String add(Model model) {
+    public String add(Model model, Pageable pageable) {
 
         model.addAttribute("course", new Course());
-         model.addAttribute("listProgramme",programmeRepository.findAll())   ;
+        model.addAttribute("listProgramme", programmeRepository.findAllByDeletedIsFalse(pageable));
         return "manager-page/courses-add";
     }
 
 
     @PostMapping("/add")
-    public String doAdd(@Valid @ModelAttribute("course") Course course, BindingResult result, RedirectAttributes attributes,Model model) {
+    public String doAdd(@Valid @ModelAttribute("course") Course course, BindingResult result, RedirectAttributes attributes, Model model, Pageable pageable) {
         try {
             if (result.hasErrors()) {
-                model.addAttribute("listProgramme",programmeRepository.findAll()) ;
+                model.addAttribute("listProgramme", programmeRepository.findAllByDeletedIsFalse(pageable));
                 return "manager-page/courses-add";
             }
 
             String name = course.getCourseName();
             Optional<Course> course1 = courseRepository.findByCourseName(name);
             if (course1 == null || course1.isEmpty()) {
-                    courseService.save(course);
+                courseService.save(course);
                 attributes.addFlashAttribute("mess", "Thêm mới thành công...!!!");
             } else {
                 attributes.addFlashAttribute("error", "Tên khóa đã tồn tại");
@@ -65,22 +67,23 @@ private ProgrammeRepository programmeRepository;
     }
 
     @GetMapping("/edit/{id}")
-    public String showEdit(@PathVariable long id, Model model) {
+    public String showEdit(@PathVariable long id, Model model, Pageable pageable) {
         Optional<Course> course = courseService.findById(id);
         if (course != null) {
             model.addAttribute("course", course);
-            model.addAttribute("listProgramme",programmeRepository.findAll());
+            model.addAttribute("listProgramme", programmeRepository.findAllByDeletedIsFalse(pageable));
             return "manager-page/courses-edit";
         } else {
             return "error";
         }
 
     }
-        @PostMapping("/edit")
-    public String doEdit(@Valid @ModelAttribute("course") Course course, BindingResult result, RedirectAttributes attributes,Model model) {
+
+    @PostMapping("/edit")
+    public String doEdit(@Valid @ModelAttribute("course") Course course, BindingResult result, RedirectAttributes attributes, Model model,Pageable pageable) {
         try {
             if (result.hasErrors()) {
-                model.addAttribute("listProgramme",programmeRepository.findAll()) ;
+                model.addAttribute("listProgramme", programmeRepository.findAllByDeletedIsFalse(pageable));
                 return "manager-page/courses-edit";
             }
 
@@ -98,5 +101,5 @@ private ProgrammeRepository programmeRepository;
             attributes.addFlashAttribute("mess", "Error");
         }
         return "redirect:/courses";
-}
+    }
 }
