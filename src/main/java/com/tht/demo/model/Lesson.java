@@ -17,6 +17,7 @@ public class Lesson {
 
     private String content;
 
+    private boolean deleted;
     @ManyToOne
     @JoinColumn(name = "programme_id")
     private Programme programme;

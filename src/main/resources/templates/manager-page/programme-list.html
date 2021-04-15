@@ -7,9 +7,9 @@
 
 
 <!--[if lt IE 8]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
 <![endif]-->
-
 
 
 <!-- Start Left menu area -->
@@ -24,38 +24,41 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="logo-pro">
-                    <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
+                    <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt=""/></a>
                 </div>
             </div>
         </div>
     </div>
     <div th:replace="/manager-page/layout::header-advance-area"></div>
-    <div class="courses-area" style="margin-top: 2%;">
+    <div class="product-status mg-b-15">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="courses-inner res-mg-b-30">
-                        <div class="courses-title">
-                            <a th:href="@{/programme/info}"><img src="img/courses/1.jpg" alt=""></a>
-                            <h2>Apps Development</h2>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="product-status-wrap">
+                        <h4>Danh Sách Chương Trình Học</h4>
+                        <div class="asset-inner">
+                            <table>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tên Chương Trình</th>
+                                    <th>Tổng Số Buổi Học</th>
+                                    <th>Giá Tiền</th>
+                                    <th>Trạng Thái</th>
+                                    <th>Hành Động</th>
+                                </tr>
+                                <tbody id="showListProgrammes">
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="courses-alaltic">
-                            <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-clock"></i></span> 1 Year</span>
-                            <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-heart"></i></span> 50</span>
-                            <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-dollar"></i></span> 500</span>
+                        <div class="custom-pagination">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                            </ul>
                         </div>
-                        <div class="course-des">
-                            <p><span><i class="fa fa-clock"></i></span> <b>Duration:</b> 6 Months</p>
-                            <p><span><i class="fa fa-clock"></i></span> <b>Professor:</b> Jane Doe</p>
-                            <p><span><i class="fa fa-clock"></i></span> <b>Students:</b> 100+</p>
-                        </div>
-
-                        <div class="product-buttons" style="display: flex; justify-content: space-evenly;">
-                            <a th:href="@{/programme/info}"><button type="button" class="button-default cart-btn"><i class="fas fa-eye"></i></button></a>
-                            <a th:href="@{/programme/edit}"><button type="button" class="button-default cart-btn"><i class="fas fa-edit"></i></button></a>
-                            <a th:href="@{/programme/delete}"><button type="button" class="button-default cart-btn"><i class="fas fa-trash"></i></button></a>
-                        </div>
-
                     </div>
                 </div>
             </div>
@@ -65,5 +68,109 @@
 
 <footer th:replace="/manager-page/layout::scrip"></footer>
 </body>
+<script>
 
+    var programmes = programmes|| {};
+    programmes.showAll = function (page) {
+        let search = $('#str').val();
+        $.ajax({
+            url: "http://localhost:8080/api/programmes?page="+page,
+            method: "GET",
+            dataType: "json",
+            success: function (data) {
+                $('#showListProgrammes').empty();
+                let totalPage = parseInt(data.totalPages);
+                let num = parseInt(data.pageable.pageNumber);
+                console.log(totalPage);
+                $('.pagination').empty('');
+                if (num !=0) {
+
+                    $('.pagination').append(`<li class="page-item" ><a class="page-link" href="#" onclick="programmes.showAll(${num} -1)">Trước</a></li>`)
+                }
+                for (let i = 0; i < totalPage; i++) {
+
+                    if (data.pageable.pageNumber === i ) {
+                        $('.pagination').append(`<li class="page-item "><a class="page-link" href="#">${i + 1}</a></li>`);
+                    }
+                    // if (data.pageable.pageNumber !== i && i < 2){
+                    //     $('.pagination').append(`<li class="page-item"><a class="page-link" href="#" onclick="courses.showAll(${i})">${i + 1}</a></li>`)
+                    // }
+                }
+
+                if (num < totalPage-1){
+                    $('.pagination').append(`<li class="page-item"><a class="page-link" href="#" onclick="programmes.showAll(${num} +1)">Sau</a></li>`);
+                }
+
+                $.each(data.content, function (i, v) {
+                    let dele = false;
+                    let delet=true;
+                    if(v.deleted = dele){
+                        v.deleted ="<td style='color: red'>Đang Mở</td>"
+                    } else {
+                        v.deleted = "<td style='color: #228B22'>Đang Mở</td>"
+                    }
+                    $('#showListProgrammes').append(
+                        "<tr>" +
+                        "<td>" + v.id + "</td>" +
+                        "<td>" + v.programmeName + "</td>" +
+                        "<td>" + v.lessons + "</td>" +
+                        "<td>" + v.tuition + "$</td>" +
+                        +"<td>" + v.deleted + "</td>" +
+                        "<td>" +
+
+                        "<a  href='#' onclick='programmes.editForm(" + v.id + ")'  ><i class=\"fas fa-edit\" ></i></a>"
+                        +
+                        "<a style='padding-left: 35px'  href='#' onclick='programmes.view(" + v.id + ")'  ><i class=\"fas fa-eye\"></i></a>"
+                        +
+                        "<a style='padding-left: 35px'    ><i onclick='programmes.delete(" + v.id + ")' class=\"fas fa-trash-alt\"></i></a>" +
+                        "</td>" +
+                        "</tr>"
+                    );
+
+
+                })
+            }
+
+        })
+    }
+
+
+
+    programmes.delete = function(id){
+        bootbox.confirm({
+            message: "Bạn có chắc muốn xóa không?",
+            buttons: {
+                cancel: {
+                    label: '<i class="fa fa-times">Không</i> '
+                },
+                confirm: {
+                    label: '<i class="fa fa-check"> Có</i>'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    $.ajax({
+                        url:"http://localhost:8080/api/programmes/" + id,
+                        method: "DELETE",
+                        contentType: 'json',
+                        success: function (data) {
+                            programmes.showAll(0);
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    programmes.view = function (id) {
+        window.location = "/programme/info/"+id;
+    };
+    programmes.editForm = function (id) {
+        window.location = "/programme/edit/"+id;
+    };
+
+    $(document).ready(function () {
+        programmes.showAll(0);
+    });
+    </script>
 </html>

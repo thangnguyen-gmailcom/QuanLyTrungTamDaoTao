@@ -44,17 +44,24 @@
                                         <div class="review-content-section">
                                             <div id="dropzone1" class="pro-ad addcoursepro">
 <!--                                                Start Form-->
-                                                <form action="" method="" class="dropzone dropzone-custom needsclick addcourse" id="demo1-upload">
+                                                <form th:action="@{/programme/edit}" method="post" th:object="${programme}" class="dropzone dropzone-custom needsclick addcourse" id="demo1-upload">
+                                                    <input type="hidden" th:field="*{id}"/>
                                                     <div class="row">
                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                             <div class="form-group">
-                                                                <input name="programmeName" type="text" class="form-control" placeholder="Tên Chương Trình">
+                                                                <input th:field="*{programmeName}" type="text" class="form-control" placeholder="Tên Chương Trình">
+                                                                <td th:if="${#fields.hasErrors('programmeName')}" th:errors="*{programmeName}">name Error</td>
+
                                                             </div>
                                                             <div class="form-group">
-                                                                <input name="lessons " type="number" class="form-control" placeholder="Số buổi">
+                                                                <input th:field="*{lessons}" type="number" class="form-control" placeholder="Số buổi">
+                                                                <td th:if="${#fields.hasErrors('lessons')}" th:errors="*{lessons}">name Error</td>
+
                                                             </div>
                                                             <div class="form-group">
-                                                                <input name="tuition" type="number" class="form-control" placeholder="Học phí">
+                                                                <input th:field="*{tuition}" type="number" class="form-control" placeholder="Học phí">
+                                                                <td th:if="${#fields.hasErrors('tuition')}" th:errors="*{tuition}">name Error</td>
+
                                                             </div>
                                                             <div class="form-group alert-up-pd">
                                                                 <div class="dz-message needsclick download-custom">
@@ -68,7 +75,8 @@
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                             <div class="form-group">
-                                                                <textarea name="description" placeholder="Mô tả"></textarea>
+                                                                <textarea th:field="*{description}" placeholder="Mô tả"></textarea>
+                                                                <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}">name Error</td>
                                                             </div>
                                                         </div>
                                                     </div>
