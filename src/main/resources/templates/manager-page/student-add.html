@@ -5,7 +5,8 @@
 
 <body>
 <!--[if lt IE 8]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
 <![endif]-->
 
 
@@ -21,7 +22,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="logo-pro">
-                    <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
+                    <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt=""/></a>
                 </div>
             </div>
         </div>
@@ -42,82 +43,111 @@
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class="review-content-section">
                                             <div id="dropzone1" class="pro-ad">
-                                                <form action="/upload" class="dropzone dropzone-custom needsclick add-professors" id="demo1-upload">
+                                                <form th:action="@{/student/add}" method="post" th:object="${user}"
+                                                      class="dropzone dropzone-custom needsclick add-professors"
+                                                      id="demo1-upload">
                                                     <div class="row">
                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                             <div class="form-group">
-                                                                <input name="email" type="text" class="form-control" placeholder="Email">
+                                                                <input th:field="*{password}" type="hidden" value=""
+                                                                       class="form-control">
+                                                                <small class="form-text text-muted"
+                                                                       th:if="${#fields.hasErrors('password')}"
+                                                                       th:errors="*{password}">Name Error</small>
                                                             </div>
                                                             <div class="form-group">
-                                                                <input name="firstname" type="text" class="form-control" placeholder="FullName">
+                                                                <input th:field="*{email}" type="text"
+                                                                       class="form-control" placeholder="Email">
+                                                                <small class="form-text text-muted"
+                                                                       th:if="${#fields.hasErrors('email')}"
+                                                                       th:errors="*{email}">Name Error</small>
                                                             </div>
                                                             <div class="form-group">
-                                                                <input name="phoneNumber" type="number" class="form-control" placeholder="Number Phone">
+                                                                <input th:field="*{fullname}" type="text"
+                                                                       class="form-control" placeholder="FullName">
+                                                                <small class="form-text text-muted"
+                                                                       th:if="${#fields.hasErrors('fullname')}"
+                                                                       th:errors="*{fullname}">Name Error</small>
                                                             </div>
                                                             <div class="form-group">
-                                                                <input name="idCard" id="postcode" type="text" class="form-control" placeholder="Số CMND hoặc thẻ căn cước">
+                                                                <input th:field="*{phoneNumber}" type="number"
+                                                                       class="form-control" placeholder="Number Phone">
+                                                                <small class="form-text text-muted"
+                                                                       th:if="${#fields.hasErrors('phoneNumber')}"
+                                                                       th:errors="*{phoneNumber}">Name Error</small>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input th:field="*{idCard}" id="postcode" type="text"
+                                                                       class="form-control"
+                                                                       placeholder="Số CMND hoặc thẻ căn cước">
+                                                                <small class="form-text text-muted"
+                                                                       th:if="${#fields.hasErrors('idCard')}"
+                                                                       th:errors="*{idCard}">Name Error</small>
                                                             </div>
                                                             <div class="form-group data-custon-pick" id="data_2">
                                                                 <div class="input-group date"></div>
-                                                                <input type="date" class="form-control" name="dateOfBirth">
+                                                                <input type="date" class="form-control" id="currentdate"
+                                                                       th:field="*{dateOfBirth}">
+                                                                <small class="form-text text-muted"
+                                                                       th:if="${#fields.hasErrors('dateOfBirth')}"
+                                                                       th:errors="*{dateOfBirth}">Name Error</small>
                                                                 <div></div>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                             <div class="form-group">
-                                                                <select name="gender" class="form-control">
-                                                                    <option value="none" selected="" disabled="">Giới Tính</option>
-                                                                    <option value="0">Male</option>
-                                                                    <option value="1">Female</option>
-                                                                    <option value="3">Other</option>
+                                                                <select th:field="*{gender}" class="form-control">
+                                                                    <option value=-1 selected="selected">Giới Tính
+                                                                    </option>
+                                                                    <option value=0>Male</option>
+                                                                    <option value=1>Female</option>
+                                                                    <option value=3>Other</option>
                                                                 </select>
                                                             </div>
                                                             <div class="form-group">
-                                                                <select name="country" class="form-control">
-                                                                    <option value="none" selected="" disabled="">Tỉnh - Thành Phố</option>
-                                                                    <option value="0">India</option>
-                                                                    <option value="1">Pakistan</option>
-                                                                    <option value="2">Amerika</option>
-                                                                    <option value="3">China</option>
-                                                                    <option value="4">Dubai</option>
-                                                                    <option value="5">Nepal</option>
+                                                                <select id="provinces" name="province"
+                                                                        class="form-control">
+                                                                    <option value="none" selected="" disabled="">Tỉnh -
+                                                                        Thành Phố
+                                                                    </option>
                                                                 </select>
                                                             </div>
                                                             <div class="form-group">
-                                                                <select name="state" class="form-control">
-                                                                    <option value="none" selected="" disabled="">Quận -  Huyện</option>
-                                                                    <option value="0">Gujarat</option>
-                                                                    <option value="1">Maharastra</option>
-                                                                    <option value="2">Rajastan</option>
-                                                                    <option value="3">Maharastra</option>
-                                                                    <option value="4">Rajastan</option>
-                                                                    <option value="5">Gujarat</option>
+                                                                <select name="state" id="districts"
+                                                                        class="form-control">
+                                                                    <option value="none" selected="" disabled="">Quận -
+                                                                        Huyện
+                                                                    </option>
                                                                 </select>
                                                             </div>
                                                             <div class="form-group">
-                                                                <select name="city" class="form-control">
-                                                                    <option value="none" selected="" disabled="">Xã Phường - Thị Trấn</option>
-                                                                    <option value="0">Surat</option>
-                                                                    <option value="1">Baroda</option>
-                                                                    <option value="2">Navsari</option>
-                                                                    <option value="3">Baroda</option>
-                                                                    <option value="4">Surat</option>
+                                                                <select th:field="*{ward}" id="ward"
+                                                                        class="form-control">
+                                                                    <option value="" selected="">Xã Phường - Thị Trấn
+                                                                    </option>
                                                                 </select>
+                                                                <small class="form-text text-muted"
+                                                                       th:if="${#fields.hasErrors('ward')}"
+                                                                       th:errors="*{ward}">Name Error</small>
                                                             </div>
                                                             <div class="form-group">
-                                                                <select name="city" class="form-control">
-                                                                    <option value="none" selected="" disabled="">Chức Vụ</option>
-                                                                    <option value="1">Giáo Vụ</option>
-                                                                    <option value="2">Giáo Viên</option>
-                                                                    <option value="3">Học Viên</option>
+                                                                <select th:field="*{roles}" id="roles"
+                                                                        class="form-control">
+                                                                    <option value="" selected="">Chức Vụ</option>
                                                                 </select>
+                                                                <small class="form-text text-muted"
+                                                                       th:if="${#fields.hasErrors('roles')}"
+                                                                       th:errors="*{roles}">Name Error</small>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-lg-1">
                                                             <div class="payment-adress">
-                                                                <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
+                                                                <button type="submit"
+                                                                        class="btn btn-primary waves-effect waves-light">
+                                                                    Submit
+                                                                </button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -136,6 +166,69 @@
 </div>
 
 <footer th:replace="/manager-page/layout::scrip"></footer>
+<script type="text/javascript">
+    var provinces = {};
+    var role = {};
+    provinces.showAllProvince = function () {
+        $.ajax({
+            url: "http://localhost:8080/api/provinces/",
+            method: "GET",
+            dataType: "json",
+            success: function (data) {
+                $.each(data, function (i, v) {
+                    $('#provinces').append(`<option value="${v.provinceCode}">${v.provinceName}</option>`)
+                })
+            }
+        })
+    };
+
+    role.showAllRole = function () {
+        $.ajax({
+            url: "http://localhost:8080/api/roles/",
+            method: "GET",
+            dataType: "json",
+            success: function (data) {
+                for (let i = 0; i < data.length; i++) {
+                    if (data[i].name === "ROLE_STUDENT") {
+                        $('#roles').append(`<option value="${data[i].id}">${data[i].description}</option>`)
+                    }
+                }
+            }
+        })
+    }
+    $(document).ready(function () {
+        provinces.showAllProvince();
+        role.showAllRole();
+        $('#provinces').change(function (event) {
+            let provinceCode = $('#provinces').val();
+            $.ajax({
+                url: "http://localhost:8080/api/provinces/districts/" + provinceCode,
+                method: "GET",
+                dataType: "json",
+                success: function (data) {
+                    $('#districts').empty('');
+                    $.each(data, function (i, v) {
+                        $('#districts').append(`<option value="${v.districtCode}">${v.distinctName}</option>`)
+                    })
+                }
+            })
+        })
+        $('#districts').change(function (event) {
+            let districtCode = $('#districts').val();
+            $.ajax({
+                url: "http://localhost:8080/api/provinces/districts/wards/" + districtCode,
+                method: "GET",
+                dataType: "json",
+                success: function (data) {
+                    $('#ward').empty('');
+                    $.each(data, function (i, v) {
+                        $('#ward').append(`<option value="${v.wardCode}">${v.wardName}</option>`)
+                    })
+                }
+            })
+        })
+    })
+</script>
 </body>
 
 </html>

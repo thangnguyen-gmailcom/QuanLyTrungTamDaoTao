@@ -25,5 +25,12 @@ public class Province {
     @JsonIgnore
     private List<District> districts;
 
-
+    @Override
+    public String toString() {
+        return "Province{" +
+                "provinceCode='" + provinceCode + '\'' +
+                ", provinceName='" + provinceName + '\'' +
+                ", type='" + type + '\'' +
+                '}';
+    }
 }

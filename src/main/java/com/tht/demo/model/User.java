@@ -30,7 +30,6 @@ public class User {
     private String fullname;
 
     @Column(name = "date_of_birth")
-    @NotNull(message = "* ngày sinh không được để trống")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
 
@@ -47,7 +46,7 @@ public class User {
     private int gender;
 
     @Column(name = "created_date")
-    private LocalDateTime createdDate;
+    private LocalDateTime createdDate = LocalDateTime.now();
 
     @Column(name = "edited_date")
     private LocalDateTime editedDate;
@@ -67,6 +66,7 @@ public class User {
     private User staffCreatedId;
 
     @OneToMany(mappedBy = "staffCreatedId")
+    @JsonIgnore
     private List<User> users;
 
 
@@ -75,6 +75,7 @@ public class User {
     private User staffEditedId;
 
     @OneToMany(mappedBy = "staffEditedId")
+    @JsonIgnore
     private List<User> userList;
 
     @OneToMany(mappedBy = "user")

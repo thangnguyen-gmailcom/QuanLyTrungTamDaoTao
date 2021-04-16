@@ -4,8 +4,6 @@ import com.tht.demo.model.District;
 import com.tht.demo.repository.DistrictRepository;
 import com.tht.demo.service.DistrictService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,18 +20,18 @@ public class DistrictServiceImpl implements DistrictService {
         return districtRepository.findAllByProvinceProvinceCode(provinceCode);
     }
 
-    @Override
-    public Optional<District> findById(Long id) {
-        return districtRepository.findById(id);
-    }
+//    @Override
+//    public Optional<District> findById(Long id) {
+//        return districtRepository.findById(id);
+//    }
 
     @Override
     public District save(District district) {
         return districtRepository.save(district);
     }
 
-    @Override
-    public void delele(Long id) {
-        districtRepository.deleteById(id);
-    }
+//    @Override
+//    public void delele(Long id) {
+//        districtRepository.deleteById(id);
+//    }
 }
