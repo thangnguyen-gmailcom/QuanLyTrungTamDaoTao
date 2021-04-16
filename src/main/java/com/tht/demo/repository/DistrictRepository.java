@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface DistrictRepository extends JpaRepository<District,Long> {
+public interface DistrictRepository extends JpaRepository<District,String> {
 
     @Query(value = "SELECT d FROM District d WHERE d.province.provinceCode = :provinceCode")
     List<District> findAllByProvinceProvinceCode(@Param("provinceCode") String provinceCode);

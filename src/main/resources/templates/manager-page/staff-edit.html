@@ -53,7 +53,7 @@
                                                                        th:errors="*{password}">Name Error</small>
                                                             </div>
                                                             <div class="form-group">
-                                                                <input th:field="*{email}" type="text" class="form-control" placeholder="Email">
+                                                                <input th:field="*{email}" type="text" readonly class="form-control" placeholder="Email">
                                                                 <small class="form-text text-muted"
                                                                        th:if="${#fields.hasErrors('email')}"
                                                                        th:errors="*{email}">Name Error</small>
@@ -71,7 +71,7 @@
                                                                        th:errors="*{phoneNumber}">Name Error</small>
                                                             </div>
                                                             <div class="form-group">
-                                                                <input th:field="*{idCard}" id="postcode" type="text" class="form-control" placeholder="Số CMND hoặc thẻ căn cước">
+                                                                <input th:field="*{idCard}" readonly id="postcode" type="text" class="form-control" placeholder="Số CMND hoặc thẻ căn cước">
                                                                 <small class="form-text text-muted"
                                                                        th:if="${#fields.hasErrors('idCard')}"
                                                                        th:errors="*{idCard}">Name Error</small>
@@ -182,10 +182,11 @@
             success : function (data){
                 for(let i = 0; i < data.length; i++){
                     if(data[i].name !== 'ROLE_STUDENT') {
+                        if(data[i].name !== 'ROLE_ADMIN')
                         if (data[i].id === idRole) {
-                            $('#roles').append(`<option selected="selected" value="${data[i].id}">${data[i].name}</option>`)
+                            $('#roles').append(`<option selected="selected" value="${data[i].id}">${data[i].description}</option>`)
                         } else {
-                            $('#roles').append(`<option  value="${data[i].id}">${data[i].name}</option>`)
+                            $('#roles').append(`<option  value="${data[i].id}">${data[i].description}</option>`)
                         }
                     }
                 }

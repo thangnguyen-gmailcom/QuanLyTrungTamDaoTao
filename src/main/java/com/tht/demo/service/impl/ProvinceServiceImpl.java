@@ -21,18 +21,18 @@ public class ProvinceServiceImpl implements ProvinceService {
         return provinceRepository.findAll();
     }
 
-    @Override
-    public Optional<Province> findById(Long id) {
-        return provinceRepository.findById(id);
-    }
+//    @Override
+//    public Optional<Province> findById(Long id) {
+//        return provinceRepository.findById(id);
+//    }
 
     @Override
     public Province save(Province province) {
         return provinceRepository.save(province);
     }
 
-    @Override
-    public void delele(Long id) {
-        provinceRepository.deleteById(id);
-    }
+//    @Override
+//    public void delele(Long id) {
+//        provinceRepository.deleteById(id);
+//    }
 }

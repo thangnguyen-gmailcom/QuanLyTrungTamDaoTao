@@ -51,7 +51,8 @@
 
 
 <footer th:replace="/manager-page/layout::scrip"></footer>
-</body>
+
+
 <script type="text/javascript">
     var users = {};
     users.findAllEmployee = function (page) {
@@ -65,7 +66,7 @@
                 let num = parseInt(data.pageable.pageNumber);
                 $('.pagination').empty('');
                 if (num !=0) {
-                    $('.pagination').append(`<li class="page-item" ><a class="page-link" href="#" onclick="courses.showAll(${num} -1)">Trước</a></li>`)
+                    $('.pagination').append(`<li class="page-item" ><a class="page-link" href="#" onclick="users.findAllEmployee(${num} -1)">Trước</a></li>`)
                 }
                 for (let i = 0; i < totalPage; i++) {
                     if (data.pageable.pageNumber === i ) {
@@ -73,27 +74,37 @@
                     }
                 }
                 if (num < totalPage-1){
-                    $('.pagination').append(`<li class="page-item"><a class="page-link" href="#" onclick="courses.showAll(${num} +1)">Sau</a></li>`);
+                    $('.pagination').append(`<li class="page-item"><a class="page-link" href="#" onclick="users.findAllEmployee(${num} +1)">Sau</a></li>`);
                 }
                 $.each(data.content, function (i, v) {
                     let info = ' chưa có thông tin';
                     if(v.information == null){
                         v.information = info;
                     }
+                    let dateEdit = v.editedDate;
+                    let dateCreate = v.createdDate;
+                    let formatterDate = moment(dateCreate).format('DD/MM/YYYY');
+                    let formatterDateEdit = moment(dateEdit).format('DD/MM/YYYY');
+                    if(dateEdit == null){
+                        formatterDateEdit = formatterDate;
+                    }
                     $('#show-list-user').append(`
                     <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12" >
                         <div class="hpanel hblue contact-panel contact-panel-cs responsive-mg-b-30">
                         <div class="panel-body custom-panel-jw">
                             <div class="social-media-in">
-                                <a th:href="@{staff/info}"><i class="fas fa-eye"></i></a>
+                                <a onclick="users.view(${v.id})"><i class="fas fa-eye"></i></a>
                                 <a onclick="users.edit(${v.id})"><i class="fas fa-edit"></i></a>
-                                <a th:href="@{staff/delete}"><i class="fas fa-trash"></i></i></a>
+                                <a th:href="" onclick="users.delete(${v.id})"><i class="fas fa-trash"></i></i></a>
                         </div>
                         <img alt="logo" class="img-circle m-b" src="img/contact/1.jpg">
                             <h3><a href="">${v.fullname}</a></h3>
                             <p class="all-pro-ad">${v.ward.wardName},${v.ward.district.distinctName},${v.ward.district.province.provinceName}</p>
                             <p style="white-space: nowrap;width: 100%; overflow: hidden; text-overflow: ellipsis; " th:if="${v.information != 'null'}" >
                                 ${v.information}
+                            </p>
+                            <p style="white-space: nowrap;width: 100%; overflow: hidden; text-overflow: ellipsis; " th:if="${v.information != 'null'}" >
+                               <b>Ngày cập nhật mới nhất : </b> </br>${formatterDateEdit}
                             </p>
                     </div>
                     <div class="panel-footer contact-footer">
@@ -119,8 +130,42 @@
     users.edit = function (id){
         window.location = "/staff/edit?id="+id;
     }
+
+    users.view = function (id){
+        window.location = "/staff/view/"+id;
+    }
+
+    users.delete = function (id){
+        bootbox.confirm({
+            message: "Bạn có chắc muốn xóa không?",
+            buttons: {
+                cancel: {
+                    label: '<i class="fa fa-times">Không</i> '
+                },
+                confirm: {
+                    label: '<i class="fa fa-check"> Có</i>'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    $.ajax({
+                        url: "http://localhost:8080/api/user/"+id,
+                        method: "PATCH",
+                        contentType: 'json',
+                        success: function (data) {
+                            users.findAllEmployee(0);
+                        }
+                    });
+                }
+            }
+        })
+    }
+
     $(document).ready(function () {
         users.findAllEmployee(0)
     })
+
+
 </script>
+</body>
 </html>

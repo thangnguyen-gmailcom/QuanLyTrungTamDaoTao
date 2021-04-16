@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface DistrictService {
     List<District> showAll(String provinceCode);
-    Optional<District> findById(Long id);
+//    Optional<District> findById(Long id);
     District save(District district);
-    void delele(Long id);
+//    void delele(Long id);
 }

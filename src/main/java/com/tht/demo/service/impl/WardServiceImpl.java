@@ -31,8 +31,8 @@ public class WardServiceImpl implements WardService {
         return wardRepository.save(ward);
     }
 
-    @Override
-    public void delele(Long id) {
-        wardRepository.deleteById(id);
-    }
+//    @Override
+//    public void delele(Long id) {
+//        wardRepository.deleteById(id);
+//    }
 }
