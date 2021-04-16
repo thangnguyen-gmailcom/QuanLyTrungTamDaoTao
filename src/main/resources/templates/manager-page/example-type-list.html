@@ -1,0 +1,85 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+
+<header th:replace="/manager-page/layout::header"></header>
+
+<body>
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+
+<!-- Start Left menu area -->
+<div th:replace="/manager-page/layout::left-sidebar-pro">
+</div>
+<!-- End Left menu area -->
+
+
+<!-- Start Welcome area -->
+<div class="all-content-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="logo-pro">
+                    <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="/manager-page/layout::header-advance-area"/>
+    <!-- Single pro tab review Start-->
+    <div class="product-status mg-b-15">
+        <div class="container-fluid" style="margin-top: 1%">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="product-status-wrap">
+                        <h4>Danh Sách Các Kiểu Điểm</h4>
+                        <div class="asset-inner">
+                            <table>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tên Kiểu Điểm</th>
+                                    <th style="text-align: center">Mô tả</th>
+                                    <th>Action</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Điểm Lý Thuyết</td>
+                                    <td>Đánh giá năng lực dựa trên các bài thi trắc nghiệm hoặc tự luận trong một khoảng thời gian nhất định</td>
+                                    <td>
+                                        <a th:href="@{/exampleType/edit}"> <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
+                                        <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Điểm Thực Hành</td>
+                                    <td>Đánh giá năng lực dựa trên các bài thi nói hoặc tự viết trong một khoảng thời gian nhất định</td>
+                                    <td>
+                                        <a th:href="@{/exampleType/edit}"> <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
+                                        <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="custom-pagination">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="/manager-page/layout::scrip"></footer>
+</body>
+
+</html>

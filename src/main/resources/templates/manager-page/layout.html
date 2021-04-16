@@ -133,6 +133,27 @@
                                 class="has-arrow"
                                 href="all-courses.html"
                                 aria-expanded="false"
+                        ><span class="glyphicon glyphicon-star"></span>
+                            <span class="mini-click-non">Kiểu Điểm</span></a
+                        >
+                        <ul class="submenu-angle" aria-expanded="false">
+                            <li>
+                                <a title="All Library" th:href="@{/exampleType}"
+                                ><span class="mini-sub-pro">Danh Sách</span></a
+                                >
+                            </li>
+                            <li>
+                                <a title="Add Library" th:href="@{/exampleType/add}"
+                                ><span class="mini-sub-pro">Tạo mới</span></a
+                                >
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a
+                                class="has-arrow"
+                                href="all-courses.html"
+                                aria-expanded="false"
                         ><span class="glyphicon glyphicon-book"></span>
                             <span class="mini-click-non">Bài Học</span></a
                         >
@@ -322,6 +343,8 @@
                 </div>
             </div>
         </div>
+
+
         <!-- Mobile Menu start -->
         <div class="mobile-menu-area">
             <div class="container">
@@ -650,6 +673,8 @@
 </div>
 </div>
 </body>
+
+
 <footer th:fragment="scrip">
     <script th:src="@{/js/vendor/jquery-1.12.4.min.js}"></script>
 <!--    Fonrt Awesome-->
