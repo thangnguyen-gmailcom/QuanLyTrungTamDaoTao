@@ -57,6 +57,7 @@
                                                                        th:errors="*{password}">Name Error</small>
                                                             </div>
                                                             <div class="form-group">
+                                                                <label>Email </label>
                                                                 <input th:field="*{email}" readonly type="text"
                                                                        class="form-control" placeholder="Email">
                                                                 <small class="form-text text-muted"
@@ -64,6 +65,7 @@
                                                                        th:errors="*{email}">Name Error</small>
                                                             </div>
                                                             <div class="form-group">
+                                                                <label>Họ Tên</label>
                                                                 <input th:field="*{fullname}" type="text"
                                                                        class="form-control" placeholder="FullName">
                                                                 <small class="form-text text-muted"
@@ -71,6 +73,7 @@
                                                                        th:errors="*{fullname}">Name Error</small>
                                                             </div>
                                                             <div class="form-group">
+                                                                <label>Số Điện Thoại</label>
                                                                 <input th:field="*{phoneNumber}" type="number"
                                                                        class="form-control" placeholder="Number Phone">
                                                                 <small class="form-text text-muted"
@@ -78,6 +81,7 @@
                                                                        th:errors="*{phoneNumber}">Name Error</small>
                                                             </div>
                                                             <div class="form-group">
+                                                                <label>Số CMND Hoặc Thẻ Căn CƯớc</label>
                                                                 <input th:field="*{idCard}" readonly id="postcode"
                                                                        type="text" class="form-control"
                                                                        placeholder="Số CMND hoặc thẻ căn cước">
@@ -86,6 +90,7 @@
                                                                        th:errors="*{idCard}">Name Error</small>
                                                             </div>
                                                             <div class="form-group data-custon-pick" id="data_2">
+                                                                <label><b>Ngày Sinh</b></label>
                                                                 <div class="input-group date"></div>
                                                                 <input type="date" class="form-control"
                                                                        th:field="*{dateOfBirth}">
@@ -96,6 +101,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                            <label>Giới Tính</label>
                                                             <div class="form-group">
                                                                 <select th:field="*{gender}" class="form-control">
                                                                     <option value=-1 selected="selected">Giới Tính
@@ -106,6 +112,7 @@
                                                                 </select>
                                                             </div>
                                                             <div class="form-group">
+                                                                <label>Tỉnh - Thành Phố</label>
                                                                 <select id="provinces" name="province"
                                                                         class="form-control">
                                                                     <option value="none" selected="" disabled="">Tỉnh -
@@ -114,6 +121,7 @@
                                                                 </select>
                                                             </div>
                                                             <div class="form-group">
+                                                                <label>Quận -  Huyện</label>
                                                                 <select name="state" id="districts"
                                                                         class="form-control">
                                                                     <option value="none" selected="" disabled="">Quận -
@@ -122,6 +130,7 @@
                                                                 </select>
                                                             </div>
                                                             <div class="form-group">
+                                                                <label>Xã Phường - Thị Trấn</label>
                                                                 <select th:field="*{ward.wardCode}" id="ward"
                                                                         class="form-control">
                                                                     <option th:value="${user.ward.wardCode}"
@@ -133,6 +142,7 @@
                                                             </div>
                                                             <input type="hidden" th:field="*{roles.id}" id="roId">
                                                             <div class="form-group">
+                                                                <label>Chức Vụ</label>
                                                                 <select th:field="*{roles}" id="roles"
                                                                         class="form-control">
                                                                 </select>
