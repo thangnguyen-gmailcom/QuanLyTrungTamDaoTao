@@ -57,13 +57,13 @@ public class StaffController {
             Optional<User> staff1 = userService.findByPhoneNumber(user.getPhoneNumber());
             Optional<User> staff2 = userService.findByIdCard(user.getIdCard());
             if (staff3.isPresent() ) {
-                redirectAttributes.addFlashAttribute("messError", "Email đã tồn tại");
+                redirectAttributes.addFlashAttribute("error", "Email đã tồn tại");
                 return "redirect:/staff";
             }else if(staff1.isPresent()){
-                redirectAttributes.addFlashAttribute("messError", "Số điện thoại đã tồn tại");
+                redirectAttributes.addFlashAttribute("error", "Số điện thoại đã tồn tại");
                 return "redirect:/staff";
             }else if(staff2.isPresent()){
-                redirectAttributes.addFlashAttribute("messError", "Số chứng minh nhân dân đã tồn tại");
+                redirectAttributes.addFlashAttribute("error", "Số chứng minh nhân dân đã tồn tại");
                 return "redirect:/staff";
             }
             redirectAttributes.addFlashAttribute("mess", "Thêm mới thành công");
@@ -80,7 +80,7 @@ public class StaffController {
                 model.addAttribute("user", user.get());
                 return "manager-page/staff-edit";
             } else {
-                redirectAttributes.addFlashAttribute("messError", "Không tìm thấy user");
+                redirectAttributes.addFlashAttribute("error", "Không tìm thấy user");
                 return "redirect:/staff";
             }
         } catch (Exception e) {
@@ -99,7 +99,7 @@ public class StaffController {
             user.setEditedDate(LocalDateTime.now());
             if(staff1.isPresent()){
                 if(!staff1.get().getPhoneNumber().equals(user.getPhoneNumber())){
-                    redirectAttributes.addFlashAttribute("messError", "Số điện thoại đã tồn tại");
+                    redirectAttributes.addFlashAttribute("error", "Số điện thoại đã tồn tại");
                     return "redirect:/staff";
                 }else {
                     redirectAttributes.addFlashAttribute("mess", "Chỉnh sửa thành công");
@@ -117,7 +117,7 @@ public class StaffController {
     public String viewStaff(@PathVariable("id") long id,RedirectAttributes redirectAttributes,Model model){
         Optional<User> user = userService.findById(id);
         if(!user.isPresent()){
-            redirectAttributes.addFlashAttribute("messError", "Nhân viên không tồn tại");
+            redirectAttributes.addFlashAttribute("error", "Nhân viên không tồn tại");
            return "redirect:/staff";
         }
         model.addAttribute("user",user.get());
