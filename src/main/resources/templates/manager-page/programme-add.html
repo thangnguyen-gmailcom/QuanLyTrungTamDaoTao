@@ -1,12 +1,14 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-
 <header th:replace="/manager-page/layout::header"></header>
 
 <body>
+
+
 <!--[if lt IE 8]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
 <![endif]-->
 
 
@@ -18,17 +20,8 @@
 
 <!-- Start Welcome area -->
 <div class="all-content-wrapper">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="logo-pro">
-                    <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div th:replace="/manager-page/layout::header-advance-area"/>
-    <!-- Single pro tab review Start-->
+    <div th:replace="/manager-page/layout::container-fluid"/>
+    <div th:replace="/manager-page/layout::header-advance-area"></div>
     <div class="single-pro-review-area mt-t-30 mg-b-15" style="margin-top: 5%;">
         <div class="container-fluid">
             <div class="row">
@@ -43,7 +36,7 @@
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class="review-content-section">
                                             <div id="dropzone1" class="pro-ad addcoursepro">
-<!--                                               Start Form-->
+                                                <!--                                               Start Form-->
                                                 <form th:action="@{/programme/add}" method="post" th:object="${programme}" class="dropzone dropzone-custom needsclick addcourse" id="demo1-upload">
                                                     <div class="row">
                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -80,7 +73,7 @@
                                                         </div>
                                                     </div>
                                                 </form>
-<!--                                                End Form-->
+                                                <!--                                                End Form-->
                                             </div>
                                         </div>
                                     </div>
@@ -96,5 +89,109 @@
 
 <footer th:replace="/manager-page/layout::scrip"></footer>
 </body>
+<script>
 
+    var programmes = programmes|| {};
+    programmes.showAll = function (page) {
+        let search = $('#str').val();
+        $.ajax({
+            url: "http://localhost:8080/api/programmes?page="+page,
+            method: "GET",
+            dataType: "json",
+            success: function (data) {
+                $('#showListProgrammes').empty();
+                let totalPage = parseInt(data.totalPages);
+                let num = parseInt(data.pageable.pageNumber);
+                console.log(totalPage);
+                $('.pagination').empty('');
+                if (num !=0) {
+
+                    $('.pagination').append(`<li class="page-item" ><a class="page-link" href="#" onclick="programmes.showAll(${num} -1)">Trước</a></li>`)
+                }
+                for (let i = 0; i < totalPage; i++) {
+
+                    if (data.pageable.pageNumber === i ) {
+                        $('.pagination').append(`<li class="page-item "><a class="page-link" href="#">${i + 1}</a></li>`);
+                    }
+                    // if (data.pageable.pageNumber !== i && i < 2){
+                    //     $('.pagination').append(`<li class="page-item"><a class="page-link" href="#" onclick="courses.showAll(${i})">${i + 1}</a></li>`)
+                    // }
+                }
+
+                if (num < totalPage-1){
+                    $('.pagination').append(`<li class="page-item"><a class="page-link" href="#" onclick="programmes.showAll(${num} +1)">Sau</a></li>`);
+                }
+
+                $.each(data.content, function (i, v) {
+                    let dele = false;
+                    let delet=true;
+                    if(v.deleted = dele){
+                        v.deleted ="<td style='color: red'>Đang Mở</td>"
+                    } else {
+                        v.deleted = "<td style='color: #228B22'>Đang Mở</td>"
+                    }
+                    $('#showListProgrammes').append(
+                        "<tr>" +
+                        "<td>" + v.id + "</td>" +
+                        "<td>" + v.programmeName + "</td>" +
+                        "<td>" + v.lessons + "</td>" +
+                        "<td>" + v.tuition + "$</td>" +
+                        +"<td>" + v.deleted + "</td>" +
+                        "<td>" +
+
+                        "<a  href='#' onclick='programmes.editForm(" + v.id + ")'  ><i class=\"fas fa-edit\" ></i></a>"
+                        +
+                        "<a style='padding-left: 35px'  href='#' onclick='programmes.view(" + v.id + ")'  ><i class=\"fas fa-eye\"></i></a>"
+                        +
+                        "<a style='padding-left: 35px'    ><i onclick='programmes.delete(" + v.id + ")' class=\"fas fa-trash-alt\"></i></a>" +
+                        "</td>" +
+                        "</tr>"
+                    );
+
+
+                })
+            }
+
+        })
+    }
+
+
+
+    programmes.delete = function(id){
+        bootbox.confirm({
+            message: "Bạn có chắc muốn xóa không?",
+            buttons: {
+                cancel: {
+                    label: '<i class="fa fa-times">Không</i> '
+                },
+                confirm: {
+                    label: '<i class="fa fa-check"> Có</i>'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    $.ajax({
+                        url:"http://localhost:8080/api/programmes/" + id,
+                        method: "DELETE",
+                        contentType: 'json',
+                        success: function (data) {
+                            programmes.showAll(0);
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    programmes.view = function (id) {
+        window.location = "/programme/info/"+id;
+    };
+    programmes.editForm = function (id) {
+        window.location = "/programme/edit/"+id;
+    };
+
+    $(document).ready(function () {
+        programmes.showAll(0);
+    });
+</script>
 </html>
