@@ -5,7 +5,8 @@
 
 <body>
 <!--[if lt IE 8]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
 <![endif]-->
 
 
@@ -19,23 +20,59 @@
 <div class="all-content-wrapper">
     <div th:replace="/manager-page/layout::container-fluid"/>
     <div th:replace="/manager-page/layout::header-advance-area"></div>
-    <div class="contacts-area mg-b-15">
+    <div class="data-table-area mg-b-15">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="student-inner-std res-mg-b-30">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="product-payment-inner-st">
+                        <ul id="myTabedu1" class="tab-review-design">
+                            <li class="active"><a href="#description">Tạo Mới Nội Dung Buổi Học</a></li>
+                        </ul>
+                        <div id="myTabContent" class="tab-content custom-product-edit">
+                            <div class="product-tab-list tab-pane fade active in" id="description">
 
-                        <div class="student-img">
-                            <img src="/img/student/1.jpg" alt="" />
-                        </div>
-                        <div class="student-dtl">
-                            <h2>Buổi 1</h2>
-                            <p class="dp">Anh Văn Giao Tiếp Nhập Môn</p>
-                        </div>
-                        <div class="product-buttons" style="display: flex; justify-content: space-evenly;">
-                            <a href="#"><button type="button" title="Chi Tiết" class="button-default cart-btn"><i class="fas fa-eye"></i></button></a>
-                            <a th:href="@{/lesson/edit}"><button type="button" title="Chỉnh Sửa" class="button-default cart-btn"><i class="fas fa-edit"></i></button></a>
-                            <a th:href="@{/lesson/delete}"><button type="button" title="Xóa" class="button-default cart-btn"><i class="fas fa-trash"></i></button></a>
+                                <form th:action="@{/lesson/list}" method="post" th:object="${lesson}">
+                                    <input type="hidden" id="idProgramme" th:value="${programmes.id}"/>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                            <p>Chương Trình:</p>
+                                            <p id="programs" th:text="${programmes.programmeName}"></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="product-status-wrap">
+                                                <div class="asset-inner">
+                                                    <table>
+                                                        <thead>
+                                                        <tr>
+                                                            <th>STT</th>
+                                                            <th>Tên Buổi Học</th>
+                                                            <th>Nội Dung</th>
+                                                            <th>Hành Động</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody id="showLesson">
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+                                                <div class="custom-pagination">
+                                                    <ul class="pagination">
+                                                        <li class="page-item"><a class="page-link" href="#">Previous</a>
+                                                        </li>
+                                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                        <li class="page-item"><a class="page-link" href="#">Next</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -45,6 +82,102 @@
 </div>
 
 <footer th:replace="/manager-page/layout::scrip"></footer>
+<script type="text/javascript">
+    var lessons = {};
+    let stt = 1;
+    lessons.showAll = function (page) {
+        let program = $('#idProgramme').val()
+        $.ajax({
+            url: "http://localhost:8080/api/lessons?program=" + program + "&page=" + page,
+            method: "GET",
+            dataType: "json",
+            success: function (data) {
+                $('#showLesson').empty('');
+                let totalPage = parseInt(data.totalPages);
+                let num = parseInt(data.pageable.pageNumber);
+                console.log(totalPage);
+                $('.pagination').empty('');
+                if (num != 0) {
+
+                    $('.pagination').append(`<li class="page-item" ><a class="page-link" href="#" onclick="lessons.showAll(${num} -1)">Trước</a></li>`)
+                }
+                for (let i = 0; i < totalPage; i++) {
+
+                    if (data.pageable.pageNumber === i) {
+                        $('.pagination').append(`<li class="page-item "><a class="page-link" href="#">${i + 1}</a></li>`);
+                    }
+
+                }
+
+                if (num < totalPage - 1) {
+                    $('.pagination').append(`<li class="page-item"><a class="page-link" href="#" onclick="lessons.showAll(${num} +1)">Sau</a></li>`);
+                }
+
+
+                if (num == 0) {
+                    stt = 0;
+                } else {
+                    stt = (num++) * 8;
+                }
+
+
+                $.each(data.content, function (i, v) {
+                    i = stt
+                    $('#showLesson').append(
+                        "<tr>" +
+                        "<td>" + ++i + "</td>" +
+                        "<td>" + v.lessonNumber + "</td>" +
+                        "<td>" + v.content + "</td>" +
+                        "<td>" +
+                        "<a  href='#' onclick='lessons.editForm(" + v.id + ")'  ><i class=\"fas fa-edit\" ></i></a>"
+                        +
+                        "<a style='padding-left: 35px'><i onclick='lessons.delete(" + v.id + ")' class=\"fas fa-trash-alt\"></i></a>" +
+                        "</td>" +
+                        "</tr>"
+                    );
+                    stt = i
+                })
+            }
+
+        })
+    }
+
+
+    lessons.delete = function (id) {
+        bootbox.confirm({
+            message: "Bạn có chắc muốn xóa không?",
+            buttons: {
+                cancel: {
+                    label: '<i class="fa fa-times">Không</i> '
+                },
+                confirm: {
+                    label: '<i class="fa fa-check"> Có</i>'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    $.ajax({
+                        url: "http://localhost:8080/api/lessons/" + id,
+                        method: "DELETE",
+                        contentType: 'json',
+                        success: function (data) {
+                            lessons.showAll(0);
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+
+    lessons.editForm = function (id) {
+        window.location = "/lesson/edit/" + id;
+    };
+
+    $(document).ready(function () {
+        lessons.showAll(0);
+    });
+</script>
 </body>
 
 </html>

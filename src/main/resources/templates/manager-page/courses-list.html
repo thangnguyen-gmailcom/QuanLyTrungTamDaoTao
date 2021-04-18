@@ -98,9 +98,7 @@
                     if (data.pageable.pageNumber === i ) {
                         $('.pagination').append(`<li class="page-item "><a class="page-link" href="#">${i + 1}</a></li>`);
                     }
-                    // if (data.pageable.pageNumber !== i && i < 2){
-                    //     $('.pagination').append(`<li class="page-item"><a class="page-link" href="#" onclick="courses.showAll(${i})">${i + 1}</a></li>`)
-                    // }
+
                 }
 
                 if (num < totalPage-1){
@@ -126,20 +124,6 @@
 
         })
     }
-
-
-    // courses.delete = function(id){
-    //         $.ajax({
-    //             url : "http://localhost:8080/api/courses/" + id,
-    //             method : "DELETE",
-    //             dataType:'json',
-    //             success : function(data){
-    //                 courses.showAll(0);
-    //             }
-    //         });
-    //     // courses.showAll(0);
-    //     }
-
 
 
     courses.delete = function(id){
