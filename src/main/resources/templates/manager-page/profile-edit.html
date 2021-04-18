@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<header th:replace="/manager-page/layout::header"></header>
+
 <body>
 <!--[if lt IE 8]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -22,12 +21,12 @@
     <div th:replace="/manager-page/layout::header-advance-area"></div>
     <!-- Single pro tab review Start-->
     <div class="single-pro-review-area mt-t-30 mg-b-15">
-        <div class="container-fluid" style="margin-top: 5%">
+        <div class="container-fluid" style="margin-top: 1%">
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div class="profile-info-inner">
                         <div class="profile-img">
-                            <img src="/img/profile/1.jpg" alt="" />
+                            <img src="img/profile/1.jpg" alt="" />
                         </div>
                         <div class="profile-details-hr">
                             <div class="row">
@@ -60,54 +59,10 @@
                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                     <div class="product-payment-inner-st res-mg-t-30 analysis-progrebar-ctn">
                         <ul id="myTabedu1" class="tab-review-design">
-                            <li class="active"><a href="#description">Thông Tin Cá Nhân</a></li>
-                            <li><a href="#reviews"> Cập Nhật Thông Tin </a></li>
-                            <li><a href="#INFORMATION">Thay Đổi Mật Khẩu</a></li>
+                            <li class="active"><a href="#description">Cập Nhật Thông Tin Cá Nhân</a></li>
                         </ul>
                         <div id="myTabContent" class="tab-content custom-product-edit">
                             <div class="product-tab-list tab-pane fade active in" id="description">
-                                <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <div class="review-content-section">
-                                            <div class="row">
-                                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                                    <div class="address-hr biography">
-                                                        <p><b>Họ Tên</b><br /> Fly Zend</p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                                    <div class="address-hr biography">
-                                                        <p><b>SDT</b><br /> 01962067309</p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                                    <div class="address-hr biography">
-                                                        <p><b>Email</b><br /> fly@gmail.com</p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                                    <div class="address-hr biography">
-                                                        <p><b>Địa Chỉ</b><br />Thuận An, Phú Vang, Huế</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <div class="content-profile">
-                                                        <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras
-                                                            dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
-                                                        <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras
-                                                            dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
-                                                        <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras
-                                                            dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-tab-list tab-pane fade" id="reviews">
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class="review-content-section">
@@ -140,14 +95,18 @@
                                                                             <input type="date" class="form-control" name="dateOfBirth">
                                                                             <div></div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                                         <div class="form-group">
                                                                             <label>Avatar</label>
                                                                             <div class="custom-file">
                                                                                 <input type="file" class="custom-file-input" id="customFile" name="filename">
                                                                                 <label class="custom-file-label" for="customFile">Choose File</label>
                                                                             </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                                        <div class="form-group res-mg-t-15">
+                                                                            <label>Giới Thiệu</label>
+                                                                            <textarea name="description" placeholder="Description" style="height: 107px"></textarea>
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <label>Giới Tính</label>
@@ -211,45 +170,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="product-tab-list tab-pane fade" id="INFORMATION">
-                                <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <div class="review-content-section">
-                                            <div class="row">
-                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                    <div class="review-content-section">
-                                                        <div id="dropzone2" class="pro-ad">
-                                                            <form action="/upload" class="dropzone dropzone-custom needsclick add-professors" id="demo1-upload">
-                                                                <div class="row">
-                                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                                        <div class="form-group">
-                                                                            <label> Mật Khẩu Mới </label>
-                                                                            <input name="password" type="password" class="form-control" placeholder="Mật Khẩu">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                                        <div class="form-group">
-                                                                            <label> Nhập Lại Mật Khẩu </label>
-                                                                            <input name="password2" type="password" class="form-control" placeholder="Nhập Lại">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-lg-1">
-                                                                        <div class="payment-adress">
-                                                                            <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -259,6 +179,6 @@
 </div>
 
 <footer th:replace="/manager-page/layout::scrip"></footer>
-
 </body>
+
 </html>
