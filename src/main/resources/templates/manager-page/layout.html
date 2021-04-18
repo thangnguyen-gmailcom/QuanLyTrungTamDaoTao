@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head  th:fragment="header">
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+<head th:fragment="header">
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <title>Trung Tâm THT</title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<!--    uploadFile-->
+
+    <!--    uploadFile-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -15,72 +16,81 @@
 
     <!-- favicon
 		============================================ -->
-    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico"/>
     <!-- Google Fonts
 		============================================ -->
     <link
-            href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900"
-            rel="stylesheet"
-    />
+            href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet"/>
 
     <!-- notifications CSS
       ============================================ -->
-    <link rel="stylesheet" href="css/notifications/Lobibox.min.css">
-    <link rel="stylesheet" href="css/notifications/notifications.css">
+    <link rel="stylesheet" href="/css/notifications/Lobibox.min.css">
+    <link rel="stylesheet" href="/css/notifications/notifications.css">
 
 
     <!-- Bootstrap CSS
 		============================================ -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <!-- Bootstrap CSS
 		============================================ -->
-    <link rel="stylesheet" href="/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/css/font-awesome.min.css"/>
     <!-- owl.carousel CSS
 		============================================ -->
-    <link rel="stylesheet" href="/css/owl.carousel.css" />
-    <link rel="stylesheet" href="/css/owl.theme.css" />
-    <link rel="stylesheet" href="/css/owl.transitions.css" />
+    <link rel="stylesheet" href="/css/owl.carousel.css"/>
+    <link rel="stylesheet" href="/css/owl.theme.css"/>
+    <link rel="stylesheet" href="/css/owl.transitions.css"/>
     <!-- animate CSS
 		============================================ -->
-    <link rel="stylesheet" href="/css/animate.css" />
+    <link rel="stylesheet" href="/css/animate.css"/>
     <!-- normalize CSS
 		============================================ -->
-    <link rel="stylesheet" href="/css/normalize.css" />
+    <link rel="stylesheet" href="/css/normalize.css"/>
     <!-- meanmenu icon CSS
 		============================================ -->
-    <link rel="stylesheet" href="/css/meanmenu.min.css" />
+    <link rel="stylesheet" href="/css/meanmenu.min.css"/>
     <!-- main CSS
 		============================================ -->
-    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/main.css"/>
     <!-- educate icon CSS
 		============================================ -->
-    <link rel="stylesheet" href="/css/educate-custon-icon.css" />
+    <link rel="stylesheet" href="/css/educate-custon-icon.css"/>
     <!-- morrisjs CSS
 		============================================ -->
-    <link rel="stylesheet" href="/css/morrisjs/morris.css" />
+    <link rel="stylesheet" href="/css/morrisjs/morris.css"/>
     <!-- mCustomScrollbar CSS
 		============================================ -->
     <link
-            rel="stylesheet"
-            href="/css/scrollbar/jquery.mCustomScrollbar.min.css"
-    />
+            rel="stylesheet" href="/css/scrollbar/jquery.mCustomScrollbar.min.css"/>
     <!-- metisMenu CSS
 		============================================ -->
-    <link rel="stylesheet" href="/css/metisMenu/metisMenu.min.css" />
-    <link rel="stylesheet" href="/css/metisMenu/metisMenu-vertical.css" />
+    <link rel="stylesheet" href="/css/metisMenu/metisMenu.min.css"/>
+    <link rel="stylesheet" href="/css/metisMenu/metisMenu-vertical.css"/>
     <!-- calendar CSS
 		============================================ -->
-    <link rel="stylesheet" href="/css/calendar/fullcalendar.min.css" />
-    <link rel="stylesheet" href="/css/calendar/fullcalendar.print.min.css" />
+    <link rel="stylesheet" href="/css/calendar/fullcalendar.min.css"/>
+    <link rel="stylesheet" href="/css/calendar/fullcalendar.print.min.css"/>
     <!-- style CSS
 		============================================ -->
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style.css"/>
     <!-- responsive CSS
 		============================================ -->
-    <link rel="stylesheet" href="/css/responsive.css" />
+    <link rel="stylesheet" href="/css/responsive.css"/>
     <!-- modernizr JS
 		============================================ -->
     <script src="/js/vendor/modernizr-2.8.3.min.js"></script>
+    <!-- x-editor CSS
+       ============================================ -->
+    <link rel="stylesheet" href="/css/editor/select2.css"/>
+    <link rel="stylesheet" href="/css/editor/datetimepicker.css"/>
+    <link rel="stylesheet" href="/css/editor/bootstrap-editable.css"/>
+    <link rel="stylesheet" href="/css/editor/x-editor-style.css"/>
+    <!-- normalize CSS
+		============================================ -->
+    <link rel="stylesheet" href="/css/data-table/bootstrap-table.css"/>
+    <link rel="stylesheet" href="/css/data-table/bootstrap-editable.css"/>
+
+    <!--    Reponsive-->
+    <link rel="stylesheet" href="/css/reponsive.css"/>
 </head>
 <body>
 
@@ -92,7 +102,7 @@
             ><img class="main-logo" th:src="@{/img/logo/logo.png}" alt=""
             /></a>
             <strong
-            ><a href="index.html"><img th:src="@{/img/logo/logosn.png}" alt="" /></a
+            ><a href="index.html"><img th:src="@{/img/logo/logosn.png}" alt=""/></a
             ></strong>
         </div>
         <div class="left-custom-menu-adp-wrap comment-scrollbar">
@@ -106,6 +116,27 @@
                         ></span>
                             <span class="mini-click-non">Tổng Quan</span></a
                         >
+                    </li>
+                    <li>
+                        <a
+                                class="has-arrow"
+                                href="all-courses.html"
+                                aria-expanded="false"
+                        ><span class="glyphicon glyphicon-globe"></span>
+                            <span class="mini-click-non">Blog</span></a
+                        >
+                        <ul class="submenu-angle" aria-expanded="false">
+                            <li>
+                                <a title="All Library" th:href="@{/blogManager}"
+                                ><span class="mini-sub-pro">Danh Sách</span></a
+                                >
+                            </li>
+                            <li>
+                                <a title="Add Library" th:href="@{/blogManager/add}"
+                                ><span class="mini-sub-pro">Tạo mới</span></a
+                                >
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a
@@ -287,54 +318,67 @@
 
 <!-- Start Welcome area -->
 <div class="all-content-wrapper">
+    <div th:fragment="container-fluid">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="logo-pro">
+                        <a th:href="@{/manager}"><img class="main-logo" src="/img/logo/logo.png" alt=""/></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div th:fragment="header-advance-area">
         <div class="header-advance-area">
-        <div class="header-top-area">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="header-top-wraper">
-                            <div class="row">
-                                <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12"></div>
-                                <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-                                    <div class="header-right-info">
-                                        <ul
-                                                class="nav navbar-nav mai-top-nav header-right-menu"
-                                        >
-                                            <li class="nav-item">
-                                                <a
-                                                        href="#"
-                                                        data-toggle="dropdown"
-                                                        role="button"
-                                                        aria-expanded="false"
-                                                        class="nav-link dropdown-toggle"
-                                                >
-                                                    <img th:src="@{/img/product/pro4.jpg}" alt="" />
-                                                    <span class="admin-name">Prof.Anderson</span>
-                                                    <i
-                                                            class="fa fa-angle-down edu-icon edu-down-arrow"
-                                                    ></i>
-                                                </a>
-                                                <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
-                                                    <li>
-                                                        <a th:href="@{/profile}"
-                                                        ><span
-                                                                class="edu-icon edu-user-rounded author-log-ic"
-                                                        ></span
-                                                        >My Profile</a
-                                                        >
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"
-                                                        ><span
-                                                                class="edu-icon edu-locked author-log-ic"
-                                                        ></span
-                                                        >Log Out</a
-                                                        >
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
+            <div class="header-top-area">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="header-top-wraper">
+                                <div class="row">
+                                    <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12"></div>
+                                    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                                        <div class="header-right-info">
+                                            <ul
+                                                    class="nav navbar-nav mai-top-nav header-right-menu"
+                                            >
+                                                <li class="nav-item">
+                                                    <a
+                                                            href="#"
+                                                            data-toggle="dropdown"
+                                                            role="button"
+                                                            aria-expanded="false"
+                                                            class="nav-link dropdown-toggle"
+                                                    >
+                                                        <img th:src="@{/img/product/pro4.jpg}" alt=""/>
+                                                        <span class="admin-name">Prof.Anderson</span>
+                                                        <i
+                                                                class="fa fa-angle-down edu-icon edu-down-arrow"
+                                                        ></i>
+                                                    </a>
+                                                    <ul role="menu"
+                                                        class="dropdown-header-top author-log dropdown-menu animated zoomIn">
+                                                        <li>
+                                                            <a th:href="@{/profile}"
+                                                            ><span
+                                                                    class="edu-icon edu-user-rounded author-log-ic"
+                                                            ></span
+                                                            >My Profile</a
+                                                            >
+                                                        </li>
+                                                        <li>
+                                                            <a href="#"
+                                                            ><span
+                                                                    class="edu-icon edu-locked author-log-ic"
+                                                            ></span
+                                                            >Log Out</a
+                                                            >
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -342,342 +386,239 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-
-        <!-- Mobile Menu start -->
-        <div class="mobile-menu-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="mobile-menu">
-                            <nav id="dropdown">
-                                <ul class="mobile-menu-nav">
-                                    <li>
-                                        <a data-toggle="collapse" data-target="#Charts" href="#"
-                                        >Home
-                                            <span
-                                                    class="admin-project-icon edu-icon edu-down-arrow"
-                                            ></span
-                                            ></a>
-                                        <ul class="collapse dropdown-header-top">
-                                            <li><a href="index.html">Dashboard v.1</a></li>
-                                            <li><a href="index-1.html">Dashboard v.2</a></li>
-                                            <li><a href="index-3.html">Dashboard v.3</a></li>
-                                            <li><a href="analytics.html">Analytics</a></li>
-                                            <li><a href="widgets.html">Widgets</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="events.html">Event</a></li>
-                                    <li>
-                                        <a
-                                                data-toggle="collapse"
-                                                data-target="#demoevent"
-                                                href="#"
-                                        >Professors
-                                            <span
-                                                    class="admin-project-icon edu-icon edu-down-arrow"
-                                            ></span
-                                            ></a>
-                                        <ul id="demoevent" class="collapse dropdown-header-top">
-                                            <li>
-                                                <a href="all-professors.html">All Professors</a>
-                                            </li>
-                                            <li>
-                                                <a href="add-professor.html">Add Professor</a>
-                                            </li>
-                                            <li>
-                                                <a href="edit-professor.html">Edit Professor</a>
-                                            </li>
-                                            <li>
-                                                <a href="professor-profile.html"
-                                                >Professor Profile</a
-                                                >
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a
-                                                data-toggle="collapse"
-                                                data-target="#demopro"
-                                                href="#"
-                                        >Students
-                                            <span
-                                                    class="admin-project-icon edu-icon edu-down-arrow"
-                                            ></span
-                                            ></a>
-                                        <ul id="demopro" class="collapse dropdown-header-top">
-                                            <li><a href="all-students.html">All Students</a></li>
-                                            <li><a href="add-student.html">Add Student</a></li>
-                                            <li><a href="edit-student.html">Edit Student</a></li>
-                                            <li>
-                                                <a href="student-profile.html">Student Profile</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a
-                                                data-toggle="collapse"
-                                                data-target="#democrou"
-                                                href="#"
-                                        >Courses
-                                            <span
-                                                    class="admin-project-icon edu-icon edu-down-arrow"
-                                            ></span
-                                            ></a>
-                                        <ul id="democrou" class="collapse dropdown-header-top">
-                                            <li><a href="all-courses.html">All Courses</a></li>
-                                            <li><a href="add-course.html">Add Course</a></li>
-                                            <li><a href="edit-course.html">Edit Course</a></li>
-                                            <li>
-                                                <a href="course-profile.html">Courses Info</a>
-                                            </li>
-                                            <li>
-                                                <a href="course-payment.html">Courses Payment</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a
-                                                data-toggle="collapse"
-                                                data-target="#demolibra"
-                                                href="#"
-                                        >Library
-                                            <span
-                                                    class="admin-project-icon edu-icon edu-down-arrow"
-                                            ></span
-                                            ></a>
-                                        <ul id="demolibra" class="collapse dropdown-header-top">
-                                            <li>
-                                                <a href="library-assets.html">Library Assets</a>
-                                            </li>
-                                            <li>
-                                                <a href="add-library-assets.html"
-                                                >Add Library Asset</a
-                                                >
-                                            </li>
-                                            <li>
-                                                <a href="edit-library-assets.html"
-                                                >Edit Library Asset</a
-                                                >
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a
-                                                data-toggle="collapse"
-                                                data-target="#demodepart"
-                                                href="#"
-                                        >Departments
-                                            <span
-                                                    class="admin-project-icon edu-icon edu-down-arrow"
-                                            ></span
-                                            ></a>
-                                        <ul
-                                                id="demodepart"
-                                                class="collapse dropdown-header-top"
-                                        >
-                                            <li>
-                                                <a href="departments.html">Departments List</a>
-                                            </li>
-                                            <li>
-                                                <a href="add-department.html">Add Departments</a>
-                                            </li>
-                                            <li>
-                                                <a href="edit-department.html">Edit Departments</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a data-toggle="collapse" data-target="#demo" href="#"
-                                        >Mailbox
-                                            <span
-                                                    class="admin-project-icon edu-icon edu-down-arrow"
-                                            ></span
-                                            ></a>
-                                        <ul id="demo" class="collapse dropdown-header-top">
-                                            <li><a href="mailbox.html">Inbox</a></li>
-                                            <li><a href="mailbox-view.html">View Mail</a></li>
-                                            <li>
-                                                <a href="mailbox-compose.html">Compose Mail</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a
-                                                data-toggle="collapse"
-                                                data-target="#Miscellaneousmob"
-                                                href="#"
-                                        >Interface
-                                            <span
-                                                    class="admin-project-icon edu-icon edu-down-arrow"
-                                            ></span
-                                            ></a>
-                                        <ul
-                                                id="Miscellaneousmob"
-                                                class="collapse dropdown-header-top"
-                                        >
-                                            <li><a href="google-map.html">Google Map</a></li>
-                                            <li><a href="data-maps.html">Data Maps</a></li>
-                                            <li><a href="pdf-viewer.html">Pdf Viewer</a></li>
-                                            <li><a href="x-editable.html">X-Editable</a></li>
-                                            <li><a href="code-editor.html">Code Editor</a></li>
-                                            <li><a href="tree-view.html">Tree View</a></li>
-                                            <li><a href="preloader.html">Preloader</a></li>
-                                            <li>
-                                                <a href="images-cropper.html">Images Cropper</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a
-                                                data-toggle="collapse"
-                                                data-target="#Chartsmob"
-                                                href="#"
-                                        >Charts
-                                            <span
-                                                    class="admin-project-icon edu-icon edu-down-arrow"
-                                            ></span
-                                            ></a>
-                                        <ul id="Chartsmob" class="collapse dropdown-header-top">
-                                            <li><a href="bar-charts.html">Bar Charts</a></li>
-                                            <li><a href="line-charts.html">Line Charts</a></li>
-                                            <li><a href="area-charts.html">Area Charts</a></li>
-                                            <li>
-                                                <a href="rounded-chart.html">Rounded Charts</a>
-                                            </li>
-                                            <li><a href="c3.html">C3 Charts</a></li>
-                                            <li><a href="sparkline.html">Sparkline Charts</a></li>
-                                            <li><a href="peity.html">Peity Charts</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a
-                                                data-toggle="collapse"
-                                                data-target="#Tablesmob"
-                                                href="#"
-                                        >Tables
-                                            <span
-                                                    class="admin-project-icon edu-icon edu-down-arrow"
-                                            ></span
-                                            ></a>
-                                        <ul id="Tablesmob" class="collapse dropdown-header-top">
-                                            <li><a href="static-table.html">Static Table</a></li>
-                                            <li><a href="data-table.html">Data Table</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a
-                                                data-toggle="collapse"
-                                                data-target="#formsmob"
-                                                href="#"
-                                        >Forms
-                                            <span
-                                                    class="admin-project-icon edu-icon edu-down-arrow"
-                                            ></span
-                                            ></a>
-                                        <ul id="formsmob" class="collapse dropdown-header-top">
-                                            <li>
-                                                <a href="basic-form-element.html"
-                                                >Basic Form Elements</a
-                                                >
-                                            </li>
-                                            <li>
-                                                <a href="advance-form-element.html"
-                                                >Advanced Form Elements</a
-                                                >
-                                            </li>
-                                            <li>
-                                                <a href="password-meter.html">Password Meter</a>
-                                            </li>
-                                            <li><a href="multi-upload.html">Multi Upload</a></li>
-                                            <li><a href="tinymc.html">Text Editor</a></li>
-                                            <li>
-                                                <a href="dual-list-box.html">Dual List Box</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a
-                                                data-toggle="collapse"
-                                                data-target="#Appviewsmob"
-                                                href="#"
-                                        >App views
-                                            <span
-                                                    class="admin-project-icon edu-icon edu-down-arrow"
-                                            ></span
-                                            ></a>
-                                        <ul
-                                                id="Appviewsmob"
-                                                class="collapse dropdown-header-top"
-                                        >
-                                            <li>
-                                                <a href="basic-form-element.html"
-                                                >Basic Form Elements</a
-                                                >
-                                            </li>
-                                            <li>
-                                                <a href="advance-form-element.html"
-                                                >Advanced Form Elements</a
-                                                >
-                                            </li>
-                                            <li>
-                                                <a href="password-meter.html">Password Meter</a>
-                                            </li>
-                                            <li><a href="multi-upload.html">Multi Upload</a></li>
-                                            <li><a href="tinymc.html">Text Editor</a></li>
-                                            <li>
-                                                <a href="dual-list-box.html">Dual List Box</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a
-                                                data-toggle="collapse"
-                                                data-target="#Pagemob"
-                                                href="#"
-                                        >Pages
-                                            <span
-                                                    class="admin-project-icon edu-icon edu-down-arrow"
-                                            ></span
-                                            ></a>
-                                        <ul id="Pagemob" class="collapse dropdown-header-top">
-                                            <li><a href="login.html">Login</a></li>
-                                            <li><a href="register.html">Register</a></li>
-                                            <li><a href="lock.html">Lock</a></li>
-                                            <li>
-                                                <a href="password-recovery.html"
-                                                >Password Recovery</a
-                                                >
-                                            </li>
-                                            <li><a href="404.html">404 Page</a></li>
-                                            <li><a href="500.html">500 Page</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </nav>
+            <!-- Mobile Menu start -->
+            <div class="mobile-menu-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="mobile-menu">
+                                <nav id="dropdown">
+                                    <ul class="mobile-menu-nav">
+                                        <li>
+                                            <a title="Landing Page" th:href="@{/manager/}" aria-expanded="false"
+                                            ><span
+                                                    class="educate-icon educate-home icon-wrap"
+                                                    aria-hidden="true"
+                                            ></span>
+                                                <span class="mini-click-non">Tổng Quan</span></a
+                                            >
+                                        </li>
+                                        <li>
+                                            <a
+                                                    class="has-arrow"
+                                                    th:href="@{/blogManager}"
+                                                    aria-expanded="false"
+                                            ><span class="glyphicon glyphicon-globe"></span>
+                                                <span class="mini-click-non">Blog</span></a
+                                            >
+                                            <ul class="submenu-angle" aria-expanded="false">
+                                                <li>
+                                                    <a title="All Library" th:href="@{/blogManager}"
+                                                    ><span class="mini-sub-pro">Danh Sách</span></a
+                                                    >
+                                                </li>
+                                                <li>
+                                                    <a title="Add Library" th:href="@{/blogManager/add}"
+                                                    ><span class="mini-sub-pro">Tạo mới</span></a
+                                                    >
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a class="has-arrow" th:href="@{/programme}" aria-expanded="false"><span
+                                                    class="educate-icon educate-library icon-wrap"></span>
+                                                <span class="mini-click-non">Chương Trình</span></a>
+                                            <ul class="submenu-angle" aria-expanded="false">
+                                                <li>
+                                                    <a title="All Library" th:href="@{/programme}"
+                                                    ><span class="mini-sub-pro">Danh Sách</span></a
+                                                    >
+                                                </li>
+                                                <li>
+                                                    <a title="Add Library" th:href="@{/programme/add}"
+                                                    ><span class="mini-sub-pro">Tạo mới</span></a
+                                                    >
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a
+                                                    class="has-arrow"
+                                                    th:href="@{/exampleType}"
+                                                    aria-expanded="false"
+                                            ><span class="glyphicon glyphicon-star"></span>
+                                                <span class="mini-click-non">Kiểu Điểm</span></a
+                                            >
+                                            <ul class="submenu-angle" aria-expanded="false">
+                                                <li>
+                                                    <a title="All Library" th:href="@{/exampleType}"
+                                                    ><span class="mini-sub-pro">Danh Sách</span></a
+                                                    >
+                                                </li>
+                                                <li>
+                                                    <a title="Add Library" th:href="@{/exampleType/add}"
+                                                    ><span class="mini-sub-pro">Tạo mới</span></a
+                                                    >
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a
+                                                    class="has-arrow"
+                                                    th:href="@{/lesson}"
+                                                    aria-expanded="false"
+                                            ><span class="glyphicon glyphicon-book"></span>
+                                                <span class="mini-click-non">Bài Học</span></a
+                                            >
+                                            <ul class="submenu-angle" aria-expanded="false">
+                                                <li>
+                                                    <a title="All Library" th:href="@{/lesson}"
+                                                    ><span class="mini-sub-pro">Danh sách</span></a
+                                                    >
+                                                </li>
+                                                <li>
+                                                    <a title="Add Library" th:href="@{/lesson/add}"
+                                                    ><span class="mini-sub-pro">Tạo mới</span></a
+                                                    >
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a
+                                                    class="has-arrow"
+                                                    th:href="@{/courses}"
+                                                    aria-expanded="false"
+                                            ><span class="educate-icon educate-course icon-wrap"></span>
+                                                <span class="mini-click-non">Niên Khóa</span></a
+                                            >
+                                            <ul class="submenu-angle" aria-expanded="false">
+                                                <li>
+                                                    <a title="All Courses" th:href="@{/courses}"
+                                                    ><span class="mini-sub-pro">Danh Sách</span></a
+                                                    >
+                                                </li>
+                                                <li>
+                                                    <a title="Add Courses" th:href="@{/courses/add}"
+                                                    ><span class="mini-sub-pro">Tạo mới</span></a
+                                                    >
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a
+                                                    class="has-arrow"
+                                                    th:href="@{/class}"
+                                                    aria-expanded="false"
+                                            ><span class="glyphicon glyphicon-list"></span>
+                                                <span class="mini-click-non">Lớp Học</span></a
+                                            >
+                                            <ul class="submenu-angle" aria-expanded="false">
+                                                <li>
+                                                    <a title="All Library" th:href="@{/class}"
+                                                    ><span class="mini-sub-pro">Danh sách</span></a
+                                                    >
+                                                </li>
+                                                <li>
+                                                    <a title="Add Library" th:href="@{/class/add}"
+                                                    ><span class="mini-sub-pro">Tạo mới</span></a
+                                                    >
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a
+                                                    class="has-arrow"
+                                                    th:href="@{/staff}"
+                                                    aria-expanded="false"
+                                            ><span
+                                                    class="educate-icon educate-professor icon-wrap"
+                                            ></span>
+                                                <span class="mini-click-non">Nhân Sự</span></a
+                                            >
+                                            <ul class="submenu-angle" aria-expanded="false">
+                                                <li>
+                                                    <a title="All Professors" th:href="@{/staff}"
+                                                    ><span class="mini-sub-pro">Danh sách</span></a
+                                                    >
+                                                </li>
+                                                <li>
+                                                    <a title="Add Professor" th:href="@{/staff/add}"
+                                                    ><span class="mini-sub-pro">Tạo mới</span></a
+                                                    >
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a
+                                                    class="has-arrow"
+                                                    th:href="@{/student}"
+                                                    aria-expanded="false"
+                                            ><span class="educate-icon educate-student icon-wrap"></span>
+                                                <span class="mini-click-non">Học Viên</span></a
+                                            >
+                                            <ul class="submenu-angle" aria-expanded="false">
+                                                <li>
+                                                    <a title="All Students" th:href="@{/student}"
+                                                    ><span class="mini-sub-pro">Danh sách</span></a
+                                                    >
+                                                </li>
+                                                <li>
+                                                    <a title="Add Students" th:href="@{/student/add}"
+                                                    ><span class="mini-sub-pro">Tạo mới</span></a
+                                                    >
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a
+                                                    class="has-arrow"
+                                                    th:href="@{/timetable}"
+                                                    aria-expanded="false"
+                                            ><span class="educate-icon educate-event icon-wrap sub-icon-mg"></span>
+                                                <span class="mini-click-non">Thời Khóa Biểu</span></a
+                                            >
+                                            <ul class="submenu-angle" aria-expanded="false">
+                                                <li>
+                                                    <a title="All Students" th:href="@{/timetable}"
+                                                    ><span class="mini-sub-pro">Danh sách</span></a
+                                                    >
+                                                </li>
+                                                <li>
+                                                    <a title="Add Students" th:href="@{/timetable/add}"
+                                                    ><span class="mini-sub-pro">Tạo mới</span></a
+                                                    >
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Mobile Menu end -->
-        <div class="breadcome-area">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+            <!-- Mobile Menu end -->
+
+
+            <div class="breadcome-area">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-</div>
 </body>
+
+<!-- End Welcome area -->
 
 
 <footer th:fragment="scrip">
     <script th:src="@{/js/vendor/jquery-1.12.4.min.js}"></script>
-<!--    Fonrt Awesome-->
+    <!--    Fonrt Awesome-->
     <script src="https://kit.fontawesome.com/f9d4b9dcf7.js" crossorigin="anonymous"></script>
     <!-- jquery
    ============================================ -->
@@ -742,8 +683,8 @@
 
     <!-- notification JS
     ============================================ -->
-    <script src="js/notifications/Lobibox.js"></script>
-    <script src="js/notifications/notification-active.js"></script>
+    <script th:src="@{/js/notifications/Lobibox.js}"></script>
+    <script th:src="@{/js/notifications/notification-active.js}"></script>
 
     <script th:if="${mess != null}">
         window.Lobibox.notify('success', {
@@ -758,13 +699,25 @@
         });
     </script>
 
-<!--    upload FIle-->
+    <!--    upload FIle-->
     <script>
         // Add the following code if you want the name of the file appear on select
-        $(".custom-file-input").on("change", function() {
+        $(".custom-file-input").on("change", function () {
             var fileName = $(this).val().split("\\").pop();
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
     </script>
+
+
+    <!-- data table JS
+    ============================================ -->
+    <script th:src="@{/js/data-table/bootstrap-table.js}"></script>
+    <script th:src="@{/js/data-table/tableExport.js}"></script>
+    <script th:src="@{/js/data-table/data-table-active.js}"></script>
+    <script th:src="@{/js/data-table/bootstrap-table-editable.js}"></script>
+    <script th:src="@{/js/data-table/bootstrap-editable.js}"></script>
+    <script th:src="@{/js/data-table/bootstrap-table-resizable.js}"></script>
+    <script th:src="@{/js/data-table/colResizable-1.5.source.js}"></script>
+    <script th:src="@{/js/data-table/bootstrap-table-export.js}"></script>
 </footer>
 </html>

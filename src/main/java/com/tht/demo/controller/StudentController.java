@@ -46,7 +46,7 @@ public class StudentController {
                 model.addAttribute("user", user.get());
                 return "manager-page/student-edit";
             } else {
-                redirectAttributes.addFlashAttribute("messError", "Không tìm thấy học viên này");
+                redirectAttributes.addFlashAttribute("error", "Không tìm thấy học viên này");
                 return "redirect:/student";
             }
         } catch (Exception e) {
@@ -66,7 +66,7 @@ public class StudentController {
             Optional<User> student = userService.findByPhoneNumber(user.getPhoneNumber());
             if(student.isPresent()){
                 if(!student.get().getPhoneNumber().equals(user.getPhoneNumber())){
-                    redirectAttributes.addFlashAttribute("messError", "Số điện thoại đã tồn tại");
+                    redirectAttributes.addFlashAttribute("error", "Số điện thoại đã tồn tại");
                     return "redirect:/student";
                 }else {
                     redirectAttributes.addFlashAttribute("mess", "Chỉnh sửa thành công");
@@ -101,13 +101,13 @@ public class StudentController {
             Optional<User> student2 = userService.findByPhoneNumber(user.getPhoneNumber());
             Optional<User> student3 = userService.findByIdCard(user.getIdCard());
             if (student1.isPresent()) {
-                redirectAttributes.addFlashAttribute("messError", "Email đã tồn tại");
+                redirectAttributes.addFlashAttribute("error", "Email đã tồn tại");
                 return "redirect:/student";
             } else if (student2.isPresent()) {
-                redirectAttributes.addFlashAttribute("messError", "Số điện thoại đã tồn tại");
+                redirectAttributes.addFlashAttribute("error", "Số điện thoại đã tồn tại");
                 return "redirect:/student";
             } else if (student3.isPresent()) {
-                redirectAttributes.addFlashAttribute("messError", "Số chứng minh nhân dân đã tồn tại");
+                redirectAttributes.addFlashAttribute("error", "Số chứng minh nhân dân đã tồn tại");
                 return "redirect:/student";
             }
             redirectAttributes.addFlashAttribute("mess", "Thêm mới thành công");
@@ -120,7 +120,7 @@ public class StudentController {
     public String viewStaff(@PathVariable("id") long id,RedirectAttributes redirectAttributes,Model model){
         Optional<User> user = userService.findStudentById(id);
         if(!user.isPresent()){
-            redirectAttributes.addFlashAttribute("messError", "Học viên không tồn tại");
+            redirectAttributes.addFlashAttribute("error", "Học viên không tồn tại");
             return "redirect:/student";
         }
         model.addAttribute("user",user.get());

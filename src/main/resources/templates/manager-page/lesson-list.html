@@ -17,21 +17,14 @@
 
 <!-- Start Welcome area -->
 <div class="all-content-wrapper">
-    <div class="container-fluid">
-        <div class="row" style="margin-top: 5%;">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="logo-pro">
-                    <a href="index.html"><img class="main-logo" src="" alt="" /></a>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div th:replace="/manager-page/layout::container-fluid"/>
     <div th:replace="/manager-page/layout::header-advance-area"></div>
     <div class="contacts-area mg-b-15">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                     <div class="student-inner-std res-mg-b-30">
+
                         <div class="student-img">
                             <img src="/img/student/1.jpg" alt="" />
                         </div>
