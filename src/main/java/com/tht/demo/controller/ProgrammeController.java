@@ -1,7 +1,9 @@
 package com.tht.demo.controller;
 
 import com.tht.demo.model.Course;
+import com.tht.demo.model.Lesson;
 import com.tht.demo.model.Programme;
+import com.tht.demo.repository.LessonRepository;
 import com.tht.demo.repository.ProgrammeRepository;
 import com.tht.demo.service.ProgrammeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class ProgrammeController {
 private ProgrammeService programmeService;
 @Autowired
 private ProgrammeRepository programmeRepository;
+
+@Autowired
+private LessonRepository lessonRepository;
 
 
     @GetMapping("")
@@ -49,23 +54,32 @@ private ProgrammeRepository programmeRepository;
     }
     @PostMapping("/add")
     public String doAdd(@Valid @ModelAttribute("programme") Programme programme, BindingResult result, RedirectAttributes attributes, Model model) {
+
         try {
+
             if (result.hasErrors()) {
                 return "manager-page/programme-add";
             }
-
             String name = programme.getProgrammeName();
             Optional<Programme> programme1 = programmeRepository.findByProgrammeName(name);
             if (programme1 == null || programme1.isEmpty()) {
                 programmeService.save(programme);
+                for (int i = 0; i < programme.getLessons(); i++) {
+                    Lesson lesson = new Lesson();
+                    lesson.setProgramme(programme);
+                    lesson.setContent("Chưa có thông tin");
+                    lesson.setLessonNumber("chưa có thông tin");
+                    lessonRepository.save(lesson);
+                }
                 attributes.addFlashAttribute("mess", "Thêm mới thành công...!!!");
             } else {
                 attributes.addFlashAttribute("mess", "Tên khóa đã tồn tại");
             }
             return "redirect:/programme";
         } catch (Exception e) {
-            attributes.addFlashAttribute("mess", "error");
-            return "redirect:/manager-page/programme-add";
+            System.out.println(e);
+            attributes.addFlashAttribute("error", "lỗi");
+            return "redirect:/programme";
         }
     }
 

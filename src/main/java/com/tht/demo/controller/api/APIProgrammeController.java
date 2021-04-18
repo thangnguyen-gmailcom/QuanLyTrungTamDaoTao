@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping(value = "/api/programmes")
 public class APIProgrammeController {
@@ -29,6 +31,15 @@ private ProgrammeService programmeService;
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findById(@PathVariable("id") long id){
+        Optional<Programme> programme=programmeService.findById(id);
+        if(programme.isPresent()){
+            return new ResponseEntity<>(programme,HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable long id){
         try {

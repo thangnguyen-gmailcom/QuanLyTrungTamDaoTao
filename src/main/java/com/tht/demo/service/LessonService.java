@@ -11,5 +11,9 @@ public interface LessonService {
     Page<Lesson> showAll(Pageable pageable);
     Optional< Lesson> findById(Long id);
     Lesson save( Lesson lesson);
-    void delele(Long id);
+    void delete(Long id);
+    Optional<Lesson> findByContent(String content);
+    Page<Lesson> findAllByDeletedIsFalse(Pageable pageable);
+
+    Page<Lesson> findAllByProgrammeIdAndDeletedIsFalse(long id,Pageable pageable);
 }

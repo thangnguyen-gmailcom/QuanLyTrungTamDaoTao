@@ -42,4 +42,14 @@ private LessonRepository lessonRepository;
             throw new RuntimeException("course not found");
         lessonRepository.softDeleteLessonByProgrammeId(id);
     }
+
+    @Override
+    public Optional<Programme> findByProgrammeName(String name) {
+        return programmeRepository.findByProgrammeName(name);
+    }
+
+    @Override
+    public Page<Programme> findAllByDeletedIsFalse(Pageable pageable) {
+        return programmeRepository.findAllByDeletedIsFalse(pageable);
+    }
 }
