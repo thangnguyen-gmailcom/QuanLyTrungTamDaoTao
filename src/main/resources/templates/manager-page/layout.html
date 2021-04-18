@@ -340,33 +340,22 @@
                                     <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12"></div>
                                     <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
                                         <div class="header-right-info">
-                                            <ul
-                                                    class="nav navbar-nav mai-top-nav header-right-menu"
-                                            >
+                                            <ul class="nav navbar-nav mai-top-nav header-right-menu">
                                                 <li class="nav-item">
-                                                    <a
-                                                            href="#"
-                                                            data-toggle="dropdown"
-                                                            role="button"
-                                                            aria-expanded="false"
-                                                            class="nav-link dropdown-toggle"
-                                                    >
+                                                    <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
                                                         <img th:src="@{/img/product/pro4.jpg}" alt=""/>
                                                         <span class="admin-name">Prof.Anderson</span>
-                                                        <i
-                                                                class="fa fa-angle-down edu-icon edu-down-arrow"
-                                                        ></i>
                                                     </a>
                                                     <ul role="menu"
                                                         class="dropdown-header-top author-log dropdown-menu animated zoomIn">
-                                                        <li>
-                                                            <a th:href="@{/profile}"
-                                                            ><span
-                                                                    class="edu-icon edu-user-rounded author-log-ic"
-                                                            ></span
-                                                            >My Profile</a
-                                                            >
+                                                        <li><a th:href="@{/profileInfo}"><span class="edu-icon edu-user-rounded author-log-ic"></span>Thông Tin Cá Nhân</a>
                                                         </li>
+                                                        <li>
+                                                            <a th:href="@{/profileEdit}"><span class="edu-icon edu-user-rounded author-log-ic"></span>Cập Nhật Thông Tin</a>
+                                                        </li>
+                                                        <li>
+                                                            <a th:href="@{/profilePassword}"><span class="edu-icon edu-settings author-log-ic">
+                                                            </span>Thay Đổi Mật Khẩu</a></li>
                                                         <li>
                                                             <a href="#"
                                                             ><span
