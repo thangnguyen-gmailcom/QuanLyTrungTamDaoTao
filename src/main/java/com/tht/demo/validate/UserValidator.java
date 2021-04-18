@@ -4,6 +4,7 @@ import com.tht.demo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import java.time.LocalDate;
@@ -23,11 +24,12 @@ public class UserValidator implements Validator {
         String[] dateOfBirth = date.toString().split(" ");
         String[] currentDate = LocalDate.now().toString().split("-");
         String password = user.getPassword();
+        ValidationUtils.rejectIfEmpty(errors,"password","password.empty");
         if(Integer.parseInt(dateOfBirth[5])+ 18 > Integer.parseInt(currentDate[0]) ){
             errors.rejectValue("dateOfBirth","dateOfBirth.error");
         }
         if(password==null){
-            if(password.length()< 8 || password.length() > 16) {
+            if(password.length() < 8 || password.length() > 16) {
                 errors.rejectValue("password","password.length");
             }
         }

@@ -32,24 +32,29 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                     <div class="address-hr">
-                                        <p><b>Họ Tên</b><br /> Fly Zend</p>
+                                        <p><b>Họ Tên</b><br /><span th:utext="${user.fullname}"></span></p>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                     <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-                                        <p><b>Ngày Sinh</b><br /> 15/4/2021 </p>
+                                        <p><b>Ngày Sinh</b><br /> <span id="dateOfBirth" th:utext="${user.dateOfBirth}"></span></p>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                     <div class="address-hr">
-                                        <p><b>Email</b><br /> fly@gmail.com</p>
+                                        <p><b>Email</b><br /><span th:utext="${user.email}"></span></p>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                     <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-                                        <p><b>SDT</b><br /> +01962067309</p>
+                                        <p><b>SDT</b><br /><span th:utext="${user.phoneNumber}"></span></p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-6">
+                                    <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                        <p><b>Địa chỉ</b><br /><span th:utext="${user.ward.wardName}+','"></span><span th:utext="${user.ward.district.distinctName}+','"></span><span th:utext="${user.ward.district.province.provinceName}"></span></p>
                                     </div>
                                 </div>
                             </div>
@@ -69,34 +74,34 @@
                                             <div class="row">
                                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
-                                                        <p><b>Họ Tên</b><br /> Fly Zend</p>
+                                                        <p><b>Họ Tên</b><br /><span th:utext="${user.fullname}"></span></p>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
-                                                        <p><b>SDT</b><br /> 01962067309</p>
+                                                        <p><b>SDT</b><br /> <span th:utext="${user.phoneNumber}"></span></p>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
-                                                        <p><b>Email</b><br /> fly@gmail.com</p>
+                                                        <p><b>Email</b><br /><span th:utext="${user.email}"></span></p>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
-                                                        <p><b>Địa Chỉ</b><br />Thuận An, Phú Vang, Huế</p>
+                                                        <p><b>Địa Chỉ</b><br /><span th:utext="${user.ward.wardName}+','"></span><span th:utext="${user.ward.district.distinctName}+','"></span><span th:utext="${user.ward.district.province.provinceName}"></span></p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-12">
                                                     <div class="content-profile">
-                                                        <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras
-                                                            dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
-                                                        <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras
-                                                            dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
-                                                        <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras
-                                                            dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
+                                                        <th:block th:if="${user.information} == null">
+                                                            <p> chưa có thông tin</p>
+                                                        </th:block>
+                                                        <th:block th:if="${user.information} != null">
+                                                            <p th:utext="${user.information}"> </p>
+                                                        </th:block>
                                                     </div>
                                                 </div>
                                             </div>
@@ -113,6 +118,11 @@
 </div>
 
 <footer th:replace="/manager-page/layout::scrip"></footer>
+<script type="text/javascript">
+    $(document).ready(function (){
+        document.getElementById("dateOfBirth").innerHTML = moment(document.getElementById("dateOfBirth").innerHTML).format("YYYY-MM-DD")
+    })
+</script>
 </body>
 
 </html>
