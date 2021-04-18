@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -59,6 +60,9 @@ public class User {
 
     private String image;
 
+    @Transient
+    private MultipartFile[] imageUrl;
+
     private String information;
 
     @ManyToOne
@@ -108,4 +112,6 @@ public class User {
 
     @OneToMany(mappedBy = "teacher")
     private List<ClassRoom> classRooms2;
+
+
 }
