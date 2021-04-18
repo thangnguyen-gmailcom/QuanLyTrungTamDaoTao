@@ -84,7 +84,7 @@
                                                             <div class="form-group data-custon-pick" id="data_2">
                                                                 <label><b>Ngày Sinh</b></label>
                                                                 <div class="input-group date"></div>
-                                                                <input type="date" class="form-control"
+                                                                <input type="date" class="form-control" id="dateedit"
                                                                        th:field="*{dateOfBirth}">
                                                                 <small class="form-text text-muted"
                                                                        th:if="${#fields.hasErrors('dateOfBirth')}"
@@ -214,6 +214,7 @@
         })
     }
     $(document).ready(function () {
+        $('#dateedit').val(moment.format("YYYY-MM-DD"));
         provinces.showAllProvince();
         role.showAllRole();
         provinces.findByWardCode();

@@ -63,4 +63,9 @@ public class UserServiceImpl implements UserService {
     public Optional<User> findByIdCard(String idCard) {
         return userRepository.findByIdCard(idCard);
     }
+
+    @Override
+    public void updatePassword(String password, Long id) {
+        userRepository.updatePassword(password,id);
+    }
 }

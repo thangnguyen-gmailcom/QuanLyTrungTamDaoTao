@@ -28,6 +28,10 @@ public interface UserRepository extends JpaRepository<User,Long> {
     @Query(value = "SELECT * FROM User WHERE is_deleted = 0 AND (role_id = 2 OR role_id = 3) AND  id = :id",nativeQuery = true)
     Optional<User> findStaffById(@Param("id") Long id);
 
+    @Modifying
+    @Query(value = "UPDATE User u SET u.password = :password WHERE u.id = :id ")
+    void updatePassword(@Param("password") String password, @Param("id") Long id);
+
     Optional<User> findByPhoneNumber(String phone);
 
     Optional<User> findByIdCard(String idCard);

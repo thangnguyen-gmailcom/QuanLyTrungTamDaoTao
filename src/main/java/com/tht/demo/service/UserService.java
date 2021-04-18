@@ -16,4 +16,5 @@ public interface UserService {
     Optional<User> findByEmail(String userEmail);
     Optional<User> findByPhoneNumber(String phoneNumber);
     Optional<User> findByIdCard(String idCard);
+    void updatePassword(String password, Long id);
 }
