@@ -30,14 +30,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity https) throws Exception {
         https   .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/admin").hasRole("ADMIN")
+                .antMatchers("/student/**").hasRole("MINISTRY")
                 .antMatchers("/user").hasRole("USER")
                 .antMatchers("/api/user").permitAll()
                 .and()
                 .formLogin()
+                .loginPage("/login/")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/admin")
+                .defaultSuccessUrl("/staff")
                 .failureUrl("/login?error=true")
                 .and()
                 .logout()
@@ -46,6 +47,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .clearAuthentication(true)
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID", "remember-me")
-                .logoutSuccessUrl("/admin");
+                .logoutSuccessUrl("/staff");
     }
 }

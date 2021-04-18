@@ -6,7 +6,8 @@
 
 <body>
 <!--[if lt IE 8]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
 <![endif]-->
 
 
@@ -18,15 +19,7 @@
 
 <!-- Start Welcome area -->
 <div class="all-content-wrapper">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="logo-pro">
-                    <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div th:replace="/manager-page/layout::container-fluid"/>
     <div th:replace="/manager-page/layout::header-advance-area"/>
     <!-- Single pro tab review Start-->
     <div class="single-pro-review-area mt-t-30 mg-b-15" style="margin-top: 5%;">
@@ -41,50 +34,53 @@
                             <div class="product-tab-list tab-pane fade active in" id="description">
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <form action="" method="">
                                             <div class="review-content-section">
                                                 <div id="dropzone1" class="pro-ad addcoursepro">
                                                     <!--                                                Start Form-->
-                                                    <form action="" method="" class="dropzone dropzone-custom needsclick addcourse" id="demo1-upload">
+                                                    <form action="" method=""
+                                                          class="dropzone dropzone-custom needsclick addcourse"
+                                                          id="demo1-upload">
                                                         <div class="row">
                                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                                 <div class="form-group">
+                                                                    <label for="teacher">Tên Lớp</label>
                                                                     <input name="coursename" type="text" class="form-control" placeholder="Tên Lớp">
                                                                 </div>
+                                                                <div class="form-group">
                                                                 <label for="teacher">Chủ Nhiệm</label>
-                                                                <select class="form-control" id="teacher" name="sellist1">
-                                                                    <option selected disabled>---Vui Lòng chọn---</option>
+                                                                <select class="form-control" id="teacher"
+                                                                        name="sellist1">
+                                                                    <option selected disabled>---Vui Lòng chọn---
+                                                                    </option>
                                                                     <option>A</option>
                                                                     <option>B</option>
                                                                     <option>C</option>
                                                                     <option>D</option>
                                                                 </select>
-                                                                <label for="course">Thuộc Khóa học</label>
-                                                                <select class="form-control" id="course" name="sellist1">
-                                                                    <option selected disabled>---Vui Lòng chọn---</option>
-                                                                    <option>A</option>
-                                                                    <option>B</option>
-                                                                    <option>C</option>
-                                                                    <option>D</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                                <div class="form-group alert-up-pd">
-                                                                    <div class="dz-message needsclick download-custom">
-                                                                        <i class="fa fa-download edudropnone" aria-hidden="true"></i>
-                                                                        <h2 class="edudropnone">Drop image here or click to upload.</h2>
-                                                                        <p class="edudropnone"><span class="note needsclick">(This is just a demo dropzone. Selected image is <strong>not</strong> actually uploaded.)</span>
-                                                                        </p>
-                                                                        <input name="imageico" class="hd-pro-img" type="text" />
-                                                                    </div>
                                                                 </div>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
+                                                                 style="margin-top: 1%">
+                                                                <label for="course">Thuộc Niên Khóa</label>
+                                                                <select class="form-control" id="course"
+                                                                        name="sellist1">
+                                                                    <option selected disabled>---Vui Lòng chọn---
+                                                                    </option>
+                                                                    <option>A</option>
+                                                                    <option>B</option>
+                                                                    <option>C</option>
+                                                                    <option>D</option>
+                                                                </select>
                                                             </div>
                                                         </div>
                                                         <br>
                                                         <div class="row">
                                                             <div class="col-lg-1">
                                                                 <div class="payment-adress">
-                                                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
+                                                                    <button type="submit"
+                                                                            class="btn btn-primary waves-effect waves-light">
+                                                                        Submit
+                                                                    </button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -92,7 +88,6 @@
                                                     <!--                                                End Form-->
                                                 </div>
                                             </div>
-                                        </form>
                                     </div>
                                 </div>
                             </div>

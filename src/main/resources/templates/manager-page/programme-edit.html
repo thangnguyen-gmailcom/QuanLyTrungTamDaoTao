@@ -18,15 +18,7 @@
 
 <!-- Start Welcome area -->
 <div class="all-content-wrapper">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="logo-pro">
-                    <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div th:replace="/manager-page/layout::container-fluid"/>
     <div th:replace="/manager-page/layout::header-advance-area"/>
     <!-- Single pro tab review Start-->
     <div class="single-pro-review-area mt-t-30 mg-b-15" style="margin-top: 5%;">
@@ -49,31 +41,25 @@
                                                     <div class="row">
                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                             <div class="form-group">
+                                                                <label>Tên Chương Trình</label>
                                                                 <input th:field="*{programmeName}" type="text" class="form-control" placeholder="Tên Chương Trình">
                                                                 <td th:if="${#fields.hasErrors('programmeName')}" th:errors="*{programmeName}">name Error</td>
 
                                                             </div>
                                                             <div class="form-group">
+                                                                <label>Tổng Số Buổi</label>
                                                                 <input th:field="*{lessons}" type="number" class="form-control" placeholder="Số buổi">
                                                                 <td th:if="${#fields.hasErrors('lessons')}" th:errors="*{lessons}">name Error</td>
 
                                                             </div>
                                                             <div class="form-group">
+                                                                <label>Học Phí</label>
                                                                 <input th:field="*{tuition}" type="number" class="form-control" placeholder="Học phí">
                                                                 <td th:if="${#fields.hasErrors('tuition')}" th:errors="*{tuition}">name Error</td>
 
                                                             </div>
-                                                            <div class="form-group alert-up-pd">
-                                                                <div class="dz-message needsclick download-custom">
-                                                                    <i class="fa fa-download edudropnone" aria-hidden="true"></i>
-                                                                    <h2 class="edudropnone">Drop image here or click to upload.</h2>
-                                                                    <p class="edudropnone"><span class="note needsclick">(This is just a demo dropzone. Selected image is <strong>not</strong> actually uploaded.)</span>
-                                                                    </p>
-                                                                    <input name="imageico" class="hd-pro-img" type="text" />
-                                                                </div>
-                                                            </div>
                                                         </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="margin-top: 2.5%">
                                                             <div class="form-group">
                                                                 <textarea th:field="*{description}" placeholder="Mô tả"></textarea>
                                                                 <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}">name Error</td>

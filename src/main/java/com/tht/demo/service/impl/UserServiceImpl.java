@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
@@ -22,8 +24,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Page<User> showAllStudent(Pageable pageable) {
+        return userRepository.findAllStudentOrderByIdDesc(pageable);
+    }
+
+    @Override
     public Optional<User> findById(Long id) {
-        return userRepository.findById(id);
+        return userRepository.findStaffById(id);
+    }
+
+    @Override
+    public Optional<User> findStudentById(Long id) {
+        return userRepository.findStudentById(id);
     }
 
     @Override
@@ -32,9 +44,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void delele(Long id) {
-        userRepository.deleteById(id);
+    public void delete(Long id) {
+        userRepository.deletedUser(id);
     }
+
 
     @Override
     public Optional<User> findByEmail(String userEmail) {
@@ -49,5 +62,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> findByIdCard(String idCard) {
         return userRepository.findByIdCard(idCard);
+    }
+
+    @Override
+    public void updatePassword(String password, Long id) {
+        userRepository.updatePassword(password,id);
     }
 }

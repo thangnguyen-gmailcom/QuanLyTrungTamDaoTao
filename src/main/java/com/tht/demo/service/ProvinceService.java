@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface ProvinceService {
     List<Province> showAll();
-    Optional<Province> findById(Long id);
+//    Optional<Province> findById(Long id);
     Province save(Province province);
-    void delele(Long id);
+//    void delele(Long id);
 }

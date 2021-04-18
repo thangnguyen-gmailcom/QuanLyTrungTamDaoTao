@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Controller
@@ -46,15 +47,23 @@ public class StaffController {
     @PostMapping("/add")
     public String addStaff(@Valid @ModelAttribute User user, BindingResult result, RedirectAttributes redirectAttributes) {
         new UserValidator().validate(user, result);
+        Optional<User> user1 = userService.findByEmail("admin@gmail.com");
         user.setPassword(passwordEncoder.encode("123456789"));
+        user.setStaffCreatedId(user1.get());
         if (result.hasFieldErrors()) {
             return "manager-page/staff-add";
         } else {
             Optional<User> staff3 = userService.findByEmail(user.getEmail());
             Optional<User> staff1 = userService.findByPhoneNumber(user.getPhoneNumber());
             Optional<User> staff2 = userService.findByIdCard(user.getIdCard());
-            if (staff3.isPresent() || staff1.isPresent() || staff2.isPresent()) {
-                redirectAttributes.addFlashAttribute("messError", "Email, số điện thoại hoặc chứng minh nhân dân đã tồn tại");
+            if (staff3.isPresent() ) {
+                redirectAttributes.addFlashAttribute("error", "Email đã tồn tại");
+                return "redirect:/staff";
+            }else if(staff1.isPresent()){
+                redirectAttributes.addFlashAttribute("error", "Số điện thoại đã tồn tại");
+                return "redirect:/staff";
+            }else if(staff2.isPresent()){
+                redirectAttributes.addFlashAttribute("error", "Số chứng minh nhân dân đã tồn tại");
                 return "redirect:/staff";
             }
             redirectAttributes.addFlashAttribute("mess", "Thêm mới thành công");
@@ -71,7 +80,7 @@ public class StaffController {
                 model.addAttribute("user", user.get());
                 return "manager-page/staff-edit";
             } else {
-                redirectAttributes.addFlashAttribute("messError", "Không tìm thấy user");
+                redirectAttributes.addFlashAttribute("error", "Không tìm thấy user");
                 return "redirect:/staff";
             }
         } catch (Exception e) {
@@ -80,21 +89,38 @@ public class StaffController {
     }
 
     @PostMapping("/edit")
-    public String editStaff(@Valid @ModelAttribute User user,BindingResult bindingResult,RedirectAttributes redirectAttributes, Model model){
+    public String editStaff(@Valid @ModelAttribute User user,BindingResult bindingResult,RedirectAttributes redirectAttributes){
         new UserValidator().validate(user, bindingResult);
         if (bindingResult.hasFieldErrors()) {
             return "manager-page/staff-edit";
         } else {
-            Optional<User> staff3 = userService.findByEmail(user.getEmail());
             Optional<User> staff1 = userService.findByPhoneNumber(user.getPhoneNumber());
-            Optional<User> staff2 = userService.findByIdCard(user.getIdCard());
-            if (staff3.isPresent() || staff1.isPresent() || staff2.isPresent()) {
-                redirectAttributes.addFlashAttribute("messError", "Email, số điện thoại hoặc chứng minh nhân dân đã tồn tại");
-                return "redirect:/staff";
+            user.setStaffEditedId(staff1.get());
+            user.setEditedDate(LocalDateTime.now());
+            if(staff1.isPresent()){
+                if(!staff1.get().getPhoneNumber().equals(user.getPhoneNumber())){
+                    redirectAttributes.addFlashAttribute("error", "Số điện thoại đã tồn tại");
+                    return "redirect:/staff";
+                }else {
+                    redirectAttributes.addFlashAttribute("mess", "Chỉnh sửa thành công");
+                    userService.save(user);
+                    return "redirect:/staff";
+                }
             }
             redirectAttributes.addFlashAttribute("mess", "Thêm mới thành công");
             userService.save(user);
             return "redirect:/staff";
         }
+    }
+
+    @GetMapping("/view/{id}")
+    public String viewStaff(@PathVariable("id") long id,RedirectAttributes redirectAttributes,Model model){
+        Optional<User> user = userService.findById(id);
+        if(!user.isPresent()){
+            redirectAttributes.addFlashAttribute("error", "Nhân viên không tồn tại");
+           return "redirect:/staff";
+        }
+        model.addAttribute("user",user.get());
+        return "manager-page/staff-info";
     }
 }

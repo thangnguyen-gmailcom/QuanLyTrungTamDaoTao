@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -30,7 +31,6 @@ public class User {
     private String fullname;
 
     @Column(name = "date_of_birth")
-    @NotNull(message = "* ngày sinh không được để trống")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
 
@@ -47,7 +47,7 @@ public class User {
     private int gender;
 
     @Column(name = "created_date")
-    private LocalDateTime createdDate;
+    private LocalDateTime createdDate = LocalDateTime.now();
 
     @Column(name = "edited_date")
     private LocalDateTime editedDate;
@@ -60,6 +60,9 @@ public class User {
 
     private String image;
 
+    @Transient
+    private MultipartFile[] imageUrl;
+
     private String information;
 
     @ManyToOne
@@ -67,6 +70,7 @@ public class User {
     private User staffCreatedId;
 
     @OneToMany(mappedBy = "staffCreatedId")
+    @JsonIgnore
     private List<User> users;
 
 
@@ -75,6 +79,7 @@ public class User {
     private User staffEditedId;
 
     @OneToMany(mappedBy = "staffEditedId")
+    @JsonIgnore
     private List<User> userList;
 
     @OneToMany(mappedBy = "user")
@@ -107,4 +112,6 @@ public class User {
 
     @OneToMany(mappedBy = "teacher")
     private List<ClassRoom> classRooms2;
+
+
 }

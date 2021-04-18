@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 import java.util.Optional;
 
-public interface WardRepository extends JpaRepository<Ward,Long> {
+public interface WardRepository extends JpaRepository<Ward,String> {
 
     @Query(value = "SELECT w FROM Ward w WHERE w.district.districtCode = :districtCode")
     List<Ward> findAllByDistrictDistrictCode(@Param("districtCode") String districtCode);

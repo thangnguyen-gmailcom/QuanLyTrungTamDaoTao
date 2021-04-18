@@ -28,4 +28,14 @@ public class District {
     @OneToMany(mappedBy = "district")
     @JsonIgnore
     private List<Ward> wards;
+
+    @Override
+    public String toString() {
+        return "District{" +
+                "districtCode='" + districtCode + '\'' +
+                ", distinctName='" + distinctName + '\'' +
+                ", type='" + type + '\'' +
+                ", province=" + province +
+                '}';
+    }
 }

@@ -12,5 +12,5 @@ public interface WardService {
     List<Ward> showAll(String districtCode);
     Optional<Ward> findByWardCode(String wardCode);
     Ward save(Ward ward);
-    void delele(Long id);
+//    void delele(Long id);
 }
