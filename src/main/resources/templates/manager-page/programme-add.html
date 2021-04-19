@@ -53,7 +53,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Học Phí</label>
-                                                                <input th:field="*{tuition}" type="text" class="form-control" placeholder="học phí">
+                                                                <input th:field="*{tuition}" type="number" class="form-control" placeholder="học phí">
                                                                 <td th:if="${#fields.hasErrors('tuition')}" th:errors="*{tuition}">name Error</td>
                                                             </div>
                                                         </div>
