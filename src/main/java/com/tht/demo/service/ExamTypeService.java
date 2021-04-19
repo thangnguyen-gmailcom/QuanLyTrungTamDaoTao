@@ -11,5 +11,7 @@ public interface ExamTypeService {
     Page<ExamType> showAll(Pageable pageable);
     Optional<ExamType> findById(Long id);
     ExamType save(ExamType examType);
-    void delele(Long id);
+    void delete(Long id);
+    Optional<ExamType> findByTitle(String name);
+
 }

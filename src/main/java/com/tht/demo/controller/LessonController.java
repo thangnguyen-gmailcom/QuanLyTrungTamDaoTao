@@ -108,7 +108,7 @@ private ProgrammeService programmeService;
 
         Optional<Lesson> lesson = lessonService.findById(id);
         if (lesson != null) {
-            model.addAttribute("lesson", lesson);
+            model.addAttribute("lesson", lesson.get());
             model.addAttribute("listProgramme", programmeService.findAllByDeletedIsFalse(pageable));
 
             return "manager-page/lesson-edit";
@@ -140,6 +140,7 @@ private ProgrammeService programmeService;
             attributes.addFlashAttribute("mess", "Error");
         }
         long idProgramme = lesson.getProgramme().getId();
+        System.out.println(idProgramme);
         return "redirect:/lesson/list/"+ idProgramme;
     }
 }
