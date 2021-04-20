@@ -84,6 +84,7 @@
 </body>
 <script>
     var examTypes = {};
+    let stt = 1;
 
     examTypes.showAll = function (page) {
         $.ajax({
@@ -111,10 +112,20 @@
                 if (num < totalPage-1){
                     $('.pagination').append(`<li class="page-item"><a class="page-link" href="#" onclick="examTypes.showAll(${num} +1)">Sau</a></li>`);
                 }
+
+
+                if (num == 0) {
+                    stt = 0;
+                } else {
+                    stt = (num++) * 8;
+                }
                 $.each(data.content, function (i, v) {
+                    i = stt
+
+
                     $('#showExamType').append(
                         "<tr>" +
-                        "<td>" + v.id + "</td>" +
+                        "<td>" + ++i + "</td>" +
                         "<td>" + v.title + "</td>" +
                         "<td>" + v.description + "</td>" +
                         "<td>" +
@@ -125,7 +136,7 @@
                         "</td>" +
                         "</tr>"
                     );
-
+                    stt = i
                 })
             }
 
@@ -151,6 +162,10 @@
                         method: "DELETE",
                         contentType: 'json',
                         success: function (data) {
+                            window.Lobibox.notify('success', {
+                                size: 'mini',
+                                msg: "xóa thành công"
+                            });
                             examTypes.showAll(0);
                         }
                     });

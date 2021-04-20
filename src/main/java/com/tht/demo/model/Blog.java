@@ -17,15 +17,16 @@ public class Blog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @NotBlank(message = "* không được để trống")
-    @Size(min = 2, message = "* độ dài từ 2 kí tự trở lên")
+    @Size(min = 2, message = "* độ dài từ 2 kí tự trở lên và dưới 80 kí tự ", max = 80)
     private String title;
 
     @Column(name = "short_content")
     @NotBlank(message = "* không được để trống")
-    @Size(min = 2, message = "* độ dài từ 2 kí tự trở lên")
+    @Size(min = 2, message = "* độ dài từ 2 kí tự trở lên và dưới 80 kí tự ", max = 80)
     private String shortContent;
 
     @Column(name = "full_content")
+    @Lob
     @NotBlank(message = "* không được để trống")
     @Size(min = 2, message = "* độ dài từ 2 kí tự trở lên")
     private String fullContent;
