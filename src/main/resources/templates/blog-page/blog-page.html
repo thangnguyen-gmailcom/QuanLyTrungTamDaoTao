@@ -67,6 +67,11 @@
             </div>
         </div>
     </div>
+    <div class="custom-pagination">
+        <ul class="pagination">
+
+        </ul>
+    </div>
 </section>
 
 <!-- CONTACT -->
@@ -174,10 +179,10 @@
 
                 $.each(data.content, function (i, v) {
                     $('#showBlog').append(
-                        "<div class=\"col-md-4 col-sm-6\" style='width: 310px; height: 520px; margin-top: 2%; margin-left: 5%; background-color: WhiteSmoke'>" +
+                        "<div class=\"col-md-4 col-sm-6\" style='width: 310px; height: 310px; margin-top: 2%; margin-left: 5%; background-color: WhiteSmoke'>" +
                         "<a href='#' onclick='blogs.views(" + v.id + ")'>" +
                        "<div class=\"team-thumb\"" +
-                        "<div class=\"team-image\">" +
+                        "<div class=\"team-image\" style='height: 150px; width: 280px '>" +
                         "<img src='/upload/" + v.image + "' class=\"img-responsive\" alt=\"\">" +
                         "</div>" +
                         "<div class=\"team-info\">" +

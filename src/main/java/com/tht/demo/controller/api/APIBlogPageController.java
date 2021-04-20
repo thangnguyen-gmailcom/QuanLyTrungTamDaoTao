@@ -24,7 +24,7 @@ public class APIBlogPageController {
     @GetMapping("")
     public ResponseEntity<?> showAll(@RequestParam(value = "page",required = false,defaultValue = "0") int page){
         try {
-            Page<Blog> blogs = blogService.showAll(PageRequest.of(page,8, Sort.by("id").descending()));
+            Page<Blog> blogs = blogService.showAll(PageRequest.of(page,6, Sort.by("id").descending()));
 
             return new ResponseEntity<>(blogs, HttpStatus.OK);
         }catch (Exception e) {
