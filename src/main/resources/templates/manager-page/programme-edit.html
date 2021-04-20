@@ -21,7 +21,7 @@
     <div th:replace="/manager-page/layout::container-fluid"/>
     <div th:replace="/manager-page/layout::header-advance-area"/>
     <!-- Single pro tab review Start-->
-    <div class="single-pro-review-area mt-t-30 mg-b-15" style="margin-top: 5%;">
+    <div class="single-pro-review-area mt-t-30 mg-b-15" style="margin-top: 1%;">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -48,8 +48,9 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Tổng Số Buổi</label>
-                                                                <input th:field="*{lessons}" type="number" class="form-control" placeholder="Số buổi">
-                                                                <td th:if="${#fields.hasErrors('lessons')}" th:errors="*{lessons}">name Error</td>
+                                                                <input th:field="*{lessons}" type="number" class="form-control" placeholder="Số buổi" readonly>
+<!--                                                                <label >(Nếu bạn sửa số buổi học của chương trình thì tất cả bài học trong chương trình bị xóa)</label>-->
+                                                                <td th:if="${#fields.hasErrors('lessons')}" th:errors="*{lessons}" >name Error</td>
 
                                                             </div>
                                                             <div class="form-group">
@@ -59,9 +60,9 @@
 
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="margin-top: 2.5%">
+                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="margin-top: 1.9%">
                                                             <div class="form-group">
-                                                                <textarea th:field="*{description}" placeholder="Mô tả"></textarea>
+                                                                <textarea th:field="*{description}" placeholder="Mô tả" style="height: 192px;"></textarea>
                                                                 <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}">name Error</td>
                                                             </div>
                                                         </div>

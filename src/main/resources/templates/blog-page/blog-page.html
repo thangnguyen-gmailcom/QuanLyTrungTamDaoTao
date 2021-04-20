@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="/blog-page/layout::header"/>
+
+
+<body>
+<!-- PRE LOADER -->
+<div th:replace="/blog-page/layout::preloader"/>
+
+
+<!-- MENU -->
+<div th:replace="/blog-page/layout::menu2"/>
+
+<!-- HOME -->
+<section id="home">
+    <div class="row">
+        <div class="owl-carousel owl-theme home-slider">
+            <div class="item item-first">
+                <div class="caption">
+                    <div class="container">
+                        <div class="col-md-6 col-sm-12">
+                            <h1>Những Con Số Ngoạn Mục</h1>
+                            <a href="#feature" class="section-btn btn btn-default smoothScroll">Discover more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item item-second">
+                <div class="caption">
+                    <div class="container">
+                        <div class="col-md-6 col-sm-12">
+                            <h1>Giao tiếp tiếng Anh thành thạo với hơn 1,600 giảng viên từ Âu – Úc – Mỹ</h1>
+                            <h3>Các khóa học trực tuyến và trực tiếp theo nhóm nhỏ từ 8h – 24h của chúng tôi cho phép bạn học tiếng Anh ở mọi lúc, mọi nơi, mọi thiết bị.</h3>
+                            <a href="#courses" class="section-btn btn btn-default smoothScroll">Take a course</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item item-third">
+                <div class="caption">
+                    <div class="container">
+                        <div class="col-md-6 col-sm-12">
+                            <h1>Tiếp Nhận Ngôn Ngữ - Thay Đổi Bản Thân</h1>
+                            <h3>Trong thế giới phẳng ngày nay, học ngoại ngữ để kết nối và nắm bắt những cơ hội thành công mới.<a rel="nofollow" href="https://www.facebook.com/templatemo">templatemo</a> page.</h3>
+                            <a href="#contact" class="section-btn btn btn-default smoothScroll">Let's chat</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTENT -->
+<section id="team">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12 col-sm-12">
+                <div class="section-title">
+                    <h2>BLOG học Tiếng Anh</h2>
+                </div>
+                <div id="showBlog"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-6 col-sm-12">
+                <h1>Bạn đang muốn học ngoại ngữ để công việc phát triển tốt hơn?</h1>
+                <h3 style="color: white;">Với THT, bạn học cách làm chủ kỹ năng không bao giờ lỗi thời, trau dồi thêm những kiến thức mới, kết nối với những con người thú vị và chạm tay tới gần hơn thành công trong sự nghiệp.</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-6 col-sm-6">
+                <div class="footer-info">
+                    <div class="section-title">
+                        <h2>Headquarter</h2>
+                    </div>
+                    <address>
+                        <p>1800 dapibus a tortor pretium,<br> Integer nisl dui, ABC 12000</p>
+                    </address>
+
+                    <ul class="social-icon">
+                        <li><a href="#" class="fa fa-facebook-square" attr="facebook icon"></a></li>
+                        <li><a href="#" class="fa fa-twitter"></a></li>
+                        <li><a href="#" class="fa fa-instagram"></a></li>
+                    </ul>
+
+                    <div class="copyright-text">
+                        <p>Copyright &copy; 2019 Company Name</p>
+
+                        <p>Design: TemplateMo</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6">
+                <div class="footer-info">
+                    <div class="section-title">
+                        <h2>Contact Info</h2>
+                    </div>
+                    <address>
+                        <p>+65 2244 1100, +66 1800 1100</p>
+                        <p><a href="mailto:youremail.co">hello@youremail.co</a></p>
+                    </address>
+
+                    <div class="footer_menu">
+                        <h2>Quick Links</h2>
+                        <ul>
+                            <li><a href="#">Career</a></li>
+                            <li><a href="#">Investor</a></li>
+                            <li><a href="#">Terms & Conditions</a></li>
+                            <li><a href="#">Refund Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!--SCRIPT-->
+<th:block th:replace="/blog-page/layout::scrip"/>
+</body>
+
+<script>
+    var blogs = {};
+    let stt = 1;
+
+    blogs.showAll = function (page) {
+        $.ajax({
+            url: "http://localhost:8080/api/blogPages?page=" + page,
+            method: "GET",
+            dataType: "json",
+            success: function (data) {
+                $('#showBlog').empty();
+                let totalPage = parseInt(data.totalPages);
+                let num = parseInt(data.pageable.pageNumber);
+                console.log(totalPage);
+                $('.pagination').empty('');
+                if (num != 0) {
+
+                    $('.pagination').append(`<li class="page-item" ><a class="page-link" href="#" onclick="blogs.showAll(${num} -1)">Trước</a></li>`)
+                }
+                for (let i = 0; i < totalPage; i++) {
+
+                    if (data.pageable.pageNumber === i) {
+                        $('.pagination').append(`<li class="page-item "><a class="page-link" href="#">${i + 1}</a></li>`);
+                    }
+
+                }
+
+                if (num < totalPage - 1) {
+                    $('.pagination').append(`<li class="page-item"><a class="page-link" href="#" onclick="blogs.showAll(${num} +1)">Sau</a></li>`);
+                }
+
+
+                $.each(data.content, function (i, v) {
+                    $('#showBlog').append(
+                        "<div class=\"col-md-4 col-sm-6\" style='width: 310px; height: 520px; margin-top: 2%; margin-left: 5%; background-color: WhiteSmoke'>" +
+                        "<a href='#' onclick='blogs.views(" + v.id + ")'>" +
+                       "<div class=\"team-thumb\"" +
+                        "<div class=\"team-image\">" +
+                        "<img src='/upload/" + v.image + "' class=\"img-responsive\" alt=\"\">" +
+                        "</div>" +
+                        "<div class=\"team-info\">" +
+                       "<h3>" + v.title + "</h3>" +
+                        "<span>" + v.shortContent + "</span>" +
+                        "</div>" +
+                        "</div>" +
+                        "</a>" +
+                        "</div>"
+                    );
+                })
+            }
+
+        })
+    }
+
+
+// Run Funtion
+    blogs.views = function (id) {
+        window.location = "/blogPage/blogSingle/"+id;
+    };
+
+
+    $(document).ready(function () {
+        blogs.showAll(0);
+    });
+</script>
+</html>

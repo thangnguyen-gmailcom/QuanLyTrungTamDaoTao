@@ -98,15 +98,19 @@ public class User {
     private List<StudentClass> studentClasses;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Blog> blogs;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<TimeTable> userCreated;
 
     @OneToMany(mappedBy = "teacher")
+    @JsonIgnore
     private List<TimeTable> teacher;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Attend> attends;
 
     @ManyToOne

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="/blog-page/layout::header"/>
+
+<body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
+
+<!-- PRE LOADER -->
+<div th:replace="/blog-page/layout::preloader"/>
+
+
+<!-- MENU -->
+<div th:replace="/blog-page/layout::menu"/>
+
+<!-- HOME -->
+<section id="home">
+    <div class="row">
+        <div class="owl-carousel owl-theme home-slider">
+            <div class="item item-first">
+                <div class="caption">
+                    <div class="container">
+                        <div class="col-md-6 col-sm-12">
+                            <h1>Những Con Số Ngoạn Mục</h1>
+                            <a href="#feature" class="section-btn btn btn-default smoothScroll">Discover more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item item-second">
+                <div class="caption">
+                    <div class="container">
+                        <div class="col-md-6 col-sm-12">
+                            <h1>Giao tiếp tiếng Anh thành thạo với hơn 1,600 giảng viên từ Âu – Úc – Mỹ</h1>
+                            <h3>Các khóa học trực tuyến và trực tiếp theo nhóm nhỏ từ 8h – 24h của chúng tôi cho phép
+                                bạn học tiếng Anh ở mọi lúc, mọi nơi, mọi thiết bị.</h3>
+                            <a href="#courses" class="section-btn btn btn-default smoothScroll">Take a course</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item item-third">
+                <div class="caption">
+                    <div class="container">
+                        <div class="col-md-6 col-sm-12">
+                            <h1>Tiếp Nhận Ngôn Ngữ - Thay Đổi Bản Thân</h1>
+                            <h3>Trong thế giới phẳng ngày nay, học ngoại ngữ để kết nối và nắm bắt những cơ hội thành
+                                công mới.<a rel="nofollow" href="https://www.facebook.com/templatemo">templatemo</a>
+                                page.</h3>
+                            <a href="#contact" class="section-btn btn btn-default smoothScroll">Let's chat</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- FEATURE -->
+<section id="feature">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-4 col-sm-4">
+                <div class="feature-thumb">
+                    <span>01</span>
+                    <h3>Giao tiếp nhiều hơn
+                        Đẩy nhanh hiệu quả</h3>
+                    <p>Lớp học quy mô 3-6 giúp học viên có nhiều thời gian giao tiếp hơn khi tương tác trực tiếp với
+                        giáo viên. Học quốc tế với chi phí nội địa.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-4">
+                <div class="feature-thumb">
+                    <span>02</span>
+                    <h3>Giáo viên chuyên nghiệp
+                        Công nghệ hiện đại</h3>
+                    <p>Giáo viên chất lượng cao đến từ Âu, Úc, Mỹ. Ứng dụng trí tuệ nhân tạo giúp phát hiện sửa lỗi phát
+                        âm chỉ sau 10s và gia tăng 3000 từ vựng chỉ sau 3 tháng.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-4">
+                <div class="feature-thumb">
+                    <span>03</span>
+                    <h3>Chủ đề đa dạng
+                        Theo sát tiến trình</h3>
+                    <p>Với 365 chủ đề và hệ thống riêng theo sát tiến trình học, học viên nhanh chóng cải thiện sự tự
+                        tin và khả năng ngoại ngữ vượt trội.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ABOUT -->
+<section id="about">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-6 col-sm-12">
+                <div class="about-info">
+                    <h2>Bắt đầu hành trình của bạn để có một cuộc sống tốt đẹp hơn với các khóa học thực hành trực
+                        tuyến</h2>
+
+                    <figure>
+                        <span><i class="fa fa-users"></i></span>
+                        <figcaption>
+                            <h3>Quyết định điểm bắt đầu</h3>
+                            <p>Các lớp học chia theo trình độ học từ mất căn bản tới nâng cao. Học viên tự lựa chọn tiêu
+                                chuẩn, chi phí, giảng viên và thiết bị học.</p>
+                        </figcaption>
+                    </figure>
+
+                    <figure>
+                        <span><i class="fa fa-certificate"></i></span>
+                        <figcaption>
+                            <h3>Lựa chọn cách thức học</h3>
+                            <p>Lớp học mở liên tục từ 8h - 24h cho phép học viên lựa chọn khung giờ học bất kỳ, học
+                                tiếng Anh online thỏa thích mà không phát sinh chi phí.</p>
+                        </figcaption>
+                    </figure>
+
+                    <figure>
+                        <span><i class="fa fa-bar-chart-o"></i></span>
+                        <figcaption>
+                            <h3>Phương pháp PIALE</h3>
+                            <p>VPhương pháp xoáy vòng 5 bước tiêu chuẩn chỉ có ở Topica Native: Luyện tập – Giao tiếp –
+                                Đánh giá – Bổ sung kiến thức – Kiểm tra khép vòng. </p>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+
+            <div class="col-md-offset-1 col-md-4 col-sm-12">
+                <div class="imageLaptop">
+                    <img src="/blogPage/images/img-11-min.jpg" style="width: 150%;">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- Programme -->
+<section id="team">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12 col-sm-12">
+                <div class="section-title">
+                    <h2>Các Chương Trình Học Đang Mở<small>Nâng cấp kỹ năng của bạn với các khóa học mới nhất</small></h2>
+                </div>
+                <th:block th:each ="programme : ${programmeList}">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="team-thumb">
+                            <div class="team-image">
+                                <img th:src="@{'/upload/programme.jpg'}" class="img-responsive" alt="">
+                            </div>
+                            <div class="team-info">
+                                <h3 th:utext="${programme.getProgrammeName()}"></h3>
+                                <span th:utext="${programme.getTuition()} + '$'"></span>
+                            </div>
+                        </div>
+                    </div>
+                </th:block>
+                </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Teacher -->
+<section id="courses">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12 col-sm-12">
+                <div class="section-title">
+                    <h2>Giảng Viên <small>Tiếp Xúc Những Giảng Viên Chuyên Nghiệp</small>
+                    </h2>
+                </div>
+
+                <div class="owl-carousel owl-theme owl-courses">
+                    <th:block th:each ="teacher : ${teacherList}">
+                    <div class="col-md-4 col-sm-4">
+                        <div class="item">
+                            <div class="courses-thumb">
+                                <div class="courses-top">
+                                    <div class="courses-image">
+                                        <img th:src="@{'/upload/'+${teacher.getImage()}}" class="img-responsive" alt="" style="height: 250px" width="200px">
+                                    </div>
+                                </div>
+
+                                <div class="courses-detail">
+                                    <h3 th:utext="${teacher.getFullname()}"></h3>
+                                    <p th:utext="${teacher.getInformation()}"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </th:block>
+                </div>
+
+            </div>
+        </div>
+</section>
+
+
+<!-- TESTIMONIAL -->
+<section id="testimonial">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12 col-sm-12">
+                <div class="section-title">
+                    <h2>Phản Hồi Từ Học Viên <small>các học viên đã và đang hoàn thành chương trình học</small></h2>
+                </div>
+
+                <div class="owl-carousel owl-theme owl-client">
+                    <div class="col-md-4 col-sm-4">
+                        <div class="item">
+                            <div class="tst-image">
+                                <img src="/blogPage/images/tst-image1.jpg" class="img-responsive" alt="">
+                            </div>
+                            <div class="tst-author">
+                                <h4>Jackson</h4>
+                                <span>Shopify Developer</span>
+                            </div>
+                            <p>You really do help young creative minds to get quality education and professional job
+                                search assistance. I’d recommend it to everyone!</p>
+                            <div class="tst-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4">
+                        <div class="item">
+                            <div class="tst-image">
+                                <img src="/blogPage/images/tst-image2.jpg" class="img-responsive" alt="">
+                            </div>
+                            <div class="tst-author">
+                                <h4>Camila</h4>
+                                <span>Marketing Manager</span>
+                            </div>
+                            <p>Trying something new is exciting! Thanks for the amazing law course and the great teacher
+                                who was able to make it interesting.</p>
+                            <div class="tst-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4">
+                        <div class="item">
+                            <div class="tst-image">
+                                <img src="/blogPage/images/tst-image3.jpg" class="img-responsive" alt="">
+                            </div>
+                            <div class="tst-author">
+                                <h4>Barbie</h4>
+                                <span>Art Director</span>
+                            </div>
+                            <p>Donec erat libero, blandit vitae arcu eu, lacinia placerat justo. Sed sollicitudin quis
+                                felis vitae hendrerit.</p>
+                            <div class="tst-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4">
+                        <div class="item">
+                            <div class="tst-image">
+                                <img src="/blogPage/images/tst-image4.jpg" class="img-responsive" alt="">
+                            </div>
+                            <div class="tst-author">
+                                <h4>Andrio</h4>
+                                <span>Web Developer</span>
+                            </div>
+                            <p>Nam eget mi eu ante faucibus viverra nec sed magna. Vivamus viverra sapien ex, elementum
+                                varius ex sagittis vel.</p>
+                            <div class="tst-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+</section>
+
+
+<!-- CONTACT -->
+<section id="contact">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-6 col-sm-12">
+                <h1>Bạn đang muốn học ngoại ngữ để công việc phát triển tốt hơn?</h1>
+                <h3 style="color: white;">Với THT, bạn học cách làm chủ kỹ năng không bao giờ lỗi thời, trau dồi thêm
+                    những kiến thức mới, kết nối với những con người thú vị và chạm tay tới gần hơn thành công trong sự
+                    nghiệp.</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-6 col-sm-6">
+                <div class="footer-info">
+                    <div class="section-title">
+                        <h2>Headquarter</h2>
+                    </div>
+                    <address>
+                        <p>1800 dapibus a tortor pretium,<br> Integer nisl dui, ABC 12000</p>
+                    </address>
+
+                    <ul class="social-icon">
+                        <li><a href="#" class="fa fa-facebook-square" attr="facebook icon"></a></li>
+                        <li><a href="#" class="fa fa-twitter"></a></li>
+                        <li><a href="#" class="fa fa-instagram"></a></li>
+                    </ul>
+
+                    <div class="copyright-text">
+                        <p>Copyright &copy; 2019 Company Name</p>
+
+                        <p>Design: TemplateMo</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6">
+                <div class="footer-info">
+                    <div class="section-title">
+                        <h2>Contact Info</h2>
+                    </div>
+                    <address>
+                        <p>+65 2244 1100, +66 1800 1100</p>
+                        <p><a href="mailto:youremail.co">hello@youremail.co</a></p>
+                    </address>
+
+                    <div class="footer_menu">
+                        <h2>Quick Links</h2>
+                        <ul>
+                            <li><a href="#">Career</a></li>
+                            <li><a href="#">Investor</a></li>
+                            <li><a href="#">Terms & Conditions</a></li>
+                            <li><a href="#">Refund Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+<th:block th:replace="/blog-page/layout::scrip"/>
+</body>
+</html>

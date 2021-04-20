@@ -27,7 +27,7 @@ public class Programme {
     private String description;
 
 
-    @Min(1)
+    @Min(value = 1,message = "* học phí nhỏ nhất là 1$")
     private Double tuition;
 
     @Min(1)

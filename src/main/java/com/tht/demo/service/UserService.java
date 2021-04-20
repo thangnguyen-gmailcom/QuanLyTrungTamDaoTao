@@ -12,6 +12,7 @@ public interface UserService {
     List<User> findAllTeacher();
     Page<User> showAllStudent(Pageable pageable);
     Page<User> findAllByEmail(String email, Pageable pageable);
+    Page<User> showAllTeacher(Pageable pageable);
     Optional<User> findById(Long id);
     Optional<User> findStudentById(Long id);
     User save(User user);

@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
@@ -18,7 +19,7 @@ public class ExamTypeServiceImpl implements ExamTypeService {
 
     @Override
     public Page<ExamType> showAll(Pageable pageable) {
-        return examTypeRepository.findAll(pageable);
+        return examTypeRepository.findAllByDeletedIsFalse(pageable);
     }
 
     @Override
@@ -31,8 +32,16 @@ public class ExamTypeServiceImpl implements ExamTypeService {
         return examTypeRepository.save(examType);
     }
 
+
+
     @Override
-    public void delele(Long id) {
-        examTypeRepository.deleteById(id);
+    public Optional<ExamType> findByTitle(String name) {
+        return examTypeRepository.findByTitle(name);
+    }
+
+    @Override
+    @Transactional
+    public void delete(Long id) {
+        examTypeRepository.softDeleteExamType(id);
     }
 }

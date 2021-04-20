@@ -38,6 +38,11 @@ public class UserServiceImpl implements UserService {
     public Page<User> findAllByEmail(String email, Pageable pageable) {
         return userRepository.findAllByEmail(email,pageable);
     }
+  
+    @Override
+    public Page<User> showAllTeacher(Pageable pageable) {
+        return userRepository.findAllTeacherOrderByIdDesc(pageable);
+    }
 
     @Override
     public Optional<User> findById(Long id) {

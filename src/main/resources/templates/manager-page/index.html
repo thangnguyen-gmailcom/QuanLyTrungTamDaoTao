@@ -16,12 +16,12 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                     <div class="analytics-sparkle-line reso-mg-b-30">
                         <div class="analytics-content">
-                            <h5>Computer Technologies</h5>
+                            <h5>Chương Trình Học</h5>
                             <h2>
-                                $<span class="counter">5000</span>
-                                <span class="tuition-fees">Tuition Fees</span>
+                                +<span class="counter" th:utext="${program.get().count()}"></span>
+                                <span class="tuition-fees">Tổng Số</span>
                             </h2>
-                            <span class="text-success">20%</span>
+                            <span class="text-success">100%</span>
                             <div class="progress m-b-0">
                                 <div
                                         class="progress-bar progress-bar-success"
@@ -29,7 +29,7 @@
                                         aria-valuenow="50"
                                         aria-valuemin="0"
                                         aria-valuemax="100"
-                                        style="width: 20%"
+                                        style="width: 100%"
                                 >
                                     <span class="sr-only">20% Complete</span>
                                 </div>
@@ -40,12 +40,12 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                     <div class="analytics-sparkle-line reso-mg-b-30">
                         <div class="analytics-content">
-                            <h5>Accounting Technologies</h5>
+                            <h5>Học Viên</h5>
                             <h2>
-                                $<span class="counter">3000</span>
-                                <span class="tuition-fees">Tuition Fees</span>
+                                +<span class="counter" th:utext="${student.get().count()}"></span>
+                                <span class="tuition-fees">Tổng số</span>
                             </h2>
-                            <span class="text-danger">30%</span>
+                            <span class="text-danger">100%</span>
                             <div class="progress m-b-0">
                                 <div
                                         class="progress-bar progress-bar-danger"
@@ -53,7 +53,7 @@
                                         aria-valuenow="50"
                                         aria-valuemin="0"
                                         aria-valuemax="100"
-                                        style="width: 30%"
+                                        style="width: 100%"
                                 >
                                     <span class="sr-only">230% Complete</span>
                                 </div>
@@ -66,12 +66,12 @@
                             class="analytics-sparkle-line reso-mg-b-30 table-mg-t-pro dk-res-t-pro-30"
                     >
                         <div class="analytics-content">
-                            <h5>Electrical Engineering</h5>
+                            <h5>Nhân viên</h5>
                             <h2>
-                                $<span class="counter">2000</span>
-                                <span class="tuition-fees">Tuition Fees</span>
+                                +<span class="counter" th:utext="${staff.get().count()}"></span>
+                                <span class="tuition-fees">Tổng số</span>
                             </h2>
-                            <span class="text-info">60%</span>
+                            <span class="text-info">100%</span>
                             <div class="progress m-b-0">
                                 <div
                                         class="progress-bar progress-bar-info"
@@ -79,7 +79,7 @@
                                         aria-valuenow="50"
                                         aria-valuemin="0"
                                         aria-valuemax="100"
-                                        style="width: 60%"
+                                        style="width: 100%"
                                 >
                                     <span class="sr-only">20% Complete</span>
                                 </div>
@@ -92,12 +92,12 @@
                             class="analytics-sparkle-line table-mg-t-pro dk-res-t-pro-30"
                     >
                         <div class="analytics-content">
-                            <h5>Chemical Engineering</h5>
+                            <h5>Lớp học</h5>
                             <h2>
-                                $<span class="counter">3500</span>
-                                <span class="tuition-fees">Tuition Fees</span>
+                                +<span class="counter">0</span>
+                                <span class="tuition-fees">Tổng số</span>
                             </h2>
-                            <span class="text-inverse">80%</span>
+                            <span class="text-inverse">100%</span>
                             <div class="progress m-b-0">
                                 <div
                                         class="progress-bar progress-bar-inverse"
@@ -105,7 +105,7 @@
                                         aria-valuenow="50"
                                         aria-valuemin="0"
                                         aria-valuemax="100"
-                                        style="width: 80%"
+                                        style="width: 100%"
                                 >
                                     <span class="sr-only">230% Complete</span>
                                 </div>

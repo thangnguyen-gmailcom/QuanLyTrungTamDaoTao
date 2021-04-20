@@ -28,10 +28,10 @@ public class Lesson {
     public String toString() {
         return "Lesson{" +
                 "id=" + id +
-                ", lessonNumber=" + lessonNumber +
+                ", lessonNumber='" + lessonNumber + '\'' +
                 ", content='" + content + '\'' +
                 ", deleted=" + deleted +
+                ", programme=" + programme +
                 '}';
     }
-
 }

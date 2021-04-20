@@ -48,27 +48,20 @@
                                 <tr>
                                     <th>STT</th>
                                     <th>Tên Kiểu Điểm</th>
-                                    <th style="text-align: center">Mô tả</th>
+                                    <th >Mô tả</th>
                                     <th>Action</th>
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Điểm Lý Thuyết</td>
-                                    <td>Đánh giá năng lực dựa trên các bài thi trắc nghiệm hoặc tự luận trong một khoảng thời gian nhất định</td>
-                                    <td>
-                                        <a th:href="@{/exampleType/edit}"> <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
-                                        <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Điểm Thực Hành</td>
-                                    <td>Đánh giá năng lực dựa trên các bài thi nói hoặc tự viết trong một khoảng thời gian nhất định</td>
-                                    <td>
-                                        <a th:href="@{/exampleType/edit}"> <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
-                                        <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                    </td>
-                                </tr>
+                                <tbody id="showExamType">
+                                </tbody>
+<!--                                <tr>-->
+<!--                                    <td>1</td>-->
+<!--                                    <td>Điểm Lý Thuyết</td>-->
+<!--                                    <td>Đánh giá năng lực dựa trên các bài thi trắc nghiệm hoặc tự luận trong một khoảng thời gian nhất định</td>-->
+<!--                                    <td>-->
+<!--                                        <a th:href="@{/exampleType/edit}"> <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>-->
+<!--                                        <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
                             </table>
                         </div>
                         <div class="custom-pagination">
@@ -89,5 +82,103 @@
 
 <footer th:replace="/manager-page/layout::scrip"></footer>
 </body>
+<script>
+    var examTypes = {};
+    let stt = 1;
 
+    examTypes.showAll = function (page) {
+        $.ajax({
+            url: "http://localhost:8080/api/examTypes?page="+page,
+            method: "GET",
+            dataType: "json",
+            success: function (data) {
+                $('#showExamType').empty();
+                let totalPage = parseInt(data.totalPages);
+                let num = parseInt(data.pageable.pageNumber);
+                console.log(totalPage);
+                $('.pagination').empty('');
+                if (num !=0) {
+
+                    $('.pagination').append(`<li class="page-item" ><a class="page-link" href="#" onclick="examTypes.showAll(${num} -1)">Trước</a></li>`)
+                }
+                for (let i = 0; i < totalPage; i++) {
+
+                    if (data.pageable.pageNumber === i ) {
+                        $('.pagination').append(`<li class="page-item "><a class="page-link" href="#">${i + 1}</a></li>`);
+                    }
+
+                }
+
+                if (num < totalPage-1){
+                    $('.pagination').append(`<li class="page-item"><a class="page-link" href="#" onclick="examTypes.showAll(${num} +1)">Sau</a></li>`);
+                }
+
+
+                if (num == 0) {
+                    stt = 0;
+                } else {
+                    stt = (num++) * 8;
+                }
+                $.each(data.content, function (i, v) {
+                    i = stt
+
+
+                    $('#showExamType').append(
+                        "<tr>" +
+                        "<td>" + ++i + "</td>" +
+                        "<td>" + v.title + "</td>" +
+                        "<td>" + v.description + "</td>" +
+                        "<td>" +
+
+                        "<a  href='#' onclick='examTypes.editForm(" + v.id + ")'  ><i class=\"fas fa-edit\" ></i></a>"
+                        +
+                        "<a style='padding-left: 35px'    ><i onclick='examTypes.delete(" + v.id + ")' class=\"fas fa-trash-alt\"></i></a>" +
+                        "</td>" +
+                        "</tr>"
+                    );
+                    stt = i
+                })
+            }
+
+        })
+    }
+
+
+    examTypes.delete = function(id){
+        bootbox.confirm({
+            message: "Bạn có chắc muốn xóa không?",
+            buttons: {
+                cancel: {
+                    label: '<i class="fa fa-times">Không</i> '
+                },
+                confirm: {
+                    label: '<i class="fa fa-check"> Có</i>'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    $.ajax({
+                        url:"http://localhost:8080/api/examTypes/" + id,
+                        method: "DELETE",
+                        contentType: 'json',
+                        success: function (data) {
+                            window.Lobibox.notify('success', {
+                                size: 'mini',
+                                msg: "xóa thành công"
+                            });
+                            examTypes.showAll(0);
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    examTypes.editForm = function (id) {
+        window.location = "/exampleType/edit/"+id;
+    };
+    $(document).ready(function () {
+        examTypes.showAll(0);
+    });
+</script>
 </html>

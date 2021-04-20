@@ -20,13 +20,13 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/programme")
 public class ProgrammeController {
-@Autowired
-private ProgrammeService programmeService;
-@Autowired
-private ProgrammeRepository programmeRepository;
+    @Autowired
+    private ProgrammeService programmeService;
+    @Autowired
+    private ProgrammeRepository programmeRepository;
 
-@Autowired
-private LessonRepository lessonRepository;
+    @Autowired
+    private LessonRepository lessonRepository;
 
 
     @GetMapping("")
@@ -39,9 +39,9 @@ private LessonRepository lessonRepository;
     public String info(@PathVariable long id, Model model) {
         Optional<Programme> programme = programmeService.findById(id);
         if (programme != null) {
-            model.addAttribute("programme",programme.get());
+            model.addAttribute("programme", programme.get());
             return "manager-page/programme-info";
-        }else {
+        } else {
             return "error";
         }
 
@@ -52,6 +52,7 @@ private LessonRepository lessonRepository;
         model.addAttribute("programme", new Programme());
         return "manager-page/programme-add";
     }
+
     @PostMapping("/add")
     public String doAdd(@Valid @ModelAttribute("programme") Programme programme, BindingResult result, RedirectAttributes attributes, Model model) {
 
@@ -84,20 +85,14 @@ private LessonRepository lessonRepository;
     }
 
 
-
-
-
-
-
-
     @GetMapping("/edit/{id}")
     public String showEdit(@PathVariable long id, Model model) {
         Optional<Programme> programme = programmeService.findById(id);
         if (programme != null) {
-            model.addAttribute("programme",programme);
+            model.addAttribute("programme", programme);
             return "manager-page/programme-edit";
 
-        }else {
+        } else {
             return "error";
         }
     }
@@ -116,6 +111,7 @@ private LessonRepository lessonRepository;
                     return "redirect:/manager-page/programme-edit";
                 }
             }
+
             programmeService.save(programme);
             attributes.addFlashAttribute("mess", "Thay đổi thành công...!!!");
         } catch (Exception e) {
@@ -124,7 +120,6 @@ private LessonRepository lessonRepository;
         }
         return "redirect:/programme";
     }
-
 
 
 }

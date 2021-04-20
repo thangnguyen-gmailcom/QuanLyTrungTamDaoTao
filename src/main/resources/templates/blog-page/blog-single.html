@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="/blog-page/layout::header"/>
+<body>
+
+
+<!-- PRE LOADER -->
+<div th:replace="/blog-page/layout::preloader"/>
+
+<!-- MENU -->
+<div th:replace="/blog-page/layout::menu2"/>
+
+
+<!--CONTENT-->
+<div class="container" style="padding-top: 5%">
+    <div class="row">
+            <div class="col-md-8 col-sm-12">
+                <div class="blog-sig-details">
+                    <h2 th:utext="${post.title}"></h2>
+                    <i th:utext="${post.shortContent}"></i>
+                    <br>
+                    <img style="width: 100%;" th:src="@{'/upload/'+${post.image}}">
+                    <p th:utext="${post.fullContent}"></p>
+                    <i>Nguồn Tổng Hợp.....!!!</i>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="imageLaptop">
+                    <img src="/blogPage/images/study-in-phone.png" style="width: 100%">
+                </div>
+            </div>
+    </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact" style="margin-top: 10%">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-6 col-sm-12">
+                <h1>Bạn đang muốn học ngoại ngữ để công việc phát triển tốt hơn?</h1>
+                <h3 style="color: white;">Với THT, bạn học cách làm chủ kỹ năng không bao giờ lỗi thời, trau dồi thêm
+                    những kiến thức mới, kết nối với những con người thú vị và chạm tay tới gần hơn thành công trong sự
+                    nghiệp.</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-6 col-sm-6">
+                <div class="footer-info">
+                    <div class="section-title">
+                        <h2>Headquarter</h2>
+                    </div>
+                    <address>
+                        <p>1800 dapibus a tortor pretium,<br> Integer nisl dui, ABC 12000</p>
+                    </address>
+
+                    <ul class="social-icon">
+                        <li><a href="#" class="fa fa-facebook-square" attr="facebook icon"></a></li>
+                        <li><a href="#" class="fa fa-twitter"></a></li>
+                        <li><a href="#" class="fa fa-instagram"></a></li>
+                    </ul>
+
+                    <div class="copyright-text">
+                        <p>Copyright &copy; 2019 Company Name</p>
+
+                        <p>Design: TemplateMo</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6">
+                <div class="footer-info">
+                    <div class="section-title">
+                        <h2>Contact Info</h2>
+                    </div>
+                    <address>
+                        <p>+65 2244 1100, +66 1800 1100</p>
+                        <p><a href="mailto:youremail.co">hello@youremail.co</a></p>
+                    </address>
+
+                    <div class="footer_menu">
+                        <h2>Quick Links</h2>
+                        <ul>
+                            <li><a href="#">Career</a></li>
+                            <li><a href="#">Investor</a></li>
+                            <li><a href="#">Terms & Conditions</a></li>
+                            <li><a href="#">Refund Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!--SCRIPT-->
+<th:block th:replace="/blog-page/layout::scrip"/>
+</body>
+</html>

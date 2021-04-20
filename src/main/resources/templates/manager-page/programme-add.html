@@ -22,7 +22,7 @@
 <div class="all-content-wrapper">
     <div th:replace="/manager-page/layout::container-fluid"/>
     <div th:replace="/manager-page/layout::header-advance-area"></div>
-    <div class="single-pro-review-area mt-t-30 mg-b-15" style="margin-top: 5%;">
+    <div class="single-pro-review-area mt-t-30 mg-b-15" style="margin-top: 1%;">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -53,13 +53,13 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Học Phí</label>
-                                                                <input th:field="*{tuition}" type="text" class="form-control" placeholder="học phí">
+                                                                <input th:field="*{tuition}" type="number" class="form-control" placeholder="học phí">
                                                                 <td th:if="${#fields.hasErrors('tuition')}" th:errors="*{tuition}">name Error</td>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="margin-top: 2.5%">
+                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="margin-top: 1.9%">
                                                             <div class="form-group">
-                                                                <textarea  th:field="*{description}" placeholder="Mô tả"></textarea>
+                                                                <textarea  th:field="*{description}" placeholder="Mô tả" style="height: 192px"></textarea>
                                                                 <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}">name Error</td>
 
                                                             </div>

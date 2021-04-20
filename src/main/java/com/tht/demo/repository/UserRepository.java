@@ -29,6 +29,9 @@ public interface UserRepository extends JpaRepository<User,Long> {
     @Query(value ="SELECT * FROM User WHERE is_deleted = 0 AND role_id=4 AND email LIKE %:email%", nativeQuery = true)
     Page<User> findAllByEmail(@Param("email") String email,Pageable pageable);
 
+    @Query(value = "SELECT * FROM User WHERE is_deleted = 0 AND role_id= 2", nativeQuery = true)
+    Page<User> findAllTeacherOrderByIdDesc(Pageable pageable);
+
     @Query(value = "SELECT * FROM User WHERE role_id = 4 AND is_Deleted = 0 AND id = :id",nativeQuery = true)
     Optional<User> findStudentById(@Param("id") Long id);
 

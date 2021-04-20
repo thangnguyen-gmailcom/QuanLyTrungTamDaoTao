@@ -40,7 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .loginPage("/login/")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/blogManager")
+                .defaultSuccessUrl("/manager")
                 .failureUrl("/login/?error=true")
                 .and()
                 .exceptionHandling().accessDeniedPage("/login/login")
@@ -51,6 +51,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .clearAuthentication(true)
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID", "remember-me")
-                .logoutSuccessUrl("/staff");
+                .logoutSuccessUrl("/blogPage");
     }
 }
