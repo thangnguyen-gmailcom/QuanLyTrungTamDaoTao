@@ -79,6 +79,8 @@
 <script>
 
     var programmes = programmes|| {};
+    let stt = 1;
+
     programmes.showAll = function (page) {
         let search = $('#str').val();
         $.ajax({
@@ -108,8 +110,15 @@
                 if (num < totalPage-1){
                     $('.pagination').append(`<li class="page-item"><a class="page-link" href="#" onclick="programmes.showAll(${num} +1)">Sau</a></li>`);
                 }
+                if (num == 0) {
+                    stt = 0;
+                } else {
+                    stt = (num++) * 8;
+                }
 
                 $.each(data.content, function (i, v) {
+                    i = stt
+
                     let dele = false;
                     let delet=true;
                     if(v.deleted = dele){
@@ -119,7 +128,7 @@
                     }
                     $('#showListProgrammes').append(
                         "<tr>" +
-                        "<td>" + v.id + "</td>" +
+                        "<td>" + ++i + "</td>" +
                         "<td>" + v.programmeName + "</td>" +
                         "<td>" + v.lessons + "</td>" +
                         "<td>" + v.tuition + "$</td>" +
@@ -134,7 +143,7 @@
                         "</td>" +
                         "</tr>"
                     );
-
+                    stt = i
 
                 })
             }

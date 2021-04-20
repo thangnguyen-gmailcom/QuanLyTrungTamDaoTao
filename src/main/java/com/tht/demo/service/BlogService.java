@@ -11,5 +11,5 @@ public interface BlogService {
     Page<Blog> showAll(Pageable pageable);
     Optional<Blog> findById(Long id);
     Blog save(Blog blog);
-    void delele(Long id);
+    void delete(Long id);
 }
