@@ -15,33 +15,34 @@
 <!--CONTENT-->
 <div class="container" style="padding-top: 5%">
     <div class="row">
-        <div class="col-md-8 col-sm-12">
-            <div class="blog-sig-details">
-                <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium nam quas inventore, ut iure iste modi eos adipisci ad ea itaque labore earum autem nobis et numquam, minima eius. Nam eius, non unde ut aut sunt eveniet rerum repellendus porro.</h2>
-                <i>Sint ab voluptates itaque, ipsum porro qui obcaecati cumque quas sit vel. Voluptatum provident id quis quo. Eveniet maiores perferendis officia veniam est laborum, expedita fuga doloribus natus repellendus dolorem ab similique sint eius cupiditate necessitatibus, magni nesciunt ex eos.</i>
-                <br>
-                <img style="width: 100%;" th:src="@{/blogPage/images/slider-image2.jpg}" alt="">
-                <p>Quibusdam autem, quas molestias recusandae aperiam molestiae modi qui ipsam vel. Placeat tenetur veritatis tempore quos impedit dicta, error autem, quae sint inventore ipsa quidem. Quo voluptate quisquam reiciendis, minus, animi minima eum officia doloremque repellat eos, odio doloribus cum.</p>
-                <i>Nguồn Tổng Hợp.....!!!</i>
+            <div class="col-md-8 col-sm-12">
+                <div class="blog-sig-details">
+                    <h2 th:utext="${post.title}"></h2>
+                    <i th:utext="${post.shortContent}"></i>
+                    <br>
+                    <img style="width: 100%;" th:src="@{'/upload/'+${post.image}}"alt="">
+                    <p th:utext="${post.fullContent}"></p>
+                    <i>Nguồn Tổng Hợp.....!!!</i>
+                </div>
             </div>
-        </div>
-
-        <div class="col-md-4 col-sm-12">
-            <div class="imageLaptop">
-                <img src="/blogPage/images/study-in-phone.png" style="width: 100%">
+            <div class="col-md-4 col-sm-12">
+                <div class="imageLaptop">
+                    <img src="/blogPage/images/study-in-phone.png" style="width: 100%">
+                </div>
             </div>
-        </div>
     </div>
 </div>
 
 <!-- CONTACT -->
-<section id="contact">
+<section id="contact" style="margin-top: 10%">
     <div class="container">
         <div class="row">
 
             <div class="col-md-6 col-sm-12">
                 <h1>Bạn đang muốn học ngoại ngữ để công việc phát triển tốt hơn?</h1>
-                <h3 style="color: white;">Với THT, bạn học cách làm chủ kỹ năng không bao giờ lỗi thời, trau dồi thêm những kiến thức mới, kết nối với những con người thú vị và chạm tay tới gần hơn thành công trong sự nghiệp.</h3>
+                <h3 style="color: white;">Với THT, bạn học cách làm chủ kỹ năng không bao giờ lỗi thời, trau dồi thêm
+                    những kiến thức mới, kết nối với những con người thú vị và chạm tay tới gần hơn thành công trong sự
+                    nghiệp.</h3>
             </div>
         </div>
     </div>

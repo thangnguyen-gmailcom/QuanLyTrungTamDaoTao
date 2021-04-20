@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head th:replace="/blog-page/layout::header"/>
+
+
 <body>
 <!-- PRE LOADER -->
 <div th:replace="/blog-page/layout::preloader"/>
@@ -61,19 +63,7 @@
                 <div class="section-title">
                     <h2>BLOG học Tiếng Anh</h2>
                 </div>
-                <div class="col-md-3 col-sm-6">
-                    <a th:href="@{/blogPage/blogSingle}">
-                        <div class="team-thumb">
-                            <div class="team-image">
-                                <img src="/blogPage/images/author-image1.jpg" class="img-responsive" alt="">
-                            </div>
-                            <div class="team-info">
-                                <h3>Mark Wilson</h3>
-                                <span>I love Teaching</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+                <div id="showBlog"></div>
             </div>
         </div>
     </div>
@@ -149,4 +139,70 @@
 <!--SCRIPT-->
 <footer th:replace="/blog-page/layout::scrip"/>
 </body>
+
+<script>
+    var blogs = {};
+    let stt = 1;
+
+    blogs.showAll = function (page) {
+        $.ajax({
+            url: "http://localhost:8080/api/blogPages?page=" + page,
+            method: "GET",
+            dataType: "json",
+            success: function (data) {
+                $('#showBlog').empty();
+                let totalPage = parseInt(data.totalPages);
+                let num = parseInt(data.pageable.pageNumber);
+                console.log(totalPage);
+                $('.pagination').empty('');
+                if (num != 0) {
+
+                    $('.pagination').append(`<li class="page-item" ><a class="page-link" href="#" onclick="blogs.showAll(${num} -1)">Trước</a></li>`)
+                }
+                for (let i = 0; i < totalPage; i++) {
+
+                    if (data.pageable.pageNumber === i) {
+                        $('.pagination').append(`<li class="page-item "><a class="page-link" href="#">${i + 1}</a></li>`);
+                    }
+
+                }
+
+                if (num < totalPage - 1) {
+                    $('.pagination').append(`<li class="page-item"><a class="page-link" href="#" onclick="blogs.showAll(${num} +1)">Sau</a></li>`);
+                }
+
+
+                $.each(data.content, function (i, v) {
+                    $('#showBlog').append(
+                        "<div class=\"col-md-4 col-sm-6\" style='width: 310px; height: 520px; margin-top: 2%; margin-left: 5%; background-color: WhiteSmoke'>" +
+                        "<a href='#' onclick='blogs.views(" + v.id + ")'>" +
+                       "<div class=\"team-thumb\"" +
+                        "<div class=\"team-image\">" +
+                        "<img src='/upload/" + v.image + "' class=\"img-responsive\" alt=\"\">" +
+                        "</div>" +
+                        "<div class=\"team-info\">" +
+                       "<h3>" + v.title + "</h3>" +
+                        "<span>" + v.shortContent + "</span>" +
+                        "</div>" +
+                        "</div>" +
+                        "</a>" +
+                        "</div>"
+                    );
+                })
+            }
+
+        })
+    }
+
+
+// Run Funtion
+    blogs.views = function (id) {
+        window.location = "/blogPage/blogSingle/"+id;
+    };
+
+
+    $(document).ready(function () {
+        blogs.showAll(0);
+    });
+</script>
 </html>
