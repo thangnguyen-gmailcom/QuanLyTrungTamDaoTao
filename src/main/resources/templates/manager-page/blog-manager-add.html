@@ -63,7 +63,7 @@
 
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" >
                                                             <div class="form-group">
                                                                 <label>Hình ảnh</label>
                                                                 <div class="custom-file">
@@ -75,11 +75,11 @@
                                                                                for="customFile">Choose File</label>
                                                                 </div>
                                                             </div>
-                                                            <div class="form-group">
+                                                            <div class="form-group" >
                                                                 <div class="form-group">
                                                                     <label>Nội Dung</label>
                                                                     <textarea th:field="*{fullContent}"
-                                                                              placeholder="Description"></textarea>
+                                                                              placeholder="Description" style="margin-top: 1%"></textarea>
                                                                     <td th:if="${#fields.hasErrors('fullContent')}"
                                                                         th:errors="*{fullContent}">name Error
                                                                     </td>
