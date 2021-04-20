@@ -148,254 +148,64 @@
 </section>
 
 
-<!-- TEAM -->
+<!-- Programme -->
 <section id="team">
     <div class="container">
         <div class="row">
 
             <div class="col-md-12 col-sm-12">
                 <div class="section-title">
-                    <h2>Giảng Viên <small>Tiếp Xúc Những Giảng Viên Chuyên Nghiệp</small></h2>
+                    <h2>Các Chương Trình Học Đang Mở<small>Nâng cấp kỹ năng của bạn với các khóa học mới nhất</small></h2>
                 </div>
+                <th:block th:each ="programme : ${programmeList}">
                     <div class="col-md-3 col-sm-6">
                         <div class="team-thumb">
                             <div class="team-image">
-                                <img src="/blogPage/images/author-image1.jpg" class="img-responsive" alt="">
+                                <img th:src="@{'/upload/programme.jpg'}" class="img-responsive" alt="">
                             </div>
                             <div class="team-info">
-                                <h3>Mark Wilson</h3>
-                                <span>I love Teaching</span>
+                                <h3 th:utext="${programme.getProgrammeName()}"></h3>
+                                <span th:utext="${programme.getTuition()} + '$'"></span>
                             </div>
-                            <ul class="social-icon">
-                                <li><a href="#" class="fa fa-facebook-square" attr="facebook icon"></a></li>
-                                <li><a href="#" class="fa fa-twitter"></a></li>
-                                <li><a href="#" class="fa fa-instagram"></a></li>
-                            </ul>
                         </div>
                     </div>
-
-                    <div class="col-md-3 col-sm-6">
-                        <div class="team-thumb">
-                            <div class="team-image">
-                                <img src="/blogPage/images/author-image2.jpg" class="img-responsive" alt="">
-                            </div>
-                            <div class="team-info">
-                                <h3>Catherine</h3>
-                                <span>Education is the key!</span>
-                            </div>
-                            <ul class="social-icon">
-                                <li><a href="#" class="fa fa-google"></a></li>
-                                <li><a href="#" class="fa fa-instagram"></a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-sm-6">
-                        <div class="team-thumb">
-                            <div class="team-image">
-                                <img src="/blogPage/images/author-image3.jpg" class="img-responsive" alt="">
-                            </div>
-                            <div class="team-info">
-                                <h3>Jessie Ca</h3>
-                                <span>I like Online Courses</span>
-                            </div>
-                            <ul class="social-icon">
-                                <li><a href="#" class="fa fa-twitter"></a></li>
-                                <li><a href="#" class="fa fa-envelope-o"></a></li>
-                                <li><a href="#" class="fa fa-linkedin"></a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-sm-6">
-                        <div class="team-thumb">
-                            <div class="team-image">
-                                <img src="/blogPage/images/author-image4.jpg" class="img-responsive" alt="">
-                            </div>
-                            <div class="team-info">
-                                <h3>Andrew Berti</h3>
-                                <span>Learning is fun</span>
-                            </div>
-                            <ul class="social-icon">
-                                <li><a href="#" class="fa fa-twitter"></a></li>
-                                <li><a href="#" class="fa fa-google"></a></li>
-                                <li><a href="#" class="fa fa-behance"></a></li>
-                            </ul>
-                        </div>
-                    </div>
+                </th:block>
                 </div>
         </div>
     </div>
 </section>
 
 
-<!-- Courses -->
+<!-- Teacher -->
 <section id="courses">
     <div class="container">
         <div class="row">
 
             <div class="col-md-12 col-sm-12">
                 <div class="section-title">
-                    <h2>Các Chương Trình Học Đang Mở <small>Nâng cấp kỹ năng của bạn với các khóa học mới nhất</small>
+                    <h2>Giảng Viên <small>Tiếp Xúc Những Giảng Viên Chuyên Nghiệp</small>
                     </h2>
                 </div>
 
                 <div class="owl-carousel owl-theme owl-courses">
+                    <th:block th:each ="teacher : ${teacherList}">
                     <div class="col-md-4 col-sm-4">
                         <div class="item">
                             <div class="courses-thumb">
                                 <div class="courses-top">
                                     <div class="courses-image">
-                                        <img src="/blogPage/images/courses-image1.jpg" class="img-responsive" alt="">
-                                    </div>
-                                    <div class="courses-date">
-                                        <span><i class="fa fa-calendar"></i> 12 / 7 / 2018</span>
-                                        <span><i class="fa fa-clock-o"></i> 7 Hours</span>
+                                        <img th:src="@{'/upload/'+${teacher.getImage()}}" class="img-responsive" alt="" style="height: 250px" width="200px">
                                     </div>
                                 </div>
 
                                 <div class="courses-detail">
-                                    <h3><a href="#">Social Media Management</a></h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                </div>
-
-                                <div class="courses-info">
-                                    <div class="courses-author">
-                                        <img src="/blogPage/images/author-image1.jpg" class="img-responsive" alt="">
-                                        <span>Mark Wilson</span>
-                                    </div>
-                                    <div class="courses-price">
-                                        <a href="#"><span>USD 25</span></a>
-                                    </div>
+                                    <h3 th:utext="${teacher.getFullname()}"></h3>
+                                    <p th:utext="${teacher.getInformation()}"></p>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-md-4 col-sm-4">
-                        <div class="item">
-                            <div class="courses-thumb">
-                                <div class="courses-top">
-                                    <div class="courses-image">
-                                        <img src="/blogPage/images/courses-image2.jpg" class="img-responsive" alt="">
-                                    </div>
-                                    <div class="courses-date">
-                                        <span><i class="fa fa-calendar"></i> 20 / 7 / 2018</span>
-                                        <span><i class="fa fa-clock-o"></i> 4.5 Hours</span>
-                                    </div>
-                                </div>
-
-                                <div class="courses-detail">
-                                    <h3><a href="#">Graphic & Web Design</a></h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                </div>
-
-                                <div class="courses-info">
-                                    <div class="courses-author">
-                                        <img src="/blogPage/images/author-image2.jpg" class="img-responsive" alt="">
-                                        <span>Jessica</span>
-                                    </div>
-                                    <div class="courses-price">
-                                        <a href="#"><span>USD 80</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-4">
-                        <div class="item">
-                            <div class="courses-thumb">
-                                <div class="courses-top">
-                                    <div class="courses-image">
-                                        <img src="/blogPage/images/courses-image3.jpg" class="img-responsive" alt="">
-                                    </div>
-                                    <div class="courses-date">
-                                        <span><i class="fa fa-calendar"></i> 15 / 8 / 2018</span>
-                                        <span><i class="fa fa-clock-o"></i> 6 Hours</span>
-                                    </div>
-                                </div>
-
-                                <div class="courses-detail">
-                                    <h3><a href="#">Marketing Communication</a></h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                </div>
-
-                                <div class="courses-info">
-                                    <div class="courses-author">
-                                        <img src="/blogPage/images/author-image3.jpg" class="img-responsive" alt="">
-                                        <span>Catherine</span>
-                                    </div>
-                                    <div class="courses-price free">
-                                        <a href="#"><span>Free</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-4">
-                        <div class="item">
-                            <div class="courses-thumb">
-                                <div class="courses-top">
-                                    <div class="courses-image">
-                                        <img src="/blogPage/images/courses-image4.jpg" class="img-responsive" alt="">
-                                    </div>
-                                    <div class="courses-date">
-                                        <span><i class="fa fa-calendar"></i> 10 / 8 / 2018</span>
-                                        <span><i class="fa fa-clock-o"></i> 8 Hours</span>
-                                    </div>
-                                </div>
-
-                                <div class="courses-detail">
-                                    <h3><a href="#">Summer Kids</a></h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                </div>
-
-                                <div class="courses-info">
-                                    <div class="courses-author">
-                                        <img src="/blogPage/images/author-image1.jpg" class="img-responsive" alt="">
-                                        <span>Mark Wilson</span>
-                                    </div>
-                                    <div class="courses-price">
-                                        <a href="#"><span>USD 45</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-4">
-                        <div class="item">
-                            <div class="courses-thumb">
-                                <div class="courses-top">
-                                    <div class="courses-image">
-                                        <img src="/blogPage/images/courses-image5.jpg" class="img-responsive" alt="">
-                                    </div>
-                                    <div class="courses-date">
-                                        <span><i class="fa fa-calendar"></i> 5 / 10 / 2018</span>
-                                        <span><i class="fa fa-clock-o"></i> 10 Hours</span>
-                                    </div>
-                                </div>
-
-                                <div class="courses-detail">
-                                    <h3><a href="#">Business &amp; Management</a></h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                </div>
-
-                                <div class="courses-info">
-                                    <div class="courses-author">
-                                        <img src="/blogPage/images/author-image2.jpg" class="img-responsive" alt="">
-                                        <span>Jessica</span>
-                                    </div>
-                                    <div class="courses-price free">
-                                        <a href="#"><span>Free</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    </th:block>
                 </div>
 
             </div>
@@ -571,6 +381,7 @@
 </footer>
 
 
-<footer th:replace="/blog-page/layout::scrip"/>
+
+<th:block th:replace="/blog-page/layout::scrip"/>
 </body>
 </html>
