@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface CourseRepository extends JpaRepository<Course , Long> {
@@ -19,4 +20,6 @@ public interface CourseRepository extends JpaRepository<Course , Long> {
     Integer softDeleteCourse(@Param("id") Long id);
 
     Page<Course> findAllByDeletedIsFalse(Pageable pageable);
+
+    List<Course> findAllByDeletedIsFalse();
 }

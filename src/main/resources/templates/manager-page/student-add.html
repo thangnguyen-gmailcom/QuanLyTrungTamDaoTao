@@ -199,7 +199,8 @@
         })
     }
     $(document).ready(function () {
-        $('#currentdate').val(moment(new Date()).format("YYYY-MM-DD"))
+        $('#currentdate').val(moment(new Date()).format("YYYY-MM-DD"));
+        $('#password').val("123456789")
         provinces.showAllProvince();
         role.showAllRole();
         $('#provinces').change(function (event) {

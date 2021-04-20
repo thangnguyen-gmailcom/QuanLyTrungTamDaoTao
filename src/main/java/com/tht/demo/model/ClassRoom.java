@@ -1,8 +1,11 @@
 package com.tht.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -15,6 +18,7 @@ public class ClassRoom {
     private long id;
 
     @Column(name = "class_name")
+    @NotBlank(message = "* tên lớp không được để trống")
     private String className;
 
     @Column(name = "created_date")
@@ -22,18 +26,33 @@ public class ClassRoom {
 
     @ManyToOne
     @JoinColumn(name = "teacher_id")
+    @NotNull(message = "* phải chọn giáo viên")
     private User teacher;
 
     @ManyToOne
     @JoinColumn(name = "course_id")
+    @NotNull(message = "* phải chọn khóa học")
     private Course course;
 
     @ManyToOne
-    @JoinColumn(name = "staff_created_id")
-    private User user;
+    @JoinColumn(name = "staff_created")
+    private User userCreated;
 
     @OneToMany(mappedBy = "classRoom")
+    @JsonIgnore
     private List<StudentClass> studentClasses;
     private boolean deleted;
 
+    @Override
+    public String toString() {
+        return "ClassRoom{" +
+                "id=" + id +
+                ", className='" + className + '\'' +
+                ", createdDate=" + createdDate +
+                ", teacher=" + teacher +
+                ", course=" + course +
+                ", user=" + userCreated +
+                ", deleted=" + deleted +
+                '}';
+    }
 }

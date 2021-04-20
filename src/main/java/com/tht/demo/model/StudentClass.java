@@ -7,6 +7,7 @@ import java.util.List;
 
 @Data
 @Entity
+@Table(uniqueConstraints ={@UniqueConstraint(columnNames = {"class_id", "user_id"})})
 public class StudentClass {
 
     @Id
@@ -26,5 +27,8 @@ public class StudentClass {
 
     @OneToMany(mappedBy = "studentClass")
     private List<Point> points;
+
+    @Column(name = "deleted")
+    private boolean deleted = false;
 
 }

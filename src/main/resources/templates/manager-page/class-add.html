@@ -34,47 +34,57 @@
                             <div class="product-tab-list tab-pane fade active in" id="description">
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <div class="review-content-section">
-                                                <div id="dropzone1" class="pro-ad addcoursepro">
-                                                    <!--                                                Start Form-->
-                                                    <form action="" method=""
-                                                          class="dropzone dropzone-custom needsclick addcourse"
-                                                          id="demo1-upload">
-                                                        <div class="row">
-                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                                <div class="form-group">
-                                                                    <label for="teacher">Tên Lớp</label>
-                                                                    <input name="coursename" type="text" class="form-control" placeholder="Tên Lớp">
-                                                                </div>
-                                                                <div class="form-group">
+                                        <div class="review-content-section">
+                                            <div id="dropzone1" class="pro-ad addcoursepro">
+                                                <!--                                                Start Form-->
+                                                <form th:action="@{/class/add}" method="post" th:object="${classRoom}"
+                                                      class="dropzone dropzone-custom needsclick addcourse"
+                                                      id="demo1-upload">
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                            <div class="form-group">
+                                                                <label for="teacher">Tên Lớp</label>
+                                                                <input th:field="*{className}" type="text"
+                                                                       class="form-control" placeholder="Tên Lớp">
+                                                                <small class="form-text text-muted"
+                                                                       th:if="${#fields.hasErrors('className')}"
+                                                                       th:errors="*{className}">Name Error</small>
+                                                            </div>
+                                                            <div class="form-group">
                                                                 <label for="teacher">Chủ Nhiệm</label>
                                                                 <select class="form-control" id="teacher"
-                                                                        name="sellist1">
-                                                                    <option selected disabled>---Vui Lòng chọn---
+                                                                        th:field="*{teacher}">
+                                                                    <option value="-1" selected >---Vui Lòng chọn---
                                                                     </option>
-                                                                    <option>A</option>
-                                                                    <option>B</option>
-                                                                    <option>C</option>
-                                                                    <option>D</option>
+                                                                    <th:block th:each="teacher : ${users}">
+                                                                        <option th:value="${teacher.id}"
+                                                                                th:utext="${teacher.fullname}"></option>
+                                                                    </th:block>
                                                                 </select>
-                                                                </div>
+                                                                <small class="form-text text-muted"
+                                                                       th:if="${#fields.hasErrors('teacher')}"
+                                                                       th:errors="*{teacher}">Name Error</small>
                                                             </div>
-                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
-                                                                 style="margin-top: 1%">
-                                                                <label for="course">Thuộc Niên Khóa</label>
-                                                                <select class="form-control" id="course"
-                                                                        name="sellist1">
-                                                                    <option selected disabled>---Vui Lòng chọn---
+                                                        </div>
+                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
+                                                             style="margin-top: 1%">
+                                                            <label for="course">Thuộc Niên Khóa</label>
+                                                            <select class="form-control" id="course"
+                                                                    th:field="*{course}">
+                                                                    <option value="-1" selected >---Vui Lòng chọn---
                                                                     </option>
-                                                                    <option>A</option>
-                                                                    <option>B</option>
-                                                                    <option>C</option>
-                                                                    <option>D</option>
+                                                                <th:block th:each="cou : ${courses}">
+                                                                    <option th:value="${cou.id}"
+                                                                            th:utext="${cou.getCourseName()}"></option>
+                                                                </th:block>
                                                                 </select>
+                                                            <small class="form-text text-muted"
+                                                                   th:if="${#fields.hasErrors('course')}"
+                                                                   th:errors="*{course}">Name Error</small>
                                                             </div>
                                                         </div>
                                                         <br>
-                                                        <div class="row">
+                                                        <div class=" row">
                                                             <div class="col-lg-1">
                                                                 <div class="payment-adress">
                                                                     <button type="submit"
@@ -84,10 +94,10 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </form>
-                                                    <!--                                                End Form-->
-                                                </div>
+                                                </form>
+                                                <!--                                                End Form-->
                                             </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

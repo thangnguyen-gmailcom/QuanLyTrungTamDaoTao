@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class ClassRoomServiceImpl implements ClassRoomService {
     @Autowired
     private ClassRoomRepository classRoomRepository;
@@ -25,6 +26,11 @@ public class ClassRoomServiceImpl implements ClassRoomService {
     @Override
     public Optional<ClassRoom> findById(Long id) {
         return classRoomRepository.findById(id);
+    }
+
+    @Override
+    public Optional<ClassRoom> findByName(String className) {
+        return classRoomRepository.findByClassName(className);
     }
 
     @Override

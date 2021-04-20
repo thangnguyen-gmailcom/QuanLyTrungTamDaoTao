@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,8 +25,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> findAllTeacher() {
+        return userRepository.findAllTeacherOrderByIdDesc();
+    }
+
+    @Override
     public Page<User> showAllStudent(Pageable pageable) {
         return userRepository.findAllStudentOrderByIdDesc(pageable);
+    }
+
+    @Override
+    public Page<User> findAllByEmail(String email, Pageable pageable) {
+        return userRepository.findAllByEmail(email,pageable);
     }
 
     @Override

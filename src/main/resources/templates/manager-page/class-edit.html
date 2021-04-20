@@ -6,7 +6,8 @@
 
 <body>
 <!--[if lt IE 8]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
 <![endif]-->
 
 
@@ -33,50 +34,78 @@
                             <div class="product-tab-list tab-pane fade active in" id="description">
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <form action="" method="">
-                                            <div class="review-content-section">
-                                                <div id="dropzone1" class="pro-ad addcoursepro">
-                                                    <!--                                                Start Form-->
-                                                    <form action="" method="" class="dropzone dropzone-custom needsclick addcourse" id="demo1-upload">
-                                                        <div class="row">
-                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                                <div class="form-group">
-                                                                    <label> Tên Lớp </label>
-                                                                    <input name="coursename" type="text" class="form-control" placeholder="Tên Lớp">
-                                                                </div>
-                                                                <label for="teacher">Chủ Nhiệm</label>
-                                                                <select class="form-control" id="teacher" name="sellist1">
-                                                                    <option selected disabled>---Vui Lòng chọn---</option>
-                                                                    <option>A</option>
-                                                                    <option>B</option>
-                                                                    <option>C</option>
-                                                                    <option>D</option>
-                                                                </select>
+                                        <div class="review-content-section">
+                                            <div id="dropzone1" class="pro-ad addcoursepro">
+                                                <!--                                                Start Form-->
+                                                <form th:action="@{/class/edit}" method="post"
+                                                      th:object="${classRoom}"
+                                                      class="dropzone dropzone-custom needsclick addcourse"
+                                                      id="demo1-upload">
+                                                    <input type="hidden" th:field="*{id}">
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                            <div class="form-group">
+                                                                <label> Tên Lớp </label>
+                                                                <input th:field="*{className}" type="text"
+                                                                       class="form-control" placeholder="Tên Lớp">
+                                                                <small class="form-text text-muted"
+                                                                       th:if="${#fields.hasErrors('className')}"
+                                                                       th:errors="*{className}">Name Error</small>
                                                             </div>
-                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="margin-top: 1%">
-                                                                <label for="course">Thuộc Khóa học</label>
-                                                                <select class="form-control" id="course" name="sellist1">
-                                                                    <option selected disabled>---Vui Lòng chọn---</option>
-                                                                    <option>A</option>
-                                                                    <option>B</option>
-                                                                    <option>C</option>
-                                                                    <option>D</option>
-                                                                </select>
+                                                            <label for="teacher">Chủ Nhiệm</label>
+                                                            <select class="form-control" id="teacher"
+                                                                    th:field="*{teacher}">
+                                                                <option th:if="${classRoom.teacher.id}"
+                                                                        th:value="${classRoom.id}"
+                                                                        th:utext="${classRoom.teacher.fullname}"
+                                                                        selected></option>
+                                                                <th:block th:each="user : ${users}">
+                                                                    <option th:if="${user.id} != ${classRoom.teacher.id}"
+                                                                            th:value="${user.id}"
+                                                                            th:utext="${user.fullname}"></option>
+                                                                </th:block>
+                                                            </select>
+                                                            <small class="form-text text-muted"
+                                                                   th:if="${#fields.hasErrors('teacher')}"
+                                                                   th:errors="*{teacher}">Name Error</small>
+                                                        </div>
+                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
+                                                             style="margin-top: 1%">
+                                                            <label for="course">Thuộc Khóa học</label>
+                                                            <select class="form-control" id="course"
+                                                                    th:field="*{course}">
+                                                                <option th:if="${classRoom.course.id}"
+                                                                        th:value="${classRoom.course.id}"
+                                                                        th:utext="${classRoom.course.getCourseName()}"
+                                                                        selected></option>
+                                                                <th:block th:each="course : ${courses}">
+                                                                    <option th:if="${course.id} != ${classRoom.course.id}"
+                                                                            th:value="${course.id}"
+                                                                            th:utext="${course.getCourseName()}"></option>
+                                                                </th:block>
+                                                            </select>
+                                                            <small class="form-text text-muted"
+                                                                   th:if="${#fields.hasErrors('course')}"
+                                                                   th:errors="*{course}">Name Error</small>
+                                                            <input type="hidden" th:field="*{userCreated}">
+                                                            <input type="hidden" th:field="*{createdDate}">
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <div class="row">
+                                                        <div class="col-lg-1">
+                                                            <div class="payment-adress">
+                                                                <button type="submit"
+                                                                        class="btn btn-primary waves-effect waves-light">
+                                                                    Submit
+                                                                </button>
                                                             </div>
                                                         </div>
-                                                        <br>
-                                                        <div class="row">
-                                                            <div class="col-lg-1">
-                                                                <div class="payment-adress">
-                                                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                    <!--                                                End Form-->
-                                                </div>
+                                                    </div>
+                                                </form>
+                                                <!--                                                End Form-->
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User,Long> {
@@ -19,8 +20,14 @@ public interface UserRepository extends JpaRepository<User,Long> {
     @Query(value = "SELECT * FROM User WHERE is_deleted = 0 AND (role_id = 2 OR role_id = 3)", nativeQuery = true)
     Page<User> findAllEmployeeOrderByIdDesc(Pageable pageable);
 
+    @Query(value = "SELECT * FROM User WHERE is_deleted = 0 AND role_id = 2 ", nativeQuery = true)
+    List<User> findAllTeacherOrderByIdDesc();
+
     @Query(value = "SELECT * FROM User WHERE is_deleted = 0 AND role_id= 4", nativeQuery = true)
     Page<User> findAllStudentOrderByIdDesc(Pageable pageable);
+
+    @Query(value ="SELECT * FROM User WHERE is_deleted = 0 AND role_id=4 AND email LIKE %:email%", nativeQuery = true)
+    Page<User> findAllByEmail(@Param("email") String email,Pageable pageable);
 
     @Query(value = "SELECT * FROM User WHERE role_id = 4 AND is_Deleted = 0 AND id = :id",nativeQuery = true)
     Optional<User> findStudentById(@Param("id") Long id);

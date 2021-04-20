@@ -5,7 +5,8 @@
 
 <body>
 <!--[if lt IE 8]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
 <![endif]-->
 
 
@@ -35,6 +36,7 @@
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class="product-status-wrap">
+                                            <input type="hidden" th:value="${classRoom.id}" id="idClassRoom">
                                             <div class="asset-inner">
                                                 <table>
                                                     <tr>
@@ -44,20 +46,14 @@
                                                         <th>Số Điện Thoại</th>
                                                         <th>Action</th>
                                                     </tr>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>Nguyễn Văn A</td>
-                                                        <td>hocvien@gmail.com</td>
-                                                        <td>0967888xxx</td>
-                                                        <td>
-                                                            <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                                        </td>
-                                                    </tr>
+                                                    <tbody id="showAllStudent">
+                                                    </tbody>
                                                 </table>
                                             </div>
                                             <div class="custom-pagination">
                                                 <ul class="pagination">
-                                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">Previous</a>
+                                                    </li>
                                                     <li class="page-item"><a class="page-link" href="#">1</a></li>
                                                     <li class="page-item"><a class="page-link" href="#">2</a></li>
                                                     <li class="page-item"><a class="page-link" href="#">3</a></li>
@@ -89,20 +85,31 @@
                                                         <td>14/4/2021</td>
                                                         <td>Động từ bất quy tắc</td>
                                                         <td>
-                                                            <a th:href="@{/attend}"> <button data-toggle="tooltip" title="Điểm Danh" class="pd-setting-ed"><i class="fa fa-table" aria-hidden="true"></i></button></a>
+                                                            <a th:href="@{/attend}">
+                                                                <button data-toggle="tooltip" title="Điểm Danh"
+                                                                        class="pd-setting-ed"><i class="fa fa-table"
+                                                                                                 aria-hidden="true"></i>
+                                                                </button>
+                                                            </a>
                                                         </td>
                                                         <td>
                                                             <input type="text" class="form-control">
                                                         </td>
                                                         <td>
-                                                            <a href=""> <button data-toggle="tooltip" title="Lưu Nhận Xét" class="pd-setting-ed"><i class="fa fa-save" aria-hidden="true"></i></button></a>
+                                                            <a href="">
+                                                                <button data-toggle="tooltip" title="Lưu Nhận Xét"
+                                                                        class="pd-setting-ed"><i class="fa fa-save"
+                                                                                                 aria-hidden="true"></i>
+                                                                </button>
+                                                            </a>
                                                         </td>
                                                     </tr>
                                                 </table>
                                             </div>
                                             <div class="custom-pagination">
                                                 <ul class="pagination">
-                                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">Previous</a>
+                                                    </li>
                                                     <li class="page-item"><a class="page-link" href="#">1</a></li>
                                                     <li class="page-item"><a class="page-link" href="#">2</a></li>
                                                     <li class="page-item"><a class="page-link" href="#">3</a></li>
@@ -119,6 +126,7 @@
                                         <div class="product-status-wrap">
                                             <div class="asset-inner">
                                                 <table>
+                                                    <thead>
                                                     <tr>
                                                         <th>STT</th>
                                                         <th>Tên Học Viên</th>
@@ -127,6 +135,8 @@
                                                         <th style="text-align: center">Trung Bình</th>
                                                         <th style="text-align: center">Hành Động</th>
                                                     </tr>
+                                                    </thead>
+                                                    <tbody >
                                                     <tr>
                                                         <td>1</td>
                                                         <td>Nguyễn Văn A</td>
@@ -140,14 +150,21 @@
                                                             <input type="number" class="form-control">
                                                         </td>
                                                         <td>
-                                                            <a href=""> <button data-toggle="tooltip" title="Lưu" class="pd-setting-ed"><i class="fa fa-save" aria-hidden="true"></i></button></a>
+                                                            <a href="">
+                                                                <button data-toggle="tooltip" title="Lưu"
+                                                                        class="pd-setting-ed"><i class="fa fa-save"
+                                                                                                 aria-hidden="true"></i>
+                                                                </button>
+                                                            </a>
                                                         </td>
                                                     </tr>
+                                                    </tbody>
                                                 </table>
                                             </div>
                                             <div class="custom-pagination">
                                                 <ul class="pagination">
-                                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">Previous</a>
+                                                    </li>
                                                     <li class="page-item"><a class="page-link" href="#">1</a></li>
                                                     <li class="page-item"><a class="page-link" href="#">2</a></li>
                                                     <li class="page-item"><a class="page-link" href="#">3</a></li>
@@ -166,9 +183,13 @@
                                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                     <div class="devit-card-custom">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="Email Học Viên">
+                                                            <input type="text" class="form-control" name="search"
+                                                                   id="search" placeholder="Email Học Viên">
                                                         </div>
-                                                        <a href="#" class="btn btn-primary waves-effect waves-light">Submit</a>
+                                                        <ul class="form-group" id="result"></ul>
+                                                        <button type="submit" onclick="classRoom.save()"
+                                                                class="btn btn-primary waves-effect waves-light">Submit
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -185,6 +206,151 @@
 </div>
 
 <footer th:replace="/manager-page/layout::scrip"></footer>
+<script type="text/javascript">
+
+    var classRoom = {};
+    var userStudent = {};
+    var classR = {};
+
+    classRoom.findAllStudent = function (page) {
+        let idClassRoom = $('#idClassRoom').val();
+        $.ajax({
+            url: "http://localhost:8080/api/studentClass/" + idClassRoom+"?page="+page,
+            method: "GET",
+            data: "json",
+            success: function (data) {
+                $('#showAllStudent').empty('');
+                $.each(data.content, function (i, v) {
+                    $('#showAllStudent').append(`
+                    <tr>
+                          <td>${v.user.id}</td>
+                          <td>${v.user.fullName}</td>
+                          <td>${v.user.email}</td>
+                          <td>${v.user.phoneNumber}</td>
+                          <td>
+                            <button data-toggle="tooltip" title="Trash"
+                             class="pd-setting-ed" onclick="classRoom.deleteStudent(${v.user.id})"><i class="fa fa-trash-o" aria-hidden="true"></i>
+                             </button>
+                          </td>
+                    </tr>
+                    `)
+                })
+            }
+        })
+    }
+
+    classRoom.deleteStudent = function (id){
+        bootbox.confirm({
+            message: "Bạn có chắc muốn xóa không?",
+            buttons: {
+                cancel: {
+                    label: '<i class="fa fa-times">Không</i> '
+                },
+                confirm: {
+                    label: '<i class="fa fa-check"> Có</i>'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    $.ajax({
+                        url: "http://localhost:8080/api/studentClass/"+id,
+                        method: "PATCH",
+                        contentType: 'json',
+                        success: function (data) {
+                            console.log(data)
+                            classRoom.findAllStudent(0);
+                            window.Lobibox.notify('success', {
+                                size: 'mini',
+                                msg: 'Xóa học viên thành công'
+                            });
+                        }
+                    });
+                }
+            }
+        })
+    }
+
+    classRoom.addStudent = function (email) {
+        $('#search').empty('');
+        $('#search').val(email);
+        $.ajax({
+            url: "http://localhost:8080/api/user/" + email,
+            method: "GET",
+            dataType: "json",
+            success: function (data) {
+                userStudent = data
+                $('#result').empty('');
+            }
+        })
+    }
+
+    classRoom.save = function () {
+        let studentClass = {};
+        studentClass.classRoom = classR;
+        studentClass.user = userStudent;
+        debugger;
+        $.ajax({
+            url: "http://localhost:8080/api/studentClass/",
+            method: "POST",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify(studentClass),
+            success: function (data) {
+                console.log(data)
+                window.Lobibox.notify('success', {
+                    size: 'mini',
+                    msg: 'Thêm học viên thành công'
+                });
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                console.log(thrownError)
+                window.Lobibox.notify('error', {
+                    size: 'mini',
+                    msg: 'Học viên đã có trong lớp'
+                });
+            }
+        })
+    }
+
+    classRoom.findById = function () {
+        let id = $('#idClassRoom').val();
+        $.ajax({
+            url: "http://localhost:8080/api/classRoom/" + id,
+            method: "GET",
+            dataType: "json",
+            success: function (data) {
+                classR = data
+            }
+        })
+    }
+
+    $(document).ready(function () {
+        classRoom.findById();
+        classRoom.findAllStudent(0);
+        $('#search').keyup(function () {
+            let searchEmail = $('#search').val();
+            $.ajax({
+                url: "http://localhost:8080/api/user/?search=" + searchEmail + "&page=0",
+                method: "GET",
+                dataType: "json",
+                success: function (data) {
+                    $('#result').empty();
+                    if (data.content == '') {
+                        $('#result').append(`
+                            <li class="text-dark" style="background-color: khaki">Không có học viên này</span></li>
+                        `)
+                    } else {
+                        $.each(data.content, function (i, v) {
+                            $('#result').append(`
+                            <li class="text-dark" style="background-color: khaki""><span  onclick="classRoom.addStudent('${v.email}')">${v.email} ||</span><span>${v.fullname}</span></li>
+                        `)
+                        })
+                    }
+                },
+            })
+        });
+    })
+</script>
 </body>
 
 </html>
