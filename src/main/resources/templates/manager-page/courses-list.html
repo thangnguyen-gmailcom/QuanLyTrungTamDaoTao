@@ -77,6 +77,7 @@
     var courses = courses || {};
     var programmeData = [];
     var programme = programme || {};
+    let stt = 1;
     courses.showAll = function (page) {
         let search = $('#str').val();
         $.ajax({
@@ -104,10 +105,19 @@
                 if (num < totalPage-1){
                 $('.pagination').append(`<li class="page-item"><a class="page-link" href="#" onclick="courses.showAll(${num} +1)">Sau</a></li>`);
                 }
+
+
+
+                if (num == 0) {
+                    stt = 0;
+                } else {
+                    stt = (num++) * 8;
+                }
                 $.each(data.content, function (i, v) {
+                    i = stt
                     $('#showListCourses').append(
                         "<tr>" +
-                        "<td>" + v.id + "</td>" +
+                        "<td>" +  ++i + "</td>" +
                         "<td>" + v.courseName + "</td>" +
                         "<td>" + v.programme.programmeName + "</td>" +
                         "<td>" +
@@ -118,7 +128,7 @@
                         "</td>" +
                         "</tr>"
                     );
-
+                    stt = i
                 })
             }
 

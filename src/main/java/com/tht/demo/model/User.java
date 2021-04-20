@@ -83,6 +83,7 @@ public class User {
     private List<User> userList;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<ClassRoom> classRooms;
 
     @ManyToOne
@@ -91,18 +92,23 @@ public class User {
     private Roles roles;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<StudentClass> studentClasses;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Blog> blogs;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<TimeTable> userCreated;
 
     @OneToMany(mappedBy = "teacher")
+    @JsonIgnore
     private List<TimeTable> teacher;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Attend> attends;
 
     @ManyToOne
@@ -111,6 +117,7 @@ public class User {
     private Ward ward;
 
     @OneToMany(mappedBy = "teacher")
+    @JsonIgnore
     private List<ClassRoom> classRooms2;
 
 

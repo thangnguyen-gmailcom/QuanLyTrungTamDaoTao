@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 @Service
 public class BlogServiceImpl implements BlogService {
@@ -17,7 +18,7 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public Page<Blog> showAll(Pageable pageable) {
-        return blogRepository.findAll(pageable);
+        return blogRepository.findAllByDeletedIsFalse(pageable);
     }
 
     @Override
@@ -31,7 +32,8 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public void delele(Long id) {
-        blogRepository.deleteById(id);
+    @Transactional
+    public void delete(Long id) {
+        blogRepository.softDeleteBlog(id);
     }
 }

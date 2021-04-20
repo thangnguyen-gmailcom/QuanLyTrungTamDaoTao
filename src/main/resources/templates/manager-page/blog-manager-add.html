@@ -37,35 +37,55 @@
                                         <div class="review-content-section">
                                             <div id="dropzone1" class="pro-ad addcoursepro">
                                                 <!--                                                Start Form-->
-                                                <form action="" method=""
+                                                <form th:action="@{/blogManager/add}" method="post" th:object="${blog}"
                                                       class="dropzone dropzone-custom needsclick addcourse"
+                                                      enctype="multipart/form-data"
                                                       id="demo1-upload">
                                                     <div class="row">
                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                             <div class="form-group">
                                                                 <label>Tiêu Đề Bài Đăng</label>
-                                                                <input name="title" type="text" class="form-control" placeholder="Tiêu Đề">
+                                                                <input th:field="*{title}" type="text"
+                                                                       class="form-control" placeholder="Tiêu Đề">
+                                                                <td th:if="${#fields.hasErrors('title')}"
+                                                                    th:errors="*{title}">name Error
+                                                                </td>
+
                                                             </div>
 
                                                             <div class="form-group">
-                                                                <label>Short Content</label>
-                                                                <textarea name="description" placeholder="Description"></textarea>
+                                                                <label>Nội Dung Chính</label>
+                                                                <textarea th:field="*{shortContent}"
+                                                                          placeholder="Description"></textarea>
+                                                                <td th:if="${#fields.hasErrors('shortContent')}"
+                                                                    th:errors="*{shortContent}">name Error
+                                                                </td>
+
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                             <div class="form-group">
-                                                                <label>Hình Ảnh</label>
+                                                                <label>Hình ảnh</label>
                                                                 <div class="custom-file">
-                                                                    <input type="file" class="custom-file-input" id="customFile" name="filename">
-                                                                    <label class="custom-file-label" for="customFile">Choose File</label>
+                                                                    <input type="hidden" th:field="*{image}">
+                                                                    <input type="file" name="imageUrl"
+                                                                           class="custom-file-input" id="customFile"
+                                                                           th:file="*{imageUrl}">
+                                                                        <label class="custom-file-label"
+                                                                               for="customFile">Choose File</label>
                                                                 </div>
                                                             </div>
-                                                           <div class="form-group">
-                                                               <div class="form-group">
-                                                                   <label>Full Content</label>
-                                                                   <textarea name="description" placeholder="Description"></textarea>
-                                                               </div>
-                                                           </div>
+                                                            <div class="form-group">
+                                                                <div class="form-group">
+                                                                    <label>Nội Dung</label>
+                                                                    <textarea th:field="*{fullContent}"
+                                                                              placeholder="Description"></textarea>
+                                                                    <td th:if="${#fields.hasErrors('fullContent')}"
+                                                                        th:errors="*{fullContent}">name Error
+                                                                    </td>
+
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <br>
