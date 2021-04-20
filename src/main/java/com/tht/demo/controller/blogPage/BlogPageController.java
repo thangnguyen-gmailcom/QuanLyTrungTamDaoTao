@@ -11,4 +11,10 @@ public class BlogPageController {
 
     @GetMapping("")
     public String index(){return "blog-page/index";}
+
+    @GetMapping("/blog")
+    public String blog(){return "blog-page/blog-page";}
+
+    @GetMapping("/blogSingle")
+    public String blogSingle(){return "blog-page/blog-single";}
 }
