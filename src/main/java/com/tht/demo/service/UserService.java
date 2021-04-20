@@ -9,6 +9,7 @@ import java.util.Optional;
 public interface UserService {
     Page<User> showAllEmployee(Pageable pageable);
     Page<User> showAllStudent(Pageable pageable);
+    Page<User> showAllTeacher(Pageable pageable);
     Optional<User> findById(Long id);
     Optional<User> findStudentById(Long id);
     User save(User user);

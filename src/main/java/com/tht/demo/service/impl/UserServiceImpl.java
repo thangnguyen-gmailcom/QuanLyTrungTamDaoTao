@@ -29,6 +29,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Page<User> showAllTeacher(Pageable pageable) {
+        return userRepository.findAllTeacherOrderByIdDesc(pageable);
+    }
+
+    @Override
     public Optional<User> findById(Long id) {
         return userRepository.findStaffById(id);
     }

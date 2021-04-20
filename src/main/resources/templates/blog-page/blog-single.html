@@ -20,7 +20,7 @@
                     <h2 th:utext="${post.title}"></h2>
                     <i th:utext="${post.shortContent}"></i>
                     <br>
-                    <img style="width: 100%;" th:src="@{'/upload/'+${post.image}}"alt="">
+                    <img style="width: 100%;" th:src="@{'/upload/'+${post.image}}">
                     <p th:utext="${post.fullContent}"></p>
                     <i>Nguồn Tổng Hợp.....!!!</i>
                 </div>
@@ -103,6 +103,6 @@
 </footer>
 
 <!--SCRIPT-->
-<footer th:replace="/blog-page/layout::scrip"/>
+<th:block th:replace="/blog-page/layout::scrip"/>
 </body>
 </html>
