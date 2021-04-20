@@ -1,7 +1,9 @@
 package com.tht.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
@@ -82,7 +84,7 @@ public class User {
     @JsonIgnore
     private List<User> userList;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "userCreated")
     @JsonIgnore
     private List<ClassRoom> classRooms;
 
@@ -120,5 +122,21 @@ public class User {
     @JsonIgnore
     private List<ClassRoom> classRooms2;
 
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", fullname='" + fullname + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", idCard='" + idCard + '\'' +
+                ", gender=" + gender +
+                ", isDeleted=" + isDeleted +
+                ", image='" + image + '\'' +
+                ", information='" + information + '\'' +
+                ", roles=" + roles +
+                '}';
+    }
 }

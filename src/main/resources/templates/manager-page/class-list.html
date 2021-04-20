@@ -39,10 +39,11 @@
                                 </form>
                             </div>
                         </div>
-                        <p hidden id="mess" th:text="${mess}"></p>
-                        <p hidden id="error" th:text="${error}"></p>
+<!--                        <p hidden id="mess" th:text="${mess}"></p>-->
+<!--                        <p hidden id="error" th:text="${error}"></p>-->
                         <div class="asset-inner">
                             <table>
+                                <thead>
                                 <tr>
                                     <th>STT</th>
                                     <th>Tên Lớp</th>
@@ -52,19 +53,9 @@
                                     <th>Chủ Nhiệm</th>
                                     <th>Action</th>
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Web Development Book</td>
-                                    <td>Khóa</td>
-                                    <td>Chương Trình</td>
-                                    <td>Bắt Đầu</td>
-                                    <td>Chủ Nhiệm</td>
-                                    <td>
-                                        <a th:href="@{/class/view}"> <button data-toggle="tooltip" title="view" class="pd-setting-ed"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
-                                        <a th:href="@{/class/edit}"> <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
-                                        <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                    </td>
-                                </tr>
+                                </thead>
+                                <tbody id="showAllClassRoom">
+                                </tbody>
                             </table>
                         </div>
                         <div class="custom-pagination">
@@ -84,6 +75,78 @@
 </div>
 
 <footer th:replace="/manager-page/layout::scrip"></footer>
-</body>
+<script type="text/javascript">
+    var classRoom = {};
 
+    classRoom.showAll = function (page) {
+        $.ajax({
+            url : "http://localhost:8080/api/classRoom?page="+page,
+            method : "GET",
+            dataType : "json",
+            success : function (data){
+                $('#showAllClassRoom').empty('');
+                let totalPage = parseInt(data.totalPages);
+                console.log(totalPage);
+                let num = parseInt(data.pageable.pageNumber);
+                $('.pagination').empty('');
+                if (num !=0) {
+
+                    $('.pagination').append(`<li class="page-item" ><a class="page-link" href="#" onclick="programmes.showAll(${num} -1)">Trước</a></li>`)
+                }
+                for (let i = 0; i < totalPage; i++) {
+
+                    if (data.pageable.pageNumber === i ) {
+                        $('.pagination').append(`<li class="page-item "><a class="page-link" href="#">${i + 1}</a></li>`);
+                    }
+                }
+
+                if (num < totalPage-1){
+                    $('.pagination').append(`<li class="page-item"><a class="page-link" href="#" onclick="programmes.showAll(${num} +1)">Sau</a></li>`);
+                }
+
+                if (num == 0) {
+                    stt = 0;
+                } else {
+                    stt = (num++) * 8;
+                }
+
+                $.each(data.content, function (i, v) {
+                    i = stt
+                    let date = moment(v.createdDate).format("YYYY-MM-DD")
+                    $('#showAllClassRoom').append(`
+                        <tr>
+                        <td> ${++i}  </td>
+                        <td> ${v.className} </td>
+                        <td> ${v.course.courseName} </td>
+                        <td> ${v.course.programme.programmeName} </td>
+                        <td> ${date} </td>
+                        <td> ${v.teacher.fullname} </td>
+                        <td>
+                        <a  href='#' onclick='classRoom.editForm(${v.id})'  ><i class=\"fas fa-edit\" ></i></a>
+
+                        <a style='padding-left: 35px'  href='#' onclick='classRoom.view( ${v.id} )'  ><i class=\"fas fa-eye\"></i></a>
+
+                        <a style='padding-left: 35px'    ><i onclick='classRoom.delete( ${v.id})' class=\"fas fa-trash-alt\"></i></a>
+                        </td>
+                        </tr>`
+                    );
+                    stt = i;
+                })
+            }
+        })
+    };
+
+    classRoom.editForm = function (id){
+        window.location = "/class/edit?id="+id;
+    }
+
+    classRoom.view = function (id){
+        window.location = "/class/view?id="+id;
+    }
+
+    $(document).ready(function (){
+        classRoom.showAll(0);
+    })
+</script>
+</body>
 </html>

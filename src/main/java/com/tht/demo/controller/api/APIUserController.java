@@ -1,6 +1,7 @@
 package com.tht.demo.controller.api;
 
 import com.tht.demo.dto.MyUserDetails;
+import com.tht.demo.model.StudentClass;
 import com.tht.demo.model.User;
 import com.tht.demo.repository.UserRepository;
 import com.tht.demo.service.UserService;
@@ -59,4 +60,33 @@ public class APIUserController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
+
+    @GetMapping("/")
+    public ResponseEntity<?> findBySearch(@RequestParam("search")String email, @RequestParam(value = "page",required = false,defaultValue = "0") int page){
+        try{
+            Page<User> users = userService.findAllByEmail(email,PageRequest.of(page,8));
+            return new ResponseEntity<>(users,HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+    }
+
+    @GetMapping("/{email}")
+    public ResponseEntity<?> findByEmail(@PathVariable("email")String email){
+        try{
+            Optional<User> user = userService.findByEmail(email);
+            return new ResponseEntity<>(user.get(),HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+    }
+
+//    @PostMapping("/")
+//    public ResponseEntity<?> addStudent(@){
+//        try{
+//
+//        }catch (Exception e){
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        }
+//    }
 }

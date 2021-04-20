@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,6 +25,11 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Page<Course> showAll(Pageable pageable) {
         return courseRepository.findAllByDeletedIsFalse(pageable);
+    }
+
+    @Override
+    public List<Course> findAll() {
+        return courseRepository.findAll();
     }
 
     @Override

@@ -8,9 +8,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class StudentClassServiceImpl implements StudentClassService {
 
     @Autowired
@@ -19,6 +21,11 @@ public class StudentClassServiceImpl implements StudentClassService {
     @Override
     public Page<StudentClass> showAll(Pageable pageable) {
         return studentClassRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<StudentClass> findAllByClassRoomIdAndUserIsDeletedIsFalse(Long id, Pageable pageable) {
+        return studentClassRepository.findAllByClassRoomIdAndUserIsDeletedIsFalseAndDeletedIsFalse(id, pageable);
     }
 
     @Override
@@ -32,7 +39,7 @@ public class StudentClassServiceImpl implements StudentClassService {
     }
 
     @Override
-    public void delele(Long id) {
-        studentClassRepository.deleteById(id);
+    public void delete(Long id) {
+        studentClassRepository.deletedStudentClass(id);
     }
 }
