@@ -154,6 +154,10 @@
                         method: "DELETE",
                         contentType: 'json',
                         success: function (data) {
+                            window.Lobibox.notify('success', {
+                                size: 'mini',
+                                msg: "xóa thành công"
+                            });
                             courses.showAll(0);
                         }
                     });

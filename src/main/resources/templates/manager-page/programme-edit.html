@@ -48,8 +48,9 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Tổng Số Buổi</label>
-                                                                <input th:field="*{lessons}" type="number" class="form-control" placeholder="Số buổi">
-                                                                <td th:if="${#fields.hasErrors('lessons')}" th:errors="*{lessons}">name Error</td>
+                                                                <input th:field="*{lessons}" type="number" class="form-control" placeholder="Số buổi" readonly>
+<!--                                                                <label >(Nếu bạn sửa số buổi học của chương trình thì tất cả bài học trong chương trình bị xóa)</label>-->
+                                                                <td th:if="${#fields.hasErrors('lessons')}" th:errors="*{lessons}" >name Error</td>
 
                                                             </div>
                                                             <div class="form-group">
