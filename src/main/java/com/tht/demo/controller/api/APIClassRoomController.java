@@ -5,6 +5,8 @@ import com.tht.demo.service.ClassRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +35,18 @@ public class APIClassRoomController {
             Optional<ClassRoom> classRoom = classRoomService.findById(id);
             return new ResponseEntity<>(classRoom.get(),HttpStatus.OK);
         }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<?> search(@RequestParam String name,@PageableDefault(size = 8) Pageable pageable
+    ){
+        try {
+            Page<ClassRoom> classRooms = classRoomService.findAllByClassNameContainingAndDeletedIsFalse(name,pageable);
+            return new ResponseEntity<>(classRooms, HttpStatus.OK);
+        }catch (Exception e){
+            System.out.println(e);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }

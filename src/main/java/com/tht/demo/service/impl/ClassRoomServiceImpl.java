@@ -43,4 +43,9 @@ public class ClassRoomServiceImpl implements ClassRoomService {
     public void delele(Long id) {
         classRoomRepository.softDeleteClassRoom(id);
     }
+
+    @Override
+    public Page<ClassRoom> findAllByClassNameContainingAndDeletedIsFalse(String name, Pageable pageable) {
+        return classRoomRepository.findAllByClassNameContainingAndDeletedIsFalse(name,pageable);
+    }
 }

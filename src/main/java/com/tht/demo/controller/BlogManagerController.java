@@ -58,6 +58,9 @@ public class BlogManagerController {
             }
             String res = null;
             Optional<User> staff = userService.findByEmail(getPrincipal());
+            if(blog.getImage().isEmpty()){
+                blog.setImage("default-image.jpg");
+            }
             blog.setUser(staff.get());
             blog.setCreatedDate(LocalDateTime.now());
             res = this.saveUploadedFiles(request,blog.getImageUrl(), blog);

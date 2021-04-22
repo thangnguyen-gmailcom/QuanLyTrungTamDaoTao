@@ -112,7 +112,8 @@
                                 <a onclick="users.edit(${v.id})"><i class="fas fa-edit"></i></a>
                                 <a th:href="" onclick="users.delete(${v.id})"><i class="fas fa-trash"></i></i></a>
                         </div>
-                        <img alt="logo" class="img-circle m-b" src="img/contact/1.jpg">
+
+                        <img alt="logo" class="img-circle m-b" src="/upload/${v.image}" style="width: 30%">
                             <h3><a href="">${v.fullname}</a></h3>
                             <p class="all-pro-ad">${v.ward.wardName},${v.ward.district.distinctName},${v.ward.district.province.provinceName}</p>
                             <p style="white-space: nowrap;width: 100%; overflow: hidden; text-overflow: ellipsis; " th:if="${v.information != 'null'}" >
@@ -184,7 +185,7 @@
                                 <a onclick="users.edit(${v.id})"><i class="fas fa-edit"></i></a>
                                 <a th:href="" onclick="users.delete(${v.id})"><i class="fas fa-trash"></i></i></a>
                         </div>
-                        <img alt="logo" class="img-circle m-b" src="img/contact/1.jpg">
+                        <img alt="logo" class="img-circle m-b" src="/upload/${v.image}" style="width: 30%">
                             <h3><a href="">${v.fullname}</a></h3>
                             <p class="all-pro-ad">${v.ward.wardName},${v.ward.district.distinctName},${v.ward.district.province.provinceName}</p>
                             <p style="white-space: nowrap;width: 100%; overflow: hidden; text-overflow: ellipsis; " th:if="${v.information != 'null'}" >

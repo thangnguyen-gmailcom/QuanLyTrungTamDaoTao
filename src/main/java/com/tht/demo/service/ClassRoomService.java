@@ -12,4 +12,6 @@ public interface ClassRoomService{
     Optional<ClassRoom> findByName(String className);
     ClassRoom save(ClassRoom classRoom);
     void delele(Long id);
+
+    Page<ClassRoom> findAllByClassNameContainingAndDeletedIsFalse(String name, Pageable pageable);
 }

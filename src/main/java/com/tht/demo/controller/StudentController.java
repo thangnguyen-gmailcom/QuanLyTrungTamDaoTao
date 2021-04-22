@@ -110,6 +110,9 @@ public class StudentController {
                 redirectAttributes.addFlashAttribute("error", "Số chứng minh nhân dân đã tồn tại");
                 return "redirect:/student";
             }
+            if (user.getImage() == null){
+                user.setImage("default-avatar.png");
+            }
             redirectAttributes.addFlashAttribute("mess", "Thêm mới thành công");
             userService.save(user);
             return "redirect:/student";
