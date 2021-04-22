@@ -54,4 +54,9 @@ public class CourseServiceImpl implements CourseService {
 //        courseRepository.deleteById(id
 //        );
     }
+
+    @Override
+    public Page<Course> findAllByCourseNameContainingAndDeletedIsFalse(String name, Pageable pageable) {
+        return courseRepository.findAllByCourseNameContainingAndDeletedIsFalse(name,pageable);
+    }
 }

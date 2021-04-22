@@ -32,10 +32,11 @@
                         <form role="search" class="sr-input-func">
                             <input
                                     type="text"
+                                    onkeyup="users.search()"
+                                    id="search"
                                     placeholder="Search..."
                                     class="search-int form-control"
                             />
-                            <a href="#"><i class="fa fa-search"></i></a>
                         </form>
                     </div>
                 </div>
@@ -68,6 +69,78 @@
     users.findAllStudent = function (page) {
         $.ajax({
             url: "http://localhost:8080/api/students?page=" + page,
+            method: "GET",
+            dataType: "json",
+            success: function (data) {
+                $('#show-list-user').empty();
+                let totalPage = parseInt(data.totalPages);
+                let num = parseInt(data.pageable.pageNumber);
+                $('.pagination').empty('');
+                if (num !=0) {
+                    $('.pagination').append(`<li class="page-item" ><a class="page-link" href="#" onclick="users.findAllEmployee(${num} -1)">Trước</a></li>`)
+                }
+                for (let i = 0; i < totalPage; i++) {
+                    if (data.pageable.pageNumber === i ) {
+                        $('.pagination').append(`<li class="page-item "><a class="page-link" href="#">${i + 1}</a></li>`);
+                    }
+                }
+                if (num < totalPage-1){
+                    $('.pagination').append(`<li class="page-item"><a class="page-link" href="#" onclick="users.findAllEmployee(${num} +1)">Sau</a></li>`);
+                }
+                $.each(data.content, function (i, v) {
+                    let info = ' chưa có thông tin';
+                    if(v.information == null){
+                        v.information = info;
+                    }
+                    let dateEdit = v.editedDate;
+                    let dateCreate = v.createdDate;
+                    let formatterDate = moment(dateCreate).format('DD/MM/YYYY');
+                    let formatterDateEdit = moment(dateEdit).format('DD/MM/YYYY');
+                    if(dateEdit == null){
+                        formatterDateEdit = formatterDate;
+                    }
+                    $('#show-list-user').append(`
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12" >
+                        <div class="hpanel hblue contact-panel contact-panel-cs responsive-mg-b-30">
+                        <div class="panel-body custom-panel-jw">
+                            <div class="social-media-in">
+                                <a onclick="users.view(${v.id})"><i class="fas fa-eye"></i></a>
+                                <a onclick="users.edit(${v.id})"><i class="fas fa-edit"></i></a>
+                                <a th:href="" onclick="users.delete(${v.id})"><i class="fas fa-trash"></i></i></a>
+                        </div>
+                        <img alt="logo" class="img-circle m-b" src="img/contact/1.jpg">
+                            <h3><a href="">${v.fullname}</a></h3>
+                            <p class="all-pro-ad">${v.ward.wardName},${v.ward.district.distinctName},${v.ward.district.province.provinceName}</p>
+                            <p style="white-space: nowrap;width: 100%; overflow: hidden; text-overflow: ellipsis; " th:if="${v.information != 'null'}" >
+                                ${v.information}
+                            </p>
+                            <p style="white-space: nowrap;width: 100%; overflow: hidden; text-overflow: ellipsis; " th:if="${v.information != 'null'}" >
+                               <b>Ngày cập nhật mới nhất : </b> </br>${formatterDateEdit}
+                            </p>
+                    </div>
+                    <div class="panel-footer contact-footer">
+                        <div class="professor-stds-int">
+                            <div class="professor-stds">
+                                <div class="contact-stat"><span>Likes: </span> <strong>956</strong></div>
+                            </div>
+                            <div class="professor-stds">
+                                <div class="contact-stat"><span>Comments: </span> <strong>350</strong></div>
+                            </div>
+                            <div class="professor-stds">
+                                <div class="contact-stat"><span>Views: </span> <strong>450</strong></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+</div>`)
+                })
+            }
+        })
+    }
+
+    users.search = function () {
+        $.ajax({
+            url: "http://localhost:8080/api/students/search?name=" + document.getElementById("search").value,
             method: "GET",
             dataType: "json",
             success: function (data) {

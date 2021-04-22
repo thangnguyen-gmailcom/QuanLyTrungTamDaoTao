@@ -21,4 +21,8 @@ public interface UserService {
     Optional<User> findByPhoneNumber(String phoneNumber);
     Optional<User> findByIdCard(String idCard);
     void updatePassword(String password, Long id);
+
+    Page<User> searchStaffByName(String name,Pageable pageable);
+
+    Page<User> searchStudentByName(String name,Pageable pageable);
 }

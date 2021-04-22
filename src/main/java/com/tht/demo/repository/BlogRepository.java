@@ -15,4 +15,8 @@ public interface BlogRepository extends JpaRepository<Blog , Long> {
     void softDeleteBlog(@Param("id") Long id);
 
     Page<Blog> findAllByDeletedIsFalse(Pageable pageable);
+
+
+
+    Page<Blog> findAllByTitleContainingAndDeletedIsFalse(String title, Pageable pageable);
 }

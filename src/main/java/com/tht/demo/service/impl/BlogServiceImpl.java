@@ -36,4 +36,9 @@ public class BlogServiceImpl implements BlogService {
     public void delete(Long id) {
         blogRepository.softDeleteBlog(id);
     }
+
+    @Override
+    public Page<Blog> findAllByTitleContainingAndDeletedIsFalse(String title, Pageable pageable) {
+        return blogRepository.findAllByTitleContainingAndDeletedIsFalse(title,pageable);
+    }
 }

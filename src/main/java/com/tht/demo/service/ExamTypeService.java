@@ -14,4 +14,6 @@ public interface ExamTypeService {
     void delete(Long id);
     Optional<ExamType> findByTitle(String name);
 
+    Page<ExamType> findAllByTitleContainingAndDeletedIsFalse(String name, Pageable pageable);
+
 }

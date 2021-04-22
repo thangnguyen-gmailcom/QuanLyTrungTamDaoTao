@@ -136,7 +136,7 @@
                                                         <th style="text-align: center">Hành Động</th>
                                                     </tr>
                                                     </thead>
-                                                    <tbody >
+                                                    <tbody>
                                                     <tr>
                                                         <td>1</td>
                                                         <td>Nguyễn Văn A</td>
@@ -215,7 +215,7 @@
     classRoom.findAllStudent = function (page) {
         let idClassRoom = $('#idClassRoom').val();
         $.ajax({
-            url: "http://localhost:8080/api/studentClass/" + idClassRoom+"?page="+page,
+            url: "http://localhost:8080/api/studentClass/" + idClassRoom + "?page=" + page,
             method: "GET",
             data: "json",
             success: function (data) {
@@ -239,7 +239,7 @@
         })
     }
 
-    classRoom.deleteStudent = function (id){
+    classRoom.deleteStudent = function (id) {
         bootbox.confirm({
             message: "Bạn có chắc muốn xóa không?",
             buttons: {
@@ -253,7 +253,7 @@
             callback: function (result) {
                 if (result) {
                     $.ajax({
-                        url: "http://localhost:8080/api/studentClass/"+id,
+                        url: "http://localhost:8080/api/studentClass/" + id,
                         method: "PATCH",
                         contentType: 'json',
                         success: function (data) {
@@ -337,12 +337,17 @@
                     $('#result').empty();
                     if (data.content == '') {
                         $('#result').append(`
-                            <li class="text-dark" style="background-color: khaki">Không có học viên này</span></li>
+                            <li class="text-dark" style="background-color: khaki">Không Tìm Thấy Dữ Liệu Khớp</span></li>
                         `)
                     } else {
                         $.each(data.content, function (i, v) {
                             $('#result').append(`
-                            <li class="text-dark" style="background-color: khaki""><span  onclick="classRoom.addStudent('${v.email}')">${v.email} ||</span><span>${v.fullname}</span></li>
+                            <li class="text-dark" style="background-color: ghostwhite; height: 30px"">
+                            <div>
+                            <span style="margin-left: 1%"  onclick="classRoom.addStudent('${v.email}')">Email: ${v.email}</span>
+                            <span style="margin-left: 5%">Họ Tên: ${v.fullname}</span>
+</div>
+                            </li>
                         `)
                         })
                     }

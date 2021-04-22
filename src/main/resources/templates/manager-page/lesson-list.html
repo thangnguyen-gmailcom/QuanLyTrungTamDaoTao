@@ -25,22 +25,28 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="product-payment-inner-st">
-                        <ul id="myTabedu1" class="tab-review-design">
-                            <li class="active"><a href="#description">Tạo Mới Nội Dung Buổi Học</a></li>
-                        </ul>
                         <div id="myTabContent" class="tab-content custom-product-edit">
                             <p hidden id="mess" th:text="${mess}"></p>
                             <p hidden id="error" th:text="${error}"></p>
+                           <div class="row">
+                               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                   <ul id="myTabedu1" class="tab-review-design">
+                                       <li class="active"><a href="#description">Danh Sách Nội Dung Buổi Học</a></li>
+                                   </ul>
+                               </div>
+                               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                   <div class="breadcome-heading" style="margin-left: 48%">
+                                       <form role="search" class="sr-input-func">
+                                           <input onkeyup="lessons.search()" type="text" id="search" placeholder="Search..." class="search-int form-control"/>
+                                       </form>
+                                   </div>
+                               </div>
+                           </div>
                             <div class="product-tab-list tab-pane fade active in" id="description">
-
                                 <form th:action="@{/lesson/list}" method="post" th:object="${lesson}">
                                     <input type="hidden" id="idProgramme" th:value="${programmes.id}"/>
-                                    <div class="row">
-                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                            <p>Chương Trình:</p>
-                                            <p id="programs" th:text="${programmes.programmeName}"></p>
-                                        </div>
-                                    </div>
+                                    <p>Chương Trình:</p>
+                                    <p id="programs" th:text="${programmes.programmeName}"></p>
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="product-status-wrap">
@@ -91,6 +97,63 @@
         let program = $('#idProgramme').val()
         $.ajax({
             url: "http://localhost:8080/api/lessons?program=" + program + "&page=" + page,
+            method: "GET",
+            dataType: "json",
+            success: function (data) {
+                $('#showLesson').empty('');
+                let totalPage = parseInt(data.totalPages);
+                let num = parseInt(data.pageable.pageNumber);
+                console.log(totalPage);
+                $('.pagination').empty('');
+                if (num != 0) {
+
+                    $('.pagination').append(`<li class="page-item" ><a class="page-link" href="#" onclick="lessons.showAll(${num} -1)">Trước</a></li>`)
+                }
+                for (let i = 0; i < totalPage; i++) {
+
+                    if (data.pageable.pageNumber === i) {
+                        $('.pagination').append(`<li class="page-item "><a class="page-link" href="#">${i + 1}</a></li>`);
+                    }
+
+                }
+
+                if (num < totalPage - 1) {
+                    $('.pagination').append(`<li class="page-item"><a class="page-link" href="#" onclick="lessons.showAll(${num} +1)">Sau</a></li>`);
+                }
+
+
+                if (num == 0) {
+                    stt = 0;
+                } else {
+                    stt = (num++) * 8;
+                }
+
+
+                $.each(data.content, function (i, v) {
+                    i = stt
+                    $('#showLesson').append(
+                        "<tr>" +
+                        "<td>" + ++i + "</td>" +
+                        "<td>" + v.lessonNumber + "</td>" +
+                        "<td>" + v.content + "</td>" +
+                        "<td>" +
+                        "<a  href='#' onclick='lessons.editForm(" + v.id + ")'  ><i class=\"fas fa-edit\" ></i></a>"
+                        +
+                        "<a style='padding-left: 35px'><i onclick='lessons.delete(" + v.id + ")' class=\"fas fa-trash-alt\"></i></a>" +
+                        "</td>" +
+                        "</tr>"
+                    );
+                    stt = i
+                })
+            }
+
+        })
+    }
+
+    lessons.search = function () {
+        let program = $('#idProgramme').val()
+        $.ajax({
+            url: "http://localhost:8080/api/lessons/search?name=" + document.getElementById("search").value,
             method: "GET",
             dataType: "json",
             success: function (data) {

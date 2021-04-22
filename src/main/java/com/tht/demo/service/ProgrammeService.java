@@ -14,4 +14,6 @@ public interface ProgrammeService {
     void delele(Long id);
     Optional<Programme> findByProgrammeName(String name);
     Page<Programme> findAllByDeletedIsFalse(Pageable pageable);
+
+    Page<Programme> findAllByProgrammeNameContainingAndDeletedIsFalse(String name, Pageable pageable);
 }

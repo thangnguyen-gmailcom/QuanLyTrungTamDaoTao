@@ -14,4 +14,6 @@ public interface CourseService {
     Optional<Course> findById(Long id);
     Course save(Course course);
     void delele(Long id);
+
+    Page<Course> findAllByCourseNameContainingAndDeletedIsFalse(String name, Pageable pageable);
 }
