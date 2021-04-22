@@ -126,38 +126,13 @@
                                         <div class="product-status-wrap">
                                             <div class="asset-inner">
                                                 <table>
-                                                    <thead>
-                                                    <tr>
+                                                    <thead id="headListStudent">
+                                                    <tr id="headRecord">
                                                         <th>STT</th>
                                                         <th>Tên Học Viên</th>
-                                                        <th style="text-align: center">Lý Thuyết</th>
-                                                        <th style="text-align: center">Thực Hành</th>
-                                                        <th style="text-align: center">Trung Bình</th>
-                                                        <th style="text-align: center">Hành Động</th>
                                                     </tr>
                                                     </thead>
-                                                    <tbody >
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>Nguyễn Văn A</td>
-                                                        <td>
-                                                            <input type="number" class="form-control">
-                                                        </td>
-                                                        <td>
-                                                            <input type="number" class="form-control">
-                                                        </td>
-                                                        <td>
-                                                            <input type="number" class="form-control">
-                                                        </td>
-                                                        <td>
-                                                            <a href="">
-                                                                <button data-toggle="tooltip" title="Lưu"
-                                                                        class="pd-setting-ed"><i class="fa fa-save"
-                                                                                                 aria-hidden="true"></i>
-                                                                </button>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
+                                                    <tbody id="listStudent">
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -209,22 +184,125 @@
 <script type="text/javascript">
 
     var classRoom = {};
+    var examType = {};
+    var point = {};
+
     var userStudent = {};
     var classR = {};
+    var studentC = {};
+    var count = 0;
 
+    // tìm kiếm loại điểm
+    point.findExamTyeById = function (id) {
+        for (let i = 0; i < examType.data.length; i++) {
+            if (id === examType.data[i].id) {
+                return examType.data[i]
+            }
+        }
+        return null;
+    }
+
+    // lưu điểm
+    point.save = function (i, v) {
+        const points = document.getElementsByClassName(`point${i}`);
+        const arrayPoints = [];
+        const arrayExamType = [];
+        for (let j = 0; j < points.length; j++) {
+            arrayPoints.push(points[j].value);
+            arrayExamType.push($(points[j]).data("type"))
+        }
+        var savePoint = {
+            idStudentClass: v,
+            points: arrayPoints,
+            examTypes: arrayExamType
+        }
+        $.ajax({
+            url: "http://localhost:8080/api/point/",
+            method: "POST",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify(savePoint),
+            success: function (data) {
+                console.log(data);
+                window.Lobibox.notify('success', {
+                    size: 'mini',
+                    msg: 'Thêm điểm cho học viên thành công'
+                });
+                classRoom.findAllStudent(0);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                console.log(thrownError)
+                window.Lobibox.notify('error', {
+                    size: 'mini',
+                    msg: 'Điểm đã nhập không hơp lệ (thang điểm từ 0 đến 10)'
+                });
+            }
+        })
+    }
+
+    // xuất ra danh sách thể loại điểm
+    examType.findAllExamList = function (page) {
+        $.ajax({
+            url: "http://localhost:8080/api/examTypes?page=" + page,
+            method: "GET",
+            dataType: "json",
+            success: function (data) {
+                examType.data = data.content;
+                $.each(data.content, function (i, v) {
+                    $('#headRecord').append(`
+                        <th style="text-align: center">${v.title}</th>
+                    `);
+                });
+                $('#headRecord').append(`
+                    <th style="text-align: center">Trung bình</th>
+                    <th style="text-align: center">Hành Động</th>
+                `)
+            }
+        })
+    }
+
+    //xuất ra học sinh có trong lớp
     classRoom.findAllStudent = function (page) {
         let idClassRoom = $('#idClassRoom').val();
         $.ajax({
-            url: "http://localhost:8080/api/studentClass/" + idClassRoom+"?page="+page,
+            url: "http://localhost:8080/api/studentClass/" + idClassRoom + "?page=" + page,
             method: "GET",
             data: "json",
             success: function (data) {
                 $('#showAllStudent').empty('');
+                $('#listStudent').empty('');
+                let totalPage = parseInt(data.totalPages);
+                let num = parseInt(data.pageable.pageNumber);
+                console.log(totalPage);
+                $('.pagination').empty('');
+                if (num != 0) {
+
+                    $('.pagination').append(`<li class="page-item" ><a class="page-link" href="#" onclick="classRoom.findAllStudent(${num} -1)">Trước</a></li>`)
+                }
+                for (let i = 0; i < totalPage; i++) {
+
+                    if (data.pageable.pageNumber === i) {
+                        $('.pagination').append(`<li class="page-item "><a class="page-link" href="#">${i + 1}</a></li>`);
+                    }
+
+                }
+
+                if (num < totalPage - 1) {
+                    $('.pagination').append(`<li class="page-item"><a class="page-link" href="#" onclick="classRoom.findAllStudent(${num} +1)">Sau</a></li>`);
+                }
+
+
+                if (num == 0) {
+                    stt = 0;
+                } else {
+                    stt = (num++) * 8;
+                }
                 $.each(data.content, function (i, v) {
+                    i = stt
                     $('#showAllStudent').append(`
                     <tr>
-                          <td>${v.user.id}</td>
-                          <td>${v.user.fullName}</td>
+                          <td>${++i}</td>
+                          <td>${v.user.fullname}</td>
                           <td>${v.user.email}</td>
                           <td>${v.user.phoneNumber}</td>
                           <td>
@@ -233,13 +311,53 @@
                              </button>
                           </td>
                     </tr>
-                    `)
+                    `);
+                    let recordId = '#record' + i;
+                    $('#listStudent').append(listStudents(i, v));
+                    $(recordId).append(listPoint(i, v));
+                    stt = i
                 })
             }
         })
     }
+    var listStudents = (i, data) => (`
+        <tr id="record${i}">
+            <td>${i}</td>
+            <td>${data.user.fullname}</td>
+        </tr>
+            `)
+    var listPoint =  (i, v) => {
+        let template = "";
+        let pointAvg = 0;
+        examType.data.forEach(function (ele,count) {
+            console.log(ele);
+            let marks = v.points[count];
+            let mark;
+            if(marks === undefined){
+                mark = 0;
+            }
+            if(marks !== undefined) {
+                mark = v.points[count].point;
+            }
+            count++;
+            console.log(count);
+            template += `<td>
+            <input type="number" min="0" value="${mark}" max="10"  data-type="${ele.id}" class="form-control point${i}">
+            </td>`;
+        });
+        template += `
+            <td>
+            <input type="number" value="${v.avgPoints}" id="avg${i}" class="form-control">
+            </td>
+            <td>
+            <button onclick="point.save(${i},${v.id})" data-toggle="tooltip" title="Lưu"class="pd-setting-ed"><i class="fa fa-save" aria-hidden="true"></i>
+            </button>
+            </td>`;
+        return template;
+    };
 
-    classRoom.deleteStudent = function (id){
+    // xóa học viên khỏi lớp
+    classRoom.deleteStudent = function (id) {
         bootbox.confirm({
             message: "Bạn có chắc muốn xóa không?",
             buttons: {
@@ -253,7 +371,7 @@
             callback: function (result) {
                 if (result) {
                     $.ajax({
-                        url: "http://localhost:8080/api/studentClass/"+id,
+                        url: "http://localhost:8080/api/studentClass/" + id,
                         method: "PATCH",
                         contentType: 'json',
                         success: function (data) {
@@ -270,6 +388,7 @@
         })
     }
 
+    //thêm học viên vào form search
     classRoom.addStudent = function (email) {
         $('#search').empty('');
         $('#search').val(email);
@@ -284,11 +403,11 @@
         })
     }
 
+    //thêm học viên vào lớp
     classRoom.save = function () {
         let studentClass = {};
         studentClass.classRoom = classR;
         studentClass.user = userStudent;
-        debugger;
         $.ajax({
             url: "http://localhost:8080/api/studentClass/",
             method: "POST",
@@ -301,6 +420,7 @@
                     size: 'mini',
                     msg: 'Thêm học viên thành công'
                 });
+                classRoom.findAllStudent(0)
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 console.log(thrownError)
@@ -312,6 +432,7 @@
         })
     }
 
+    // tìm kiếm classRoom theo id
     classRoom.findById = function () {
         let id = $('#idClassRoom').val();
         $.ajax({
@@ -324,7 +445,10 @@
         })
     }
 
+
+
     $(document).ready(function () {
+        examType.findAllExamList(0);
         classRoom.findById();
         classRoom.findAllStudent(0);
         $('#search').keyup(function () {

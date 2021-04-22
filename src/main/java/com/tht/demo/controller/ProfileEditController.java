@@ -49,7 +49,8 @@ public class ProfileEditController {
         } else {
             String result = null;
             Optional<User> staff1 = userService.findByPhoneNumber(user.getPhoneNumber());
-            user.setStaffEditedId(staff1.get());
+            Optional<User> staff2 = userService.findByEmail("admin@gmail.com");
+            user.setStaffEditedId(staff2.get());
             user.setEditedDate(LocalDateTime.now());
             if (staff1.isPresent()) {
                 if (!staff1.get().getPhoneNumber().equals(user.getPhoneNumber())) {

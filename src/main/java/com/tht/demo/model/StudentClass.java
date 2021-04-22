@@ -1,5 +1,6 @@
 package com.tht.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -7,7 +8,6 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(uniqueConstraints ={@UniqueConstraint(columnNames = {"class_id", "user_id"})})
 public class StudentClass {
 
     @Id

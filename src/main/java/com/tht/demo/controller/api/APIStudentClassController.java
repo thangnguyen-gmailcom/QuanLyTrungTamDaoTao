@@ -21,8 +21,22 @@ public class APIStudentClassController {
     @PostMapping(value = "")
     public ResponseEntity<?> saveStudentClass(@RequestBody StudentClass studentClass) {
         try {
-            StudentClass studentClass1 = studentClassService.save(studentClass);
-            return new ResponseEntity<>(studentClass1,HttpStatus.OK);
+            long userId = studentClass.getUser().getId();
+            long classId = studentClass.getClassRoom().getId();
+            StudentClass studentClass1 = null;
+            Optional<StudentClass> optionalStudentClass = studentClassService.findByUserIdAndClassRoomId(userId,classId);
+            if(optionalStudentClass.isEmpty()){
+                studentClass1 = studentClassService.save(studentClass);
+                return new ResponseEntity<>(studentClass1, HttpStatus.OK);
+            }else {
+                Optional<StudentClass> studentClassOptional = studentClassService.findByUserIdAndClassRoomIdAndDeletedIsTrue(userId,classId);
+                if(studentClassOptional.isPresent()) {
+                    studentClass1 = studentClassService.save(studentClass);
+                    return new ResponseEntity<>(studentClass1, HttpStatus.OK);
+                }else {
+                    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                }
+            }
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -33,6 +47,16 @@ public class APIStudentClassController {
         try{
             Page<StudentClass> studentClasses = studentClassService.findAllByClassRoomIdAndUserIsDeletedIsFalse(id, PageRequest.of(page,8));
             return new ResponseEntity<>(studentClasses,HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+    }
+
+    @GetMapping("")
+    public ResponseEntity<?> findStudentClassById(@RequestParam("id")long id){
+        try{
+            Optional<StudentClass> studentClass = studentClassService.findById(id);
+            return new ResponseEntity<>(studentClass.get(), HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
