@@ -146,38 +146,8 @@
         </div>
     </div>
 </section>
-
-
-<!-- Programme -->
-<section id="team">
-    <div class="container">
-        <div class="row">
-
-            <div class="col-md-12 col-sm-12">
-                <div class="section-title">
-                    <h2>Các Chương Trình Học Đang Mở<small>Nâng cấp kỹ năng của bạn với các khóa học mới nhất</small></h2>
-                </div>
-                <th:block th:each ="programme : ${programmeList}">
-                    <div class="col-md-3 col-sm-6">
-                        <div class="team-thumb">
-                            <div class="team-image">
-                                <img th:src="@{'/upload/programme.jpg'}" class="img-responsive" alt="">
-                            </div>
-                            <div class="team-info">
-                                <h3 th:utext="${programme.getProgrammeName()}"></h3>
-                                <span th:utext="${programme.getTuition()} + '$'"></span>
-                            </div>
-                        </div>
-                    </div>
-                </th:block>
-                </div>
-        </div>
-    </div>
-</section>
-
-
 <!-- Teacher -->
-<section id="courses">
+<section id="team">
     <div class="container">
         <div class="row">
 
@@ -188,29 +158,67 @@
                 </div>
 
                 <div class="owl-carousel owl-theme owl-courses">
-                    <th:block th:each ="teacher : ${teacherList}">
+                    <th:block th:each="teacher : ${teacherList}">
+                        <div class="col-md-4 col-sm-4" style="height: 350px; width: 350px">
+                            <div class="item">
+                                <div class="courses-thumb">
+                                    <div class="courses-top">
+                                        <div class="courses-image">
+                                            <img th:src="@{'/upload/'+${teacher.getImage()}}" class="img-responsive"
+                                                 alt="" style="height: 250px" width="200px">
+                                        </div>
+                                    </div>
+
+                                    <div class="courses-detail">
+                                        <h3 th:utext="${teacher.getFullname()}"></h3>
+                                        <p th:utext="${teacher.getInformation()}"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Programme -->
+<section id="courses">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="section-title">
+                    <h2>Các Chương Trình Học Đang Mở<small>Nâng cấp kỹ năng của bạn với các khóa học mới nhất</small>
+                    </h2>
+                </div>
+                <div class="owl-carousel owl-theme owl-courses">
+                <th:block th:each="programme : ${programmeList}">
                     <div class="col-md-4 col-sm-4">
-                        <div class="item">
+                        <div class="item"  style="height: 350px; width: 350px">
                             <div class="courses-thumb">
                                 <div class="courses-top">
                                     <div class="courses-image">
-                                        <img th:src="@{'/upload/'+${teacher.getImage()}}" class="img-responsive" alt="" style="height: 250px" width="200px">
+                                        <img th:src="@{'/upload/programme.jpg'}" class="img-responsive"
+                                             alt="" style="height: 250px; width: 350px">
                                     </div>
                                 </div>
 
                                 <div class="courses-detail">
-                                    <h3 th:utext="${teacher.getFullname()}"></h3>
-                                    <p th:utext="${teacher.getInformation()}"></p>
+                                    <h3 th:utext="${programme.getProgrammeName()}"></h3>
+                                    <p th:utext="${programme.getTuition()}"></p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    </th:block>
+                </th:block>
                 </div>
-
             </div>
         </div>
+    </div>
 </section>
+
+
 
 
 <!-- TESTIMONIAL -->
@@ -308,6 +316,7 @@
 
             </div>
         </div>
+    </div>
 </section>
 
 
@@ -379,7 +388,6 @@
         </div>
     </div>
 </footer>
-
 
 
 <th:block th:replace="/blog-page/layout::scrip"/>

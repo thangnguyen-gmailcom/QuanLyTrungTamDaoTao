@@ -1,7 +1,9 @@
 package com.tht.demo.controller;
 
+import com.tht.demo.model.ClassRoom;
 import com.tht.demo.model.Programme;
 import com.tht.demo.model.User;
+import com.tht.demo.service.ClassRoomService;
 import com.tht.demo.service.ProgrammeService;
 import com.tht.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,8 @@ public class HomeController {
 private ProgrammeService programmeService;
 @Autowired
 private UserService userService;
-
+@Autowired
+private ClassRoomService classRoomService;
 
     @GetMapping("")
     public String index(Model model, Pageable pageable){
@@ -29,6 +32,8 @@ private UserService userService;
          model.addAttribute("student",users);
          Page<User> staff = userService.showAllEmployee(pageable);
          model.addAttribute("staff" , staff);
+         Page<ClassRoom> classRooms = classRoomService.showAll(pageable);
+         model.addAttribute("class",classRooms);
         return "manager-page/index";
     }
 }

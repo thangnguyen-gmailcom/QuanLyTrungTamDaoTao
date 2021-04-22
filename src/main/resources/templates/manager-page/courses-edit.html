@@ -62,10 +62,10 @@
                                                                     </th:block>
                                                                 </select>
                                                             </div>
-                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="margin-top: 2.5%">
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="margin-top: 2%;">
                                                                 <div class="form-group">
                                                                     <textarea th:field="*{description}"
-                                                                              placeholder="Mô tả" style="margin-top: -1%;"></textarea>
+                                                                              placeholder="Mô tả" id="summernote1"></textarea>
                                                                     <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}">name Error</td>
 
                                                                 </div>

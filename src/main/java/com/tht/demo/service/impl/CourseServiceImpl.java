@@ -29,7 +29,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public List<Course> findAll() {
-        return courseRepository.findAll();
+        return courseRepository.findAllByDeletedIsFalse();
     }
 
     @Override

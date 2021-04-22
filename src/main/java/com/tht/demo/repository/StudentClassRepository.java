@@ -9,10 +9,14 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Optional;
+
 
 public interface StudentClassRepository extends JpaRepository<StudentClass,Long> {
 
     Page<StudentClass> findAllByClassRoomIdAndUserIsDeletedIsFalseAndDeletedIsFalse(Long classroomId, Pageable pageable);
+
+    Optional<StudentClass> findByUserIdAndClassRoomIdAndDeletedIsFalse(Long userId,Long classRoomId);
 
     @Modifying
     @Query(value = "UPDATE StudentClass sc SET sc.deleted = true WHERE sc.user.id = :id")
