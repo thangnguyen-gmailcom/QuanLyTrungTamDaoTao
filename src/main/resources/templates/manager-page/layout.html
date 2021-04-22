@@ -88,6 +88,9 @@
 		============================================ -->
     <link rel="stylesheet" href="/css/data-table/bootstrap-table.css"/>
     <link rel="stylesheet" href="/css/data-table/bootstrap-editable.css"/>
+    <!-- summernote CSS
+		============================================ -->
+    <link rel="stylesheet" href="/css/summernote/summernote.css">
 
     <!--    Reponsive-->
     <link rel="stylesheet" href="/css/reponsive.css"/>
@@ -340,11 +343,19 @@
                                     <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12"></div>
                                     <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
                                         <div class="header-right-info">
+                                            <th:block th:if="${session.isEmpty()}">
+                                                <ul class="nav navbar-nav mai-top-nav header-right-menu">
+                                                    <li class="nav-item">
+                                                    <li><a th:href="@{/login/}"><i class="fa fa-sign-in"></i>Login</a></li>
+                                                    </li>
+                                                </ul>
+                                            </th:block>
+                                            <th:block th:if="${!session.isEmpty()}">
                                             <ul class="nav navbar-nav mai-top-nav header-right-menu">
                                                 <li class="nav-item">
                                                     <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
-                                                        <img th:src="@{/img/product/pro4.jpg}" alt=""/>
-                                                        <span class="admin-name">Prof.Anderson</span>
+                                                        <img th:src="@{'/upload/'+ ${session.user.getImage()}}" alt=""/>
+                                                        <span class="admin-name" th:utext="${session.user.fullname}"></span>
                                                     </a>
                                                     <ul role="menu"
                                                         class="dropdown-header-top author-log dropdown-menu animated zoomIn">
@@ -367,6 +378,7 @@
                                                     </ul>
                                                 </li>
                                             </ul>
+                                            </th:block>
                                         </div>
                                     </div>
                                 </div>
@@ -710,6 +722,10 @@
     <script th:src="@{/js/data-table/bootstrap-table-resizable.js}"></script>
     <script th:src="@{/js/data-table/colResizable-1.5.source.js}"></script>
     <script th:src="@{/js/data-table/bootstrap-table-export.js}"></script>
+
+<!--    summernote-->
+    <script th:src="@{/js/summernote/summernote.min.js}"></script>
+    <script th:src="@{/js/summernote/summernote-active.js}"></script>
 
 </footer>
 </html>

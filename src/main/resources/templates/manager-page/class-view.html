@@ -132,7 +132,9 @@
                                                         <th>Tên Học Viên</th>
                                                     </tr>
                                                     </thead>
+
                                                     <tbody id="listStudent">
+
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -356,6 +358,7 @@
         return template;
     };
 
+
     // xóa học viên khỏi lớp
     classRoom.deleteStudent = function (id) {
         bootbox.confirm({
@@ -461,12 +464,17 @@
                     $('#result').empty();
                     if (data.content == '') {
                         $('#result').append(`
-                            <li class="text-dark" style="background-color: khaki">Không có học viên này</span></li>
+                            <li class="text-dark" style="background-color: khaki">Không Tìm Thấy Dữ Liệu Khớp</span></li>
                         `)
                     } else {
                         $.each(data.content, function (i, v) {
                             $('#result').append(`
-                            <li class="text-dark" style="background-color: khaki""><span  onclick="classRoom.addStudent('${v.email}')">${v.email} ||</span><span>${v.fullname}</span></li>
+                            <li class="text-dark" style="background-color: ghostwhite; height: 30px"">
+                            <div>
+                            <span style="margin-left: 1%"  onclick="classRoom.addStudent('${v.email}')">Email: ${v.email}</span>
+                            <span style="margin-left: 5%">Họ Tên: ${v.fullname}</span>
+</div>
+                            </li>
                         `)
                         })
                     }

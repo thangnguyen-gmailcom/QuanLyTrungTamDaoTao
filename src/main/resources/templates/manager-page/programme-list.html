@@ -33,12 +33,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <div class="breadcome-heading" style="margin-left: 48%">
                                 <form role="search" class="sr-input-func">
-                                    <input
-                                            type="text"
-                                            placeholder="Search..."
-                                            class="search-int form-control"
-                                    />
-                                    <a href="#"><i class="fa fa-search"></i></a>
+                                    <input onkeyup="programmes.search()" type="text" id="search" placeholder="Search..." class="search-int form-control"/>
                                 </form>
                             </div>
                         </div>
@@ -151,7 +146,74 @@
         })
     }
 
+    programmes.search = function () {
+        $.ajax({
+            url: "http://localhost:8080/api/programmes/search?name=" + document.getElementById("search").value,
+            method: "GET",
+            dataType: "json",
+            success: function (data) {
+                $('#showListProgrammes').empty();
+                let totalPage = parseInt(data.totalPages);
+                let num = parseInt(data.pageable.pageNumber);
+                console.log(totalPage);
+                $('.pagination').empty('');
+                if (num !=0) {
 
+                    $('.pagination').append(`<li class="page-item" ><a class="page-link" href="#" onclick="programmes.showAll(${num} -1)">Trước</a></li>`)
+                }
+                for (let i = 0; i < totalPage; i++) {
+
+                    if (data.pageable.pageNumber === i ) {
+                        $('.pagination').append(`<li class="page-item "><a class="page-link" href="#">${i + 1}</a></li>`);
+                    }
+                    // if (data.pageable.pageNumber !== i && i < 2){
+                    //     $('.pagination').append(`<li class="page-item"><a class="page-link" href="#" onclick="courses.showAll(${i})">${i + 1}</a></li>`)
+                    // }
+                }
+
+                if (num < totalPage-1){
+                    $('.pagination').append(`<li class="page-item"><a class="page-link" href="#" onclick="programmes.showAll(${num} +1)">Sau</a></li>`);
+                }
+                if (num == 0) {
+                    stt = 0;
+                } else {
+                    stt = (num++) * 8;
+                }
+
+                $.each(data.content, function (i, v) {
+                    i = stt
+
+                    let dele = false;
+                    let delet=true;
+                    if(v.deleted = dele){
+                        v.deleted ="<td style='color: red'>Đang Mở</td>"
+                    } else {
+                        v.deleted = "<td style='color: #228B22'>Đang Mở</td>"
+                    }
+                    $('#showListProgrammes').append(
+                        "<tr>" +
+                        "<td>" + ++i + "</td>" +
+                        "<td>" + v.programmeName + "</td>" +
+                        "<td>" + v.lessons + "</td>" +
+                        "<td>" + v.tuition + "$</td>" +
+                        +"<td>" + v.deleted + "</td>" +
+                        "<td>" +
+
+                        "<a  href='#' onclick='programmes.editForm(" + v.id + ")'  ><i class=\"fas fa-edit\" ></i></a>"
+                        +
+                        "<a style='padding-left: 35px'  href='#' onclick='programmes.view(" + v.id + ")'  ><i class=\"fas fa-eye\"></i></a>"
+                        +
+                        "<a style='padding-left: 35px'    ><i onclick='programmes.delete(" + v.id + ")' class=\"fas fa-trash-alt\"></i></a>" +
+                        "</td>" +
+                        "</tr>"
+                    );
+                    stt = i
+
+                })
+            }
+
+        })
+    }
 
     programmes.delete = function(id){
         bootbox.confirm({
@@ -186,6 +248,7 @@
     programmes.view = function (id) {
         window.location = "/programme/info/"+id;
     };
+
     programmes.editForm = function (id) {
         window.location = "/programme/edit/"+id;
     };

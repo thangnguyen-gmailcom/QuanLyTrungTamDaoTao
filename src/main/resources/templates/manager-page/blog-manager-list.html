@@ -33,12 +33,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <div class="breadcome-heading" style="margin-left: 48%">
                                 <form role="search" class="sr-input-func">
-                                    <input
-                                            type="text"
-                                            placeholder="Search..."
-                                            class="search-int form-control"
-                                    />
-                                    <a href="#"><i class="fa fa-search"></i></a>
+                                    <input onkeyup="blogs.search()" type="text" id="search" placeholder="Search..." class="search-int form-control"/>
                                 </form>
                             </div>
                         </div>
@@ -132,6 +127,62 @@
             }
 
         })
+    }
+
+
+    blogs.search = function () {
+        $.ajax({
+            url: "http://localhost:8080/api/blogs/search?title=" + document.getElementById("search").value,
+            method: "GET",
+            dataType: "json",
+            success: function (data) {
+                $('#showBlog').empty();
+                let totalPage = parseInt(data.totalPages);
+                let num = parseInt(data.pageable.pageNumber);
+                console.log(totalPage);
+                $('.pagination').empty('');
+                if (num != 0) {
+
+                    $('.pagination').append(`<li class="page-item" ><a class="page-link" href="#" onclick="blogs.showAll(${num} -1)">Trước</a></li>`)
+                }
+                for (let i = 0; i < totalPage; i++) {
+
+                    if (data.pageable.pageNumber === i) {
+                        $('.pagination').append(`<li class="page-item "><a class="page-link" href="#">${i + 1}</a></li>`);
+                    }
+
+                }
+
+                if (num < totalPage - 1) {
+                    $('.pagination').append(`<li class="page-item"><a class="page-link" href="#" onclick="blogs.showAll(${num} +1)">Sau</a></li>`);
+                }
+
+
+                if (num == 0) {
+                    stt = 0;
+                } else {
+                    stt = (num++) * 8;
+                }
+                $.each(data.content, function (i, v) {
+                    i = stt
+                    $('#showBlog').append(
+                        "<tr>" +
+                        "<td>" + ++i + "</td>" +
+                        "<td>" + v.title + "</td>" +
+                        "<td>" + v.shortContent + "</td>" +
+                        "<td><img src='/upload/" + v.image + "'></td>" +
+                        "<td>" +
+                        "<a  href='#' onclick='blogs.editForm(" + v.id + ")'  ><i class=\"fas fa-edit\" ></i></a>" +
+                        "<a style='padding-left: 35px' ><i onclick='blogs.delete(" + v.id + ")' class=\"fas fa-trash-alt\"></i></a>" +
+                        "</td>" +
+                        "</tr>"
+                    );
+                    stt = i
+                })
+            }
+
+        })
+
     }
 
 

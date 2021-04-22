@@ -28,4 +28,6 @@ public interface LessonRepository extends JpaRepository<Lesson,Long> {
 
     Page<Lesson> findAllByProgrammeIdAndDeletedIsFalse(long id,Pageable pageable);
 
+    Page<Lesson> findAllByLessonNumberContainingAndDeletedIsFalse(String name, Pageable pageable);
+
 }

@@ -19,4 +19,6 @@ public interface ExamTypeRepository extends JpaRepository<ExamType , Long> {
     void softDeleteExamType(@Param("id") Long id);
 
     Page<ExamType> findAllByDeletedIsFalse(Pageable pageable);
+
+    Page<ExamType> findAllByTitleContainingAndDeletedIsFalse(String name, Pageable pageable);
 }

@@ -16,4 +16,6 @@ public interface LessonService {
     Page<Lesson> findAllByDeletedIsFalse(Pageable pageable);
 
     Page<Lesson> findAllByProgrammeIdAndDeletedIsFalse(long id,Pageable pageable);
+
+    Page<Lesson> findAllByLessonNumberContainingAndDeletedIsFalse(String name, Pageable pageable);
 }

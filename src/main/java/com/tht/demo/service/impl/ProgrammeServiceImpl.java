@@ -52,4 +52,9 @@ private LessonRepository lessonRepository;
     public Page<Programme> findAllByDeletedIsFalse(Pageable pageable) {
         return programmeRepository.findAllByDeletedIsFalse(pageable);
     }
+
+    @Override
+    public Page<Programme> findAllByProgrammeNameContainingAndDeletedIsFalse(String name, Pageable pageable) {
+        return programmeRepository.findAllByProgrammeNameContainingAndDeletedIsFalse(name,pageable);
+    }
 }

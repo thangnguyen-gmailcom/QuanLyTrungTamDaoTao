@@ -9,10 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/api/blogPages")
@@ -24,13 +21,12 @@ public class APIBlogPageController {
     @GetMapping("")
     public ResponseEntity<?> showAll(@RequestParam(value = "page",required = false,defaultValue = "0") int page){
         try {
-            Page<Blog> blogs = blogService.showAll(PageRequest.of(page,8, Sort.by("id").descending()));
+            Page<Blog> blogs = blogService.showAll(PageRequest.of(page,6, Sort.by("id").descending()));
 
             return new ResponseEntity<>(blogs, HttpStatus.OK);
         }catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
 
 }

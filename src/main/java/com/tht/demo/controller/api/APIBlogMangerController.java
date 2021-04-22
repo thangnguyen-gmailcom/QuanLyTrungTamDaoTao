@@ -6,6 +6,7 @@ import com.tht.demo.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
@@ -38,6 +39,17 @@ public class APIBlogMangerController {
             blogService.delete(id);
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<?> search(@RequestParam String title,@PageableDefault(size = 8) Pageable pageable
+    ){
+        try {
+            return new ResponseEntity<>(blogService.findAllByTitleContainingAndDeletedIsFalse(title,pageable), HttpStatus.OK);
+        }catch (Exception e){
+            System.out.println(e);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }

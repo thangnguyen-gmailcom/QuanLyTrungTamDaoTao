@@ -40,4 +40,15 @@ public class APICourseController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<?> search(@RequestParam String name,@PageableDefault(size = 8) Pageable pageable
+    ){
+        try {
+            return new ResponseEntity<>(courseService.findAllByCourseNameContainingAndDeletedIsFalse(name,pageable), HttpStatus.OK);
+        }catch (Exception e){
+            System.out.println(e);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+    }
 }
