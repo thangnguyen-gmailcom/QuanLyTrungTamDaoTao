@@ -12,4 +12,6 @@ public interface BlogService {
     Optional<Blog> findById(Long id);
     Blog save(Blog blog);
     void delete(Long id);
+
+    Page<Blog> findAllByTitleContainingAndDeletedIsFalse(String title, Pageable pageable);
 }

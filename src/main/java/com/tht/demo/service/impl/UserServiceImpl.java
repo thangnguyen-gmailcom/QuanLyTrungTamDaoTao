@@ -84,4 +84,14 @@ public class UserServiceImpl implements UserService {
     public void updatePassword(String password, Long id) {
         userRepository.updatePassword(password,id);
     }
+
+    @Override
+    public Page<User> searchStaffByName(String name, Pageable pageable) {
+        return userRepository.searchStaffByName(name,pageable);
+    }
+
+    @Override
+    public Page<User> searchStudentByName(String name, Pageable pageable) {
+        return userRepository.searchStudentByName(name,pageable);
+    }
 }

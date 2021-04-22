@@ -52,4 +52,9 @@ public class LessonServiceImpl implements LessonService {
     public Page<Lesson> findAllByProgrammeIdAndDeletedIsFalse(long id, Pageable pageable) {
         return lessonRepository.findAllByProgrammeIdAndDeletedIsFalse(id,pageable);
     }
+
+    @Override
+    public Page<Lesson> findAllByLessonNumberContainingAndDeletedIsFalse(String name, Pageable pageable) {
+        return lessonRepository.findAllByLessonNumberContainingAndDeletedIsFalse(name,pageable);
+    }
 }

@@ -1,5 +1,6 @@
 package com.tht.demo.repository;
 
+import com.tht.demo.model.Blog;
 import com.tht.demo.model.Course;
 import com.tht.demo.model.Lesson;
 import com.tht.demo.model.Programme;
@@ -21,6 +22,8 @@ public interface ProgrammeRepository extends JpaRepository<Programme,Long> {
     Integer softDeleteProgramme(@Param("id") Long id);
 
     Page<Programme> findAllByDeletedIsFalse(Pageable pageable);
+
+    Page<Programme> findAllByProgrammeNameContainingAndDeletedIsFalse(String name, Pageable pageable);
 
 
 

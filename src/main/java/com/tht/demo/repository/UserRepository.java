@@ -49,4 +49,12 @@ public interface UserRepository extends JpaRepository<User,Long> {
     @Modifying
     @Query(value = "UPDATE User u SET u.isDeleted = 1 WHERE u.id = :id")
     void deletedUser(@Param("id") Long id);
+
+
+    @Query(value = "SELECT * FROM User WHERE fullname like %:name% and is_deleted = 0 and (role_id = 3 or role_id = 2)", nativeQuery = true)
+    Page<User> searchStaffByName(@Param("name")String name, Pageable pageable);
+
+
+    @Query(value = "SELECT * FROM User WHERE fullname like %:name% and is_deleted = 0 and role_id = 4", nativeQuery = true)
+    Page<User> searchStudentByName(@Param("name")String name, Pageable pageable);
 }

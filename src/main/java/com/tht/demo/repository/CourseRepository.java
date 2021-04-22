@@ -22,4 +22,6 @@ public interface CourseRepository extends JpaRepository<Course , Long> {
     Page<Course> findAllByDeletedIsFalse(Pageable pageable);
 
     List<Course> findAllByDeletedIsFalse();
+
+    Page<Course> findAllByCourseNameContainingAndDeletedIsFalse(String name, Pageable pageable);
 }

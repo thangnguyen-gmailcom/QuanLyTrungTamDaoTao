@@ -40,6 +40,11 @@ public class ExamTypeServiceImpl implements ExamTypeService {
     }
 
     @Override
+    public Page<ExamType> findAllByTitleContainingAndDeletedIsFalse(String name, Pageable pageable) {
+        return examTypeRepository.findAllByTitleContainingAndDeletedIsFalse(name,pageable);
+    }
+
+    @Override
     @Transactional
     public void delete(Long id) {
         examTypeRepository.softDeleteExamType(id);
