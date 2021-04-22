@@ -66,6 +66,13 @@ public class StaffController {
                 redirectAttributes.addFlashAttribute("error", "Số chứng minh nhân dân đã tồn tại");
                 return "redirect:/staff";
             }
+            try {
+                if (user.getImage() == null){
+                    user.setImage("default-avatar.png");
+                }
+            }catch (Exception e){
+                System.out.println(e);
+            }
             redirectAttributes.addFlashAttribute("mess", "Thêm mới thành công");
             userService.save(user);
             return "redirect:/staff";

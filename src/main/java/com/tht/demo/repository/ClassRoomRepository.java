@@ -23,4 +23,6 @@ public interface ClassRoomRepository extends JpaRepository<ClassRoom , Long> {
 
     Optional<ClassRoom> findByClassName(String className);
 
+    Page<ClassRoom> findAllByClassNameContainingAndDeletedIsFalse(String name, Pageable pageable);
+
 }
