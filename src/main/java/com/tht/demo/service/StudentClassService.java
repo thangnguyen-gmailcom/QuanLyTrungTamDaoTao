@@ -11,6 +11,7 @@ import java.util.Optional;
 public interface StudentClassService {
     Page<StudentClass> showAll(Pageable pageable);
     Page<StudentClass> findAllByClassRoomIdAndUserIsDeletedIsFalse(Long id,Pageable pageable);
+    Optional<StudentClass> findByUserIdAndClassRoomIdAndDeletedIsFalse(Long userId,Long classId);
     Optional<StudentClass> findById(Long id);
     StudentClass save(StudentClass studentClass);
     void delete(Long id);

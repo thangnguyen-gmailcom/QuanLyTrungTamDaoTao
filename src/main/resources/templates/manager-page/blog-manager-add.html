@@ -55,8 +55,8 @@
 
                                                             <div class="form-group">
                                                                 <label>Nội Dung Chính</label>
-                                                                <textarea th:field="*{shortContent}"
-                                                                          placeholder="Description"></textarea>
+                                                                <textarea th:field="*{shortContent}"  id="summernote2"
+                                                                          placeholder="Description" style="height: 285px;"></textarea>
                                                                 <td th:if="${#fields.hasErrors('shortContent')}"
                                                                     th:errors="*{shortContent}">name Error
                                                                 </td>
@@ -75,11 +75,13 @@
                                                                                for="customFile">Choose File</label>
                                                                 </div>
                                                             </div>
+
+
                                                             <div class="form-group" >
-                                                                <div class="form-group">
+                                                                <div class="form-group" style=" margin-top: 2.5%;">
                                                                     <label>Nội Dung</label>
-                                                                    <textarea th:field="*{fullContent}"
-                                                                              placeholder="Description" style="margin-top: 1%"></textarea>
+                                                                    <textarea  id="summernote1"  th:field="*{fullContent} "
+                                                                              ></textarea>
                                                                     <td th:if="${#fields.hasErrors('fullContent')}"
                                                                         th:errors="*{fullContent}">name Error
                                                                     </td>
@@ -99,6 +101,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
+
                                                 </form>
                                                 <!--                                                End Form-->
                                             </div>

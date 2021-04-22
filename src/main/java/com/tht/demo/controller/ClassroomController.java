@@ -48,8 +48,10 @@ public class ClassroomController {
     }
 
     @PostMapping("/add")
-    public String addClassRoom(@Valid @ModelAttribute("classRoom")ClassRoom classRoom, BindingResult result, RedirectAttributes redirect){
+    public String addClassRoom(@Valid @ModelAttribute("classRoom")ClassRoom classRoom, BindingResult result, RedirectAttributes redirect,Model model){
         if(result.hasFieldErrors()){
+            model.addAttribute("users",userService.findAllTeacher());
+            model.addAttribute("courses", courseService.findAll());
             return "manager-page/class-add";
         }else {
             Optional<User> staffCreated = userService.findByEmail(getPrincipal());

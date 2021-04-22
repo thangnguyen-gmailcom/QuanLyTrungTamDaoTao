@@ -21,8 +21,13 @@ public class APIStudentClassController {
     @PostMapping(value = "")
     public ResponseEntity<?> saveStudentClass(@RequestBody StudentClass studentClass) {
         try {
-            StudentClass studentClass1 = studentClassService.save(studentClass);
-            return new ResponseEntity<>(studentClass1,HttpStatus.OK);
+            Optional<StudentClass> studentClass1 = studentClassService.findByUserIdAndClassRoomIdAndDeletedIsFalse(studentClass.getUser().getId(),studentClass.getClassRoom().getId());
+            if(studentClass1.isPresent()) {
+                StudentClass studentClass2 = studentClassService.save(studentClass);
+                return new ResponseEntity<>(studentClass2, HttpStatus.OK);
+            }else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
