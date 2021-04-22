@@ -29,8 +29,13 @@ public class StudentClassServiceImpl implements StudentClassService {
     }
 
     @Override
-    public Optional<StudentClass> findByUserIdAndClassRoomIdAndDeletedIsFalse(Long userId, Long classId) {
-        return studentClassRepository.findByUserIdAndClassRoomIdAndDeletedIsFalse(userId,classId);
+    public Optional<StudentClass> findByUserIdAndClassRoomIdAndDeletedIsTrue(Long userId, Long classRoomId) {
+        return studentClassRepository.findByUserIdAndClassRoomIdAndDeletedIsTrue(userId,classRoomId);
+    }
+
+    @Override
+    public Optional<StudentClass> findByUserIdAndClassRoomId(Long userId, Long classroomId) {
+        return studentClassRepository.findByUserIdAndClassRoomId(userId,classroomId);
     }
 
     @Override

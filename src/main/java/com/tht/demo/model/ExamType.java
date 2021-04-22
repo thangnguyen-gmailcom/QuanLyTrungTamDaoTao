@@ -1,5 +1,6 @@
 package com.tht.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,7 @@ public class ExamType {
     private boolean deleted;
 
     @OneToMany(mappedBy = "examType")
+    @JsonIgnore
     private List<Point> points;
 
     @Override

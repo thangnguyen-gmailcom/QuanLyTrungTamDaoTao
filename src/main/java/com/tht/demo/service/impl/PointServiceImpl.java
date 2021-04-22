@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,6 +25,11 @@ public class PointServiceImpl implements PointService {
     @Override
     public Optional<Point> findById(Long id) {
         return pointRepository.findById(id);
+    }
+
+    @Override
+    public Optional<Point> findByStudentClassIdAndExamTypeId(Long studentClassId, Long examTypeId) {
+        return pointRepository.findByStudentClassIdAndExamTypeId(studentClassId,examTypeId);
     }
 
     @Override

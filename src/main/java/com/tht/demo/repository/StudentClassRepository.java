@@ -16,7 +16,9 @@ public interface StudentClassRepository extends JpaRepository<StudentClass,Long>
 
     Page<StudentClass> findAllByClassRoomIdAndUserIsDeletedIsFalseAndDeletedIsFalse(Long classroomId, Pageable pageable);
 
-    Optional<StudentClass> findByUserIdAndClassRoomIdAndDeletedIsFalse(Long userId,Long classRoomId);
+    Optional<StudentClass> findByUserIdAndClassRoomIdAndDeletedIsTrue(Long userId,Long classroomId);
+
+    Optional<StudentClass> findByUserIdAndClassRoomId(Long userId,Long classroomId);
 
     @Modifying
     @Query(value = "UPDATE StudentClass sc SET sc.deleted = true WHERE sc.user.id = :id")
