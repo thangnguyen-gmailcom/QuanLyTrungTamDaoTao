@@ -62,7 +62,34 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a th:href="@{/login/}"><i class="fa fa-sign-in"></i>Login</a></li>
+                    <th:block th:if="${session.isEmpty()}">
+                        <li><a th:href="@{/login/}"><i class="fa fa-sign-in"></i>Login</a></li>
+                    </th:block>
+
+
+                    <th:block th:if="${!session.isEmpty()}">
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                                <img th:src="@{'/upload/'+ ${session.user.getImage()}}" style="width: 54px;border-radius: 50%;" alt=""/>
+                                <span class="admin-name" th:utext="${session.user.fullname}"></span>
+                            </a>
+                            <ul role="menu"
+                                class="dropdown-header-top author-log dropdown-menu animated zoomIn">
+                                <li>
+                                    <a th:href="@{/manager/}"><span class="edu-icon edu-settings author-log-ic">
+                                                            </span>Trang Quản Lý</a></li>
+                                <li>
+                                    <a th:href="@{/logout}"
+                                    ><span
+                                            class="edu-icon edu-locked author-log-ic"
+                                    ></span
+                                    >Log Out</a
+                                    >
+                                </li>
+                            </ul>
+                        </li>
+                    </th:block>
+
                 </ul>
             </div>
 
@@ -95,7 +122,34 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a th:href="@{/login/}"><i class="fa fa-sign-in"></i>Login</a></li>
+                    <th:block th:if="${session.isEmpty()}">
+                        <li><a th:href="@{/login/}"><i class="fa fa-sign-in"></i>Login</a></li>
+                    </th:block>
+
+
+                    <th:block th:if="${!session.isEmpty()}">
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                                <img th:src="@{'/upload/'+ ${session.user.getImage()}}" style="width: 54px;border-radius: 50%;" alt=""/>
+                                <span class="admin-name" th:utext="${session.user.fullname}"></span>
+                            </a>
+                            <ul role="menu"
+                                class="dropdown-header-top author-log dropdown-menu animated zoomIn">
+                                <li>
+                                    <a th:href="@{/manager/}"><span class="edu-icon edu-settings author-log-ic">
+                                                            </span>Trang Quản Lý</a></li>
+                                <li>
+                                    <a th:href="@{/logout}"
+                                    ><span
+                                            class="edu-icon edu-locked author-log-ic"
+                                    ></span
+                                    >Log Out</a
+                                    >
+                                </li>
+                            </ul>
+                        </li>
+                    </th:block>
+
                 </ul>
             </div>
 

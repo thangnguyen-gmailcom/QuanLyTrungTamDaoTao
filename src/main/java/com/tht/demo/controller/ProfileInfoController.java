@@ -27,6 +27,7 @@ public class ProfileInfoController {
             model.addAttribute("user", user.get());
             return "manager-page/profile-info";
         } catch (Exception e) {
+            System.out.println(e);
             return "/error";
         }
     }
