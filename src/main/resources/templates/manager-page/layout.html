@@ -94,6 +94,10 @@
 
     <!--    Reponsive-->
     <link rel="stylesheet" href="/css/reponsive.css"/>
+
+    <!-- dropzone CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/dropzone/dropzone.css">
 </head>
 <body>
 
@@ -152,7 +156,12 @@
                         <ul class="submenu-angle" aria-expanded="false">
                             <li>
                                 <a title="All Library" th:href="@{/programme}"
-                                ><span class="mini-sub-pro">Danh Sách</span></a
+                                ><span class="mini-sub-pro">Đang Mở</span></a
+                                >
+                            </li>
+                            <li>
+                                <a title="All Library" th:href="@{/programme/close}"
+                                ><span class="mini-sub-pro">Đã Đóng</span></a
                                 >
                             </li>
                             <li>
@@ -311,6 +320,32 @@
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <a
+                                class="has-arrow"
+                                href="all-students.html"
+                                aria-expanded="false"
+                        ><span class="glyphicon glyphicon-envelope"></span>
+                            <span class="mini-click-non">Mail</span></a
+                        >
+                        <ul class="submenu-angle" aria-expanded="false">
+                            <li>
+                                <a title="All Students" th:href="@{/mail/staff}"
+                                ><span class="mini-sub-pro">Mail Cho Nhân Viên</span></a
+                                >
+                            </li>
+                            <li>
+                                <a title="Add Students" th:href="@{/mail/student}"
+                                ><span class="mini-sub-pro">Mail Cho Học Viên</span></a
+                                >
+                            </li>
+                            <li>
+                                <a title="Add Students" th:href="@{/mail/user}"
+                                ><span class="mini-sub-pro">Mail Cho Từng Đối Tượng</span></a
+                                >
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -433,7 +468,12 @@
                                             <ul class="submenu-angle" aria-expanded="false">
                                                 <li>
                                                     <a title="All Library" th:href="@{/programme}"
-                                                    ><span class="mini-sub-pro">Danh Sách</span></a
+                                                    ><span class="mini-sub-pro">Đang Mở</span></a
+                                                    >
+                                                </li>
+                                                <li>
+                                                    <a title="All Library" th:href="@{/programme/close}"
+                                                    ><span class="mini-sub-pro">Đã Đóng</span></a
                                                     >
                                                 </li>
                                                 <li>
@@ -592,6 +632,32 @@
                                                 </li>
                                             </ul>
                                         </li>
+                                        <li>
+                                            <a
+                                                    class="has-arrow"
+                                                    href="#"
+                                                    aria-expanded="false"
+                                            ><span class="glyphicon glyphicon-envelope"></span>
+                                                <span class="mini-click-non">Mail</span></a
+                                            >
+                                            <ul class="submenu-angle" aria-expanded="false">
+                                                <li>
+                                                    <a title="All Students" th:href="@{/mail/staff}"
+                                                    ><span class="mini-sub-pro">Mail Cho Nhân Viên</span></a
+                                                    >
+                                                </li>
+                                                <li>
+                                                    <a title="Add Students" th:href="@{/mail/student}"
+                                                    ><span class="mini-sub-pro">Mail Cho Học Viên</span></a
+                                                    >
+                                                </li>
+                                                <li>
+                                                    <a title="Add Students" th:href="@{/mail/user}"
+                                                    ><span class="mini-sub-pro">Mail Cho Từng Đối Tượng</span></a
+                                                    >
+                                                </li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </nav>
                             </div>
@@ -619,6 +685,12 @@
 
 <footer th:fragment="scrip">
     <script th:src="@{/js/vendor/jquery-1.12.4.min.js}"></script>
+
+    <!-- dropzone JS
+    ============================================ -->
+    <script src="js/dropzone/dropzone.js"></script>
+
+
     <!--    Fonrt Awesome-->
     <script src="https://kit.fontawesome.com/f9d4b9dcf7.js" crossorigin="anonymous"></script>
     <!-- jquery

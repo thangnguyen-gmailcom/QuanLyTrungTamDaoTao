@@ -25,6 +25,12 @@ public interface ProgrammeRepository extends JpaRepository<Programme,Long> {
 
     Page<Programme> findAllByProgrammeNameContainingAndDeletedIsFalse(String name, Pageable pageable);
 
+    Page<Programme> findAllByDeletedIsTrue(Pageable pageable);
+
+    @Modifying
+    @Query("update Programme p set p.deleted = false where p.id = :id")
+    Integer restoreProgramme(@Param("id") Long id);
+
 
 
 }
