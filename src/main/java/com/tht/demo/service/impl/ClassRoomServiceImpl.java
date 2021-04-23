@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,6 +22,11 @@ public class ClassRoomServiceImpl implements ClassRoomService {
     @Override
     public Page<ClassRoom> showAll(Pageable pageable) {
         return classRoomRepository.findAllByDeletedIsFalse(pageable);
+    }
+
+    @Override
+    public List<ClassRoom> findAll() {
+        return classRoomRepository.findAllByDeletedIsFalse();
     }
 
     @Override
