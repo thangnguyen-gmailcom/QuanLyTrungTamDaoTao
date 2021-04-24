@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -29,6 +30,18 @@ public class APIClassRoomController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping("/")
+    public ResponseEntity<?> findAll(){
+        try{
+            List<ClassRoom> classRooms = classRoomService.findAll();
+            return new ResponseEntity<>(classRooms,HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+    }
+
+
     @GetMapping("/{id}")
     public ResponseEntity<?> findClassRoomById(@PathVariable("id") long id){
         try{

@@ -31,7 +31,8 @@ public class APIStudentClassController {
             }else {
                 Optional<StudentClass> studentClassOptional = studentClassService.findByUserIdAndClassRoomIdAndDeletedIsTrue(userId,classId);
                 if(studentClassOptional.isPresent()) {
-                    studentClass1 = studentClassService.save(studentClass);
+                    studentClassOptional.get().setDeleted(false);
+                    studentClass1 = studentClassService.save(studentClassOptional.get());
                     return new ResponseEntity<>(studentClass1, HttpStatus.OK);
                 }else {
                     return new ResponseEntity<>(HttpStatus.NOT_FOUND);

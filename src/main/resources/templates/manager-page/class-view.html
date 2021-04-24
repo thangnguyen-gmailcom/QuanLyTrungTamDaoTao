@@ -192,7 +192,6 @@
     var userStudent = {};
     var classR = {};
     var studentC = {};
-    var count = 0;
 
     // tìm kiếm loại điểm
     point.findExamTyeById = function (id) {
@@ -330,19 +329,23 @@
             `)
     var listPoint =  (i, v) => {
         let template = "";
-        let pointAvg = 0;
-        examType.data.forEach(function (ele,count) {
-            console.log(ele);
-            let marks = v.points[count];
-            let mark;
-            if(marks === undefined){
+        let marks;
+        let mark;
+        console.log(v.points)
+        examType.data.forEach(function (ele) {
+            for(let i = 0; i < v.points.length; i ++){
+                marks= v.points[i].examType .id;
+                console.log(v.points[i])
+                if(marks === ele.id ){
+                    mark = v.points[i].point;
+                    break;
+                }else{
+                    mark = 0;
+                }
+            }
+            if(mark === undefined){
                 mark = 0;
             }
-            if(marks !== undefined) {
-                mark = v.points[count].point;
-            }
-            count++;
-            console.log(count);
             template += `<td>
             <input type="number" min="0" value="${mark}" max="10"  data-type="${ele.id}" class="form-control point${i}">
             </td>`;

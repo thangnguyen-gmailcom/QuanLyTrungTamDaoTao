@@ -34,6 +34,9 @@ public class ProgrammeController {
         return "manager-page/programme-list";
     }
 
+    @GetMapping("/close")
+    public String programmeClose(){return "manager-page/programme-list-close";}
+
 
     @GetMapping("/info/{id}")
     public String info(@PathVariable long id, Model model) {

@@ -1,0 +1,259 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<header th:replace="/manager-page/layout::header"></header>
+
+<body>
+
+
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+
+
+<!-- Start Left menu area -->
+<div th:replace="/manager-page/layout::left-sidebar-pro">
+</div>
+<!-- End Left menu area -->
+
+
+<!-- Start Welcome area -->
+<div class="all-content-wrapper">
+    <div th:replace="/manager-page/layout::container-fluid"/>
+    <div th:replace="/manager-page/layout::header-advance-area"></div>
+    <div class="product-status mg-b-15">
+        <div class="container-fluid" style="margin-top: 1%">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="product-status-wrap">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <h4>Danh Sách Chương Trình Học Đang Đóng</h4>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="breadcome-heading" style="margin-left: 48%">
+                                <form role="search" class="sr-input-func">
+                                    <input onkeyup="programmes.search()" type="text" id="search" placeholder="Search..." class="search-int form-control"/>
+                                </form>
+                            </div>
+                        </div>
+                        <p hidden id="mess" th:text="${mess}"></p>
+                        <p hidden id="error" th:text="${error}"></p>
+                        <div class="asset-inner">
+                            <table>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tên Chương Trình</th>
+                                    <th>Tổng Số Buổi Học</th>
+                                    <th>Giá Tiền</th>
+                                    <th>Trạng Thái</th>
+                                    <th>Hành Động</th>
+                                </tr>
+                                <tbody id="showListProgrammes">
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="custom-pagination">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="/manager-page/layout::scrip"></footer>
+</body>
+<script>
+
+    var programmes = programmes|| {};
+    let stt = 1;
+
+    programmes.showAllClose = function (page) {
+        let search = $('#str').val();
+        $.ajax({
+            url: "http://localhost:8080/api/programmes/close?page="+page,
+            method: "GET",
+            dataType: "json",
+            success: function (data) {
+                $('#showListProgrammes').empty();
+                let totalPage = parseInt(data.totalPages);
+                let num = parseInt(data.pageable.pageNumber);
+                console.log(totalPage);
+                $('.pagination').empty('');
+                if (num !=0) {
+
+                    $('.pagination').append(`<li class="page-item" ><a class="page-link" href="#" onclick="programmes.showAll(${num} -1)">Trước</a></li>`)
+                }
+                for (let i = 0; i < totalPage; i++) {
+
+                    if (data.pageable.pageNumber === i ) {
+                        $('.pagination').append(`<li class="page-item "><a class="page-link" href="#">${i + 1}</a></li>`);
+                    }
+                    // if (data.pageable.pageNumber !== i && i < 2){
+                    //     $('.pagination').append(`<li class="page-item"><a class="page-link" href="#" onclick="courses.showAll(${i})">${i + 1}</a></li>`)
+                    // }
+                }
+
+                if (num < totalPage-1){
+                    $('.pagination').append(`<li class="page-item"><a class="page-link" href="#" onclick="programmes.showAll(${num} +1)">Sau</a></li>`);
+                }
+                if (num == 0) {
+                    stt = 0;
+                } else {
+                    stt = (num++) * 8;
+                }
+
+                $.each(data.content, function (i, v) {
+                    i = stt
+
+                    if(v.deleted == false){
+                        v.deleted ="<td style='color: #228B22'>Đang Mở</td>"
+                    } else {
+                        v.deleted = "<td style='color: red'>Đã Đóng</td>"
+                    }
+                    $('#showListProgrammes').append(
+                        "<tr>" +
+                        "<td>" + ++i + "</td>" +
+                        "<td>" + v.programmeName + "</td>" +
+                        "<td>" + v.lessons + "</td>" +
+                        "<td>" + v.tuition + "$</td>" +
+                        +"<td>" + v.deleted + "</td>" +
+                        "<td>" +
+
+                        "<a  href='#' onclick='programmes.editForm(" + v.id + ")'  ><i class=\"fas fa-edit\" ></i></a>"
+                        +
+                        "<a style='padding-left: 35px'  href='#' onclick='programmes.view(" + v.id + ")'  ><i class=\"fas fa-eye\"></i></a>"
+                        +
+                        "<a style='padding-left: 35px'    ><i onclick='programmes.restores(" + v.id + ")' class=\"fas fa-window-restore\"></i></a>" +
+                        "</td>" +
+                        "</tr>"
+                    );
+                    stt = i
+
+                })
+            }
+
+        })
+    }
+
+    programmes.search = function () {
+        $.ajax({
+            url: "http://localhost:8080/api/programmes/search?name=" + document.getElementById("search").value,
+            method: "GET",
+            dataType: "json",
+            success: function (data) {
+                $('#showListProgrammes').empty();
+                let totalPage = parseInt(data.totalPages);
+                let num = parseInt(data.pageable.pageNumber);
+                console.log(totalPage);
+                $('.pagination').empty('');
+                if (num !=0) {
+
+                    $('.pagination').append(`<li class="page-item" ><a class="page-link" href="#" onclick="programmes.showAll(${num} -1)">Trước</a></li>`)
+                }
+                for (let i = 0; i < totalPage; i++) {
+
+                    if (data.pageable.pageNumber === i ) {
+                        $('.pagination').append(`<li class="page-item "><a class="page-link" href="#">${i + 1}</a></li>`);
+                    }
+                    // if (data.pageable.pageNumber !== i && i < 2){
+                    //     $('.pagination').append(`<li class="page-item"><a class="page-link" href="#" onclick="courses.showAll(${i})">${i + 1}</a></li>`)
+                    // }
+                }
+
+                if (num < totalPage-1){
+                    $('.pagination').append(`<li class="page-item"><a class="page-link" href="#" onclick="programmes.showAll(${num} +1)">Sau</a></li>`);
+                }
+                if (num == 0) {
+                    stt = 0;
+                } else {
+                    stt = (num++) * 8;
+                }
+
+                $.each(data.content, function (i, v) {
+                    i = stt
+
+                    let dele = false;
+                    let delet=true;
+                    if(v.deleted = dele){
+                        v.deleted ="<td style='color: red'>Đang Mở</td>"
+                    } else {
+                        v.deleted = "<td style='color: #228B22'>Đang Mở</td>"
+                    }
+                    $('#showListProgrammes').append(
+                        "<tr>" +
+                        "<td>" + ++i + "</td>" +
+                        "<td>" + v.programmeName + "</td>" +
+                        "<td>" + v.lessons + "</td>" +
+                        "<td>" + v.tuition + "$</td>" +
+                        +"<td>" + v.deleted + "</td>" +
+                        "<td>" +
+
+                        "<a  href='#' onclick='programmes.editForm(" + v.id + ")'  ><i class=\"fas fa-edit\" ></i></a>"
+                        +
+                        "<a style='padding-left: 35px'  href='#' onclick='programmes.view(" + v.id + ")'  ><i class=\"fas fa-eye\"></i></a>"
+                        +
+                        "<a style='padding-left: 35px'    ><i onclick='programmes.delete(" + v.id + ")' class=\"fas fa-trash-alt\"></i></a>" +
+                        "</td>" +
+                        "</tr>"
+                    );
+                    stt = i
+
+                })
+            }
+
+        })
+    }
+
+    programmes.restores = function(id){
+        bootbox.confirm({
+            message: "Xác Nhận Mở Lại Chương Trình...!!!",
+            buttons: {
+                cancel: {
+                    label: '<i class="fa fa-times">Hủy Bỏ</i> '
+                },
+                confirm: {
+                    label: '<i class="fa fa-check"> Xác Nhận</i>'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    $.ajax({
+                        url:"http://localhost:8080/api/programmes/restore/" + id,
+                        method: "GET",
+                        contentType: 'json',
+                        success: function (data) {
+                            window.Lobibox.notify('success', {
+                                size: 'mini',
+                                msg: "Thao tác thành công"
+                            });
+                            programmes.showAllClose(0);
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    programmes.view = function (id) {
+        window.location = "/programme/info/"+id;
+    };
+
+    programmes.editForm = function (id) {
+        window.location = "/programme/edit/"+id;
+    };
+
+    $(document).ready(function () {
+        programmes.showAllClose(0);
+    });
+</script>
+</html>
+
