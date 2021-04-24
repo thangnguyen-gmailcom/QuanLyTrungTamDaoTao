@@ -20,54 +20,51 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 col-md-12 col-sm-12 col-xs-12">
+                    <form th:action="@{/mail/student}" method="post">
                     <div class="hpanel email-compose">
                         <div class="panel-heading hbuilt">
                             <div class="p-xs h4">
-                                Mail Cho Học Viên
+                                Mail Cho Học Viên Trong Lớp
                             </div>
                         </div>
                         <div class="panel-heading hbuilt">
                             <div class="p-xs">
-                                <form method="get" class="form-horizontal">
-                                    <div class="form-group">
-                                        <label class="col-lg-1 control-label text-left">To:</label>
-                                        <div class="col-lg-11 col-md-12 col-sm-12 col-xs-12">
-                                            <label for="sel1">Select list (select one):</label>
-                                            <select class="form-control" id="sel1">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                            </select>
+                                <div class="form-group">
+                                    <label>Đến Lớp:</label>
+                                    <select class="form-control" id="teacher"
+                                            name="to">
+                                        <option value="-1" selected>---Vui Lòng chọn---
+                                        </option>
+                                        <th:block th:each="class : ${class}">
+                                            <option th:value="${class.className}"
+                                                    th:utext="${class.className}"></option>
+                                        </th:block>
+                                    </select>
+                                </div>
+                                <div class="panel-heading hbuilt">
+                                    <div class="p-xs">
+                                        <div class="form-group">
+                                            <label>Tiêu Đề:</label>
+                                            <textarea class="form-control" rows="2" name="subject"></textarea>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-1 control-label text-left">Subject:</label>
-                                        <div class="col-lg-11 col-md-12 col-sm-12 col-xs-12">
-                                            <input type="text" class="form-control input-sm" placeholder="Subject">
-                                        </div>
-                                    </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
-                        <div class="panel-body no-padding">
-                            <div class="summernote6">
-                                <h5>Hello Jonathan! </h5>
-                                <p>Dummy text of the printing and typesetting industry. <strong>Lorem Ipsum has been the dustrys</strong> standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
-                                    a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                                    containing Lorem Ipsum passages, and more
-                                    <br/>
-                                    <br/>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with
-                                    a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. recently with.</p>
-                                <p>Mark Smith
-                                </p>
-                            </div>
+                        <label >Nội Dung:</label>
+
+                        <div class="panel-body no-padding" style=" margin-top: 1%; margin-bottom: 1%">
+                             <textarea class="summernote6" name="content">
+                                </textarea>
                         </div>
-                        <div class="panel-footer">
-                            <button class="btn btn-primary ft-compse">Send email</button>
+                        <div >
+                            <button type="submit" class="btn btn-primary">Gửi</button>
                         </div>
                     </div>
+                    </form>
                 </div>
+                <p hidden id="mess" th:text="${mess}"></p>
+                <p hidden id="error" th:text="${error}"></p>
             </div>
         </div>
     </div>

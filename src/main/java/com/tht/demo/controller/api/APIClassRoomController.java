@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class APIClassRoomController {
     @GetMapping("")
     public ResponseEntity<?> findAllClassRoom(@RequestParam(value = "page",required = false,defaultValue = "0") int page){
         try {
-            Page<ClassRoom> classRooms = classRoomService.showAll(PageRequest.of(page,8));
+            Page<ClassRoom> classRooms = classRoomService.showAll(PageRequest.of(page,8, Sort.by("id").descending()));
             return new ResponseEntity<>(classRooms, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
