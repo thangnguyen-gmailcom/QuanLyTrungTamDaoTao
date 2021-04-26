@@ -86,31 +86,38 @@ public class MailController {
     @PostMapping("/user")
     public String sendEmails(@RequestParam("to") String to,
                              @RequestParam("to2") String to2,
-                             @RequestParam("content") String content, @RequestParam("subject") String subject, Pageable pageable, RedirectAttributes attributes) {
+                             @RequestParam("content") String content, @RequestParam("subject") String subject, Pageable pageable, RedirectAttributes attributes,Model model) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-
         try {
             simpleMailMessage.setTo(to);
             simpleMailMessage.setSubject(subject);
             simpleMailMessage.setText(content);
             this.javaMailSender.send(simpleMailMessage);
-
-
+        } catch (Exception e) {
+            attributes.addFlashAttribute("error", "gửi mail thất bại, sai địa chỉ người nhận");
+            return "redirect:/manager";
+        }
+        try {
             String cc = to2;
             String[] split = cc.split(" ");
 
             for (String item : split) {
-              simpleMailMessage.setTo(item);
-                simpleMailMessage.setSubject(subject);
-                simpleMailMessage.setText(content);
-                this.javaMailSender.send(simpleMailMessage);
+                try {
+                    simpleMailMessage.setTo(item);
+                    simpleMailMessage.setSubject(subject);
+                    simpleMailMessage.setText(content);
+                    this.javaMailSender.send(simpleMailMessage);
+                } catch (Exception e) {
+                    System.out.println("sai");
+                }
             }
-
         } catch (Exception e) {
-            attributes.addFlashAttribute("mess", "gửi mail hoàn tất, tuy nhiên một số email không tồn tại sẽ không gửi đucợ");
+            attributes.addFlashAttribute("mess", "gửi mail thành công, tuy nhiên một số email không đúng địa chỉ sẽ không nhận được");
             return "redirect:/manager";
         }
 
+
+        attributes.addFlashAttribute("mess", "gửi mail hoàn tất");
         return "redirect:/manager";
     }
 }
