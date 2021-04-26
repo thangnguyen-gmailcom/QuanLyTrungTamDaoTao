@@ -46,7 +46,7 @@ public class MailController {
             this.javaMailSender.send(simpleMailMessage);
         }
         attributes.addFlashAttribute("mess", "gửi mail hoàn tất");
-        return "manager-page/mail-staff";
+        return "redirect:/manager";
     }
 
 
@@ -74,7 +74,7 @@ public class MailController {
             this.javaMailSender.send(simpleMailMessage);
         }
         attributes.addFlashAttribute("mess", "gửi mail hoàn tất");
-        return "manager-page/mail-student";
+        return "redirect:/manager";
     }
 
     @GetMapping("/user")
@@ -85,43 +85,32 @@ public class MailController {
 
     @PostMapping("/user")
     public String sendEmails(@RequestParam("to") String to,
-                             @RequestParam("to1") String to1, @RequestParam("to2") String to2,
-                             @RequestParam("to3") String to3,
-                             @RequestParam("to4") String to4,
+                             @RequestParam("to2") String to2,
                              @RequestParam("content") String content, @RequestParam("subject") String subject, Pageable pageable, RedirectAttributes attributes) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
 
         try {
-
             simpleMailMessage.setTo(to);
             simpleMailMessage.setSubject(subject);
             simpleMailMessage.setText(content);
             this.javaMailSender.send(simpleMailMessage);
-            simpleMailMessage.setTo(to1);
-            simpleMailMessage.setSubject(subject);
-            simpleMailMessage.setText(content);
-            this.javaMailSender.send(simpleMailMessage);
 
-            simpleMailMessage.setTo(to2);
-            simpleMailMessage.setSubject(subject);
-            simpleMailMessage.setText(content);
-            this.javaMailSender.send(simpleMailMessage);
 
-            simpleMailMessage.setTo(to3);
-            simpleMailMessage.setSubject(subject);
-            simpleMailMessage.setText(content);
-            this.javaMailSender.send(simpleMailMessage);
+            String cc = to2;
+            String[] split = cc.split(" ");
 
-            simpleMailMessage.setTo(to4);
-            simpleMailMessage.setSubject(subject);
-            simpleMailMessage.setText(content);
-            this.javaMailSender.send(simpleMailMessage);
+            for (String item : split) {
+              simpleMailMessage.setTo(item);
+                simpleMailMessage.setSubject(subject);
+                simpleMailMessage.setText(content);
+                this.javaMailSender.send(simpleMailMessage);
+            }
 
         } catch (Exception e) {
             attributes.addFlashAttribute("mess", "gửi mail hoàn tất, tuy nhiên một số email không tồn tại sẽ không gửi đucợ");
-            return "manager-page/mail-user";
+            return "redirect:/manager";
         }
 
-        return "manager-page/mail-user";
+        return "redirect:/manager";
     }
 }
