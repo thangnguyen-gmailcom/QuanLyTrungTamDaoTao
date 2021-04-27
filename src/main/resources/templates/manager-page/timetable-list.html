@@ -43,26 +43,18 @@
                         <p hidden id="error" th:text="${error}"></p>
                         <div class="asset-inner">
                             <table>
+                                <thead>
                                 <tr>
                                     <th>STT</th>
                                     <th>Thuột Lớp</th>
                                     <th>Ngày Bắt Đầu</th>
-                                    <th>Buổi Trong Tuần</th>
+                                    <th>Số buổi</th>
                                     <th>Chủ Nhiệm</th>
                                     <th>Action</th>
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>21AVGT1</td>
-                                    <td>14/4/2021</td>
-                                    <td>3</td>
-                                    <td>Nguyễn Văn Teacher</td>
-                                    <td>
-                                        <a th:href="@{/timetable/view}"> <button data-toggle="tooltip" title="view" class="pd-setting-ed"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
-                                        <a th:href="@{/timetable/edit}"> <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
-                                        <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                    </td>
-                                </tr>
+                                </thead>
+                                <tbody id="showListTimeTable">
+                                </tbody>
                             </table>
                         </div>
                         <div class="custom-pagination">
@@ -82,6 +74,77 @@
 </div>
 
 <footer th:replace="/manager-page/layout::scrip"></footer>
+<script type="text/javascript">
+    var classRoom = {};
+
+    classRoom.showAll = function (page) {
+        $.ajax({
+            url : "http://localhost:8080/api/classRoom?page="+page,
+            method : "GET",
+            dataType : "json",
+            success : function (data){
+                $('#showListTimeTable').empty('');
+                let totalPage = parseInt(data.totalPages);
+                console.log(totalPage);
+                let num = parseInt(data.pageable.pageNumber);
+                $('.pagination').empty('');
+                if (num !=0) {
+
+                    $('.pagination').append(`<li class="page-item" ><a class="page-link" href="#" onclick="classRoom.showAll(${num} -1)">Trước</a></li>`)
+                }
+                for (let i = 0; i < totalPage; i++) {
+
+                    if (data.pageable.pageNumber === i ) {
+                        $('.pagination').append(`<li class="page-item "><a class="page-link" href="#">${i + 1}</a></li>`);
+                    }
+                }
+
+                if (num < totalPage-1){
+                    $('.pagination').append(`<li class="page-item"><a class="page-link" href="#" onclick="classRoom.showAll(${num} +1)">Sau</a></li>`);
+                }
+
+                if (num == 0) {
+                    stt = 0;
+                } else {
+                    stt = (num++) * 8;
+                }
+
+                $.each(data.content, function (i, v) {
+                    i = stt
+                    let day = v.startDate;
+                    if(day !== undefined){
+                        day = moment(day).format("YYYY-MM-DD")
+                    }else {
+                        day = "lớp chưa có thời khóa biểu"
+                    }
+                    $('#showListTimeTable').append(`
+                         <tr>
+                                    <td>${++i}</td>
+                                    <td>${v.className}</td>
+                                    <td>${day}</td>
+                                    <td>${v.course.programme.lessons}</td>
+                                    <td>${v.teacher.fullname}</td>
+                                    <td>
+                                        <a th:href="" onclick="classRoom.viewTimeTable(${v.id})"> <button data-toggle="tooltip" title="view" class="pd-setting-ed"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
+                                        <a th:href="@{/timetable/edit}"> <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
+                                        <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                    </td>
+                                </tr>`
+                    );
+                    stt = i;
+                })
+            }
+        })
+    };
+
+    classRoom.viewTimeTable = function (id){
+        window.location = "/timetable/view/"+id;
+    }
+
+    $(document).ready(function (){
+        classRoom.showAll(0);
+    })
+</script>
 </body>
 
 </html>

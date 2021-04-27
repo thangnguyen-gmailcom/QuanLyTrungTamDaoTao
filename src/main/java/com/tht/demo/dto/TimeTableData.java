@@ -7,8 +7,6 @@ import java.util.List;
 
 @Data
 public class TimeTableData {
-    private long id;
-    private List<String> DaysOfWeek;
-    private LocalDate startDate;
+    private List<Integer> daysOfWeek;
     private long classId;
 }

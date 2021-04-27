@@ -55,7 +55,7 @@
                                                                 <label for="teacher">Chủ Nhiệm</label>
                                                                 <select class="form-control" id="teacher"
                                                                         th:field="*{teacher}">
-                                                                    <option value="-1" selected >---Vui Lòng chọn---
+                                                                    <option value="-1" selected>---Vui Lòng chọn---
                                                                     </option>
                                                                     <th:block th:each="teacher : ${users}">
                                                                         <option th:value="${teacher.id}"
@@ -66,38 +66,64 @@
                                                                        th:if="${#fields.hasErrors('teacher')}"
                                                                        th:errors="*{teacher}">Name Error</small>
                                                             </div>
+                                                            <div class="form-group">
+                                                                <div class="form-group data-custon-pick"
+                                                                     id="data_2">
+                                                                    <label for="dateStart"><b>Ngày Bắt Đầu</b></label>
+                                                                    <div class="input-group date"></div>
+                                                                    <input type="date" id="dateStart" name="dateStart"
+                                                                           class="form-control">
+                                                                    <div></div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
                                                              style="margin-top: 1%">
                                                             <label for="course">Thuộc Niên Khóa</label>
                                                             <select class="form-control" id="course"
                                                                     th:field="*{course}">
-                                                                    <option value="-1" selected >---Vui Lòng chọn---
-                                                                    </option>
+                                                                <option value="-1" selected>---Vui Lòng chọn---
+                                                                </option>
                                                                 <th:block th:each="cou : ${courses}">
                                                                     <option th:value="${cou.id}"
                                                                             th:utext="${cou.getCourseName()}"></option>
                                                                 </th:block>
-                                                                </select>
+                                                            </select>
                                                             <small class="form-text text-muted"
                                                                    th:if="${#fields.hasErrors('course')}"
                                                                    th:errors="*{course}">Name Error</small>
+
+                                                            <label for="course">Khung giờ học</label>
+                                                            <select class="form-control" id="studyTime"
+                                                                    th:field="*{studyTime}">
+                                                                <option value="-1" selected>---Vui Lòng chọn---
+                                                                </option>
+                                                                <option th:value="morning"
+                                                                        th:utext="8h-11h"></option>
+                                                                <option th:value="afternoon"
+                                                                        th:utext="14h-17h"></option>
+                                                                <option th:value="night"
+                                                                        th:utext="19-21h"></option>
+                                                            </select>
+                                                            <small class="form-text text-muted"
+                                                                   th:if="${#fields.hasErrors('studyTime')}"
+                                                                   th:errors="*{studyTime}">Name Error</small>
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <div class=" row">
+                                                        <div class="col-lg-1">
+                                                            <div class="payment-adress">
+                                                                <button type="submit"
+                                                                        class="btn btn-primary waves-effect waves-light">
+                                                                    Submit
+                                                                </button>
                                                             </div>
                                                         </div>
-                                                        <br>
-                                                        <div class=" row">
-                                                            <div class="col-lg-1">
-                                                                <div class="payment-adress">
-                                                                    <button type="submit"
-                                                                            class="btn btn-primary waves-effect waves-light">
-                                                                        Submit
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                    </div>
                                                 </form>
-                                                <!--                                                End Form-->
                                             </div>
+                                            <!--End Form-->
                                         </div>
                                     </div>
                                 </div>
@@ -108,6 +134,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <footer th:replace="/manager-page/layout::scrip"></footer>

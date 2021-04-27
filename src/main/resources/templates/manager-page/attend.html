@@ -5,7 +5,8 @@
 
 <body>
 <!--[if lt IE 8]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
 <![endif]-->
 
 
@@ -17,7 +18,7 @@
 
 <!-- Start Welcome area -->
 <div class="all-content-wrapper">
-    <div th:replace="/manager-page/layout::container-fluid" />
+    <div th:replace="/manager-page/layout::container-fluid"/>
     <div th:replace="/manager-page/layout::header-advance-area"></div>
     <div class="data-table-area mg-b-15" style="margin-top: 1%">
         <div class="container-fluid">
@@ -32,17 +33,21 @@
                                 <div class="row">
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" disabled placeholder="14/4/2021">
+                                            <input type="hidden" th:value="${timeTable.id}" id="idTimeTable">
+                                            <input type="text" class="form-control" disabled
+                                                   th:value="${timeTable.date}">
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" disabled placeholder="Buổi 1">
+                                            <input type="text" class="form-control" disabled
+                                                   th:value="${timeTable.lessonTitle}">
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" disabled placeholder="Chủ Nhiệm">
+                                            <input type="text" class="form-control" disabled
+                                                   th:value="${timeTable.classRoom.teacher.getFullname()}">
                                         </div>
                                     </div>
                                 </div>
@@ -51,6 +56,7 @@
                                         <div class="product-status-wrap">
                                             <div class="asset-inner">
                                                 <table>
+                                                    <thead>
                                                     <tr>
                                                         <th>STT</th>
                                                         <th>Tên Học Viên</th>
@@ -61,37 +67,70 @@
                                                         <th>Nhận Xét</th>
                                                         <th>Action</th>
                                                     </tr>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>Nguyễn Văn A</td>
-                                                        <td>0967888xxx</td>
-                                                        <td>
-                                                            <div class="radio">
-                                                                <label><input type="radio" name="optradio"></label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="radio">
-                                                                <label><input type="radio" name="optradio"></label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="radio">
-                                                                <label><input type="radio" name="optradio"></label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <input type="text" class="form-control">
-                                                        </td>
-                                                        <td>
-                                                            <a href=""> <button data-toggle="tooltip" title="Lưu Nhận Xét" class="pd-setting-ed"><i class="fa fa-save" aria-hidden="true"></i></button></a>
-                                                        </td>
-                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <th:block
+                                                            th:each="student, iStart:${timeTable.classRoom.getStudentClasses()}">
+                                                        <tr>
+                                                            <td th:utext="${iStart.count}"></td>
+                                                            <td th:utext="${student.user.fullname}"></td>
+                                                            <td th:utext="${student.user.phoneNumber}"></td>
+                                                            <td>
+                                                                <div class="radio">
+                                                                    <label><input
+                                                                            th:checked=" ${attends.containsKey(student.user.id)} and ${attends.get(student.user.id).status == 0}"
+                                                                            th:class="'status'+${student.user.id}"
+                                                                            th:value="0" type="radio"
+                                                                            th:name="'status'+${student.user.id}"
+                                                                    ></label>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="radio">
+                                                                    <label><input
+                                                                            th:checked=" ${attends.containsKey(student.user.id)} and ${attends.get(student.user.id).status == 1}"
+                                                                            th:class="'status'+${student.user.id}"
+                                                                            th:value="1" type="radio"
+                                                                            th:name="'status'+${student.user.id}"
+                                                                    ></label>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+
+                                                                <div class="radio">
+                                                                    <label><input
+                                                                            th:checked=" ${attends.containsKey(student.user.id)} and ${attends.get(student.user.id).status == 2}"
+                                                                            th:class="'status'+${student.user.id}"
+                                                                            th:value="2" type="radio"
+                                                                            th:name="'status'+${student.user.id}"
+                                                                    ></label>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <input type="text"
+                                                                       th:value="(${attends.containsKey(student.user.id)} and ${attends.get(student.user.id).content}) ? ${attends.get(student.user.id).content} : ''"
+                                                                       th:class="'content'+${student.user.id}"
+                                                                       class="form-control">
+                                                            </td>
+
+                                                            <td>
+                                                                <a href="#">
+                                                                    <button th:onclick="'attends.save('+${student.user.id}+')'"
+                                                                            data-toggle="tooltip" title="Lưu Nhận Xét"
+                                                                            class="pd-setting-ed"><i class="fa fa-save"
+                                                                                                     aria-hidden="true"></i>
+                                                                    </button>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </th:block>
+                                                    </tbody>
                                                 </table>
                                             </div>
                                             <div class="custom-pagination">
                                                 <ul class="pagination">
-                                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">Previous</a>
+                                                    </li>
                                                     <li class="page-item"><a class="page-link" href="#">1</a></li>
                                                     <li class="page-item"><a class="page-link" href="#">2</a></li>
                                                     <li class="page-item"><a class="page-link" href="#">3</a></li>
@@ -111,6 +150,68 @@
 </div>
 
 <footer th:replace="/manager-page/layout::scrip"></footer>
+<script type="text/javascript">
+    var attends = {};
+    var students = {};
+    var timeTables = {};
+
+    var student = {};
+    var timeT = {};
+
+
+    students.findStudentById = function (id) {
+        return $.ajax({
+            url: "http://localhost:8080/api/user/student/" + id,
+            method: "GET",
+            dataType: "json",
+        })
+    }
+
+    timeTables.findTimeTableById = function () {
+        let idTimeTable = $('#idTimeTable').val();
+        $.ajax({
+            url: "http://localhost:8080/api/timetable/" + idTimeTable,
+            method: "GET",
+            dataType: "json",
+            success: function (data) {
+                timeT = data;
+            }
+        })
+    }
+
+
+    attends.save = async function (id) {
+        let attend = {};
+        let statusAttend = 'status' + id;
+        let statusArr = document.getElementsByClassName(statusAttend);
+        for (let i = 0; i < statusArr.length; i++) {
+            if (statusArr[i].checked === true) {
+                attend.status = parseInt(statusArr[i].value);
+            }
+        }
+        attend.content = $('.content' + id).val();
+        await students.findStudentById(id).success(function (data) {
+            student = data;
+        });
+        attend.user = student;
+        attend.timeTable = timeT;
+        await fetch("http://localhost:8080/api/attend/", {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify(attend)
+        }).then(res => res.json(), window.Lobibox.notify('success', {
+            size: 'mini',
+            msg: 'Đã điểm danh'
+        }))
+            .then(data => console.log(data));
+    }
+
+    $(document).ready(function () {
+        timeTables.findTimeTableById();
+    });
+</script>
 </body>
 
 </html>
