@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,7 +50,7 @@ public class ClassroomController {
     }
 
     @PostMapping("/add")
-    public String addClassRoom(@Valid @ModelAttribute("classRoom")ClassRoom classRoom, BindingResult result, RedirectAttributes redirect,Model model){
+    public String addClassRoom(@Valid @ModelAttribute("classRoom")ClassRoom classRoom, BindingResult result,@RequestParam String dateStart, RedirectAttributes redirect,Model model){
         if(result.hasFieldErrors()){
             model.addAttribute("users",userService.findAllTeacher());
             model.addAttribute("courses", courseService.findAll());
@@ -57,6 +59,8 @@ public class ClassroomController {
             Optional<User> staffCreated = userService.findByEmail(getPrincipal());
             classRoom.setUserCreated(staffCreated.get());
             classRoom.setCreatedDate(LocalDateTime.now());
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            classRoom.setStartDate(LocalDate.parse(dateStart,formatter));
             Optional<ClassRoom> classRoom1 = classRoomService.findByName(classRoom.getClassName());
             if(classRoom1.isPresent()){
                 redirect.addFlashAttribute("error","tên lớp đã tồn tại");

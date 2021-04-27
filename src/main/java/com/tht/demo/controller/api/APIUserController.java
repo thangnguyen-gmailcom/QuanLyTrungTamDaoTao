@@ -94,4 +94,14 @@ public class APIUserController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
+
+    @GetMapping("/student/{id}")
+    public ResponseEntity<?> findStudentById(@PathVariable long id){
+        try{
+            Optional<User> user = userService.findStudentById(id);
+            return new ResponseEntity<>(user.get(), HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+    }
 }

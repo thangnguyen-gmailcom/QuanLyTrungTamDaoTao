@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -29,6 +30,10 @@ public class ClassRoom {
     @NotNull(message = "* phải chọn giáo viên")
     private User teacher;
 
+    private String studyTime;
+
+    private LocalDate startDate;
+
     @ManyToOne
     @JoinColumn(name = "course_id")
     @NotNull(message = "* phải chọn khóa học")
@@ -41,6 +46,11 @@ public class ClassRoom {
     @OneToMany(mappedBy = "classRoom")
     @JsonIgnore
     private List<StudentClass> studentClasses;
+
+    @OneToMany(mappedBy = "classRoom")
+    @JsonIgnore
+    private List<TimeTable> timeTables;
+
     private boolean deleted;
 
     @Override

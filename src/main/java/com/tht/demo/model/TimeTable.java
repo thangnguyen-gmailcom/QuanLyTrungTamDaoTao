@@ -1,8 +1,10 @@
 package com.tht.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -14,10 +16,14 @@ public class TimeTable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private Date date;
+    private LocalDate date;
 
     @Column(name = "teacher_note")
     private String teacherNote;
+
+    private String lessonTitle;
+
+    private String lessonContent;
 
     @ManyToOne
     @JoinColumn(name = "class_id")
@@ -33,5 +39,6 @@ public class TimeTable {
     private User teacher;
 
     @OneToMany(mappedBy = "timeTable")
+    @JsonIgnore
     private List<Attend> attends;
 }

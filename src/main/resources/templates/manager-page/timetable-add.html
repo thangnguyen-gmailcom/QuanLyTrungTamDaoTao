@@ -37,8 +37,7 @@
                                         <div class="review-content-section">
                                             <div id="dropzone1" class="pro-ad addcoursepro">
                                                 <!--                                                Start Form-->
-                                                <form action="" method=""
-                                                      class="dropzone dropzone-custom needsclick addcourse"
+                                                <div class="dropzone dropzone-custom needsclick addcourse"
                                                       id="demo1-upload">
                                                     <div class="row">
                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -49,16 +48,6 @@
                                                                     <option value="" selected disabled>---Vui Lòng chọn---
                                                                     </option>
                                                                 </select>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="form-group data-custon-pick"
-                                                                     id="data_2">
-                                                                    <label for="dateStart"><b>Ngày Bắt Đầu</b></label>
-                                                                    <div class="input-group date"></div>
-                                                                    <input type="date" id="dateStart" class="form-control"
-                                                                           name="dateStart">
-                                                                    <div></div>
-                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -72,10 +61,10 @@
                                                                         <label class="form-check-label"
                                                                                for="check1">
                                                                             <input type="checkbox"
-                                                                                   class="form-check-input"
+                                                                                   class="form-check-input dayTime"
                                                                                    id="check1"
                                                                                    name="vehicle1"
-                                                                                   value="MONDAY"> Thứ
+                                                                                   value="1"> Thứ
                                                                             2
                                                                         </label>
                                                                     </div>
@@ -85,11 +74,11 @@
                                                                         <label class="form-check-label"
                                                                                for="check5">
                                                                             <input type="checkbox"
-                                                                                   class="form-check-input"
+                                                                                   class="form-check-input dayTime"
                                                                                    id="check5"
                                                                                    name="vehicle1"
-                                                                                   value="THURSDAY"> Thứ
-                                                                            5
+                                                                                   value="2"> Thứ
+                                                                            3
                                                                         </label>
                                                                     </div>
                                                                 </div>
@@ -98,11 +87,11 @@
                                                                         <label class="form-check-label"
                                                                                for="check3">
                                                                             <input type="checkbox"
-                                                                                   class="form-check-input"
+                                                                                   class="form-check-input dayTime"
                                                                                    id="check3"
                                                                                    name="vehicle1"
-                                                                                   value="TUESDAY"> Thứ
-                                                                            3
+                                                                                   value="3"> Thứ
+                                                                            4
                                                                         </label>
                                                                     </div>
                                                                     <br>
@@ -111,11 +100,11 @@
                                                                         <label class="form-check-label"
                                                                                for="check6">
                                                                             <input type="checkbox"
-                                                                                   class="form-check-input"
+                                                                                   class="form-check-input dayTime"
                                                                                    id="check6"
                                                                                    name="vehicle1"
-                                                                                   value="FRIDAY"> Thứ
-                                                                            6
+                                                                                   value="4"> Thứ
+                                                                            5
                                                                         </label>
                                                                     </div>
                                                                 </div>
@@ -124,11 +113,11 @@
                                                                         <label class="form-check-label"
                                                                                for="check4">
                                                                             <input type="checkbox"
-                                                                                   class="form-check-input"
+                                                                                   class="form-check-input dayTime"
                                                                                    id="check4"
                                                                                    name="vehicle1"
-                                                                                   value="WEDNESDAY"> Thứ
-                                                                            4
+                                                                                   value="5"> Thứ
+                                                                            6
                                                                         </label>
                                                                     </div>
                                                                     <br>
@@ -137,10 +126,10 @@
                                                                         <label class="form-check-label"
                                                                                for="check7">
                                                                             <input type="checkbox"
-                                                                                   class="form-check-input"
+                                                                                   class="form-check-input dayTime"
                                                                                    id="check7"
                                                                                    name="vehicle1"
-                                                                                   value="SATURDAY"> Thứ
+                                                                                   value="6"> Thứ
                                                                             7
                                                                         </label>
                                                                     </div>
@@ -152,14 +141,14 @@
                                                     <div class="row">
                                                         <div class="col-lg-1">
                                                             <div class="payment-adress">
-                                                                <button type="submit"
+                                                                <button type="submit" onclick="timeTables.add()"
                                                                         class="btn btn-primary waves-effect waves-light">
                                                                     Submit
                                                                 </button>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </form>
+                                                </div>
                                                 <!--                                                End Form-->
                                             </div>
                                         </div>
@@ -195,12 +184,43 @@
 
     }
     timeTables.add = function (){
-        let timeTable = {};
-        for(let i = 0; i <)
-        timeTable.DaysOfWeek = [
-        ]
-        timeTable.startDate = moment("dateStart").format("DD-MM-YYYY");
-        timeTable.classId = $('#classRoom').val();
+        const arrDays = [];
+        let days = document.getElementsByClassName('dayTime');
+        let length = days.length;
+        for(let i = 0; i < length; i++){
+            if(days[i].checked === true){
+                arrDays.push(days[i].value)
+            }
+        }
+        let timeTableData = {};
+        timeTableData.daysOfWeek = arrDays;
+        timeTableData.startDate = $('#dateStart').val();
+        timeTableData.classId = $('#classRoom').val();
+
+        $.ajax({
+            url: "http://localhost:8080/api/timetable/",
+            method: "POST",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify(timeTableData),
+            success: function (data) {
+                console.log(data);
+                window.Lobibox.notify('success', {
+                    size: 'mini',
+                    msg: 'Tạo thời khóa biểu thành công'
+                });
+                classRoom.findAllStudent(0);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                console.log(thrownError)
+                window.Lobibox.notify('error', {
+                    size: 'mini',
+                    msg: 'Lớp đã có thời khóa biểu'
+                });
+            }
+        })
+
+
     }
 
     $(document).ready(function (){

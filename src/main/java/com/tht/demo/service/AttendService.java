@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public interface AttendService {
     Page<Attend> showAll(Pageable pageable);
+    Attend findByTimeTableIdAndUserId(Long timeTableId,Long userId);
     Optional<Attend> findById(Long id);
     Attend save(Attend attend);
     void delele(Long id);

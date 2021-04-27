@@ -5,7 +5,8 @@
 
 <body>
 <!--[if lt IE 8]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
 <![endif]-->
 
 
@@ -38,29 +39,39 @@
                                                         <th>STT</th>
                                                         <th>Số Buổi</th>
                                                         <th>Thứ</th>
+                                                        <th>Khung giờ học</th>
                                                         <th>Ngày</th>
                                                         <th>Nội Dung Chính</th>
                                                         <th>Nhận Xét</th>
                                                         <th>Hành Động</th>
                                                     </tr>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>Lesson 1</td>
-                                                        <td>Thứ 2</td>
-                                                        <td>14/4/2021</td>
-                                                        <td>Động từ bất quy tắc</td>
-                                                        <td>
-                                                            <input type="text" class="form-control" value="Nhật kí Chung" disabled>
-                                                        </td>
-                                                        <td>
-                                                            <a th:href="@{/timetable/viewDetail}"> <button data-toggle="tooltip" title="Chi Tiết" class="pd-setting-ed"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
-                                                        </td>
-                                                    </tr>
+                                                    <th:block th:each="timeTable, iStart : ${timeTables}">
+                                                        <tr>
+                                                            <td th:utext="${iStart.count}"></td>
+                                                            <td th:utext="${timeTable.classRoom.course.programme.getLessonList().get(iStart.index).getLessonNumber()}"></td>
+                                                            <td th:utext="${timeTable.date.getDayOfWeek()}"></td>
+                                                            <td th:utext="${timeTable.classRoom.studyTime}"></td>
+                                                            <td th:utext="${timeTable.date}"></td>
+                                                            <td th:utext="${timeTable.classRoom.course.programme.getLessonList().get(iStart.index).getContent()}"></td>
+                                                            <td>
+                                                                <input type="text" class="form-control" th:value="${timeTable.teacherNote != null} ? ${timeTable.teacherNote} :'Chưa có nhật ký ngày' " readonly>
+                                                            </td>
+                                                            <td>
+                                                                <a th:href="@{/timetable/viewDetail}">
+                                                                    <button data-toggle="tooltip" title="Chi Tiết"
+                                                                            class="pd-setting-ed"><i class="fa fa-eye"
+                                                                                                     aria-hidden="true"></i>
+                                                                    </button>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </th:block>
                                                 </table>
                                             </div>
                                             <div class="custom-pagination">
                                                 <ul class="pagination">
-                                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">Previous</a>
+                                                    </li>
                                                     <li class="page-item"><a class="page-link" href="#">1</a></li>
                                                     <li class="page-item"><a class="page-link" href="#">2</a></li>
                                                     <li class="page-item"><a class="page-link" href="#">3</a></li>

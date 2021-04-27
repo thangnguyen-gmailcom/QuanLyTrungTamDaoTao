@@ -70,15 +70,19 @@
                                         <div class="product-status-wrap">
                                             <div class="asset-inner">
                                                 <table>
+                                                    <thead>
                                                     <tr>
                                                         <th>STT</th>
-                                                        <th>Số Buổi</th>
+                                                        <th>Tên Buổi</th>
+                                                        <th>Khung giờ học</th>
                                                         <th>Ngày</th>
                                                         <th>Nội Dung Chính</th>
                                                         <th>Điểm Danh</th>
                                                         <th>Nhận Xét</th>
                                                         <th>Action</th>
                                                     </tr>
+                                                    </thead>
+                                                    <tbody id="showListTimeTable">
                                                     <tr>
                                                         <td>1</td>
                                                         <td>Lesson 1</td>
@@ -104,17 +108,8 @@
                                                             </a>
                                                         </td>
                                                     </tr>
+                                                    </tbody>
                                                 </table>
-                                            </div>
-                                            <div class="custom-pagination">
-                                                <ul class="pagination">
-                                                    <li class="page-item"><a class="page-link" href="#">Previous</a>
-                                                    </li>
-                                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                                </ul>
                                             </div>
                                         </div>
                                     </div>
@@ -188,6 +183,7 @@
     var classRoom = {};
     var examType = {};
     var point = {};
+    var timeT = {};
 
     var userStudent = {};
     var classR = {};
@@ -451,12 +447,82 @@
         })
     }
 
+    //xuất ra thời khóa biểu
+    timeT.findByClassRoomId = function (){
+        let id = $('#idClassRoom').val();
+        $.ajax({
+            url : "http://localhost:8080/api/timetable/view/"+id,
+            method : "GET",
+            dataType : "json",
+            success : function (data){
+                $('#showListTimeTable').empty('');
+                $.each(data,function (i,v){
+                    let note = v.teacherNote;
+                    if(note == null){
+                        note = 'chưa-có-lời-nhận-xét'
+                    }
+                    $('#showListTimeTable').append(`
+                        <tr>
+                                                        <td>${v.id}</td>
+                                                        <td>${v.lessonTitle}</td>
+                                                        <td>${v.classRoom.studyTime}</td>
+                                                        <td>${v.date}</td>
+                                                        <td>${v.lessonContent}</td>
+                                                        <td>
+                                                            <a href="#">
+                                                                <button onclick="timeT.attend(${v.id})" data-toggle="tooltip" title="Điểm Danh"
+                                                                        class="pd-setting-ed"><i class="fa fa-table"
+                                                                                                 aria-hidden="true" style="color: #337ab7"></i>
+                                                                </button>
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" id="teacherNote${v.id}" class="form-control" value=${note}>
+                                                        </td>
+                                                        <td>
+                                                            <a href="#">
+                                                                <button onclick="timeT.save(${v.id})" data-toggle="tooltip" title="Lưu Nhận Xét"
+                                                                        class="pd-setting-ed"><i class="fa fa-save"
+                                                                                                 aria-hidden="true"></i>
+                                                                </button>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                    `)
+                })
+            }
+        })
+    }
+
+    timeT.save = function (id){
+        let timeTableId = '#teacherNote'+id;
+        var teacherNote = $(timeTableId).val();
+        $.ajax({
+            url : "http://localhost:8080/api/timetable/"+id,
+            method: "PATCH",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify(teacherNote),
+            success : function (data){
+                console.log(data)
+                window.Lobibox.notify('success', {
+                    size: 'mini',
+                    msg: 'Thêm nhận xét thành công'
+                });
+            }
+        })
+    }
+
+    timeT.attend = function (id){
+        window.location = "/attend/"+id;
+    }
 
 
     $(document).ready(function () {
         examType.findAllExamList(0);
         classRoom.findById();
         classRoom.findAllStudent(0);
+        timeT.findByClassRoomId();
         $('#search').keyup(function () {
             let searchEmail = $('#search').val();
             $.ajax({

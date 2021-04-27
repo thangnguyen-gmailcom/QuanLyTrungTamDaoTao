@@ -20,6 +20,11 @@ public class AttendServiceImpl implements AttendService {
     }
 
     @Override
+    public Attend findByTimeTableIdAndUserId(Long timeTableId, Long userId) {
+        return attendRepository.findByTimeTableIdAndUserId(timeTableId,userId);
+    }
+
+    @Override
     public Optional<Attend> findById(Long id) {
         return attendRepository.findById(id);
     }
