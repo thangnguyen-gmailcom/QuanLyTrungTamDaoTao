@@ -1,4 +1,4 @@
-package com.tht.demo.controller;
+    package com.tht.demo.controller;
 
 
 import org.springframework.stereotype.Controller;
