@@ -13,6 +13,7 @@ public interface TimeTableService {
     Page<TimeTable> showAll(Pageable pageable);
     List<TimeTable> findByClassRoomId(Long classroomId);
     void updateTeacherNote(Long id,String teacherNote);
+    void deleteTimeTableByClassRoomId(Long classroomId);
     Optional<TimeTable> findById(Long id);
     TimeTable save(TimeTable timeTable);
     void delele(Long id);

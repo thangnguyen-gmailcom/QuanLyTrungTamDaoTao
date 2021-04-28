@@ -46,7 +46,7 @@
                                 <thead>
                                 <tr>
                                     <th>STT</th>
-                                    <th>Thuột Lớp</th>
+                                    <th>Thuộc Lớp</th>
                                     <th>Ngày Bắt Đầu</th>
                                     <th>Số buổi</th>
                                     <th>Chủ Nhiệm</th>
@@ -79,7 +79,7 @@
 
     classRoom.showAll = function (page) {
         $.ajax({
-            url : "http://localhost:8080/api/classRoom?page="+page,
+            url : "http://localhost:8080/api/classRoom/timeTable?page="+page,
             method : "GET",
             dataType : "json",
             success : function (data){
@@ -126,8 +126,7 @@
                                     <td>${v.teacher.fullname}</td>
                                     <td>
                                         <a th:href="" onclick="classRoom.viewTimeTable(${v.id})"> <button data-toggle="tooltip" title="view" class="pd-setting-ed"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
-                                        <a th:href="@{/timetable/edit}"> <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
-                                        <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                        <button data-toggle="tooltip" title="Trash" class="pd-setting-ed" onclick="classRoom.deleteTimeTable(${v.id})"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                                     </td>
                                 </tr>`
                     );
@@ -139,6 +138,37 @@
 
     classRoom.viewTimeTable = function (id){
         window.location = "/timetable/view/"+id;
+    }
+
+    classRoom.deleteTimeTable = function (id){
+        bootbox.confirm({
+            message: "Bạn có chắc muốn xóa không?",
+            buttons: {
+                cancel: {
+                    label: '<i class="fa fa-times">Không</i> '
+                },
+                confirm: {
+                    label: '<i class="fa fa-check"> Có</i>'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    $.ajax({
+                        url: "http://localhost:8080/api/timetable/"+id,
+                        method: "DELETE",
+                        contentType: 'json',
+                        success: function (data) {
+                            console.log(data)
+                            window.Lobibox.notify('success', {
+                                size: 'mini',
+                                msg: "xóa thành công"
+                            });
+                            classRoom.showAll(0);
+                        }
+                    });
+                }
+            }
+        })
     }
 
     $(document).ready(function (){

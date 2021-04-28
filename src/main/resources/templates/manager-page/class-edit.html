@@ -52,11 +52,14 @@
                                                                        th:if="${#fields.hasErrors('className')}"
                                                                        th:errors="*{className}">Name Error</small>
                                                             </div>
+                                                        </div>
+                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
+                                                             style="margin-top: 1%">
                                                             <label for="teacher">Chủ Nhiệm</label>
                                                             <select class="form-control" id="teacher"
-                                                                    th:field="*{teacher}">
+                                                                    th:field="*{teacher.id}">
                                                                 <option th:if="${classRoom.teacher.id}"
-                                                                        th:value="${classRoom.id}"
+                                                                        th:value="${classRoom.teacher.id}"
                                                                         th:utext="${classRoom.teacher.fullname}"
                                                                         selected></option>
                                                                 <th:block th:each="user : ${users}">
@@ -68,25 +71,7 @@
                                                             <small class="form-text text-muted"
                                                                    th:if="${#fields.hasErrors('teacher')}"
                                                                    th:errors="*{teacher}">Name Error</small>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
-                                                             style="margin-top: 1%">
-                                                            <label for="course">Thuộc Khóa học</label>
-                                                            <select class="form-control" id="course"
-                                                                    th:field="*{course}">
-                                                                <option th:if="${classRoom.course.id}"
-                                                                        th:value="${classRoom.course.id}"
-                                                                        th:utext="${classRoom.course.getCourseName()}"
-                                                                        selected></option>
-                                                                <th:block th:each="course : ${courses}">
-                                                                    <option th:if="${course.id} != ${classRoom.course.id}"
-                                                                            th:value="${course.id}"
-                                                                            th:utext="${course.getCourseName()}"></option>
-                                                                </th:block>
-                                                            </select>
-                                                            <small class="form-text text-muted"
-                                                                   th:if="${#fields.hasErrors('course')}"
-                                                                   th:errors="*{course}">Name Error</small>
+                                                            <input type="hidden" th:field="*{course}">
                                                             <input type="hidden" th:field="*{userCreated}">
                                                             <input type="hidden" th:field="*{createdDate}">
                                                         </div>

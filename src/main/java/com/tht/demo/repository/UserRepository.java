@@ -15,7 +15,7 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User,Long> {
 
-    Optional<User> findByEmail(String email);
+    Optional<User> findByEmailAndIsDeletedIsFalse(String email);
 
     @Query(value = "SELECT * FROM User WHERE is_deleted = 0 AND (role_id = 2 OR role_id = 3)", nativeQuery = true)
     Page<User> findAllEmployeeOrderByIdDesc(Pageable pageable);
