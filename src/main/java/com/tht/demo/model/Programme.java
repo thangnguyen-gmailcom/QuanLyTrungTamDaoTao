@@ -40,7 +40,6 @@ public class Programme {
     private List<Course> courses;
 
     @OneToMany(mappedBy = "programme")
-    @JsonIgnore
     private List<Lesson> lessonList;
     @Override
     public String toString() {

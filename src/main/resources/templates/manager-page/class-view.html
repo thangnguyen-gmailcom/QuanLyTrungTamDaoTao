@@ -461,13 +461,15 @@
                     if(note == null){
                         note = 'chưa-có-lời-nhận-xét'
                     }
+                    let lesson = v.classRoom.course.programme.lessonList[i].lessonNumber;
+                    let lessoncontent = v.classRoom.course.programme.lessonList[i].content;
                     $('#showListTimeTable').append(`
                         <tr>
                                                         <td>${++i}</td>
-                                                        <td>${v.lessonTitle}</td>
+                                                        <td>${lesson}</td>
                                                         <td>${v.classRoom.studyTime}</td>
                                                         <td>${v.date}</td>
-                                                        <td>${v.lessonContent}</td>
+                                                        <td>${lessoncontent}</td>
                                                         <td>
                                                             <a href="#">
                                                                 <button onclick="timeT.attend(${v.id})" data-toggle="tooltip" title="Điểm Danh"
