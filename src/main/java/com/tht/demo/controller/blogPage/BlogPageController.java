@@ -40,8 +40,6 @@ public class BlogPageController {
     public String index(Model model, Pageable pageable, HttpSession session){
         Page<User> teacherList = userService.showAllTeacher(pageable);
         Page<Programme> programmeList = programmeService.showAll(pageable);
-        Optional<User> user = userService.findByEmail(getPrincipal());
-        session.setAttribute("user",user.get());
         model.addAttribute("programmeList",programmeList);
         model.addAttribute("teacherList",teacherList);
         return "blog-page/index";
@@ -57,17 +55,5 @@ public class BlogPageController {
     public String blogSingle(@PathVariable long id,Model model){
     model.addAttribute("post",blogService.findById(id).get());
     return "blog-page/blog-single";
-    }
-
-    private String getPrincipal() {
-        String userName = null;
-        Object printObject = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if (printObject instanceof MyUserDetails) {
-            userName = ((MyUserDetails) printObject).getUsername();
-        } else {
-            userName = printObject.toString();
-        }
-        return userName;
     }
 }
