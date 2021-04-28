@@ -405,7 +405,7 @@
                                             <ul class="nav navbar-nav mai-top-nav header-right-menu">
                                                 <li class="nav-item">
                                                     <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
-                                                        <img th:src="@{'/upload/'+ ${session.user.getImage()}}" alt=""/>
+                                                        <img th:src="@{'/upload/'+ ${session.user.getImage()}}" alt="" style="width: 40px;height: 40px"/>
                                                         <span class="admin-name" th:utext="${session.user.fullname}"></span>
                                                     </a>
                                                     <ul role="menu"
