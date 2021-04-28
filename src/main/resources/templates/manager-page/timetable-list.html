@@ -125,8 +125,8 @@
                                     <td>${v.course.programme.lessons}</td>
                                     <td>${v.teacher.fullname}</td>
                                     <td>
-                                        <a th:href="" onclick="classRoom.viewTimeTable(${v.id})"> <button data-toggle="tooltip" title="view" class="pd-setting-ed"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
-                                        <button data-toggle="tooltip" title="Trash" class="pd-setting-ed" onclick="classRoom.deleteTimeTable(${v.id})"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                        <a  href='#' data-toggle='tooltip' title='Chi Tiết'  onclick="classRoom.viewTimeTable(${v.id})"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        <a href='#' style="margin-left: 15%" data-toggle='tooltip' title='Xóa' onclick="classRoom.deleteTimeTable(${v.id})"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>`
                     );

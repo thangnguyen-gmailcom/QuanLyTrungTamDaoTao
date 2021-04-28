@@ -30,7 +30,7 @@
                             <img src="img/profile/1.jpg" alt="" />
                             </th:block>
                             <th:block  th:if="${user.image} != null">
-                                <img th:src="@{'upload/'+${user.image}}" alt="" />
+                                <img th:src="@{'/upload/'+${user.image}}" alt="" />
                             </th:block>
                         </div>
                         <div class="profile-details-hr">

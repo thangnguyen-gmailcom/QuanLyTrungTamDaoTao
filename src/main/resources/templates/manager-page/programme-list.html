@@ -127,11 +127,11 @@
                         +"<td>" + v.deleted + "</td>" +
                         "<td>" +
 
-                        "<a  href='#' onclick='programmes.editForm(" + v.id + ")'  ><i class=\"fas fa-edit\" ></i></a>"
+                        "<a   href='#' data-toggle='tooltip' title='Chỉnh Sửa' onclick='programmes.editForm(" + v.id + ")'  ><i class=\"fas fa-edit\" ></i></a>"
                         +
-                        "<a style='padding-left: 35px'  href='#' onclick='programmes.view(" + v.id + ")'  ><i class=\"fas fa-eye\"></i></a>"
+                        "<a  href='#' data-toggle='tooltip' title='Chi Tiết' style='padding-left: 15%' onclick='programmes.view(" + v.id + ")'  ><i class=\"fas fa-eye\"></i></a>"
                         +
-                        "<a style='padding-left: 35px'    ><i onclick='programmes.delete(" + v.id + ")' class=\"fas fa-trash-alt\"></i></a>" +
+                        "<a  href='#' data-toggle='tooltip' title='Xóa' style='padding-left: 15%'    ><i onclick='programmes.delete(" + v.id + ")' class=\"fas fa-trash-alt\"></i></a>" +
                         "</td>" +
                         "</tr>"
                     );
@@ -194,11 +194,11 @@
                         +"<td>" + v.deleted + "</td>" +
                         "<td>" +
 
-                        "<a  href='#' onclick='programmes.editForm(" + v.id + ")'  ><i class=\"fas fa-edit\" ></i></a>"
+                        "<a   href='#' data-toggle='tooltip' title='Chỉnh Sửa' onclick='programmes.editForm(" + v.id + ")'  ><i class=\"fas fa-edit\" ></i></a>"
                         +
-                        "<a style='padding-left: 35px'  href='#' onclick='programmes.view(" + v.id + ")'  ><i class=\"fas fa-eye\"></i></a>"
+                        "<a style='padding-left: 15%'   href='#' data-toggle='tooltip' title='Chi Tiết' onclick='programmes.view(" + v.id + ")'  ><i class=\"fas fa-eye\"></i></a>"
                         +
-                        "<a style='padding-left: 35px'    ><i onclick='programmes.delete(" + v.id + ")' class=\"fas fa-trash-alt\"></i></a>" +
+                        "<a style='padding-left: 15%'  href='#' data-toggle='tooltip' title='Xóa'    ><i onclick='programmes.delete(" + v.id + ")' class=\"fas fa-trash-alt\"></i></a>" +
                         "</td>" +
                         "</tr>"
                     );

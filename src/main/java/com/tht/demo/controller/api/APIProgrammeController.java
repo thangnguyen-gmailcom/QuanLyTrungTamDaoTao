@@ -77,6 +77,17 @@ private ProgrammeService programmeService;
         }
     }
 
+    @GetMapping("/close/search")
+    public ResponseEntity<?> searchClose(@RequestParam String name,@PageableDefault(size = 8) Pageable pageable
+    ){
+        try {
+            return new ResponseEntity<>(programmeService.findAllByProgrammeNameContainingAndDeletedIsTrue(name,pageable), HttpStatus.OK);
+        }catch (Exception e){
+            System.out.println(e);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+    }
+
     @GetMapping("/restore/{id}")
     public ResponseEntity<?> restores(@PathVariable long id){
         try {

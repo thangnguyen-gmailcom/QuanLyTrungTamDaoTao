@@ -22,6 +22,7 @@ public class Programme {
     @Size(min = 2, message = "* phải dài trên 2 kí tự")
     private String programmeName;
 
+    @Column(columnDefinition = "TEXT")
     @NotBlank(message = "* không được để trống")
     @Size(min = 5, message = "* phải dài hơn 5 kí tự")
     private String description;

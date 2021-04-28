@@ -117,8 +117,8 @@
                         "<td>" + v.shortContent + "</td>" +
                         "<td><img src='/upload/" + v.image + "'></td>" +
                         "<td>" +
-                        "<a  href='#' onclick='blogs.editForm(" + v.id + ")'  ><i class=\"fas fa-edit\" ></i></a>" +
-                        "<a style='padding-left: 35px' ><i onclick='blogs.delete(" + v.id + ")' class=\"fas fa-trash-alt\"></i></a>" +
+                        "<a  href='#' data-toggle='tooltip' title='Chỉnh Sửa' onclick='blogs.editForm(" + v.id + ")'  ><i class=\"fas fa-edit\" ></i></a>" +
+                        "<a href='#' data-toggle='tooltip' title='Xóa' style='padding-left: 35px' ><i onclick='blogs.delete(" + v.id + ")' class=\"fas fa-trash-alt\"></i></a>" +
                         "</td>" +
                         "</tr>"
                     );
@@ -172,8 +172,8 @@
                         "<td>" + v.shortContent + "</td>" +
                         "<td><img src='/upload/" + v.image + "'></td>" +
                         "<td>" +
-                        "<a  href='#' onclick='blogs.editForm(" + v.id + ")'  ><i class=\"fas fa-edit\" ></i></a>" +
-                        "<a style='padding-left: 35px' ><i onclick='blogs.delete(" + v.id + ")' class=\"fas fa-trash-alt\"></i></a>" +
+                        "<a   href='#' data-toggle='tooltip' title='Chỉnh Sửa' onclick='blogs.editForm(" + v.id + ")'  ><i class=\"fas fa-edit\" ></i></a>" +
+                        "<a  href='#' data-toggle='tooltip' title='Xóa' style='padding-left: 15%' ><i onclick='blogs.delete(" + v.id + ")' class=\"fas fa-trash-alt\"></i></a>" +
                         "</td>" +
                         "</tr>"
                     );
