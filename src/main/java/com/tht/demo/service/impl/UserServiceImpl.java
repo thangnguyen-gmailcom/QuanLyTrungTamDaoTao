@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> findByEmail(String userEmail) {
-        return userRepository.findByEmail(userEmail);
+        return userRepository.findByEmailAndIsDeletedIsFalse(userEmail);
     }
 
     @Override

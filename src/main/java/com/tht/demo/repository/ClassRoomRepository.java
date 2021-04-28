@@ -18,6 +18,16 @@ public interface ClassRoomRepository extends JpaRepository<ClassRoom , Long> {
 
     List<ClassRoom> findAllByDeletedIsFalse();
 
+    Page<ClassRoom> findByTeacherId(Long id,Pageable pageable);
+
+    Page<ClassRoom> findByStudentClassesUserId(Long id,Pageable pageable);
+
+    Page<ClassRoom> findAllByStatusTimeTableIsTrue(Pageable pageable);
+
+    Page<ClassRoom> findAllByStatusTimeTableIsTrueAndTeacherId(Long id,Pageable pageable);
+
+    Page<ClassRoom> findAllByStatusTimeTableIsTrueAndStudentClassesUserId(Long id,Pageable pageable);
+
     @Modifying
     @Query("update ClassRoom c set c.deleted = true where c.id = :id")
     Integer softDeleteClassRoom(@Param("id") Long id);

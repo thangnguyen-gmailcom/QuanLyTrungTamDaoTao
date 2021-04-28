@@ -53,6 +53,8 @@ public class ClassRoom {
 
     private boolean deleted;
 
+    private boolean statusTimeTable;
+
     @Override
     public String toString() {
         return "ClassRoom{" +

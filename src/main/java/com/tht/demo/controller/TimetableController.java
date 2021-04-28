@@ -35,7 +35,7 @@ public class TimetableController {
         }
     }
 
-    @GetMapping("/viewDetail/{id}")
+    @GetMapping("/viewDetail")
     public String viewsDetail(){
         return "manager-page/timetable-viewDetail";
     }

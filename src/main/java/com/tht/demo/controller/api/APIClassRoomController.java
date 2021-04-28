@@ -1,7 +1,10 @@
 package com.tht.demo.controller.api;
 
+import com.tht.demo.dto.MyUserDetails;
 import com.tht.demo.model.ClassRoom;
+import com.tht.demo.model.User;
 import com.tht.demo.service.ClassRoomService;
+import com.tht.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,10 +26,37 @@ public class APIClassRoomController {
     @Autowired
     private ClassRoomService classRoomService;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("")
     public ResponseEntity<?> findAllClassRoom(@RequestParam(value = "page",required = false,defaultValue = "0") int page){
         try {
-            Page<ClassRoom> classRooms = classRoomService.showAll(PageRequest.of(page,8, Sort.by("id").descending()));
+            Page<ClassRoom> classRooms = null;
+            Optional<User> user = userService.findByEmail(getPrincipal());
+            if(user.get().getRoles().getName().equals("ROLE_MINISTRY") ||user.get().getRoles().getName().equals("ROLE_ADMIN")){
+                classRooms =  classRoomService.showAll(PageRequest.of(page,8, Sort.by("id").descending()));
+            }else if(user.get().getRoles().getName().equals("ROLE_TEACHER")){
+                classRooms = classRoomService.findByTeacherId(user.get().getId(),PageRequest.of(page,8, Sort.by("id").descending()));
+            }
+            return new ResponseEntity<>(classRooms, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/timeTable")
+    public ResponseEntity<?> findAllClassRoomByStatusTimeTable(@RequestParam(value = "page",required = false,defaultValue = "0") int page){
+        try {
+            Page<ClassRoom> classRooms = null;
+            Optional<User> user = userService.findByEmail(getPrincipal());
+            if(user.get().getRoles().getName().equals("ROLE_MINISTRY") ||user.get().getRoles().getName().equals("ROLE_ADMIN")){
+                classRooms =  classRoomService.findAllByStatusTimeTableIsTrue(PageRequest.of(page,8, Sort.by("id").descending()));
+            }else if(user.get().getRoles().getName().equals("ROLE_TEACHER")){
+                classRooms = classRoomService.findAllByStatusTimeTableIsTrueAndTeacherId(user.get().getId(),PageRequest.of(page,8, Sort.by("id").descending()));
+            }else if(user.get().getRoles().getName().equals("ROLE_STUDENT")) {
+                classRooms = classRoomService.findAllByStatusTimeTableIsTrueAndStudentClassesUserId(user.get().getId(),PageRequest.of(page,8, Sort.by("id").descending()));
+            }
             return new ResponseEntity<>(classRooms, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -63,5 +94,17 @@ public class APIClassRoomController {
             System.out.println(e);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
+    }
+
+    private String getPrincipal() {
+        String userName = null;
+        Object printObject = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (printObject instanceof MyUserDetails) {
+            userName = ((MyUserDetails) printObject).getUsername();
+        } else {
+            userName = printObject.toString();
+        }
+        return userName;
     }
 }

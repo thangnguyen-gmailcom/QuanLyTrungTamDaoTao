@@ -43,40 +43,31 @@
                                                         <th>Ngày</th>
                                                         <th>Nội Dung Chính</th>
                                                         <th>Nhận Xét</th>
-                                                        <th>Hành Động</th>
                                                     </tr>
                                                     <th:block th:each="timeTable, iStart : ${timeTables}">
                                                         <tr>
                                                             <td th:utext="${iStart.count}"></td>
                                                             <td th:utext="${timeTable.classRoom.course.programme.getLessonList().get(iStart.index).getLessonNumber()}"></td>
-                                                            <td th:utext="${timeTable.date.getDayOfWeek()}"></td>
+                                                            <th:block th:switch="${timeTable.date.getDayOfWeek().getValue()}">
+                                                                <td th:case="1">Thứ 2</td>
+                                                                <td th:case="2">Thứ 3</td>
+                                                                <td th:case="3">Thứ 4</td>
+                                                                <td th:case="4">Thứ 5</td>
+                                                                <td th:case="5">Thứ 6</td>
+                                                                <td th:case="6">Thứ 7</td>
+                                                                <td th:case="*" >CHủ nhật</td>
+                                                            </th:block>
                                                             <td th:utext="${timeTable.classRoom.studyTime}"></td>
                                                             <td th:utext="${timeTable.date}"></td>
                                                             <td th:utext="${timeTable.classRoom.course.programme.getLessonList().get(iStart.index).getContent()}"></td>
                                                             <td>
-                                                                <input type="text" class="form-control" th:value="${timeTable.teacherNote != null} ? ${timeTable.teacherNote} :'Chưa có nhật ký ngày' " readonly>
-                                                            </td>
-                                                            <td>
-                                                                <a th:href="@{/timetable/viewDetail}">
-                                                                    <button data-toggle="tooltip" title="Chi Tiết"
-                                                                            class="pd-setting-ed"><i class="fa fa-eye"
-                                                                                                     aria-hidden="true"></i>
-                                                                    </button>
-                                                                </a>
+                                                                <input type="text" class="form-control"
+                                                                       th:value="${timeTable.teacherNote != null} ? ${timeTable.teacherNote} :'Chưa có nhật ký ngày' "
+                                                                       readonly>
                                                             </td>
                                                         </tr>
                                                     </th:block>
                                                 </table>
-                                            </div>
-                                            <div class="custom-pagination">
-                                                <ul class="pagination">
-                                                    <li class="page-item"><a class="page-link" href="#">Previous</a>
-                                                    </li>
-                                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                                </ul>
                                             </div>
                                         </div>
                                     </div>

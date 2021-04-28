@@ -5,6 +5,7 @@ import com.tht.demo.dto.TimeTableData;
 import com.tht.demo.model.ClassRoom;
 import com.tht.demo.model.TimeTable;
 import com.tht.demo.model.User;
+import com.tht.demo.service.AttendService;
 import com.tht.demo.service.ClassRoomService;
 import com.tht.demo.service.TimeTableService;
 import com.tht.demo.service.UserService;
@@ -28,6 +29,9 @@ public class APITimeTableController {
 
     @Autowired
     private ClassRoomService classRoomService;
+
+    @Autowired
+    private AttendService attendService;
 
     @Autowired
     private UserService userService;
@@ -85,6 +89,8 @@ public class APITimeTableController {
                 timeTableService.save(timeTable);
                 count++;
             }
+            classRoom.setStatusTimeTable(true);
+            classRoomService.save(classRoom);
             return new ResponseEntity<>(timeTableData, HttpStatus.OK);
         }else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -116,6 +122,23 @@ public class APITimeTableController {
             count++;
         }
         return localDates;
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteTimeTable(@PathVariable("id") long id){
+        try{
+            ClassRoom classRoom = classRoomService.findById(id).orElse(null);
+            List<TimeTable> timeTables = timeTableService.findByClassRoomId(id);
+            for(TimeTable timeTable : timeTables){
+                attendService.deleteByTimeTableId(timeTable.getId());
+            }
+            timeTableService.deleteTimeTableByClassRoomId(id);
+            classRoom.setStatusTimeTable(false);
+            classRoomService.save(classRoom);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
     }
 
     private String getPrincipal() {

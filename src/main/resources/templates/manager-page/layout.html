@@ -115,6 +115,7 @@
         <div class="left-custom-menu-adp-wrap comment-scrollbar">
             <nav class="sidebar-nav left-sidebar-menu-pro">
                 <ul class="metismenu" id="menu1">
+                    <th:block sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TEACHER','ROLE_MINISTRY')">
                     <li>
                         <a title="Landing Page" th:href="@{/manager/}" aria-expanded="false"
                         ><span
@@ -124,6 +125,8 @@
                             <span class="mini-click-non">Tổng Quan</span></a
                         >
                     </li>
+                    </th:block>
+                    <th:block sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_MINISTRY')">
                     <li>
                         <a
                                 class="has-arrow"
@@ -234,6 +237,8 @@
                             </li>
                         </ul>
                     </li>
+                    </th:block>
+                    <th:block sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TEACHER','ROLE_MINISTRY')">
                     <li>
                         <a
                                 class="has-arrow"
@@ -248,13 +253,17 @@
                                 ><span class="mini-sub-pro">Danh sách</span></a
                                 >
                             </li>
+                            <th:block sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_MINISTRY')">
                             <li>
                                 <a title="Add Library" th:href="@{/class/add}"
                                 ><span class="mini-sub-pro">Tạo mới</span></a
                                 >
                             </li>
+                            </th:block>
                         </ul>
                     </li>
+                    </th:block>
+                    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                     <li>
                         <a
                                 class="has-arrow"
@@ -278,6 +287,8 @@
                             </li>
                         </ul>
                     </li>
+                    </th:block>
+                    <th:block  sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_MINISTRY')">
                     <li>
                         <a
                                 class="has-arrow"
@@ -299,6 +310,7 @@
                             </li>
                         </ul>
                     </li>
+                    </th:block>
                     <li>
                         <a
                                 class="has-arrow"
@@ -313,13 +325,16 @@
                                 ><span class="mini-sub-pro">Danh sách</span></a
                                 >
                             </li>
+                            <th:block sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_MINISTRY')">
                             <li>
                                 <a title="Add Students" th:href="@{/timetable/add}"
                                 ><span class="mini-sub-pro">Tạo mới</span></a
                                 >
                             </li>
+                            </th:block>
                         </ul>
                     </li>
+                    <th:block  sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_MINISTRY')">
                     <li>
                         <a
                                 class="has-arrow"
@@ -346,6 +361,7 @@
                             </li>
                         </ul>
                     </li>
+                    </th:block>
                 </ul>
             </nav>
         </div>

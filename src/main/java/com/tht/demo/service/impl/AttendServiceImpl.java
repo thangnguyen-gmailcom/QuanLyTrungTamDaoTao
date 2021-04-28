@@ -8,8 +8,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 @Service
+@Transactional
 public class AttendServiceImpl implements AttendService {
     @Autowired
     private AttendRepository attendRepository;
@@ -22,6 +24,11 @@ public class AttendServiceImpl implements AttendService {
     @Override
     public Attend findByTimeTableIdAndUserId(Long timeTableId, Long userId) {
         return attendRepository.findByTimeTableIdAndUserId(timeTableId,userId);
+    }
+
+    @Override
+    public void deleteByTimeTableId(Long timeTableId) {
+        attendRepository.deleteByTimeTableId(timeTableId);
     }
 
     @Override

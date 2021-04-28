@@ -98,12 +98,12 @@
                                                                     th:field="*{studyTime}">
                                                                 <option value="-1" selected>---Vui Lòng chọn---
                                                                 </option>
-                                                                <option th:value="morning"
+                                                                <option th:value="8h-11h"
                                                                         th:utext="8h-11h"></option>
-                                                                <option th:value="afternoon"
+                                                                <option th:value="14h-17h"
                                                                         th:utext="14h-17h"></option>
-                                                                <option th:value="night"
-                                                                        th:utext="19-21h"></option>
+                                                                <option th:value="19h-21h"
+                                                                        th:utext="19h-21h"></option>
                                                             </select>
                                                             <small class="form-text text-muted"
                                                                    th:if="${#fields.hasErrors('studyTime')}"

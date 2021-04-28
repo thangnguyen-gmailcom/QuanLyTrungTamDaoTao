@@ -32,6 +32,11 @@ public class TimeTableServiceImpl implements TimeTableService {
     }
 
     @Override
+    public void deleteTimeTableByClassRoomId(Long classroomId) {
+        timeTableRepository.deleteTimeTableByClassRoomId(classroomId);
+    }
+
+    @Override
     public Optional<TimeTable> findById(Long id) {
         return timeTableRepository.findById(id);
     }

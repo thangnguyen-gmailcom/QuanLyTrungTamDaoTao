@@ -25,6 +25,31 @@ public class ClassRoomServiceImpl implements ClassRoomService {
     }
 
     @Override
+    public Page<ClassRoom> findByTeacherId(Long id,Pageable pageable) {
+        return classRoomRepository.findByTeacherId(id,pageable);
+    }
+
+    @Override
+    public Page<ClassRoom> findByStudentClassesUserId(Long id, Pageable pageable) {
+        return classRoomRepository.findByStudentClassesUserId(id,pageable);
+    }
+
+    @Override
+    public Page<ClassRoom> findAllByStatusTimeTableIsTrue(Pageable pageable) {
+        return classRoomRepository.findAllByStatusTimeTableIsTrue(pageable);
+    }
+
+    @Override
+    public Page<ClassRoom> findAllByStatusTimeTableIsTrueAndTeacherId(Long id, Pageable pageable) {
+        return classRoomRepository.findAllByStatusTimeTableIsTrueAndTeacherId(id,pageable);
+    }
+
+    @Override
+    public Page<ClassRoom> findAllByStatusTimeTableIsTrueAndStudentClassesUserId(Long id, Pageable pageable) {
+        return classRoomRepository.findAllByStatusTimeTableIsTrueAndStudentClassesUserId(id,pageable);
+    }
+
+    @Override
     public List<ClassRoom> findAll() {
         return classRoomRepository.findAllByDeletedIsFalse();
     }
