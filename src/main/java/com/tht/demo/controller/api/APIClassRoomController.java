@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,7 +47,7 @@ public class APIClassRoomController {
     }
 
     @GetMapping("/timeTable")
-    public ResponseEntity<?> findAllClassRoomByStatusTimeTable(@RequestParam(value = "page",required = false,defaultValue = "0") int page){
+    public ResponseEntity<?> findAllClassRoomByStatusTimeTable(@RequestParam(value = "page",required = false,defaultValue = "0") int page, HttpSession session){
         try {
             Page<ClassRoom> classRooms = null;
             Optional<User> user = userService.findByEmail(getPrincipal());

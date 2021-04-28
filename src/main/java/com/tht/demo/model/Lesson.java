@@ -1,5 +1,7 @@
 package com.tht.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -22,6 +24,7 @@ public class Lesson {
     private boolean deleted;
     @ManyToOne
     @JoinColumn(name = "programme_id")
+    @JsonIgnore
     private Programme programme;
 
     @Override

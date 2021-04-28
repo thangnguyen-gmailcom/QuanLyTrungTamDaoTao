@@ -71,8 +71,8 @@
                     <th:block sec:authorize="isAuthenticated()">
                         <li class="dropdown">
                             <a href="#" data-toggle="dropdown" role="button" aria-expanded="false"
-                               class="nav-link dropdown-toggle">
-                                <!--                                <img th:src="@{'/upload/'+ ${session.user.getImage()}}" style="width: 54px;border-radius: 50%;" alt=""/>-->
+                               class="nav-link dropdown-toggle" >
+                                <img th:src="@{'/upload/'+ ${session.user.getImage()}}" style="width: 54px;border-radius: 50%;" alt=""/>
                                 <span class="admin-name" sec:authentication="name"></span>
                             </a>
                             <ul role="menu"
@@ -84,7 +84,7 @@
                                 </th:block>
                                 <th:block sec:authorize="hasRole('ROLE_STUDENT')">
                                     <li>
-                                        <a th:href="@{/manager/}"><span class="edu-icon edu-settings author-log-ic">
+                                        <a th:href="@{/timetable}"><span class="edu-icon edu-settings author-log-ic">
                                                             </span>Xem thời khóa biểu</a></li>
                                 </th:block>
                                 <li>

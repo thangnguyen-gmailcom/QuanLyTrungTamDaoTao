@@ -31,20 +31,14 @@
                         <div id="myTabContent" class="tab-content custom-product-edit">
                             <div class="product-tab-list tab-pane fade active in" id="description">
                                 <div class="row">
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                         <div class="form-group">
                                             <input type="hidden" th:value="${timeTable.id}" id="idTimeTable">
                                             <input type="text" class="form-control" disabled
                                                    th:value="${timeTable.date}">
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" disabled
-                                                   th:value="${timeTable.lessonTitle}">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                         <div class="form-group">
                                             <input type="text" class="form-control" disabled
                                                    th:value="${timeTable.classRoom.teacher.getFullname()}">
