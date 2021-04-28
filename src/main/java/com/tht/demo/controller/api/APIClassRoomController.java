@@ -2,8 +2,10 @@ package com.tht.demo.controller.api;
 
 import com.tht.demo.dto.MyUserDetails;
 import com.tht.demo.model.ClassRoom;
+import com.tht.demo.model.TimeTable;
 import com.tht.demo.model.User;
 import com.tht.demo.service.ClassRoomService;
+import com.tht.demo.service.TimeTableService;
 import com.tht.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,6 +32,8 @@ public class APIClassRoomController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private TimeTableService timeTableService;
     @GetMapping("")
     public ResponseEntity<?> findAllClassRoom(@RequestParam(value = "page",required = false,defaultValue = "0") int page){
         try {
@@ -101,6 +105,10 @@ public class APIClassRoomController {
     public ResponseEntity<?> delete(@PathVariable long id){
         try {
             classRoomService.delele(id);
+            timeTableService.deleteTimeTableByClassRoomId(id);
+            ClassRoom classRoom = classRoomService.findById(id).orElse(null);
+            classRoom.setStatusTimeTable(false);
+            classRoomService.save(classRoom);
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
