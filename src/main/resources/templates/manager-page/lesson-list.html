@@ -137,9 +137,9 @@
                         "<td>" + v.lessonNumber + "</td>" +
                         "<td>" + v.content + "</td>" +
                         "<td>" +
-                        "<a  href='#' onclick='lessons.editForm(" + v.id + ")'  ><i class=\"fas fa-edit\" ></i></a>"
+                        "<a   href='#' data-toggle='tooltip' title='Chỉnh Sửa' onclick='lessons.editForm(" + v.id + ")'  ><i class=\"fas fa-edit\" ></i></a>"
                         +
-                        "<a style='padding-left: 35px'><i onclick='lessons.delete(" + v.id + ")' class=\"fas fa-trash-alt\"></i></a>" +
+                        "<a style='padding-left: 35px'  href='#' data-toggle='tooltip' title='Xóa'><i onclick='lessons.delete(" + v.id + ")' class=\"fas fa-trash-alt\"></i></a>" +
                         "</td>" +
                         "</tr>"
                     );
@@ -194,9 +194,9 @@
                         "<td>" + v.lessonNumber + "</td>" +
                         "<td>" + v.content + "</td>" +
                         "<td>" +
-                        "<a  href='#' onclick='lessons.editForm(" + v.id + ")'  ><i class=\"fas fa-edit\" ></i></a>"
+                        "<a   href='#' data-toggle='tooltip' title='Chỉnh Sửa' onclick='lessons.editForm(" + v.id + ")'  ><i class=\"fas fa-edit\" ></i></a>"
                         +
-                        "<a style='padding-left: 35px'><i onclick='lessons.delete(" + v.id + ")' class=\"fas fa-trash-alt\"></i></a>" +
+                        "<a style='padding-left: 15%'  href='#' data-toggle='tooltip' title='Xóa'><i onclick='lessons.delete(" + v.id + ")' class=\"fas fa-trash-alt\"></i></a>" +
                         "</td>" +
                         "</tr>"
                     );

@@ -69,4 +69,9 @@ private LessonRepository lessonRepository;
         programmeRepository.restoreProgramme(id);
     }
 
+    @Override
+    public Page<Programme> findAllByProgrammeNameContainingAndDeletedIsTrue(String name, Pageable pageable) {
+        return programmeRepository.findAllByProgrammeNameContainingAndDeletedIsTrue(name,pageable);
+    }
+
 }

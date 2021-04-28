@@ -62,7 +62,7 @@
                     <li><a th:href="@{/blogPage/blog}" class="smoothScroll">Blog Học Tiếng Anh</a></li>
                 </ul>
 
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right" style="max-width: 15%;">
                     <th:block sec:authorize="!isAuthenticated()">
                         <li><a th:href="@{/login/}"><i class="fa fa-sign-in"></i>Login</a></li>
                     </th:block>
@@ -73,7 +73,7 @@
                             <a href="#" data-toggle="dropdown" role="button" aria-expanded="false"
                                class="nav-link dropdown-toggle">
                                 <!--                                <img th:src="@{'/upload/'+ ${session.user.getImage()}}" style="width: 54px;border-radius: 50%;" alt=""/>-->
-                                <span class="admin-name" sec:authentication="name"></span>
+                                <span class="admin-name" text-truncate sec:authentication="name"></span>
                             </a>
                             <ul role="menu"
                                 class="dropdown-header-top author-log dropdown-menu animated zoomIn">

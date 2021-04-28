@@ -96,6 +96,16 @@ public class APIClassRoomController {
         }
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable long id){
+        try {
+            classRoomService.delele(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+    }
+
     private String getPrincipal() {
         String userName = null;
         Object printObject = SecurityContextHolder.getContext().getAuthentication().getPrincipal();

@@ -120,11 +120,11 @@
                         +"<td>" + v.deleted + "</td>" +
                         "<td>" +
 
-                        "<a  href='#' onclick='programmes.editForm(" + v.id + ")'  ><i class=\"fas fa-edit\" ></i></a>"
+                        "<a  href='#' data-toggle='tooltip' title='Chỉnh Sửa' onclick='programmes.editForm(" + v.id + ")'  ><i class=\"fas fa-edit\" ></i></a>"
                         +
-                        "<a style='padding-left: 35px'  href='#' onclick='programmes.view(" + v.id + ")'  ><i class=\"fas fa-eye\"></i></a>"
+                        "<a style='padding-left: 35px'  href='#' data-toggle='tooltip' title='Chi Tiết' onclick='programmes.view(" + v.id + ")'  ><i class=\"fas fa-eye\"></i></a>"
                         +
-                        "<a style='padding-left: 35px'    ><i onclick='programmes.restores(" + v.id + ")' class=\"fas fa-window-restore\"></i></a>" +
+                        "<a style='padding-left: 35px' href='#' data-toggle='tooltip' title='Xóa' ><i onclick='programmes.restores(" + v.id + ")' class=\"fas fa-window-restore\"></i></a>" +
                         "</td>" +
                         "</tr>"
                     );
@@ -138,7 +138,7 @@
 
     programmes.search = function () {
         $.ajax({
-            url: "http://localhost:8080/api/programmes/search?name=" + document.getElementById("search").value,
+            url: "http://localhost:8080/api/programmes/close/search?name=" + document.getElementById("search").value,
             method: "GET",
             dataType: "json",
             success: function (data) {
@@ -170,13 +170,12 @@
                 $.each(data.content, function (i, v) {
                     i = stt
 
-                    let dele = false;
-                    let delet=true;
-                    if(v.deleted = dele){
-                        v.deleted ="<td style='color: red'>Đang Mở</td>"
+                    if(v.deleted == false){
+                        v.deleted ="<td style='color: #228B22'>Đang Mở</td>"
                     } else {
-                        v.deleted = "<td style='color: #228B22'>Đang Mở</td>"
+                        v.deleted = "<td style='color: red'>Đã Đóng</td>"
                     }
+
                     $('#showListProgrammes').append(
                         "<tr>" +
                         "<td>" + ++i + "</td>" +
@@ -186,11 +185,11 @@
                         +"<td>" + v.deleted + "</td>" +
                         "<td>" +
 
-                        "<a  href='#' onclick='programmes.editForm(" + v.id + ")'  ><i class=\"fas fa-edit\" ></i></a>"
+                        "<a  href='#' data-toggle='tooltip' title='Chỉnh Sửa' onclick='programmes.editForm(" + v.id + ")'  ><i class=\"fas fa-edit\" ></i></a>"
                         +
-                        "<a style='padding-left: 35px'  href='#' onclick='programmes.view(" + v.id + ")'  ><i class=\"fas fa-eye\"></i></a>"
+                        "<a style='padding-left: 35px'  href='#' data-toggle='tooltip' title='Chi Tiết' onclick='programmes.view(" + v.id + ")'  ><i class=\"fas fa-eye\"></i></a>"
                         +
-                        "<a style='padding-left: 35px'    ><i onclick='programmes.delete(" + v.id + ")' class=\"fas fa-trash-alt\"></i></a>" +
+                        "<a style='padding-left: 35px'  href='#' data-toggle='tooltip' title='Xóa'  ><i onclick='programmes.delete(" + v.id + ")' class=\"fas fa-trash-alt\"></i></a>" +
                         "</td>" +
                         "</tr>"
                     );

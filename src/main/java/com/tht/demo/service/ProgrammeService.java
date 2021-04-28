@@ -20,4 +20,7 @@ public interface ProgrammeService {
     Page<Programme> findAllByDeletedIsTrue(Pageable pageable);
 
     void restoreProgramme(Long id);
+
+
+    Page<Programme> findAllByProgrammeNameContainingAndDeletedIsTrue(String name, Pageable pageable);
 }
