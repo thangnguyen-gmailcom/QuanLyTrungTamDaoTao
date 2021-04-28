@@ -125,11 +125,11 @@
                         <td> ${date} </td>
                         <td> ${v.teacher.fullname} </td>
                         <td>
-                        <a  href='#' onclick='classRoom.editForm(${v.id})'  ><i class=\"fas fa-edit\" ></i></a>
+                        <a   href='#' data-toggle='tooltip' title='Chỉnh Sửa' onclick='classRoom.editForm(${v.id})'  ><i class=\"fas fa-edit\" ></i></a>
 
-                        <a style='padding-left: 35px'  href='#' onclick='classRoom.view( ${v.id} )'  ><i class=\"fas fa-eye\"></i></a>
+                        <a style='padding-left: 15%'   href='#' data-toggle='tooltip' title='Chi Tiết' onclick='classRoom.view( ${v.id} )'  ><i class=\"fas fa-eye\"></i></a>
 
-                        <a style='padding-left: 35px'    ><i onclick='classRoom.delete( ${v.id})' class=\"fas fa-trash-alt\"></i></a>
+                        <a style='padding-left: 15%'  href='#' data-toggle='tooltip' title='Xóa'   ><i onclick='classRoom.delete( ${v.id})' class=\"fas fa-trash-alt\"></i></a>
                         </td>
                         </tr>`
                     );
@@ -183,11 +183,11 @@
                         <td> ${date} </td>
                         <td> ${v.teacher.fullname} </td>
                         <td>
-                        <a  href='#' onclick='classRoom.editForm(${v.id})'  ><i class=\"fas fa-edit\" ></i></a>
+                        <a   href='#' data-toggle='tooltip' title='Chỉnh Sửa' onclick='classRoom.editForm(${v.id})'  ><i class=\"fas fa-edit\" ></i></a>
 
-                        <a style='padding-left: 35px'  href='#' onclick='classRoom.view( ${v.id} )'  ><i class=\"fas fa-eye\"></i></a>
+                        <a style='padding-left: 15%'  href='#' data-toggle='tooltip' title='Chi Tiết' onclick='classRoom.view( ${v.id} )'  ><i class=\"fas fa-eye\"></i></a>
 
-                        <a style='padding-left: 35px'    ><i onclick='classRoom.delete( ${v.id})' class=\"fas fa-trash-alt\"></i></a>
+                        <a style='padding-left: 15%'   href='#' data-toggle='tooltip' title='Xóa'  ><i onclick='classRoom.delete( ${v.id})' class=\"fas fa-trash-alt\"></i></a>
                         </td>
                         </tr>`
                     );
@@ -203,6 +203,36 @@
 
     classRoom.view = function (id){
         window.location = "/class/view?id="+id;
+    }
+
+    classRoom.delete = function (id) {
+        bootbox.confirm({
+            message: "Bạn có chắc muốn xóa không?",
+            buttons: {
+                cancel: {
+                    label: '<i class="fa fa-times">Không</i> '
+                },
+                confirm: {
+                    label: '<i class="fa fa-check"> Có</i>'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    $.ajax({
+                        url: "http://localhost:8080/api/classRoom/" + id,
+                        method: "DELETE",
+                        contentType: 'json',
+                        success: function (data) {
+                            window.Lobibox.notify('success', {
+                                size: 'mini',
+                                msg: "xóa thành công"
+                            });
+                            classRoom.showAll(0);
+                        }
+                    });
+                }
+            }
+        });
     }
 
     $(document).ready(function (){
