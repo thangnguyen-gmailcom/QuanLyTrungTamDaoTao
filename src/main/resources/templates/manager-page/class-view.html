@@ -201,6 +201,10 @@
 
     // lưu điểm
     point.save = function (i, v) {
+        const record = document.getElementById(`record${i}`);
+        record.classList.add('bg-primary');
+        record.getElementsByTagName("td")[0].classList.add('text-white');
+        record.getElementsByTagName("td")[1].classList.add('text-white');
         const points = document.getElementsByClassName(`point${i}`);
         const arrayPoints = [];
         const arrayExamType = [];
@@ -225,7 +229,7 @@
                     size: 'mini',
                     msg: 'Thêm điểm cho học viên thành công'
                 });
-                classRoom.findAllStudent(0);
+                //classRoom.findAllStudent(0);
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 console.log(thrownError)
@@ -348,7 +352,7 @@
         });
         template += `
             <td>
-            <input type="number" value="${v.avgPoints}" id="avg${i}" class="form-control">
+            <input type="number" value="${v.avgPoints}" id="avg${i}" readonly class="form-control">
             </td>
             <td>
             <button onclick="point.save(${i},${v.id})" data-toggle="tooltip" title="Lưu"class="pd-setting-ed"><i class="fa fa-save" aria-hidden="true"></i>

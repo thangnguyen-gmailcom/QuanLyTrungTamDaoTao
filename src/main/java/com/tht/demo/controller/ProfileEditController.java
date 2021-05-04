@@ -31,7 +31,7 @@ public class ProfileEditController {
     private UserService userService;
 
     @GetMapping("")
-    public String profileEdit(Model model){
+    public String profileEdit(Model model) {
         try {
             Optional<User> user = userService.findByEmail(getPrincipal());
             model.addAttribute("user", user.get());
@@ -50,7 +50,10 @@ public class ProfileEditController {
             String result = null;
             Optional<User> staff1 = userService.findByPhoneNumber(user.getPhoneNumber());
             Optional<User> staff2 = userService.findByEmail("admin@gmail.com");
-            user.setStaffEditedId(staff2.get());
+            String admin = getPrincipal();
+            if (!admin.equals("admin@gmail.com")) {
+                user.setStaffEditedId(staff2.get());
+            }
             user.setEditedDate(LocalDateTime.now());
             if (staff1.isPresent()) {
                 if (!staff1.get().getPhoneNumber().equals(user.getPhoneNumber())) {
@@ -62,8 +65,7 @@ public class ProfileEditController {
                         result = this.saveUploadedFiles(request, imageUrl, user);
                         userService.save(user);
                         return "redirect:/profileEdit";
-                    }
-                    catch (IOException e) {
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
@@ -72,7 +74,7 @@ public class ProfileEditController {
             try {
                 result = this.saveUploadedFiles(request, imageUrl, user);
                 userService.save(user);
-            }catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
             return "redirect:/profileEdit";
@@ -81,7 +83,7 @@ public class ProfileEditController {
 
     // Save Files
     private String saveUploadedFiles(HttpServletRequest request, MultipartFile[] files, User user) throws IOException {
-        String UPLOAD_DIR = System.getProperty("user.dir")+"/src/main/resources/static/upload";
+        String UPLOAD_DIR = System.getProperty("user.dir") + "/src/main/resources/static/upload";
         String uploadRootPath = request.getServletContext().getRealPath("upload");
 
         System.out.println("uploadRootPath=" + uploadRootPath);
@@ -92,7 +94,7 @@ public class ProfileEditController {
         if (!uploadRootDir.exists()) {
             uploadRootDir.mkdirs();
         }
-        if(!uploadDir.exists()){
+        if (!uploadDir.exists()) {
             uploadDir.mkdirs();
         }
         for (MultipartFile fileData : files) {
