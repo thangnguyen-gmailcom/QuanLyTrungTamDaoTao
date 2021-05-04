@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CourseRepository extends JpaRepository<Course , Long> {
-    Optional<Course> findByCourseName(String name);
+    Optional<Course> findByCourseNameAndDeletedIsFalse(String name);
 
     @Modifying
     @Query("update Course c set c.deleted = true where c.id = :id")

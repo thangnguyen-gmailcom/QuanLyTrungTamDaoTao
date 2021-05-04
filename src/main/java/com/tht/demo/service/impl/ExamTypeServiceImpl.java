@@ -36,7 +36,7 @@ public class ExamTypeServiceImpl implements ExamTypeService {
 
     @Override
     public Optional<ExamType> findByTitle(String name) {
-        return examTypeRepository.findByTitle(name);
+        return examTypeRepository.findByTitleAndDeletedIsFalse(name);
     }
 
     @Override

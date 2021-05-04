@@ -45,7 +45,7 @@ private LessonRepository lessonRepository;
 
     @Override
     public Optional<Programme> findByProgrammeName(String name) {
-        return programmeRepository.findByProgrammeName(name);
+        return programmeRepository.findByProgrammeNameAndDeletedIsFalse(name);
     }
 
     @Override

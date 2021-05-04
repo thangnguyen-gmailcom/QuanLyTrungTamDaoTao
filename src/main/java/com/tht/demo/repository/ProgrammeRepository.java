@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProgrammeRepository extends JpaRepository<Programme,Long> {
-    Optional<Programme> findByProgrammeName(String name);
+    Optional<Programme> findByProgrammeNameAndDeletedIsFalse(String name);
 
     @Modifying
     @Query("update Programme p set p.deleted = true where p.id = :id")
