@@ -22,6 +22,6 @@ public class CustomLoginFailureHandler implements AuthenticationFailureHandler {
             message = "sai tên đăng nhập và mật khẩu";
         }
 
-        httpServletRequest.getRequestDispatcher(String.format("/login/error?message%s=",message)).forward(httpServletRequest,httpServletResponse);
+        httpServletRequest.getRequestDispatcher(String.format("/login/error?message=%s",message)).forward(httpServletRequest,httpServletResponse);
     }
 }

@@ -22,11 +22,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public AuthenticationFailureHandler authenticationFailureHandler(){
-        return new CustomLoginFailureHandler();
-    }
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
         auth.userDetailsService(myUserDetailsService).passwordEncoder(bCryptPasswordEncoder());
@@ -36,7 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity https) throws Exception {
         https   .csrf().disable()
                 .authorizeRequests()
-                    .antMatchers("/manager**","/courses**","/programme**","lesson**").hasAnyAuthority("ROLE_ADMIN","ROLE_MINISTRY","ROLE_TEACHER")
+                    .antMatchers("/manager**","/courses**","/programme**","/lesson**","/class/**").hasAnyAuthority("ROLE_ADMIN","ROLE_MINISTRY","ROLE_TEACHER")
                 .antMatchers("/blogManager**","/programme**","/courses**","/lesson**","/exampleType**","/student**","/mail").hasAnyAuthority("ROLE_ADMIN","ROLE_MINISTRY")
                 .antMatchers("/staff**").hasAuthority("ROLE_ADMIN")
                 .antMatchers("/profile**","/timetable**").hasAnyAuthority("ROLE_ADMIN","ROLE_MINISTRY","ROLE_TEACHER","ROLE_STUDENT")
@@ -48,7 +43,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/blogPage")
-                .failureHandler(authenticationFailureHandler())
+                .failureHandler(new CustomLoginFailureHandler())
                 .and()
                 .exceptionHandling().accessDeniedPage("/login/login")
                 .and()
