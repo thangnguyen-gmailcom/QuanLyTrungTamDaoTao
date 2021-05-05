@@ -2,9 +2,11 @@ package com.tht.demo.controller.blogPage;
 
 
 import com.tht.demo.dto.MyUserDetails;
+import com.tht.demo.model.Banner;
 import com.tht.demo.model.Blog;
 import com.tht.demo.model.Programme;
 import com.tht.demo.model.User;
+import com.tht.demo.service.BannerService;
 import com.tht.demo.service.BlogService;
 import com.tht.demo.service.ProgrammeService;
 import com.tht.demo.service.UserService;
@@ -35,11 +37,17 @@ public class BlogPageController {
     private UserService userService;
 
     @Autowired
+    private BannerService bannerService;
+
+    @Autowired
     private ProgrammeService programmeService;
     @GetMapping("")
     public String index(Model model, Pageable pageable, HttpSession session){
         Page<User> teacherList = userService.showAllTeacher(pageable);
         Page<Programme> programmeList = programmeService.showAll(pageable);
+        Page<Banner> bannerList = bannerService.findLimit(pageable);
+        System.out.println(bannerList);
+        model.addAttribute("bannerList",bannerList);
         model.addAttribute("programmeList",programmeList);
         model.addAttribute("teacherList",teacherList);
         return "blog-page/index";
