@@ -387,7 +387,6 @@ section {
 }
 
 .home-slider .item-first {
-  background-image: url(../images/slider-image1.jpg);
   background-position: center;
 }
 
@@ -397,6 +396,12 @@ section {
 
 .home-slider .item-third {
   background-image: url(../images/slider-image3.jpg);
+}
+
+.caption {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 /*---------------------------------------
