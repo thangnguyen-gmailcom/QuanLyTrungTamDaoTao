@@ -52,7 +52,7 @@ public class CourseController {
             }
 
             String name = course.getCourseName();
-            Optional<Course> course1 = courseRepository.findByCourseName(name);
+            Optional<Course> course1 = courseRepository.findByCourseNameAndDeletedIsFalse(name);
             if (course1 == null || course1.isEmpty()) {
                 courseService.save(course);
                 attributes.addFlashAttribute("mess", "Thêm mới thành công...!!!");
