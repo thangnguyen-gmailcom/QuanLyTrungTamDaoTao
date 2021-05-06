@@ -145,6 +145,9 @@
 
 <footer th:replace="/manager-page/layout::scrip"></footer>
 <script type="text/javascript">
+    let apiUrl = "asdfa";
+    // let apiUrl = "http://localhost:8080/api";
+
     var attends = {};
     var students = {};
     var timeTables = {};
@@ -155,7 +158,7 @@
 
     students.findStudentById = function (id) {
         return $.ajax({
-            url: "http://localhost:8080/api/user/student/" + id,
+            url: apiUrl+"/api/user/student/" + id,
             method: "GET",
             dataType: "json",
         })
