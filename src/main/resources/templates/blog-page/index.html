@@ -16,43 +16,45 @@
 <section id="home">
     <div class="row">
         <div class="owl-carousel owl-theme home-slider">
-            <div class="item item-first">
-                <div class="caption">
-                    <div class="container">
-                        <div class="col-md-6 col-sm-12">
-                            <h1>Những Con Số Ngoạn Mục</h1>
-                            <a href="#feature" class="section-btn btn btn-default smoothScroll">Discover more</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="item item-second">
-                <div class="caption">
-                    <div class="container">
-                        <div class="col-md-6 col-sm-12">
-                            <h1>Giao tiếp tiếng Anh thành thạo với hơn 1,600 giảng viên từ Âu – Úc – Mỹ</h1>
-                            <h3>Các khóa học trực tuyến và trực tiếp theo nhóm nhỏ từ 8h – 24h của chúng tôi cho phép
-                                bạn học tiếng Anh ở mọi lúc, mọi nơi, mọi thiết bị.</h3>
-                            <a href="#courses" class="section-btn btn btn-default smoothScroll">Take a course</a>
+            <th:block th:each="banner : ${bannerList}">
+                <div class="item item-first">
+                    <div class="caption"  th:style="'background-image: url('+'/upload/' + ${{banner.getImage()}} + ');'">
+                        <div class="container">
+                            <div class="col-md-6 col-sm-12">
+                                <h1 th:utext="${banner.getDescription()}"></h1>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </th:block>
 
-            <div class="item item-third">
-                <div class="caption">
-                    <div class="container">
-                        <div class="col-md-6 col-sm-12">
-                            <h1>Tiếp Nhận Ngôn Ngữ - Thay Đổi Bản Thân</h1>
-                            <h3>Trong thế giới phẳng ngày nay, học ngoại ngữ để kết nối và nắm bắt những cơ hội thành
-                                công mới.<a rel="nofollow" href="https://www.facebook.com/templatemo">templatemo</a>
-                                page.</h3>
-                            <a href="#contact" class="section-btn btn btn-default smoothScroll">Let's chat</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!--            <div class="item item-second">-->
+<!--                <div class="caption">-->
+<!--                    <div class="container">-->
+<!--                        <div class="col-md-6 col-sm-12">-->
+<!--                            <h1>Giao tiếp tiếng Anh thành thạo với hơn 1,600 giảng viên từ Âu – Úc – Mỹ</h1>-->
+<!--                            <h3>Các khóa học trực tuyến và trực tiếp theo nhóm nhỏ từ 8h – 24h của chúng tôi cho phép-->
+<!--                                bạn học tiếng Anh ở mọi lúc, mọi nơi, mọi thiết bị.</h3>-->
+<!--                            <a href="#courses" class="section-btn btn btn-default smoothScroll">Take a course</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="item item-third">-->
+<!--                <div class="caption">-->
+<!--                    <div class="container">-->
+<!--                        <div class="col-md-6 col-sm-12">-->
+<!--                            <h1>Tiếp Nhận Ngôn Ngữ - Thay Đổi Bản Thân</h1>-->
+<!--                            <h3>Trong thế giới phẳng ngày nay, học ngoại ngữ để kết nối và nắm bắt những cơ hội thành-->
+<!--                                công mới.<a rel="nofollow" href="https://www.facebook.com/templatemo">templatemo</a>-->
+<!--                                page.</h3>-->
+<!--                            <a href="#contact" class="section-btn btn btn-default smoothScroll">Let's chat</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
     </div>
 </section>

@@ -65,7 +65,7 @@ public class ProgrammeController {
                 return "manager-page/programme-add";
             }
             String name = programme.getProgrammeName();
-            Optional<Programme> programme1 = programmeRepository.findByProgrammeName(name);
+            Optional<Programme> programme1 = programmeRepository.findByProgrammeNameAndDeletedIsFalse(name);
             if (programme1 == null || programme1.isEmpty()) {
                 programmeService.save(programme);
                 for (int i = 0; i < programme.getLessons(); i++) {

@@ -1,8 +1,9 @@
 package com.tht.demo.controller.api;
 
+
+import com.tht.demo.model.Banner;
 import com.tht.demo.model.Blog;
-import com.tht.demo.model.ExamType;
-import com.tht.demo.service.BlogService;
+import com.tht.demo.service.BannerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,32 +14,30 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 @RestController
-@RequestMapping(value = "/api/blogs")
-public class APIBlogMangerController {
+@RequestMapping(value = "/api/banner")
+public class APIBannerController {
+
     @Autowired
-    private BlogService blogService;
+    private BannerService bannerService;
+
 
     @GetMapping("")
-    public ResponseEntity<?> showAll( @RequestParam(value = "page",required = false,defaultValue = "0") int page
+    public ResponseEntity<?> showAll(@RequestParam(value = "page",required = false,defaultValue = "0") int page
     ) {
         try {
-            Page<Blog> blogs = blogService.showAll(PageRequest.of(page,6,Sort.by("id").descending()));
+            Page<Banner> banners = bannerService.showAll(PageRequest.of(page,6, Sort.by("id").descending()));
 
-            return new ResponseEntity<>(blogs, HttpStatus.OK);
+            return new ResponseEntity<>(banners, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable long id){
         try {
-            blogService.delete(id);
+            bannerService.delete(id);
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -46,10 +45,10 @@ public class APIBlogMangerController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<?> search(@RequestParam String title,@PageableDefault(size = 8) Pageable pageable
+    public ResponseEntity<?> search(@RequestParam String description,@PageableDefault(size = 6) Pageable pageable
     ){
         try {
-            return new ResponseEntity<>(blogService.findAllByTitleContainingAndDeletedIsFalse(title,pageable), HttpStatus.OK);
+            return new ResponseEntity<>(bannerService.search(description,pageable), HttpStatus.OK);
         }catch (Exception e){
             System.out.println(e);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

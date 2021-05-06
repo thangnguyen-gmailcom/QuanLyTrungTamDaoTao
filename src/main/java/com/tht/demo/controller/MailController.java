@@ -60,7 +60,7 @@ public class MailController {
     public String sendEmailStudent(@RequestParam("to") String to, @RequestParam("content") String content, @RequestParam("subject") String subject, Pageable pageable, RedirectAttributes attributes) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
 
-        ClassRoom classRoom = classRoomRepository.findByClassName(to).orElse(null);
+        ClassRoom classRoom = classRoomRepository.findByClassNameAndDeletedIsFalse(to).orElse(null);
 
         List<StudentClass> studentClass = classRoom.getStudentClasses();
         List<User> users = new ArrayList<>();

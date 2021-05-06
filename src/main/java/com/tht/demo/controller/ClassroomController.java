@@ -61,10 +61,10 @@ public class ClassroomController {
             classRoom.setCreatedDate(LocalDateTime.now());
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             classRoom.setStartDate(LocalDate.parse(dateStart,formatter));
-            Optional<ClassRoom> classRoom1 = classRoomService.findByName(classRoom.getClassName());
+            Optional<ClassRoom> classRoom1 = classRoomService.findByClassNameAndDeletedIsFalse(classRoom.getClassName());
             if(classRoom1.isPresent()){
                 redirect.addFlashAttribute("error","tên lớp đã tồn tại");
-                return "redirect:/class/add";
+                return "redirect:/class";
             }
             classRoomService.save(classRoom);
             redirect.addFlashAttribute("mess", "Tạo lớp thành công");
@@ -86,7 +86,7 @@ public class ClassroomController {
         if(result.hasFieldErrors()){
             return "manager-page/class-edit";
         }else {
-            Optional<ClassRoom> classRoom1 = classRoomService.findByName(classRoom.getClassName());
+            Optional<ClassRoom> classRoom1 = classRoomService.findByClassNameAndDeletedIsFalse(classRoom.getClassName());
             if(classRoom1.isPresent()){
                 if(!classRoom1.get().getClassName().equals(classRoom.getClassName())){
                     redirect.addFlashAttribute("error","tên lớp đã tồn tại");

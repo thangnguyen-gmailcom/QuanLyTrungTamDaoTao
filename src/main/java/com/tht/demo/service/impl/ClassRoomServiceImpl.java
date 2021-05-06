@@ -60,8 +60,8 @@ public class ClassRoomServiceImpl implements ClassRoomService {
     }
 
     @Override
-    public Optional<ClassRoom> findByName(String className) {
-        return classRoomRepository.findByClassName(className);
+    public Optional<ClassRoom> findByClassNameAndDeletedIsFalse(String className) {
+        return classRoomRepository.findByClassNameAndDeletedIsFalse(className);
     }
 
     @Override

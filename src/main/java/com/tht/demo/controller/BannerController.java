@@ -2,13 +2,13 @@ package com.tht.demo.controller;
 
 
 import com.tht.demo.dto.MyUserDetails;
+import com.tht.demo.model.Banner;
 import com.tht.demo.model.Blog;
-import com.tht.demo.model.ExamType;
 import com.tht.demo.model.User;
-import com.tht.demo.repository.BlogRepository;
-import com.tht.demo.service.BlogService;
+import com.tht.demo.service.BannerService;
 import com.tht.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -29,86 +29,95 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/blogManager")
-public class BlogManagerController {
-    @Autowired
-    private BlogService blogService;
+@RequestMapping("/banner")
+public class BannerController {
+
     @Autowired
     private UserService userService;
+
     @Autowired
-    private BlogRepository blogRepository;
+    private BannerService bannerService;
+
 
     @GetMapping("")
-    public String blogManagerList() {
-        return "manager-page/blog-manager-list";
-    }
+    public String showAll(){return "manager-page/banner-list";}
+
 
     @GetMapping("/add")
     public String add(Model model) {
-        model.addAttribute("blog", new Blog());
-        return "manager-page/blog-manager-add";
+        model.addAttribute("banner", new Banner());
+        return "manager-page/banner-add";
     }
 
     @PostMapping("/add")
-    public String doAdd(HttpServletRequest request,@Valid @ModelAttribute("blog") Blog blog, BindingResult result, RedirectAttributes attributes) {
+    public String doAdd(HttpServletRequest request, @Valid @ModelAttribute("banner") Banner banner, BindingResult result, RedirectAttributes attributes, Pageable pageable) {
 
         try {
             if (result.hasFieldErrors()) {
-                return "manager-page/blog-manager-add";
+                return "manager-page/banner-add";
             }
             String res = null;
-            Optional<User> staff = userService.findByEmail(getPrincipal());
-            if(blog.getImage().isEmpty()){
-                blog.setImage("default-image.jpg");
+            Page<Banner> bannerList = bannerService.showAll(pageable);
+            for (Banner tempBanner : bannerList) {
+                if ((tempBanner.getDescription()).equals(banner.getDescription()) && (tempBanner.getId()) != banner.getId()) {
+                    attributes.addFlashAttribute("error", "Nội dung đã tồn tại...!!!");
+                    return "redirect:/banner";
+                }
             }
-            blog.setUser(staff.get());
-            blog.setCreatedDate(LocalDateTime.now());
-            res = this.saveUploadedFiles(request,blog.getImageUrl(), blog);
-            blogService.save(blog);
+
+
+            Optional<User> staff = userService.findByEmail(getPrincipal());
+            if(banner.getImage().isEmpty()){
+                banner.setImage("default-image.jpg");
+            }
+
+            res = this.saveUploadedFiles(request,banner.getImageUrl(), banner);
+            bannerService.save(banner);
             attributes.addFlashAttribute("mess", "Thêm mới thành công...!!!");
-            return "redirect:/blogManager";
+            return "redirect:/banner";
         } catch (Exception e) {
             attributes.addFlashAttribute("error", "error");
-            return "redirect:/blogManager";
+            return "redirect:/banner";
         }
     }
 
 
     @GetMapping("/edit/{id}")
     public String edit( @PathVariable long id, Model model)  {
-        Optional<Blog> blog = blogService.findById(id);
-        if (blog != null) {
-            model.addAttribute("blog", blog.get());
-            return "manager-page/blog-manager-edit";
+        Optional<Banner> banner = bannerService.findById(id);
+        if (banner != null) {
+            model.addAttribute("banner", banner.get());
+            return "manager-page/banner-edit";
         } else {
             return "error";
         }
     }
 
     @PostMapping("/edit")
-    public String doEdit(HttpServletRequest request,@Valid @ModelAttribute("blog") Blog blog, BindingResult result, RedirectAttributes attributes) {
+    public String doEdit(HttpServletRequest request, @Valid @ModelAttribute("banner") Banner banner, BindingResult result, RedirectAttributes attributes, Pageable pageable) {
         try {
             if (result.hasErrors()) {
-                return "manager-page/blog-manager-edit";
+                return "manager-page/banner-edit";
             }
             String res = null;
-            List<Blog> blogs = blogRepository.findAll();
-            for (Blog blog1 : blogs) {
-                if ((blog.getTitle()).equals(blog1.getTitle()) && (blog.getId()) != blog1.getId()) {
-                    attributes.addFlashAttribute("error", "Tên tiêu đề đã tồn tại...!!!");
-                    return "/manager-page/blog-manager-edit";
+            Page<Banner> bannerList = bannerService.showAll(pageable);
+            for (Banner tempBanner : bannerList) {
+                if ((tempBanner.getDescription()).equals(banner.getDescription()) && (tempBanner.getId()) != banner.getId()) {
+                    attributes.addFlashAttribute("error", "Nội dung đã tồn tại...!!!");
+                    return "redirect:/banner";
                 }
             }
-            res= this.saveUploadedFiles(request, blog.getImageUrl(), blog);
-            blog.setCreatedDate(LocalDateTime.now());
-            blogService.save(blog);
+            res= this.saveUploadedFiles(request, banner.getImageUrl(), banner);
+            bannerService.save(banner);
             attributes.addFlashAttribute("mess", "Thay đổi thành công...!!!");
         } catch (Exception e) {
             e.getMessage();
-            attributes.addFlashAttribute("error", "Error");
+            attributes.addFlashAttribute("error", "Có Lỗi Xảy Ra");
         }
-        return "redirect:/blogManager";
+        return "redirect:/banner";
     }
+
+
 
     private String getPrincipal() {
         String userName = null;
@@ -121,7 +130,7 @@ public class BlogManagerController {
         }
         return userName;
     }
-    private String saveUploadedFiles(HttpServletRequest request, MultipartFile[] files, Blog blog) throws IOException {
+    private String saveUploadedFiles(HttpServletRequest request, MultipartFile[] files, Banner banner) throws IOException {
         String UPLOAD_DIR = System.getProperty("user.dir")+"/src/main/resources/static/upload";
         String uploadRootPath = request.getServletContext().getRealPath("upload");
 
@@ -156,7 +165,7 @@ public class BlogManagerController {
                     BufferedOutputStream streamLocal = new BufferedOutputStream(new FileOutputStream(localFile));
                     streamLocal.write(fileData.getBytes());
                     streamLocal.close();
-                    blog.setImage(name);
+                    banner.setImage(name);
                     System.out.println("Write file: " + serverFile);
                 } catch (Exception e) {
                     System.out.println("Error Write file: " + name);
@@ -165,6 +174,4 @@ public class BlogManagerController {
         }
         return uploadRootDir.toString();
     }
-
-
 }

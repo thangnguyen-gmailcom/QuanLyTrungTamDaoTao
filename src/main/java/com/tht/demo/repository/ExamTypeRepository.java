@@ -12,7 +12,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.Optional;
 
 public interface ExamTypeRepository extends JpaRepository<ExamType , Long> {
-    Optional<ExamType> findByTitle(String name);
+    Optional<ExamType> findByTitleAndDeletedIsFalse(String name);
 
     @Modifying
     @Query("update ExamType e set e.deleted = true where e.id = :id")
