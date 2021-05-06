@@ -99,12 +99,14 @@
 </body>
 
 <script>
+    let apiUrl = "https://tht-center.herokuapp.com";
+    // let apiUrl = "http://localhost:8080/api";
     var blogs = {};
     let stt = 1;
 
     blogs.showAll = function (page) {
         $.ajax({
-            url: "http://localhost:8080/api/blogPages?page=" + page,
+            url: apiUrl+"/blogPages?page=" + page,
             method: "GET",
             dataType: "json",
             success: function (data) {
