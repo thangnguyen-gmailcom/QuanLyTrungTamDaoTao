@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<head th:replace="/blog-page/layout::header"/>
+<head th:replace="/blog-page/layout.html::header"/>
 
 
 <body>
 <!-- PRE LOADER -->
-<div th:replace="/blog-page/layout::preloader"/>
+<div th:replace="/blog-page/layout.html::preloader"/>
 
 
 <!-- MENU -->
-<div th:replace="/blog-page/layout::menu2"/>
+<div th:replace="/blog-page/layout.html::menu2"/>
 
 <!-- HOME -->
 
@@ -95,8 +95,8 @@
 </footer>
 
 <!--SCRIPT-->
-<th:block th:replace="/blog-page/layout::scrip"/>
-</body>
+<th:block th:replace="/blog-page/layout.html::scrip"/>
+</body>t
 
 <script>
     let apiUrl = "https://tht-center.herokuapp.com";
