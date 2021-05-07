@@ -11,15 +11,15 @@
 
 
 <!-- Start Left menu area -->
-<div th:replace="/manager-page/layout::left-sidebar-pro">
+<div th:replace="manager-page/layout.html::left-sidebar-pro">
 </div>
 <!-- End Left menu area -->
 
 
 <!-- Start Welcome area -->
 <div class="all-content-wrapper">
-    <div th:replace="/manager-page/layout::container-fluid"/>
-    <div th:replace="/manager-page/layout::header-advance-area"></div>
+    <div th:replace="manager-page/layout.html::container-fluid"/>
+    <div th:replace="manager-page/layout.html::header-advance-area"></div>
     <div class="product-status mg-b-15" style="margin-top: 3%">
         <div class="container-fluid">
             <div class="row">
@@ -177,9 +177,10 @@
     </div>
 </div>
 
-<footer th:replace="/manager-page/layout::scrip"></footer>
+<footer th:replace="manager-page/layout.html::scrip"></footer>
 <script type="text/javascript">
-
+    let apiUrl = "https://tht-center.herokuapp.com";
+    // let apiUrl = "http://localhost:8080/api";
     var classRoom = {};
     var examType = {};
     var point = {};
@@ -218,7 +219,7 @@
             examTypes: arrayExamType
         }
         $.ajax({
-            url: "http://localhost:8080/api/point/",
+            url: apiUrl+"/point/",
             method: "POST",
             dataType: "json",
             contentType: "application/json",
@@ -244,7 +245,7 @@
     // xuất ra danh sách thể loại điểm
     examType.findAllExamList = function (page) {
         $.ajax({
-            url: "http://localhost:8080/api/examTypes?page=" + page,
+            url: apiUrl+"/examTypes?page=" + page,
             method: "GET",
             dataType: "json",
             success: function (data) {
@@ -266,7 +267,7 @@
     classRoom.findAllStudent = function (page) {
         let idClassRoom = $('#idClassRoom').val();
         $.ajax({
-            url: "http://localhost:8080/api/studentClass/" + idClassRoom + "?page=" + page,
+            url: apiUrl+"/studentClass/" + idClassRoom + "?page=" + page,
             method: "GET",
             data: "json",
             success: function (data) {
@@ -377,7 +378,7 @@
             callback: function (result) {
                 if (result) {
                     $.ajax({
-                        url: "http://localhost:8080/api/studentClass/" + id,
+                        url: apiUrl+"/studentClass/" + id,
                         method: "PATCH",
                         contentType: 'json',
                         success: function (data) {
@@ -399,7 +400,7 @@
         $('#search').empty('');
         $('#search').val(email);
         $.ajax({
-            url: "http://localhost:8080/api/user/" + email,
+            url: apiUrl+"/user/" + email,
             method: "GET",
             dataType: "json",
             success: function (data) {
@@ -415,7 +416,7 @@
         studentClass.classRoom = classR;
         studentClass.user = userStudent;
         $.ajax({
-            url: "http://localhost:8080/api/studentClass/",
+            url: apiUrl+"/studentClass/",
             method: "POST",
             dataType: "json",
             contentType: "application/json",
@@ -442,7 +443,7 @@
     classRoom.findById = function () {
         let id = $('#idClassRoom').val();
         $.ajax({
-            url: "http://localhost:8080/api/classRoom/" + id,
+            url: apiUrl+"/classRoom/" + id,
             method: "GET",
             dataType: "json",
             success: function (data) {
@@ -455,7 +456,7 @@
     timeT.findByClassRoomId = function (){
         let id = $('#idClassRoom').val();
         $.ajax({
-            url : "http://localhost:8080/api/timetable/view/"+id,
+            url : apiUrl+"/timetable/view/"+id,
             method : "GET",
             dataType : "json",
             success : function (data){
@@ -504,7 +505,7 @@
         let timeTableId = '#teacherNote'+id;
         var teacherNote = $(timeTableId).val();
         $.ajax({
-            url : "http://localhost:8080/api/timetable/"+id,
+            url : apiUrl+"/timetable/"+id,
             method: "PATCH",
             dataType: "json",
             contentType: "application/json",
@@ -532,7 +533,7 @@
         $('#search').keyup(function () {
             let searchEmail = $('#search').val();
             $.ajax({
-                url: "http://localhost:8080/api/user/?search=" + searchEmail + "&page=0",
+                url: apiUrl+"/user/?search=" + searchEmail + "&page=0",
                 method: "GET",
                 dataType: "json",
                 success: function (data) {

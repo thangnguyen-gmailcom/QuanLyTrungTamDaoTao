@@ -45,7 +45,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/blogPage")
                 .failureHandler(new CustomLoginFailureHandler())
                 .and()
-                .exceptionHandling().accessDeniedPage("/login/login")
+                .exceptionHandling().accessDeniedPage("/access_denied")
                 .and()
                 .logout()
                 .logoutUrl("/logout")

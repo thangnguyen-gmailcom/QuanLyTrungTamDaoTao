@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<header th:replace="/manager-page/layout::header"/>
+<header th:replace="manager-page/layout.html::header"/>
 
 <body>
 <!-- Start Left menu area -->
-<div th:replace="/manager-page/layout::left-sidebar-pro"/>
+<div th:replace="manager-page/layout.html::left-sidebar-pro"/>
 <!-- End Left menu area -->
 <!-- Start Welcome area -->
 <div class="all-content-wrapper">
-    <div th:replace="/manager-page/layout::container-fluid"/>
-    <div th:replace="/manager-page/layout::header-advance-area"/>
+    <div th:replace="manager-page/layout.html::container-fluid"/>
+    <div th:replace="manager-page/layout.html::header-advance-area"/>
     <div class="analytics-sparkle-area">
         <div class="container-fluid">
             <div class="row" style="margin-top: 50px">
@@ -121,6 +121,6 @@
 
 </div>
 
-<footer th:replace="/manager-page/layout::scrip"></footer>
+<footer th:replace="manager-page/layout.html::scrip"></footer>
 </body>
 </html>

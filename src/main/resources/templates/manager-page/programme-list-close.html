@@ -1,7 +1,7 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<header th:replace="/manager-page/layout::header"></header>
+<header th:replace="manager-page/layout.html::header"></header>
 
 <body>
 
@@ -13,15 +13,15 @@
 
 
 <!-- Start Left menu area -->
-<div th:replace="/manager-page/layout::left-sidebar-pro">
+<div th:replace="manager-page/layout.html::left-sidebar-pro">
 </div>
 <!-- End Left menu area -->
 
 
 <!-- Start Welcome area -->
 <div class="all-content-wrapper">
-    <div th:replace="/manager-page/layout::container-fluid"/>
-    <div th:replace="/manager-page/layout::header-advance-area"></div>
+    <div th:replace="manager-page/layout.html::container-fluid"/>
+    <div th:replace="manager-page/layout.html::header-advance-area"></div>
     <div class="product-status mg-b-15">
         <div class="container-fluid" style="margin-top: 3%">
             <div class="row">
@@ -64,17 +64,18 @@
     </div>
 </div>
 
-<footer th:replace="/manager-page/layout::scrip"></footer>
+<footer th:replace="manager-page/layout.html::scrip"></footer>
 </body>
 <script>
-
+    let apiUrl = "https://tht-center.herokuapp.com";
+    // let apiUrl = "http://localhost:8080/api";
     var programmes = programmes|| {};
     let stt = 1;
 
     programmes.showAllClose = function (page) {
         let search = $('#str').val();
         $.ajax({
-            url: "http://localhost:8080/api/programmes/close?page="+page,
+            url: apiUrl+"/programmes/close?page="+page,
             method: "GET",
             dataType: "json",
             success: function (data) {
@@ -138,7 +139,7 @@
 
     programmes.search = function () {
         $.ajax({
-            url: "http://localhost:8080/api/programmes/close/search?name=" + document.getElementById("search").value,
+            url: apiUrl+"/programmes/close/search?name=" + document.getElementById("search").value,
             method: "GET",
             dataType: "json",
             success: function (data) {
@@ -215,7 +216,7 @@
             callback: function (result) {
                 if (result) {
                     $.ajax({
-                        url:"http://localhost:8080/api/programmes/restore/" + id,
+                        url:apiUrl+"/programmes/restore/" + id,
                         method: "GET",
                         contentType: 'json',
                         success: function (data) {

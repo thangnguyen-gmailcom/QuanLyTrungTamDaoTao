@@ -1,7 +1,7 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<header th:replace="/manager-page/layout::header"></header>
+<header th:replace="manager-page/layout.html::header"></header>
 
 <body>
 <!--[if lt IE 8]>
@@ -10,14 +10,14 @@
 
 
 <!-- Start Left menu area -->
-<div th:replace="/manager-page/layout::left-sidebar-pro">
+<div th:replace="manager-page/layout.html::left-sidebar-pro">
 </div>
 <!-- End Left menu area -->
 
 <!-- Start Welcome area -->
 <div class="all-content-wrapper">
-    <div th:replace="/manager-page/layout::container-fluid"/>
-    <div th:replace="/manager-page/layout::header-advance-area"/>
+    <div th:replace="manager-page/layout.html::container-fluid"/>
+    <div th:replace="manager-page/layout.html::header-advance-area"/>
     <div class="blog-details-area mg-b-15" style="margin-top: 3%;">
         <div class="container-fluid">
             <div class="row">
@@ -53,7 +53,7 @@
     </div>
 </div>
 
-<footer th:replace="/manager-page/layout::scrip"></footer>
+<footer th:replace="manager-page/layout.html::scrip"></footer>
 </body>
 
 </html>

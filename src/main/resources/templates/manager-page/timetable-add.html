@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 
-<header th:replace="/manager-page/layout::header"></header>
+<header th:replace="manager-page/layout.html::header"></header>
 
 <body>
 <!--[if lt IE 8]>
@@ -12,15 +12,15 @@
 
 
 <!-- Start Left menu area -->
-<div th:replace="/manager-page/layout::left-sidebar-pro">
+<div th:replace="manager-page/layout.html::left-sidebar-pro">
 </div>
 <!-- End Left menu area -->
 
 
 <!-- Start Welcome area -->
 <div class="all-content-wrapper">
-    <div th:replace="/manager-page/layout::container-fluid"/>
-    <div th:replace="/manager-page/layout::header-advance-area"/>
+    <div th:replace="manager-page/layout.html::container-fluid"/>
+    <div th:replace="manager-page/layout.html::header-advance-area"/>
     <!-- Single pro tab review Start-->
     <div class="single-pro-review-area mt-t-30 mg-b-15" style="margin-top: 3%;">
         <div class="container-fluid">
@@ -163,13 +163,15 @@
     </div>
 </div>
 
-<footer th:replace="/manager-page/layout::scrip"></footer>
+<footer th:replace="manager-page/layout.html::scrip"></footer>
 <script type="text/javascript">
+    let apiUrl = "https://tht-center.herokuapp.com";
+    // let apiUrl = "http://localhost:8080/api";
     const timeTables = {};
     const classRoom = {};
     classRoom.findAll = function (){
         $.ajax({
-            url : "http://localhost:8080/api/classRoom/",
+            url : apiUrl+"/classRoom/",
             method : "GET",
             dataType : "json",
             success : function (data){
@@ -198,7 +200,7 @@
         timeTableData.classId = $('#classRoom').val();
 
         $.ajax({
-            url: "http://localhost:8080/api/timetable/",
+            url: apiUrl+"/timetable/",
             method: "POST",
             dataType: "json",
             contentType: "application/json",

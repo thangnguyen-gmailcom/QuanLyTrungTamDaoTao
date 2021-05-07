@@ -1,7 +1,7 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<header th:replace="/manager-page/layout::header"></header>
+<header th:replace="manager-page/layout.html::header"></header>
 
 <body>
 <!--[if lt IE 8]>
@@ -11,15 +11,15 @@
 
 
 <!-- Start Left menu area -->
-<div th:replace="/manager-page/layout::left-sidebar-pro">
+<div th:replace="manager-page/layout.html::left-sidebar-pro">
 </div>
 <!-- End Left menu area -->
 
 
 <!-- Start Welcome area -->
 <div class="all-content-wrapper">
-    <div th:replace="/manager-page/layout::container-fluid"/>
-    <div th:replace="/manager-page/layout::header-advance-area"></div>
+    <div th:replace="manager-page/layout.html::container-fluid"/>
+    <div th:replace="manager-page/layout.html::header-advance-area"></div>
     <div class="contacts-area mg-b-15">
         <div class="container-fluid">
             <div class="row" style="background-color: white;margin-top: 3%;margin-left:0%; width: 100%">
@@ -65,14 +65,16 @@
 </div>
 
 
-<footer th:replace="/manager-page/layout::scrip"></footer>
+<footer th:replace="manager-page/layout.html::scrip"></footer>
 
 
 <script type="text/javascript">
+    let apiUrl = "https://tht-center.herokuapp.com";
+    // let apiUrl = "http://localhost:8080/api";
     var users = {};
     users.findAllEmployee = function (page) {
         $.ajax({
-            url: "http://localhost:8080/api/user?page=" + page,
+            url: apiUrl+"/user?page=" + page,
             method: "GET",
             dataType: "json",
             success: function (data) {
@@ -145,7 +147,7 @@
 
     users.search = function () {
         $.ajax({
-            url: "http://localhost:8080/api/user/search?name=" + document.getElementById("search").value,
+            url: apiUrl+"/user/search?name=" + document.getElementById("search").value,
             method: "GET",
             dataType: "json",
             success: function (data) {
@@ -237,7 +239,7 @@
             callback: function (result) {
                 if (result) {
                     $.ajax({
-                        url: "http://localhost:8080/api/user/"+id,
+                        url: apiUrl+"/user/"+id,
                         method: "PATCH",
                         contentType: 'json',
                         success: function (data) {

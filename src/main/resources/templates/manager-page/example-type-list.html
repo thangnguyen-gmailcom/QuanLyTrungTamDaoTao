@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 
-<header th:replace="/manager-page/layout::header"></header>
+<header th:replace="manager-page/layout.html::header"></header>
 
 <body>
 <!--[if lt IE 8]>
@@ -11,15 +11,15 @@
 
 
 <!-- Start Left menu area -->
-<div th:replace="/manager-page/layout::left-sidebar-pro">
+<div th:replace="manager-page/layout.html::left-sidebar-pro">
 </div>
 <!-- End Left menu area -->
 
 
 <!-- Start Welcome area -->
 <div class="all-content-wrapper">
-    <div th:replace="/manager-page/layout::container-fluid"/>
-    <div th:replace="/manager-page/layout::header-advance-area"/>
+    <div th:replace="manager-page/layout.html::container-fluid"/>
+    <div th:replace="manager-page/layout.html::header-advance-area"/>
     <!-- Single pro tab review Start-->
     <div class="product-status mg-b-15">
         <div class="container-fluid" style="margin-top: 3%">
@@ -75,15 +75,17 @@
     </div>
 </div>
 
-<footer th:replace="/manager-page/layout::scrip"></footer>
+<footer th:replace="manager-page/layout.html::scrip"></footer>
 </body>
 <script>
+    let apiUrl = "https://tht-center.herokuapp.com";
+    // let apiUrl = "http://localhost:8080/api";
     var examTypes = {};
     let stt = 1;
 
     examTypes.showAll = function (page) {
         $.ajax({
-            url: "http://localhost:8080/api/examTypes?page="+page,
+            url: apiUrl+"/examTypes?page="+page,
             method: "GET",
             dataType: "json",
             success: function (data) {
@@ -140,7 +142,7 @@
 
     examTypes.search = function () {
         $.ajax({
-            url: "http://localhost:8080/api/examTypes/search?name=" + document.getElementById("search").value,
+            url: apiUrl+"/examTypes/search?name=" + document.getElementById("search").value,
             method: "GET",
             dataType: "json",
             success: function (data) {
@@ -209,7 +211,7 @@
             callback: function (result) {
                 if (result) {
                     $.ajax({
-                        url:"http://localhost:8080/api/examTypes/" + id,
+                        url:apiUrl+"/examTypes/" + id,
                         method: "DELETE",
                         contentType: 'json',
                         success: function (data) {

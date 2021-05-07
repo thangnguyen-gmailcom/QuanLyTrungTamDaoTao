@@ -1,7 +1,7 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<header th:replace="/manager-page/layout::header"></header>
+<header th:replace="manager-page/layout.html::header"></header>
 
 <body>
 <!--[if lt IE 8]>
@@ -10,15 +10,15 @@
 
 
 <!-- Start Left menu area -->
-<div th:replace="/manager-page/layout::left-sidebar-pro">
+<div th:replace="manager-page/layout.html::left-sidebar-pro">
 </div>
 <!-- End Left menu area -->
 
 
 <!-- Start Welcome area -->
 <div class="all-content-wrapper">
-    <div th:replace="/manager-page/layout::container-fluid"/>
-    <div th:replace="/manager-page/layout::header-advance-area"></div>
+    <div th:replace="manager-page/layout.html::container-fluid"/>
+    <div th:replace="manager-page/layout.html::header-advance-area"></div>
     <div class="product-status mg-b-15" style="margin-top: 3%">
         <div class="container-fluid">
             <div class="row">
@@ -64,16 +64,17 @@
     </div>
 </div>
 
-<footer th:replace="/manager-page/layout::scrip"></footer>
+<footer th:replace="manager-page/layout.html::scrip"></footer>
 </body>
 <script>
-
+    let apiUrl = "https://tht-center.herokuapp.com";
+    // let apiUrl = "http://localhost:8080/api";
     var lessons = lessons|| {};
     let stt = 1;
     lessons.showAll = function (page) {
         let search = $('#str').val();
         $.ajax({
-            url: "http://localhost:8080/api/programmes?page="+page,
+            url: apiUrl+"/programmes?page="+page,
             method: "GET",
             dataType: "json",
             success: function (data) {
@@ -126,7 +127,7 @@
     lessons.search = function () {
         let search = $('#str').val();
         $.ajax({
-            url: "http://localhost:8080/api/programmes/search?name=" + document.getElementById("search").value,
+            url: apiUrl+"/programmes/search?name=" + document.getElementById("search").value,
             method: "GET",
             dataType: "json",
             success: function (data) {
