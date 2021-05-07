@@ -76,12 +76,12 @@
 <footer th:replace="manager-page/layout.html::scrip"></footer>
 <script type="text/javascript">
     let apiUrl = "https://tht-center.herokuapp.com";
-    // let apiUrl = "http://localhost:8080/api";
+    // let apiUrl = "http://localhost:8080";
     var classRoom = {};
 
     classRoom.showAll = function (page) {
         $.ajax({
-            url : apiUrl+"/classRoom/timeTable?page="+page,
+            url : apiUrl+"/api/classRoom/timeTable?page="+page,
             method : "GET",
             dataType : "json",
             success : function (data){
@@ -156,7 +156,7 @@
             callback: function (result) {
                 if (result) {
                     $.ajax({
-                        url: apiUrl+"/timetable/"+id,
+                        url: apiUrl+"/api/timetable/"+id,
                         method: "DELETE",
                         contentType: 'json',
                         success: function (data) {

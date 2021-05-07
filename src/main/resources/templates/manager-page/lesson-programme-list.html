@@ -68,13 +68,13 @@
 </body>
 <script>
     let apiUrl = "https://tht-center.herokuapp.com";
-    // let apiUrl = "http://localhost:8080/api";
+    // let apiUrl = "http://localhost:8080";
     var lessons = lessons|| {};
     let stt = 1;
     lessons.showAll = function (page) {
         let search = $('#str').val();
         $.ajax({
-            url: apiUrl+"/programmes?page="+page,
+            url: apiUrl+"/api/programmes?page="+page,
             method: "GET",
             dataType: "json",
             success: function (data) {
@@ -127,7 +127,7 @@
     lessons.search = function () {
         let search = $('#str').val();
         $.ajax({
-            url: apiUrl+"/programmes/search?name=" + document.getElementById("search").value,
+            url: apiUrl+"/api/programmes/search?name=" + document.getElementById("search").value,
             method: "GET",
             dataType: "json",
             success: function (data) {

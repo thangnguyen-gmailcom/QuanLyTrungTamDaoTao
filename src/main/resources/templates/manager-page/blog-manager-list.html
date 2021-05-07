@@ -74,12 +74,12 @@
 </body>
 <script>
     let apiUrl = "https://tht-center.herokuapp.com";
-    // let apiUrl = "http://localhost:8080/api";
+    // let apiUrl = "http://localhost:8080";
     var blogs = {};
     let stt = 1;
     blogs.showAll = function (page) {
         $.ajax({
-            url: apiUrl+"/blogs?page=" + page,
+            url: apiUrl+"/api/blogs?page=" + page,
             method: "GET",
             dataType: "json",
             success: function (data) {
@@ -134,7 +134,7 @@
 
     blogs.search = function () {
         $.ajax({
-            url: apiUrl+"/blogs/search?title=" + document.getElementById("search").value,
+            url: apiUrl+"/api/blogs/search?title=" + document.getElementById("search").value,
             method: "GET",
             dataType: "json",
             success: function (data) {
@@ -202,7 +202,7 @@
             callback: function (result) {
                 if (result) {
                     $.ajax({
-                        url: apiUrl+"/blogs/" + id,
+                        url: apiUrl+"/api/blogs/" + id,
                         method: "DELETE",
                         contentType: 'json',
                         success: function (data) {

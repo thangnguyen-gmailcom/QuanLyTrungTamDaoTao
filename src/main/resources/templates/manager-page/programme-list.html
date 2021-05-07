@@ -73,14 +73,14 @@
 </body>
 <script>
     let apiUrl = "https://tht-center.herokuapp.com";
-    // let apiUrl = "http://localhost:8080/api";
+    // let apiUrl = "http://localhost:8080";
     var programmes = programmes|| {};
     let stt = 1;
 
     programmes.showAll = function (page) {
         let search = $('#str').val();
         $.ajax({
-            url: apiUrl+"/programmes?page="+page,
+            url: apiUrl+"/api/programmes?page="+page,
             method: "GET",
             dataType: "json",
             success: function (data) {
@@ -146,7 +146,7 @@
 
     programmes.search = function () {
         $.ajax({
-            url: apiUrl+"/programmes/search?name=" + document.getElementById("search").value,
+            url: apiUrl+"/api/programmes/search?name=" + document.getElementById("search").value,
             method: "GET",
             dataType: "json",
             success: function (data) {
@@ -225,7 +225,7 @@
             callback: function (result) {
                 if (result) {
                     $.ajax({
-                        url:apiUrl+"/programmes/" + id,
+                        url:apiUrl+"/api/programmes/" + id,
                         method: "DELETE",
                         contentType: 'json',
                         success: function (data) {

@@ -82,13 +82,13 @@
 <footer th:replace="manager-page/layout.html::scrip"></footer>
 <script type="text/javascript">
     let apiUrl = "https://tht-center.herokuapp.com";
-    // let apiUrl = "http://localhost:8080/api";
+    // let apiUrl = "http://localhost:8080";
     let lessons = {};
     lessons.showAll = function () {
 
         let program = $('#idProgramme').val()
         $.ajax({
-            url: apiUrl+"/lessons/" + program,
+            url: apiUrl+"/api/lessons/" + program,
             method: "GET",
             dataType: "json",
             success: function (data) {

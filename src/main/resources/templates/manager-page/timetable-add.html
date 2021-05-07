@@ -166,12 +166,12 @@
 <footer th:replace="manager-page/layout.html::scrip"></footer>
 <script type="text/javascript">
     let apiUrl = "https://tht-center.herokuapp.com";
-    // let apiUrl = "http://localhost:8080/api";
+    // let apiUrl = "http://localhost:8080";
     const timeTables = {};
     const classRoom = {};
     classRoom.findAll = function (){
         $.ajax({
-            url : apiUrl+"/classRoom/",
+            url : apiUrl+"/api/classRoom/",
             method : "GET",
             dataType : "json",
             success : function (data){
@@ -200,7 +200,7 @@
         timeTableData.classId = $('#classRoom').val();
 
         $.ajax({
-            url: apiUrl+"/timetable/",
+            url: apiUrl+"/api/timetable/",
             method: "POST",
             dataType: "json",
             contentType: "application/json",

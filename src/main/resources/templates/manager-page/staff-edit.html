@@ -148,12 +148,12 @@
 <footer th:replace="manager-page/layout.html::scrip"></footer>
 <script type="text/javascript">
     let apiUrl = "https://tht-center.herokuapp.com";
-    // let apiUrl = "http://localhost:8080/api";
+    // let apiUrl = "http://localhost:8080";
     var provinces = {};
     var role = {};
     provinces.showAllProvince = function (){
         $.ajax({
-            url :apiUrl+"/provinces/",
+            url :apiUrl+"/api/provinces/",
             method : "GET",
             dataType : "json",
             success : function (data){
@@ -167,7 +167,7 @@
     provinces.findByWardCode= function (){
         let idWard = $('#wardDis').val();
         $.ajax({
-            url : apiUrl+"/provinces/districts/ward/"+idWard,
+            url : apiUrl+"/api/provinces/districts/ward/"+idWard,
             method : "GET",
             dataType : "json",
             success : function (data){
@@ -180,7 +180,7 @@
     role.showAllRole = function (){
         let idRole = parseInt($("#roId").val());
         $.ajax({
-            url :apiUrl+"/roles/",
+            url :apiUrl+"/api/roles/",
             method : "GET",
             dataType : "json",
             success : function (data){
@@ -205,7 +205,7 @@
         $('#provinces').change(function (event){
             let provinceCode = $('#provinces').val();
             $.ajax({
-                url : apiUrl+"/provinces/districts/"+provinceCode,
+                url : apiUrl+"/api/provinces/districts/"+provinceCode,
                 method: "GET",
                 dataType: "json",
                 success : function (data){
@@ -219,7 +219,7 @@
         $('#districts').change(function (event){
             let districtCode = $('#districts').val();
             $.ajax({
-                url : apiUrl+"/provinces/districts/wards/"+districtCode,
+                url : apiUrl+"/api/provinces/districts/wards/"+districtCode,
                 method: "GET",
                 dataType: "json",
                 success : function (data){

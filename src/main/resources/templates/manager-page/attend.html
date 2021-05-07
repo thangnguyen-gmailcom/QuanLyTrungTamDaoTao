@@ -146,7 +146,7 @@
 <footer th:replace="manager-page/layout.html::scrip"></footer>
 <script type="text/javascript">
     let apiUrl = "https://tht-center.herokuapp.com";
-    // let apiUrl = "http://localhost:8080/api";
+    // let apiUrl = "http://localhost:8080";
 
     var attends = {};
     var students = {};
@@ -167,7 +167,7 @@
     timeTables.findTimeTableById = function () {
         let idTimeTable = $('#idTimeTable').val();
         $.ajax({
-            url: apiUrl+"/timetable/" + idTimeTable,
+            url: apiUrl+"/api/timetable/" + idTimeTable,
             method: "GET",
             dataType: "json",
             success: function (data) {
@@ -192,7 +192,7 @@
         });
         attend.user = student;
         attend.timeTable = timeT;
-        await fetch(apiUrl+"/attend/", {
+        await fetch(apiUrl+"/api/attend/", {
             method: "POST",
             headers: {
                 "Content-type": "application/json"

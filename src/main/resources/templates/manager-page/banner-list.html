@@ -74,12 +74,12 @@
 </body>
 <script>
     let apiUrl = "https://tht-center.herokuapp.com";
-    // let apiUrl = "http://localhost:8080/api";
+    // let apiUrl = "http://localhost:8080";
     var banner = {};
     let stt = 1;
     banner.showAll = function (page) {
         $.ajax({
-            url: apiUrl+"/banner?page=" + page,
+            url: apiUrl+"/api/banner?page=" + page,
             method: "GET",
             dataType: "json",
             success: function (data) {
@@ -132,7 +132,7 @@
 
     banner.search = function () {
         $.ajax({
-            url: apiUrl+"/banner/search?description=" + document.getElementById("search").value,
+            url: apiUrl+"/api/banner/search?description=" + document.getElementById("search").value,
             method: "GET",
             dataType: "json",
             success: function (data) {
@@ -198,7 +198,7 @@
             callback: function (result) {
                 if (result) {
                     $.ajax({
-                        url: apiUrl+"/banner/" + id,
+                        url: apiUrl+"/api/banner/" + id,
                         method: "DELETE",
                         contentType: 'json',
                         success: function (data) {

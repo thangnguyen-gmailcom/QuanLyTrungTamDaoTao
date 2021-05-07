@@ -180,7 +180,7 @@
 <footer th:replace="manager-page/layout.html::scrip"></footer>
 <script type="text/javascript">
     let apiUrl = "https://tht-center.herokuapp.com";
-    // let apiUrl = "http://localhost:8080/api";
+    // let apiUrl = "http://localhost:8080";
     var classRoom = {};
     var examType = {};
     var point = {};
@@ -219,7 +219,7 @@
             examTypes: arrayExamType
         }
         $.ajax({
-            url: apiUrl+"/point/",
+            url: apiUrl+"/api/point/",
             method: "POST",
             dataType: "json",
             contentType: "application/json",
@@ -245,7 +245,7 @@
     // xuất ra danh sách thể loại điểm
     examType.findAllExamList = function (page) {
         $.ajax({
-            url: apiUrl+"/examTypes?page=" + page,
+            url: apiUrl+"/api/examTypes?page=" + page,
             method: "GET",
             dataType: "json",
             success: function (data) {
@@ -267,7 +267,7 @@
     classRoom.findAllStudent = function (page) {
         let idClassRoom = $('#idClassRoom').val();
         $.ajax({
-            url: apiUrl+"/studentClass/" + idClassRoom + "?page=" + page,
+            url: apiUrl+"/api/studentClass/" + idClassRoom + "?page=" + page,
             method: "GET",
             data: "json",
             success: function (data) {
@@ -378,7 +378,7 @@
             callback: function (result) {
                 if (result) {
                     $.ajax({
-                        url: apiUrl+"/studentClass/" + id,
+                        url: apiUrl+"/api/studentClass/" + id,
                         method: "PATCH",
                         contentType: 'json',
                         success: function (data) {
@@ -400,7 +400,7 @@
         $('#search').empty('');
         $('#search').val(email);
         $.ajax({
-            url: apiUrl+"/user/" + email,
+            url: apiUrl+"/api/user/" + email,
             method: "GET",
             dataType: "json",
             success: function (data) {
@@ -416,7 +416,7 @@
         studentClass.classRoom = classR;
         studentClass.user = userStudent;
         $.ajax({
-            url: apiUrl+"/studentClass/",
+            url: apiUrl+"/api/studentClass/",
             method: "POST",
             dataType: "json",
             contentType: "application/json",
@@ -443,7 +443,7 @@
     classRoom.findById = function () {
         let id = $('#idClassRoom').val();
         $.ajax({
-            url: apiUrl+"/classRoom/" + id,
+            url: apiUrl+"/api/classRoom/" + id,
             method: "GET",
             dataType: "json",
             success: function (data) {
@@ -456,7 +456,7 @@
     timeT.findByClassRoomId = function (){
         let id = $('#idClassRoom').val();
         $.ajax({
-            url : apiUrl+"/timetable/view/"+id,
+            url : apiUrl+"/api/timetable/view/"+id,
             method : "GET",
             dataType : "json",
             success : function (data){
@@ -505,7 +505,7 @@
         let timeTableId = '#teacherNote'+id;
         var teacherNote = $(timeTableId).val();
         $.ajax({
-            url : apiUrl+"/timetable/"+id,
+            url : apiUrl+"/api/timetable/"+id,
             method: "PATCH",
             dataType: "json",
             contentType: "application/json",
@@ -533,7 +533,7 @@
         $('#search').keyup(function () {
             let searchEmail = $('#search').val();
             $.ajax({
-                url: apiUrl+"/user/?search=" + searchEmail + "&page=0",
+                url: apiUrl+"/api/user/?search=" + searchEmail + "&page=0",
                 method: "GET",
                 dataType: "json",
                 success: function (data) {
