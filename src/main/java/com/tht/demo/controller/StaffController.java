@@ -102,7 +102,8 @@ public class StaffController {
             return "manager-page/staff-edit";
         } else {
             Optional<User> staff1 = userService.findByPhoneNumber(user.getPhoneNumber());
-            user.setStaffEditedId(staff1.get());
+            Optional<User> admin = userService.findByEmail("admin@gmail.com");
+            user.setStaffEditedId(admin.get());
             user.setEditedDate(LocalDateTime.now());
             if(staff1.isPresent()){
                 if(!staff1.get().getPhoneNumber().equals(user.getPhoneNumber())){
