@@ -43,7 +43,7 @@ public class BlogPageController {
         model.addAttribute("bannerList",bannerList);
         model.addAttribute("programmeList",programmeList);
         model.addAttribute("teacherList",teacherList);
-        return "index";
+        return "blog-page/index";
 
     }
 
