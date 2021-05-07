@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<head th:replace="/blog-page/layout::header"/>
+<head th:replace="blog-page/layout.html::header"/>
 
 <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
 <!-- PRE LOADER -->
-<div th:replace="/blog-page/layout::preloader"/>
+<div th:replace="blog-page/layout.html::preloader"/>
 
 
 <!-- MENU -->
-<div th:replace="/blog-page/layout::menu"/>
+<div th:replace="blog-page/layout.html::menu"/>
 
 <!-- HOME -->
 <section id="home">
@@ -392,6 +392,6 @@
 </footer>
 
 
-<th:block th:replace="/blog-page/layout::scrip"/>
+<th:block th:replace="blog-page/layout.html::scrip"/>
 </body>
 </html>
