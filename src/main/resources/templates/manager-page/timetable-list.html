@@ -77,6 +77,7 @@
 <script type="text/javascript">
     let apiUrl = "https://tht-center.herokuapp.com";
     // let apiUrl = "http://localhost:8080";
+    const role = '[[${session.user.roles.name}]]';
     var classRoom = {};
 
     classRoom.showAll = function (page) {
@@ -126,12 +127,18 @@
                                     <td>${day}</td>
                                     <td>${v.course.programme.lessons}</td>
                                     <td>${v.teacher.fullname}</td>
-                                    <td>
+                                    <td id="${v.id}">
                                         <a  href='#' data-toggle='tooltip' title='Chi Tiết'  onclick="classRoom.viewTimeTable(${v.id})"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                        <a href='#' style="margin-left: 15%" data-toggle='tooltip' title='Xóa' onclick="classRoom.deleteTimeTable(${v.id})"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>`
                     );
+                    if(role == 'ROLE_STUDENT' ) {
+                        $('#' + v.id).append('')
+                    }else if (role == 'ROLE_TEACHER'){
+                        $('#' + v.id).append('');
+                    }else {
+                        $('#' + v.id).append(`<a href='#' style="margin-left: 15%" data-toggle='tooltip' title='Xóa' onclick="classRoom.deleteTimeTable(${v.id})"><i class="fa fa-trash-o" aria-hidden="true"></i></a>`)
+                    }
                     stt = i;
                 })
             }
